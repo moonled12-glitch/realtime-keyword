@@ -138,8 +138,11 @@
   .nt{font-size:13.5px; line-height:1.4; display:-webkit-box;
     -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
   .src{font-size:11px; color:var(--sub); margin-top:2px;}
-  .links{display:flex; flex-wrap:wrap; gap:14px; margin-top:8px;}
+  .links{display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; align-items:center;}
   .links a{font-size:12px; text-decoration:none; font-weight:600; color:var(--accent);}
+  .closebtn{margin-left:auto; background:none; border:1px solid var(--line); color:var(--sub);
+    border-radius:8px; padding:4px 11px; font-size:12px; font-weight:600; cursor:pointer;}
+  .closebtn:hover{border-color:var(--accent); color:var(--txt);}
 
   footer{margin-top:26px; font-size:11.5px; color:var(--sub); line-height:1.7; text-align:center;}
   footer .note{display:block; margin-top:8px; font-size:11px; opacity:.85;}
@@ -238,7 +241,7 @@ function rowHTML(it, kind){
       <div class="panel"><div class="panel-inner">
         ${it.aiSummary ? `<div class="ai"><span class="ai-tag">🤖 AI 요약</span>${esc(it.aiSummary)}</div>` : ""}
         ${body}
-        <div class="links">${links}</div>
+        <div class="links">${links}<button type="button" class="closebtn" onclick="closeRow(this)">닫기 ▲</button></div>
       </div></div>
     </li>`;
 }
@@ -256,6 +259,15 @@ function toggleRow(head){
     li.classList.add('open');
     head.setAttribute('aria-expanded','true');
   }
+}
+
+// 패널 닫기 버튼
+function closeRow(btn){
+  const li = btn.closest('li.row');
+  if(!li) return;
+  li.classList.remove('open');
+  const h = li.querySelector('.head');
+  if(h) h.setAttribute('aria-expanded','false');
 }
 
 // 보드의 1위를 기본으로 펼침
