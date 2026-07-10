@@ -2,3 +2,5 @@
 _sample.xml
 __pycache__/
 *.pyc
+admin.html
+_*.json
