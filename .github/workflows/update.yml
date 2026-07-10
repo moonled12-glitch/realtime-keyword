@@ -2,7 +2,7 @@ name: Update trends data
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # 10분마다 (UTC) — GitHub 부하 시 지연/건너뜀 가능
+    - cron: "*/20 * * * *"  # 20분마다 (UTC) — Gemini 무료 한도 여유. 부하 시 지연 가능
   workflow_dispatch: {}      # 수동 실행 버튼
 
 permissions:

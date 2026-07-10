@@ -13,6 +13,7 @@
 import json
 import os
 import sys
+import time
 import html
 import urllib.request
 import urllib.parse
@@ -40,6 +41,7 @@ SUMMARIES_FILE = "summaries.json"
 SUMMARY_TOP_N = 10      # 소스별 상위 N개만 요약 대상
 MAX_NEW_SUMMARIES = 12  # 실행 1회당 신규 요약 상한 (비용 캡)
 SUMMARY_CACHE_MAX = 120 # 캐시 보존 상한 (회전 대비, 재생성/할당량 절약)
+GEMINI_SLEEP = 4.5      # 호출 간격(초) — Gemini 무료 분당 한도(RPM) 회피
 
 SIGNAL_STATE = {"n": "new", "+": "up", "-": "down", "s": "same"}
 
@@ -255,6 +257,7 @@ def build_summaries(google, naver, cache):
                         continue
                     cache[kw] = ai_summary(client, kw, titles)
                     made += 1
+                    time.sleep(GEMINI_SLEEP)   # RPM 회피
                 except Exception as e:
                     print(f"summary failed for {kw!r}: {e}")
             print(f"AI summaries: {made} new via {SUMMARY_MODEL}")

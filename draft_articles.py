@@ -7,6 +7,7 @@
 import os
 import re
 import json
+import time
 import html
 import urllib.parse
 import xml.etree.ElementTree as ET
@@ -142,6 +143,7 @@ def main():
             open(os.path.join(DRAFTS_DIR, f"{slug}.md"), "w", encoding="utf-8").write(content)
             have.add(slug)
             made += 1
+            time.sleep(g.GEMINI_SLEEP)   # RPM 회피
         except Exception as e:
             print(f"draft failed for {kw!r}: {e}")
     print(f"drafts created: {made} (model {g.SUMMARY_MODEL})")
