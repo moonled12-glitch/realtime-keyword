@@ -1,2 +1,4 @@
 .claude/
 _sample.xml
+__pycache__/
+*.pyc
