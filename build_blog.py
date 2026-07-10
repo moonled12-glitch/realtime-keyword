@@ -14,7 +14,7 @@ OUT_DIR = "blog"
 
 # 애드센스 퍼블리셔 ID — 승인 후 실제 값(ca-pub-…)으로 교체. 그전엔 광고가 안 뜸(정상).
 ADSENSE_CLIENT = os.environ.get("ADSENSE_CLIENT", "").strip() or "ca-pub-XXXXXXXXXXXXXXXX"
-SITE_NAME = "실시간 검색어 블로그"
+SITE_NAME = "키워드픽"
 
 
 def site_url():
@@ -149,7 +149,7 @@ def rail(label):
 
 def nav():
     return (f'<div class="nav">'
-            f'<a class="brand" href="{PREFIX}/">실시간 검색<span class="dot">어</span></a>'
+            f'<a class="brand" href="{PREFIX}/">키워드<span class="dot">픽</span></a>'
             f'<a href="{PREFIX}/">실시간</a>'
             f'<a href="{PREFIX}/blog/">블로그</a>'
             f'<a href="{PREFIX}/about.html">소개</a>'
