@@ -24,6 +24,21 @@
    - `NAVER_CLIENT_SECRET`
 3. Actions에서 워크플로 실행 → 네이버 탭이 "네이버 데이터랩 기준"으로 표시됨
    (키가 없거나 호출 실패 시 자동으로 signal.bz로 폴백)
+
+## AI 요약 연결 (선택)
+
+키를 등록하면 각 키워드 펼침 패널에 **"🤖 AI 요약"**(왜 뜨는지 2~3문장)이 표시됩니다.
+
+- 동작: 구글 뉴스 RSS로 헤드라인 수집 → Claude로 요약 → `summaries.json`에 캐시
+- 비용 억제: **새 키워드만** 생성(실행당 최대 12개), 캐시된 요약은 재사용
+- 키가 없으면 요약 생성만 건너뜀(사이트는 정상, 캐시된 요약은 계속 표시)
+
+1. [console.anthropic.com](https://console.anthropic.com) 에서 **API 키** 발급
+2. 저장소 **Settings → Secrets and variables → Actions**
+   - Secret에 `ANTHROPIC_API_KEY` 등록
+   - (선택) Variables에 `SUMMARY_MODEL` = `claude-haiku-4-5`(기본·저렴) 또는 `claude-opus-4-8`(고품질)
+3. Actions에서 워크플로 실행 → 상위 키워드부터 요약이 채워짐
+
 - 약 10분마다 **GitHub Actions**가 자동으로 데이터를 받아 페이지를 다시 생성
 - 백엔드 서버 없는 **정적 사이트** (GitHub Pages 배포 가능)
 
