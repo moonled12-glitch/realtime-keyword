@@ -1,0 +1,41 @@
+name: Update trends data
+
+on:
+  schedule:
+    - cron: "0 * * * *"     # 매시 정각 (UTC) — 실행 지연 가능
+  workflow_dispatch: {}      # 수동 실행 버튼
+
+permissions:
+  contents: write
+
+# 동시에 여러 실행이 겹쳐 push 충돌 나는 것 방지
+concurrency:
+  group: update-trends
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Generate latest index.html
+        run: python generate.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html prev.json
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            git commit -m "Auto-update trends ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git push
+          fi

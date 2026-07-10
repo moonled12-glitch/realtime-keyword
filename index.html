@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>실시간 검색어 · 지금 뜨는 키워드</title>
+<meta name="description" content="지금 대한민국에서 가장 많이 검색되는 실시간 인기 검색어 순위. 매시간 자동 갱신.">
+<style>
+  :root{
+    --bg:#0d1017; --card:#161b26; --card2:#1c2230; --line:#252c3a;
+    --txt:#e8ecf3; --sub:#8b95a7; --accent:#ff5a3c;
+    --up:#ff4d4d; --down:#4d8bff; --new:#ff8a00; --same:#6b7688;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px; margin:0 auto; padding:20px 16px 60px;}
+
+  header{text-align:center; padding:22px 0 18px;}
+  .logo{font-size:26px; font-weight:800; letter-spacing:-.5px;}
+  .logo .dot{color:var(--accent);}
+  .live{
+    display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+    font-size:13px; color:var(--sub); background:var(--card);
+    border:1px solid var(--line); padding:5px 12px; border-radius:999px;
+  }
+  .live .pulse{
+    width:8px; height:8px; border-radius:50%; background:var(--accent);
+    box-shadow:0 0 0 0 rgba(255,90,60,.6); animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,90,60,.55);}
+    70%{box-shadow:0 0 0 7px rgba(255,90,60,0);}
+    100%{box-shadow:0 0 0 0 rgba(255,90,60,0);}
+  }
+
+  .meta{display:flex; justify-content:space-between; align-items:center;
+    font-size:12px; color:var(--sub); margin:14px 4px 10px;}
+  .meta b{color:var(--txt); font-weight:600;}
+
+  ul.board{list-style:none; display:flex; flex-direction:column; gap:8px;}
+  li.row{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; transition:border-color .15s;
+  }
+  li.row:hover{border-color:#33405a;}
+  .head{display:flex; align-items:center; gap:12px; padding:13px 14px; cursor:pointer;}
+  .rank{
+    flex:0 0 30px; text-align:center; font-size:19px; font-weight:800;
+    font-variant-numeric:tabular-nums;
+  }
+  li.row:nth-child(-n+3) .rank{color:var(--accent);}
+  .kw{flex:1 1 auto; min-width:0;}
+  .kw .word{font-size:16px; font-weight:600; white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis;}
+  .kw .vol{font-size:12px; color:var(--sub); margin-top:1px;}
+  .move{flex:0 0 auto; display:flex; align-items:center; gap:3px;
+    font-size:12px; font-weight:700; font-variant-numeric:tabular-nums;}
+  .move.up{color:var(--up);} .move.down{color:var(--down);}
+  .move.same{color:var(--same);} .move.new{color:var(--new);}
+  .badge-new{background:var(--new); color:#fff; font-size:10px; font-weight:800;
+    padding:2px 6px; border-radius:6px; letter-spacing:.3px;}
+  .caret{flex:0 0 auto; color:var(--sub); font-size:12px; transition:transform .2s;}
+  li.open .caret{transform:rotate(180deg);}
+
+  .news{max-height:0; overflow:hidden; transition:max-height .25s ease;
+    background:var(--card2); border-top:1px solid transparent;}
+  li.open .news{max-height:400px; border-top-color:var(--line);}
+  .news-inner{padding:6px 14px 12px;}
+  .news a{display:flex; gap:10px; align-items:center; padding:9px 0;
+    color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);}
+  .news a:last-child{border-bottom:none;}
+  .news .thumb{flex:0 0 46px; width:46px; height:46px; border-radius:8px;
+    object-fit:cover; background:var(--line);}
+  .news .nt{font-size:13.5px; line-height:1.4; display:-webkit-box;
+    -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .news .src{font-size:11px; color:var(--sub); margin-top:2px;}
+  .search-link{display:inline-block; margin-top:8px; font-size:12px;
+    color:var(--accent); text-decoration:none; font-weight:600;}
+
+  footer{margin-top:26px; text-align:center; font-size:11.5px; color:var(--sub); line-height:1.7;}
+  footer a{color:var(--sub);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">실시간 검색<span class="dot">어</span></div>
+    <div class="live"><span class="pulse"></span><span>지금 대한민국이 검색하는 키워드</span></div>
+  </header>
+
+  <div class="meta">
+    <span>업데이트 <b id="updated">–</b></span>
+    <span id="next">자동 새로고침</span>
+  </div>
+
+  <ul class="board" id="board"></ul>
+
+  <footer>
+    데이터 출처: Google Trends · 매시간 자동 갱신<br>
+    키워드를 누르면 관련 뉴스가 열리고, 오른쪽 검색 링크로 바로 검색할 수 있어요.
+  </footer>
+</div>
+
+<script>
+const DATA = {"updatedAt": "2026-07-10 14:00", "updatedAtISO": "2026-07-10T14:00:58.601838+09:00", "count": 10, "items": [{"keyword": "클래 리티 법안", "traffic": "500+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQdy8i3mAPGApBvuYeUi35NdVZw3OOw8rAfKWLNb6Uj92perLeg-ZWWtw8inKQ", "news": [{"title": "비트마인, 이더리움 7천400만달러 추가 매수…\"클래리티 법안 통과 기대\"", "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4423756", "source": "연합인포맥스"}, {"title": "이더리움 5% 쓸어 담은 비트마인…’ETH 트레저리’ 시대 본격화", "url": "https://www.blockmedia.co.kr/archives/1114782", "source": "블록미디어"}, {"title": "비트마인 이멀젼 테크놀로지, 주가 하락과 거래량 급증", "url": "https://www.tokenpost.kr/news/cryptocurrency/376409", "source": "토큰포스트"}], "rank": 1, "move": "new", "delta": 0}, {"keyword": "해병대", "traffic": "100+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTvtK5xCsnhRyvbwvSkIfm_8E4mqGrIX9VOL1QKkPXfJkMsEP62EUy-axNjhz0", "news": [{"title": "이승만·전두환도 추진했는데…\"진보가 하면 실험인가\" 사관학교 개혁위원장의 반박[사관학교 통합 논쟁 격화]", "url": "https://www.hankookilbo.com/news/article/A2026070913570002016", "source": "한국일보"}, {"title": "국힘, '안규백 탈영 의혹'에 \"도둑을 포도대장에 앉힌 꼴, 사퇴하라\"", "url": "https://imnews.imbc.com/news/2026/politics/article/6836446_36911.html?xtr_cate=LK&xtr_ref=r11&xtr_kw=N&xtr_area=k&xtr_cp=c4", "source": "MBC 뉴스"}, {"title": "국방부 일일 정례 브리핑", "url": "https://www.korea.kr/briefing/policyBriefingView.do?newsId=156770171", "source": "대한민국 정책브리핑"}], "rank": 2, "move": "new", "delta": 0}, {"keyword": "표절", "traffic": "1000+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSqQJC7OXdftdwdpqp4Hwz0PGvD-T1xzj0OeHLhL8r8T1xlnybHDFb40_CMr4", "news": [{"title": "“BTS ’스윔’은 표절곡“…미국 작곡가들, 법원에 소송", "url": "https://www.yonhapnewstv.co.kr/news/AKR202607101113498w8", "source": "연합뉴스TV"}, {"title": "“BTS ‘Swim(스윔)’ 우리 곡 베꼈다”…美작곡가, 하이브 상대 저작권 소송", "url": "https://v.daum.net/v/20260710110707568", "source": "Daum"}, {"title": "美 작곡가들 “BTS 표절”…하이브·작곡진 상대 소송", "url": "https://www.donga.com/news/Inter/article/all/20260710/134273557/1", "source": "동아일보"}], "rank": 3, "move": "new", "delta": 0}, {"keyword": "복수", "traffic": "1000+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRdGhPeSjIPXwr3vroSwDUYzbVXHIxHIXyPXEMcDS1y9NBoJzQEO9W0FIpfPB0", "news": [{"title": "드라마 '김부장'에서 사라진 것은 딸 민지만이 아니다", "url": "https://v.daum.net/v/20260710092751865", "source": "Daum"}, {"title": "AI로 찍어낸 ‘김부장’ 3분 액션… 시청자는 몰랐다", "url": "https://www.munhwa.com/article/11601800", "source": "문화일보"}, {"title": "[다시보기] 좋은아침 7292회", "url": "https://programs.sbs.co.kr/culture/goodmorning/vod/55600/22000632752", "source": "programs.sbs.co.kr"}], "rank": 4, "move": "new", "delta": 0}, {"keyword": "맥그리거", "traffic": "100+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSzg3i9blwnd7IFIphNWJ9S21i1YBdbASIQm-RGnIKknLCFus79TUEloTxY8tY", "news": [{"title": "맥그리거, “마카체프가 하빕보다 더 대단” 이례적 찬사", "url": "https://v.daum.net/v/20260709090939035", "source": "Daum"}, {"title": "맥그리거, 5년 만에 UFC 복귀…할로웨이와 13년 만에 재격돌", "url": "https://www.munhwa.com/article/11601557", "source": "문화일보"}, {"title": "[격투기] 코너 맥그리거, 5년 만에 복귀…할로웨이와 UFC 329서 격돌", "url": "https://www.newspim.com/news/view/20260709001253", "source": "뉴스핌"}], "rank": 5, "move": "new", "delta": 0}, {"keyword": "fsd lite", "traffic": "200+", "image": "", "news": [], "rank": 6, "move": "new", "delta": 0}, {"keyword": "미추홀구", "traffic": "500+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLvGZKMMFY6P4Zjlq_ffAr4ShCMU7fGwlCvhcG4Bnb035l2lANAb2sz7WXd_A", "news": [{"title": "성동구, 구청장 직통 문자 민원서비스 '문자소통 365' 가동", "url": "https://www.newsis.com/view/NISX20260710_0003704256", "source": "뉴시스"}, {"title": "[취임 인터뷰] ‘노인·장애인·청년 동행’ 꿈꾸는 김정식 인천 미추홀구청장", "url": "https://www.kyeongin.com/article/1766993", "source": "경인일보"}, {"title": "성동구청장 직통 문자 민원서비스‘문자소통 365’본격 가동", "url": "https://biz.heraldcorp.com/article/10804329", "source": "헤럴드경제"}], "rank": 7, "move": "new", "delta": 0}, {"keyword": "송승현", "traffic": "10000+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTfOC96u-37cZY08_iZcTwsEsEF90sGIkJ5gGz9cBXOlz88Y2wCCx8Jkj7OPHY", "news": [{"title": "'연예계 은퇴' 송승현, 미국으로 떠난 후 아빠 됐다…득남 발표 \"사랑한다 아들\"", "url": "https://v.daum.net/v/20260710110236322", "source": "Daum"}, {"title": "송승현, 득남했다…“너무 행복, 사랑한다 아들”", "url": "https://sports.donga.com/ent/article/all/20260710/134272935/1", "source": "스포츠동아"}, {"title": "FT아일랜드 출신 송승현 득남…연예계 은퇴→美 국밥집 도전 중 겹경사 - 스타투데이", "url": "https://www.mk.co.kr/news/hot-issues/12095284", "source": "매일경제"}], "rank": 8, "move": "new", "delta": 0}, {"keyword": "황영웅", "traffic": "2000+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTpJGSMO5CDHGyJX1Z-sahfXAy6hkWsyNfxYFfZbIGXYuz9RH8F8MFCKcywrgM", "news": [{"title": "'학폭 의혹 해명' 황영웅, 방송 복귀 시동…KBS 주말극 OST 참여", "url": "https://www.newsis.com/view/NISX20260710_0003703858", "source": "뉴시스"}, {"title": "[공식] '학폭 해명' 황영웅, 결국 지상파로 복귀…KBS 주말극 OST 가창", "url": "https://news.nate.com/view/20260710n07000", "source": "네이트"}, {"title": "'학폭 의혹' 해명한 황영웅, 드라마 OST로 복귀 시동 [투데이픽]", "url": "https://enews.imbc.com/News/RetrieveNewsInfo/511064", "source": "iMBC 연예"}], "rank": 9, "move": "new", "delta": 0}, {"keyword": "방탄소년단", "traffic": "2000+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRE_h-SAs5zNhRA9YNQynY9fxn9UmJ9eQ1AMiEBrmv7hr_OKLIW06GuZVpMMuc", "news": [{"title": "BTS 진의 압도적인 눈맞춤, 엘르 6종 커버 공개", "url": "https://www.elle.co.kr/article/1906015", "source": "엘르 코리아 │ ELLE KOREA"}, {"title": "방탄소년단 진 “음악으로 지금의 인생 얻었다” [화보]", "url": "https://sports.donga.com/ent/article/all/20260710/134271993/1", "source": "스포츠동아"}, {"title": "방탄소년단 진, 얼굴도 얼굴이다…비주얼이 명품", "url": "https://news.nate.com/view/20260710n07011", "source": "네이트"}], "rank": 10, "move": "new", "delta": 0}]};
+
+function moveHTML(it){
+  if(it.move === "new") return '<span class="badge-new">NEW</span>';
+  if(it.move === "up")   return '<span class="move up">▲ '+it.delta+'</span>';
+  if(it.move === "down") return '<span class="move down">▼ '+it.delta+'</span>';
+  return '<span class="move same">–</span>';
+}
+
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function render(){
+  document.getElementById("updated").textContent = DATA.updatedAt;
+  const board = document.getElementById("board");
+  board.innerHTML = DATA.items.map(it=>{
+    const q = encodeURIComponent(it.keyword);
+    const news = (it.news||[]).map(n=>`
+      <a href="${esc(n.url)}" target="_blank" rel="noopener">
+        <div class="nt">${esc(n.title)}<div class="src">${esc(n.source)}</div></div>
+      </a>`).join("");
+    const newsBlock = it.news && it.news.length ? news : '<div class="src" style="padding:8px 0;">관련 뉴스가 없어요.</div>';
+    return `
+    <li class="row">
+      <div class="head" onclick="this.parentElement.classList.toggle('open')">
+        <div class="rank">${it.rank}</div>
+        <div class="kw">
+          <div class="word">${esc(it.keyword)}</div>
+          <div class="vol">검색량 ${esc(it.traffic)||'–'}</div>
+        </div>
+        ${moveHTML(it)}
+        <div class="caret">▾</div>
+      </div>
+      <div class="news"><div class="news-inner">
+        ${newsBlock}
+        <a class="search-link" href="https://search.naver.com/search.naver?query=${q}" target="_blank" rel="noopener">네이버에서 "${esc(it.keyword)}" 검색 →</a>
+      </div></div>
+    </li>`;
+  }).join("");
+}
+
+render();
+
+// 정적 페이지가 GitHub Actions로 갱신되므로 5분마다 새로고침해 최신 데이터 반영
+setTimeout(()=>location.reload(), 5*60*1000);
+</script>
+</body>
+</html>
