@@ -42,6 +42,22 @@ MAX_NEW_SUMMARIES = 12  # 실행 1회당 신규 요약 상한 (비용 캡)
 
 SIGNAL_STATE = {"n": "new", "+": "up", "-": "down", "s": "same"}
 
+# 홈(실시간 보드) 애드센스 — 승인 후 ADSENSE_CLIENT(ca-pub-…) 설정 시 활성화. 자동광고도 이 로더로 동작.
+ADSENSE_CLIENT = os.environ.get("ADSENSE_CLIENT", "").strip() or "ca-pub-XXXXXXXXXXXXXXXX"
+_ADS_ON = ADSENSE_CLIENT != "ca-pub-XXXXXXXXXXXXXXXX"
+ADSENSE_HEAD = (
+    f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    f'?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>' if _ADS_ON
+    else '<!-- 애드센스 승인 후 ADSENSE_CLIENT 설정 시 로더/자동광고 스크립트가 삽입됩니다 -->')
+
+
+def ad_html(label):
+    return ('<div class="ad"><span class="ad-note">광고</span>'
+            f'<ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE_CLIENT}" '
+            f'data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true" '
+            f'data-label="{label}"></ins>'
+            '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>')
+
 
 def get(url):
     req = urllib.request.Request(url, headers=HDRS)
@@ -312,7 +328,10 @@ def main():
     }
 
     tpl = open("template.html", encoding="utf-8").read()
-    out = tpl.replace("__TRENDS_DATA__", json.dumps(data, ensure_ascii=False))
+    out = (tpl.replace("__TRENDS_DATA__", json.dumps(data, ensure_ascii=False))
+              .replace("__ADSENSE_HEAD__", ADSENSE_HEAD)
+              .replace("__AD_TOP__", ad_html("home-top"))
+              .replace("__AD_BOTTOM__", ad_html("home-bottom")))
     open("index.html", "w", encoding="utf-8").write(out)
 
     snap = {"google": prev["google"], "naver": prev["naver"]}

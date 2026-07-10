@@ -36,6 +36,7 @@ jobs:
           # AI 요약용 Gemini 무료 키 (없으면 요약 생성 건너뜀, 캐시된 요약만 표시)
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}   # 미설정 시 gemini-flash-lite-latest
+          ADSENSE_CLIENT: ${{ vars.ADSENSE_CLIENT }} # 홈 광고/자동광고 (승인 후 ca-pub-… 설정)
         run: python generate.py
 
       - name: Generate blog drafts (사람이 편집·발행)

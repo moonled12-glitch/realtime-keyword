@@ -122,6 +122,13 @@ def main():
             mt = re.search(r"^#\s+(.+)$", article, re.M)
             title = mt.group(1).strip() if mt else kw
             body = re.sub(r"^#\s+.+$", "", article, count=1, flags=re.M).strip()
+            # 이미지 자리(교체용) — 첫 소제목 앞에 삽입
+            ph = (f'<figure class="ph">여기에 "{kw}" 관련 이미지를 넣으세요'
+                  f'<br>(라이선스 확인 후 사용)</figure>')
+            if "\n## " in body:
+                body = body.replace("\n## ", "\n\n" + ph + "\n\n## ", 1)
+            else:
+                body = ph + "\n\n" + body
             sources = "\n".join(f"- [{html.escape(n['title'])}]({n['link']})" for n in news)
             fm = (f"---\n"
                   f'title: "{title.replace(chr(34), "")}"\n'

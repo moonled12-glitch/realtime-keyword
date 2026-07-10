@@ -106,7 +106,13 @@ article h1{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.3;
 .content p{margin:12px 0;}
 .content ul,.content ol{margin:12px 0 12px 22px;}
 .content li{margin:5px 0;}
-.content img{max-width:100%;border-radius:10px;}
+.content img{max-width:100%;border-radius:10px;display:block;}
+.content figure{margin:20px 0;}
+.content figure img{width:100%;border-radius:10px;display:block;}
+.content figcaption{font-size:12px;color:var(--sub);text-align:center;margin-top:6px;}
+.content figure.ph{background:var(--card);border:1px dashed var(--line);border-radius:10px;
+ min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;
+ padding:20px;color:var(--sub);font-size:13px;line-height:1.6;}
 .content blockquote{border-left:3px solid var(--accent);margin:14px 0;padding:4px 14px;color:var(--sub);}
 .content a{word-break:break-all;}
 .postlist{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:18px;}
@@ -160,6 +166,16 @@ def page(title, desc, body, canonical):
 """
 
 
+def content_with_mid_ad(body_html):
+    """본문 중간(가운데 소제목 앞)에 광고 1개만 삽입 → 글당 광고 3개(상/중/하) 유지."""
+    sections = re.split(r"(?=<h2)", body_html)
+    if len(sections) <= 2:
+        return body_html
+    mid = len(sections) // 2
+    return "".join((ad_unit("middle") + sec) if i == mid else sec
+                   for i, sec in enumerate(sections))
+
+
 def render_article(p):
     body_html = markdown.markdown(p["body_md"], extensions=["extra", "sane_lists"])
     tags = "".join(f'<a href="{PREFIX}/blog/">#{esc(t)}</a>' for t in p["tags"])
@@ -169,16 +185,10 @@ def render_article(p):
   <div class="meta">{esc(p["date"])}{' · ' + esc(p["keyword"]) if p["keyword"] else ''}</div>
   {f'<div class="tags">{tags}</div>' if tags else ''}
   {ad_unit("top")}
-  <div class="content">{body_html}</div>
+  <div class="content">{content_with_mid_ad(body_html)}</div>
   {ad_unit("bottom")}
   <p style="margin-top:20px"><a href="{PREFIX}/blog/">← 목록으로</a></p>
 </article>"""
-    # 본문 중간 광고: 문단 절반 지점에 삽입
-    parts = inner.split("</p>")
-    if len(parts) > 3:
-        mid = len(parts) // 2
-        parts[mid] = parts[mid] + "</p>" + ad_unit("middle")
-        inner = "</p>".join(p_ if i == mid else p_ for i, p_ in enumerate(parts))
     return page(p["title"], p["description"] or p["title"], inner, canonical)
 
 
