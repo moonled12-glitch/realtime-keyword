@@ -17,7 +17,7 @@ import generate as g   # get(), GEMINI_KEY, SUMMARY_MODEL, txt() 재사용
 KST = timezone(timedelta(hours=9))
 DRAFTS_DIR = "drafts"
 POSTS_DIR = "posts"
-MAX_DRAFTS = 10         # 실행 1회당 신규 초안 상한
+MAX_DRAFTS = 5          # 실행 1회당 신규 초안 상한 (요약 우선 + 분당 한도 회피)
 POOL_TOP_N = 10         # 소스별 상위 N개 키워드를 후보로
 
 DRAFT_SYSTEM = (

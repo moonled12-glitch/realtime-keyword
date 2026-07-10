@@ -39,6 +39,7 @@ SUMMARY_MODEL = os.environ.get("SUMMARY_MODEL", "").strip() or "gemini-flash-lit
 SUMMARIES_FILE = "summaries.json"
 SUMMARY_TOP_N = 10      # 소스별 상위 N개만 요약 대상
 MAX_NEW_SUMMARIES = 12  # 실행 1회당 신규 요약 상한 (비용 캡)
+SUMMARY_CACHE_MAX = 120 # 캐시 보존 상한 (회전 대비, 재생성/할당량 절약)
 
 SIGNAL_STATE = {"n": "new", "+": "up", "-": "down", "s": "same"}
 
@@ -258,12 +259,16 @@ def build_summaries(google, naver, cache):
                     print(f"summary failed for {kw!r}: {e}")
             print(f"AI summaries: {made} new via {SUMMARY_MODEL}")
 
-    # 현재 노출 키워드로 캐시 정리(무한 증가 방지) + 항목에 부착
-    pruned = {kw: cache[kw] for kw in wanted if kw in cache}
+    # 회전 대비: 현재 키워드 우선 보존 + 기존 캐시도 최대치까지 유지(재생성/할당량 절약)
+    keep = {kw: cache[kw] for kw in wanted if kw in cache}
+    for kw, v in cache.items():
+        if len(keep) >= SUMMARY_CACHE_MAX:
+            break
+        keep.setdefault(kw, v)
     for it in google + naver:
-        if it["keyword"] in pruned:
-            it["aiSummary"] = pruned[it["keyword"]]
-    return pruned
+        if it["keyword"] in keep:
+            it["aiSummary"] = keep[it["keyword"]]
+    return keep
 
 
 # ---------- 공통 ----------
