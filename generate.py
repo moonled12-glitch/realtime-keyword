@@ -175,6 +175,22 @@ def load_summaries():
     return {}
 
 
+def news_for(keyword, limit=3):
+    """구글 뉴스 RSS에서 키워드 관련 기사 [{title,url,source}] (네이버 탭 관련기사용)."""
+    root = ET.fromstring(get(GNEWS_RSS.format(urllib.parse.quote(keyword))))
+    out = []
+    for it in root.iter("item"):
+        t = txt(it.find("title"))
+        link = txt(it.find("link"))
+        s = it.find("source")
+        if t and link:
+            out.append({"title": html.unescape(t), "url": link,
+                        "source": (s.text or "").strip() if s is not None else ""})
+        if len(out) >= limit:
+            break
+    return out
+
+
 def google_news_titles(keyword, limit=5):
     """구글 뉴스 RSS에서 키워드 관련 최신 헤드라인 제목만 추출."""
     raw = get(GNEWS_RSS.format(urllib.parse.quote(keyword)))
@@ -319,6 +335,14 @@ def main():
     if not google and not naver:
         print("both sources failed; keep existing index.html")
         sys.exit(0)
+
+    # 네이버 항목에 관련 기사 붙이기(구글 뉴스 RSS) — 구글 탭처럼 패널에 노출
+    if naver_source == "signal":
+        for it in naver:
+            try:
+                it["news"] = news_for(it["keyword"])
+            except Exception:
+                it["news"] = []
 
     # AI 요약(캐시 기반, 새 키워드만 생성) — 항목에 aiSummary 부착
     summaries = build_summaries(google, naver, load_summaries())

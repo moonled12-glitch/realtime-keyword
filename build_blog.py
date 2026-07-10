@@ -79,7 +79,14 @@ ADSENSE_HEAD = (
 
 CSS = """
 :root{--bg:#0d1017;--card:#161b26;--line:#252c3a;--txt:#e8ecf3;--sub:#8b95a7;--accent:#ff5a3c;}
+@media (prefers-color-scheme: light){:root:not([data-theme]){
+ --bg:#f4f6f9;--card:#ffffff;--line:#e0e5ec;--txt:#1a1f2b;--sub:#5f6b7c;--accent:#ff5a3c;}}
+:root[data-theme="light"]{--bg:#f4f6f9;--card:#ffffff;--line:#e0e5ec;--txt:#1a1f2b;--sub:#5f6b7c;--accent:#ff5a3c;}
 *{box-sizing:border-box;margin:0;padding:0;}
+.themebtn{width:30px;height:30px;flex:0 0 auto;border-radius:50%;border:1px solid var(--line);
+ background:var(--card);color:var(--txt);cursor:pointer;font-size:14px;line-height:1;padding:0;
+ display:inline-flex;align-items:center;justify-content:center;}
+.themebtn:hover{border-color:var(--accent);}
 body{background:var(--bg);color:var(--txt);line-height:1.5;
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
  -webkit-font-smoothing:antialiased;}
@@ -145,7 +152,20 @@ def nav():
             f'<a class="brand" href="{PREFIX}/">실시간 검색<span class="dot">어</span></a>'
             f'<a href="{PREFIX}/">실시간</a>'
             f'<a href="{PREFIX}/blog/">블로그</a>'
-            f'<a href="{PREFIX}/about.html">소개</a></div>')
+            f'<a href="{PREFIX}/about.html">소개</a>'
+            f'<button class="themebtn" id="themeToggle" type="button" '
+            f'aria-label="다크/라이트 모드 전환" title="테마 전환">🌙</button></div>')
+
+
+THEME_INIT = ("<script>(function(){try{var t=localStorage.getItem('theme');"
+              "if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>")
+THEME_JS = ("<script>(function(){var b=document.getElementById('themeToggle');if(!b)return;"
+            "function cur(){return document.documentElement.getAttribute('data-theme')||"
+            "(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');}"
+            "function set(t){document.documentElement.setAttribute('data-theme',t);"
+            "try{localStorage.setItem('theme',t);}catch(e){}b.textContent=t==='dark'?'\\ud83c\\udf19':'\\u2600\\ufe0f';}"
+            "b.textContent=cur()==='dark'?'\\ud83c\\udf19':'\\u2600\\ufe0f';"
+            "b.addEventListener('click',function(){set(cur()==='dark'?'light':'dark');});})();</script>")
 
 
 def foot():
@@ -167,6 +187,7 @@ def page(title, desc, body, canonical):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:type" content="article">
+{THEME_INIT}
 {ADSENSE_HEAD}
 <style>{CSS}</style>
 </head>
@@ -176,7 +197,9 @@ def page(title, desc, body, canonical):
 {nav()}
 {body}
 {foot()}
-</div></body>
+</div>
+{THEME_JS}
+</body>
 </html>
 """
 
