@@ -26,6 +26,10 @@ jobs:
           python-version: "3.x"
 
       - name: Generate latest index.html
+        env:
+          # 네이버 데이터랩 API 키 (없으면 자동으로 signal.bz 폴백)
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         run: python generate.py
 
       - name: Commit & push if changed

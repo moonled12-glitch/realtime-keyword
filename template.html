@@ -126,8 +126,8 @@
   <ul class="board n" id="board-naver" hidden></ul>
 
   <footer>
-    데이터 출처: 구글 트렌드 · <a href="https://signal.bz" target="_blank" rel="noopener">signal.bz</a> · 매시간 자동 갱신
-    <span class="note">※ 네이버는 2021년 공식 실시간 검색어를 폐지했습니다. "네이버 실시간"은 signal.bz의 실시간 검색어 집계를 표시한 것으로, 네이버 공식 순위가 아닙니다.</span>
+    <span id="srcline">데이터 출처: 구글 트렌드 · 매시간 자동 갱신</span>
+    <span class="note" id="footnote"></span>
   </footer>
 </div>
 
@@ -157,7 +157,8 @@ function rowHTML(it, kind){
   const body = (kind === "google" && (!it.news || !it.news.length))
     ? '<div class="src" style="padding:6px 0;">관련 뉴스가 없어요.</div>' : news;
   const vol = kind === "google"
-    ? `<div class="vol">검색량 ${esc(it.traffic)||'–'}</div>` : "";
+    ? `<div class="vol">검색량 ${esc(it.traffic)||'–'}</div>`
+    : (it.metric ? `<div class="vol">${esc(it.metric)}</div>` : "");
   return `
     <li class="row">
       <div class="head" tabindex="0" role="button" aria-expanded="false"
@@ -187,10 +188,19 @@ function renderBoard(id, items, kind){
     : '<li class="row"><div class="head"><div class="kw"><div class="word" style="color:var(--sub);font-weight:500">데이터를 불러오지 못했어요.</div></div></div></li>';
 }
 
+const NAVER_DATALAB = DATA.naverSource === 'datalab';
 const SRC = {
   google: '구글 트렌드 기준',
-  naver:  'signal.bz 집계 기준'
+  naver:  NAVER_DATALAB ? '네이버 데이터랩 기준' : 'signal.bz 집계 기준'
 };
+
+document.getElementById('srcline').textContent =
+  NAVER_DATALAB ? '데이터 출처: 구글 트렌드 · 네이버 데이터랩 · 매시간 자동 갱신'
+                : '데이터 출처: 구글 트렌드 · signal.bz · 매시간 자동 갱신';
+document.getElementById('footnote').textContent =
+  NAVER_DATALAB
+    ? '※ 네이버는 2021년 공식 실시간 검색어를 폐지했습니다. "네이버 실시간"은 구글 트렌드 키워드를 네이버 데이터랩 검색비중으로 재정렬한 순위이며, 네이버 공식 실검이 아닙니다.'
+    : '※ 네이버는 2021년 공식 실시간 검색어를 폐지했습니다. "네이버 실시간"은 signal.bz의 실시간 검색어 집계를 표시한 것으로, 네이버 공식 순위가 아닙니다.';
 
 function showTab(name){
   document.querySelectorAll('.tab').forEach(t=>{

@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-# 구글 트렌드(한국) + signal.bz 실시간 검색어를 받아 순위 변동을 계산하고 index.html 생성
+# 구글 트렌드(한국) + 네이버 실시간 검색어를 받아 순위 변동을 계산하고 index.html 생성
 # GitHub Actions에서 매시간 자동 실행됨
 #
 # 소스
 #  - 구글: Google Trends 인기 급상승 검색어 RSS (geo=KR)
-#  - 네이버(형): signal.bz 실시간 검색어 집계 API
-#      (네이버는 2021년 공식 실검 폐지 → signal.bz가 사실상 대체 지표로 널리 쓰임)
+#  - 네이버:
+#      (A) 네이버 데이터랩 검색어트렌드 API  ← NAVER_CLIENT_ID/SECRET 환경변수가 있으면 사용
+#          · 데이터랩은 "발견"이 아니라 "지정 키워드의 상대 추이"만 주므로,
+#            구글 트렌드 키워드를 후보로 삼아 네이버 검색비중 순으로 재정렬한다.
+#          · 요청당 최대 5개 그룹만 상호 비교되어, 공통 앵커("날씨")로 배치 간 정규화한다.
+#      (B) signal.bz 실시간 검색어 집계     ← 키가 없으면 자동 폴백 (네이버는 2021년 공식 실검 폐지)
 import json
 import os
 import sys
@@ -16,13 +20,17 @@ from datetime import datetime, timezone, timedelta
 
 GOOGLE_RSS = "https://trends.google.com/trending/rss?geo=KR"
 SIGNAL_API = "https://api.signal.bz/news/realtime"
+DATALAB_API = "https://openapi.naver.com/v1/datalab/search"
 HDRS = {"User-Agent": "Mozilla/5.0 (compatible; trends-updater/1.0)"}
 HT = "{https://trends.google.com/trending/rss}"
 KST = timezone(timedelta(hours=9))
 MAX_ITEMS = 20          # 화면에 노출할 최대 개수
 MAX_NEWS = 3            # 항목당 관련 뉴스 최대 개수
 
-# signal.bz state 코드 → 내부 이동값 (delta 없을 때의 기본 표시)
+NAVER_ID = os.environ.get("NAVER_CLIENT_ID", "").strip()
+NAVER_SECRET = os.environ.get("NAVER_CLIENT_SECRET", "").strip()
+DATALAB_ANCHOR = "날씨"   # 배치 간 정규화용 기준 검색어 (항상 검색량이 큰 일반어)
+
 SIGNAL_STATE = {"n": "new", "+": "up", "-": "down", "s": "same"}
 
 
@@ -32,12 +40,20 @@ def get(url):
         return r.read()
 
 
+def post_json(url, body, headers):
+    data = json.dumps(body).encode("utf-8")
+    h = {"Content-Type": "application/json", **headers}
+    req = urllib.request.Request(url, data=data, headers=h, method="POST")
+    with urllib.request.urlopen(req, timeout=20) as r:
+        return json.loads(r.read())
+
+
 def txt(el):
     return el.text.strip() if el is not None and el.text else ""
 
 
+# ---------- 구글 ----------
 def parse_google(xml_bytes):
-    """구글 RSS → [{keyword, traffic, image, news:[{title,url,source}]}]"""
     root = ET.fromstring(xml_bytes)
     items = []
     for it in root.iter("item"):
@@ -54,34 +70,71 @@ def parse_google(xml_bytes):
                     "url": url,
                     "source": txt(n.find(HT + "news_item_source")),
                 })
-        items.append({
-            "keyword": keyword,
-            "traffic": txt(it.find(HT + "approx_traffic")),
-            "news": news,
-        })
+        items.append({"keyword": keyword,
+                      "traffic": txt(it.find(HT + "approx_traffic")),
+                      "news": news})
         if len(items) >= MAX_ITEMS:
             break
     return items
 
 
+# ---------- 네이버 (B) signal.bz ----------
 def parse_signal(raw_bytes):
-    """signal.bz JSON → [{keyword, summary, state}]"""
     obj = json.loads(raw_bytes)
     items = []
     for e in obj.get("top10", [])[:MAX_ITEMS]:
         kw = (e.get("keyword") or "").strip()
         if not kw:
             continue
-        items.append({
-            "keyword": kw,
-            "summary": e.get("summary", ""),
-            "state": e.get("state", ""),
-        })
+        items.append({"keyword": kw, "summary": e.get("summary", ""),
+                      "state": e.get("state", "")})
     return items
 
 
+# ---------- 네이버 (A) 데이터랩 ----------
+def datalab_ratio(keywords):
+    """키워드별 '최근일 검색비중(앵커=날씨 기준 정규화)'을 dict로 반환."""
+    end = datetime.now(KST).date()
+    start = end - timedelta(days=7)
+    headers = {"X-Naver-Client-Id": NAVER_ID, "X-Naver-Client-Secret": NAVER_SECRET}
+    scores = {}
+    batch = [k for k in keywords if k and k != DATALAB_ANCHOR][:MAX_ITEMS]
+    # 4개 후보 + 앵커 1개 = 5그룹씩
+    for i in range(0, len(batch), 4):
+        chunk = batch[i:i + 4]
+        groups = [{"groupName": DATALAB_ANCHOR, "keywords": [DATALAB_ANCHOR]}]
+        groups += [{"groupName": k, "keywords": [k]} for k in chunk]
+        body = {"startDate": start.isoformat(), "endDate": end.isoformat(),
+                "timeUnit": "date", "keywordGroups": groups}
+        res = post_json(DATALAB_API, body, headers)
+        latest = {}
+        for g in res.get("results", []):
+            pts = g.get("data", [])
+            latest[g.get("title")] = pts[-1]["ratio"] if pts else 0.0
+        anchor = latest.get(DATALAB_ANCHOR, 0.0)
+        for k in chunk:
+            raw = latest.get(k, 0.0)
+            scores[k] = raw if anchor <= 0 else raw / anchor * 100.0
+    return scores
+
+
+def build_naver_datalab(google_keywords):
+    """구글 후보를 네이버 검색비중 순으로 재정렬. 실패/빈약하면 None 반환(→폴백)."""
+    scores = datalab_ratio(google_keywords)
+    ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    ranked = [(k, s) for k, s in ranked if s > 0]
+    if len(ranked) < 3:
+        return None
+    top = ranked[0][1]
+    items = []
+    for k, s in ranked[:MAX_ITEMS]:
+        idx = round(s / top * 100) if top > 0 else 0     # 1위=100으로 환산
+        items.append({"keyword": k, "metric": f"네이버 검색비중 {idx}"})
+    return items
+
+
+# ---------- 공통 ----------
 def load_prev():
-    """직전 실행의 소스별 키워드→순위 맵. 구버전(평면) 포맷도 안전 처리."""
     if not os.path.exists("prev.json"):
         return {"google": {}, "naver": {}}
     try:
@@ -90,13 +143,12 @@ def load_prev():
         return {"google": {}, "naver": {}}
     if isinstance(data, dict) and ("google" in data or "naver" in data):
         return {"google": data.get("google", {}), "naver": data.get("naver", {})}
-    return {"google": {}, "naver": {}}   # 구버전 포맷은 무시하고 초기화
+    return {"google": {}, "naver": {}}
 
 
 def movement(keyword, rank, prev_map, fallback_state=""):
-    """이전 순위 대비 변동. 이전 스냅샷이 없으면 소스가 준 state로 대체."""
     if keyword in prev_map:
-        delta = prev_map[keyword] - rank      # +면 상승, -면 하락
+        delta = prev_map[keyword] - rank
         if delta > 0:
             return {"move": "up", "delta": delta}
         if delta < 0:
@@ -128,12 +180,24 @@ def main():
     except Exception as e:
         print(f"google fetch/parse failed: {e}")
 
-    # 네이버(형): signal.bz
-    naver = []
-    try:
-        naver = rank_items(parse_signal(get(SIGNAL_API)), prev["naver"])
-    except Exception as e:
-        print(f"signal.bz fetch/parse failed: {e}")
+    # 네이버: 데이터랩(키 있음) 우선, 실패 시 signal.bz 폴백
+    naver, naver_source = [], "signal"
+    google_kws = [it["keyword"] for it in google]
+    if NAVER_ID and NAVER_SECRET and google_kws:
+        try:
+            dl = build_naver_datalab(google_kws)
+            if dl:
+                naver, naver_source = rank_items(dl, prev["naver"]), "datalab"
+            else:
+                print("datalab returned too few results; falling back to signal.bz")
+        except Exception as e:
+            print(f"datalab failed ({e}); falling back to signal.bz")
+    if not naver:
+        try:
+            naver = rank_items(parse_signal(get(SIGNAL_API)), prev["naver"])
+            naver_source = "signal"
+        except Exception as e:
+            print(f"signal.bz fetch/parse failed: {e}")
 
     if not google and not naver:
         print("both sources failed; keep existing index.html")
@@ -145,13 +209,13 @@ def main():
         "updatedAtISO": now.isoformat(),
         "google": google,
         "naver": naver,
+        "naverSource": naver_source,
     }
 
     tpl = open("template.html", encoding="utf-8").read()
     out = tpl.replace("__TRENDS_DATA__", json.dumps(data, ensure_ascii=False))
     open("index.html", "w", encoding="utf-8").write(out)
 
-    # 다음 실행 비교용 스냅샷 저장 (수집 성공한 소스만 갱신)
     snap = {"google": prev["google"], "naver": prev["naver"]}
     if google:
         snap["google"] = {it["keyword"]: it["rank"] for it in google}
@@ -160,7 +224,7 @@ def main():
     json.dump(snap, open("prev.json", "w", encoding="utf-8"), ensure_ascii=False)
 
     print(f"index.html generated at {data['updatedAt']} KST "
-          f"(google={len(google)}, naver={len(naver)})")
+          f"(google={len(google)}, naver={len(naver)} via {naver_source})")
 
 
 if __name__ == "__main__":
