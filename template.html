@@ -77,7 +77,7 @@
   .kw{flex:1 1 auto; min-width:0;}
   .kw .word{font-size:16px; font-weight:600; white-space:nowrap;
     overflow:hidden; text-overflow:ellipsis;}
-  .kw .vol{font-size:12px; color:var(--sub); margin-top:1px;}
+  .vol{flex:0 0 auto; font-size:12px; color:var(--sub); white-space:nowrap; text-align:right;}
   .move{flex:0 0 auto; display:flex; align-items:center; gap:3px;
     font-size:12px; font-weight:700; font-variant-numeric:tabular-nums;}
   .move.up{color:var(--up);} .move.down{color:var(--down);}
@@ -187,7 +187,8 @@ function rowHTML(it, kind){
       <div class="head" tabindex="0" role="button" aria-expanded="false"
            onclick="toggleRow(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
         <div class="rank">${it.rank}</div>
-        <div class="kw"><div class="word">${esc(it.keyword)}</div>${vol}</div>
+        <div class="kw"><div class="word">${esc(it.keyword)}</div></div>
+        ${vol}
         ${moveHTML(it)}
         <div class="caret">▾</div>
       </div>
@@ -201,8 +202,27 @@ function rowHTML(it, kind){
 
 function toggleRow(head){
   const li = head.parentElement;
-  li.classList.toggle('open');
-  head.setAttribute('aria-expanded', li.classList.contains('open'));
+  const board = li.closest('.board');
+  const wasOpen = li.classList.contains('open');
+  // 아코디언: 같은 보드에서 열린 항목 모두 닫기
+  board.querySelectorAll('li.open').forEach(o=>{
+    o.classList.remove('open');
+    o.querySelector('.head').setAttribute('aria-expanded','false');
+  });
+  if(!wasOpen){
+    li.classList.add('open');
+    head.setAttribute('aria-expanded','true');
+  }
+}
+
+// 보드의 1위를 기본으로 펼침
+function openFirst(id){
+  const li = document.querySelector('#'+id+' li.row');
+  if(li){
+    li.classList.add('open');
+    const h = li.querySelector('.head');
+    if(h) h.setAttribute('aria-expanded','true');
+  }
 }
 
 function renderBoard(id, items, kind){
@@ -240,6 +260,8 @@ function showTab(name){
 document.getElementById('updated').textContent = DATA.updatedAt;
 renderBoard('board-google', DATA.google, 'google');
 renderBoard('board-naver',  DATA.naver,  'naver');
+openFirst('board-google');   // 각 보드 1위 기본 펼침
+openFirst('board-naver');
 document.querySelectorAll('.tab').forEach(t=>{
   t.addEventListener('click', ()=>showTab(t.dataset.tab));
   t.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); showTab(t.dataset.tab);} });
