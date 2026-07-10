@@ -207,7 +207,6 @@ function moveHTML(it){
 }
 function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function naverSearch(kw){return 'https://search.naver.com/search.naver?query='+encodeURIComponent(kw);}
-function naverBlog(kw){return 'https://search.naver.com/search.naver?where=blog&query='+encodeURIComponent(kw);}
 function googleSearch(kw){return 'https://www.google.com/search?q='+encodeURIComponent(kw);}
 
 function rowHTML(it, kind){
@@ -219,7 +218,7 @@ function rowHTML(it, kind){
     ? `<a href="${naverSearch(it.keyword)}" target="_blank" rel="noopener">네이버 검색 →</a>
        <a href="${googleSearch(it.keyword)}" target="_blank" rel="noopener">구글 검색 →</a>`
     : `<a href="${naverSearch(it.keyword)}" target="_blank" rel="noopener">네이버 검색 →</a>
-       <a href="${naverBlog(it.keyword)}" target="_blank" rel="noopener">네이버 블로그 →</a>`
+       <a href="${googleSearch(it.keyword)}" target="_blank" rel="noopener">구글 검색 →</a>`
       + (it.summary ? `<a href="${esc(it.summary)}" target="_blank" rel="noopener">AI 요약 보기 →</a>` : "");
   const body = (!it.news || !it.news.length)
     ? '<div class="src" style="padding:6px 0;">관련 뉴스가 없어요.</div>' : news;
