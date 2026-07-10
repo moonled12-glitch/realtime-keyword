@@ -5,12 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>실시간 검색어 · 구글 & 네이버 인기 검색어</title>
 <meta name="description" content="지금 대한민국에서 가장 많이 검색되는 실시간 인기 검색어 순위. 구글과 네이버(실검) 랭킹을 각각 제공. 매시간 자동 갱신.">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <style>
   :root{
     --bg:#0d1017; --card:#161b26; --card2:#1c2230; --line:#252c3a;
     --txt:#e8ecf3; --sub:#8b95a7; --accent:#ff5a3c;
     --google:#4285f4; --naver:#03c75a;
     --up:#ff4d4d; --down:#4d8bff; --new:#ff8a00; --same:#6b7688;
+  }
+  /* 라이트 테마: OS가 라이트이고 사용자가 토글 안 했을 때 + 명시적 라이트 선택 시 */
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme]){
+      --bg:#f4f6f9; --card:#ffffff; --card2:#eef1f5; --line:#e0e5ec;
+      --txt:#1a1f2b; --sub:#5f6b7c; --accent:#ff5a3c;
+      --google:#1a73e8; --naver:#03b94f;
+      --up:#e5342f; --down:#2f6bff; --new:#e07b00; --same:#8b95a7;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f4f6f9; --card:#ffffff; --card2:#eef1f5; --line:#e0e5ec;
+    --txt:#1a1f2b; --sub:#5f6b7c; --accent:#ff5a3c;
+    --google:#1a73e8; --naver:#03b94f;
+    --up:#e5342f; --down:#2f6bff; --new:#e07b00; --same:#8b95a7;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
@@ -38,6 +54,16 @@
     100%{box-shadow:0 0 0 0 rgba(255,90,60,0);}
   }
   @media (prefers-reduced-motion: reduce){ .live .pulse{animation:none;} }
+  .livewrap{display:inline-flex; align-items:center; gap:8px; margin-top:10px;}
+  .livewrap .live{margin-top:0;}
+  .themebtn{
+    width:30px; height:30px; flex:0 0 auto; border-radius:50%;
+    border:1px solid var(--line); background:var(--card); color:var(--txt);
+    cursor:pointer; font-size:14px; line-height:1; padding:0;
+    display:inline-flex; align-items:center; justify-content:center; transition:.15s;
+  }
+  .themebtn:hover{border-color:var(--accent);}
+  .themebtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
   /* 탭 */
   .tabs{display:flex; gap:8px; margin:8px 0 12px;}
@@ -127,7 +153,10 @@ __AD_RIGHT__
 <div class="wrap">
   <header>
     <div class="logo">실시간 검색<span class="dot">어</span></div>
-    <div class="live"><span class="pulse"></span><span>지금 대한민국이 검색하는 키워드</span></div>
+    <div class="livewrap">
+      <div class="live"><span class="pulse"></span><span>지금 대한민국이 검색하는 키워드</span></div>
+      <button class="themebtn" id="themeToggle" type="button" aria-label="다크/라이트 모드 전환" title="테마 전환">🌙</button>
+    </div>
   </header>
 
   <div class="tabs" role="tablist">
@@ -267,6 +296,22 @@ document.querySelectorAll('.tab').forEach(t=>{
   t.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); showTab(t.dataset.tab);} });
 });
 showTab('google');
+
+// 다크/라이트 테마 토글
+function currentTheme(){
+  return document.documentElement.getAttribute('data-theme')
+    || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  try{ localStorage.setItem('theme', t); }catch(e){}
+  document.getElementById('themeToggle').textContent = (t === 'dark') ? '🌙' : '☀️';
+}
+(function initTheme(){
+  const btn = document.getElementById('themeToggle');
+  btn.textContent = (currentTheme() === 'dark') ? '🌙' : '☀️';
+  btn.addEventListener('click', ()=> applyTheme(currentTheme() === 'dark' ? 'light' : 'dark'));
+})();
 
 // 정적 페이지가 GitHub Actions로 갱신되므로 5분마다 새로고침해 최신 데이터 반영
 setTimeout(()=>location.reload(), 5*60*1000);
