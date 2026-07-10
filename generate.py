@@ -33,9 +33,9 @@ NAVER_ID = os.environ.get("NAVER_CLIENT_ID", "").strip()
 NAVER_SECRET = os.environ.get("NAVER_CLIENT_SECRET", "").strip()
 DATALAB_ANCHOR = "날씨"   # 배치 간 정규화용 기준 검색어 (항상 검색량이 큰 일반어)
 
-# AI 요약 (Claude) — 키가 있으면 새 키워드만 요약해 summaries.json에 캐시
-ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-SUMMARY_MODEL = os.environ.get("SUMMARY_MODEL", "").strip() or "claude-haiku-4-5"
+# AI 요약 (Google Gemini, 무료 API) — 키가 있으면 새 키워드만 요약해 캐시
+GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+SUMMARY_MODEL = os.environ.get("SUMMARY_MODEL", "").strip() or "gemini-2.5-flash"
 SUMMARIES_FILE = "summaries.json"
 SUMMARY_TOP_N = 10      # 소스별 상위 N개만 요약 대상
 MAX_NEW_SUMMARIES = 12  # 실행 1회당 신규 요약 상한 (비용 캡)
@@ -166,18 +166,24 @@ def google_news_titles(keyword, limit=5):
     return titles
 
 
+SUMMARY_SYSTEM = ("너는 실시간 검색어 큐레이터다. 아래 뉴스 헤드라인만 근거로 "
+                  "이 키워드가 지금 왜 화제인지 한국어로 2~3문장으로 중립적이게 요약해라. "
+                  "추측·과장 금지, 헤드라인에 없는 사실 추가 금지. 요약 본문만 출력.")
+
+
 def ai_summary(client, keyword, headlines):
+    from google.genai import types
     joined = "\n".join(f"- {h}" for h in headlines)
-    resp = client.messages.create(
+    resp = client.models.generate_content(
         model=SUMMARY_MODEL,
-        max_tokens=400,
-        system="너는 실시간 검색어 큐레이터다. 아래 뉴스 헤드라인만 근거로 "
-               "이 키워드가 지금 왜 화제인지 한국어로 2~3문장으로 중립적이게 요약해라. "
-               "추측·과장 금지, 헤드라인에 없는 사실 추가 금지. 요약 본문만 출력.",
-        messages=[{"role": "user",
-                   "content": f'키워드: "{keyword}"\n\n관련 뉴스:\n{joined}'}],
+        contents=f'키워드: "{keyword}"\n\n관련 뉴스:\n{joined}',
+        config=types.GenerateContentConfig(
+            system_instruction=SUMMARY_SYSTEM,
+            max_output_tokens=400,
+            temperature=0.3,
+        ),
     )
-    return "".join(b.text for b in resp.content if b.type == "text").strip()
+    return (resp.text or "").strip()
 
 
 def build_summaries(google, naver, cache):
@@ -188,12 +194,12 @@ def build_summaries(google, naver, cache):
         if kw not in wanted:
             wanted.append(kw)
 
-    if ANTHROPIC_KEY:
+    if GEMINI_KEY:
         try:
-            import anthropic
-            client = anthropic.Anthropic(api_key=ANTHROPIC_KEY)
+            from google import genai
+            client = genai.Client(api_key=GEMINI_KEY)
         except Exception as e:
-            print(f"anthropic init failed ({e}); skip summary generation")
+            print(f"gemini init failed ({e}); skip summary generation")
             client = None
         if client:
             made = 0

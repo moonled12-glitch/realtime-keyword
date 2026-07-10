@@ -26,16 +26,16 @@ jobs:
           python-version: "3.x"
 
       - name: Install AI summary deps
-        run: pip install --quiet anthropic
+        run: pip install --quiet google-genai
 
       - name: Generate latest index.html
         env:
           # 네이버 데이터랩 API 키 (없으면 자동으로 signal.bz 폴백)
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
-          # AI 요약용 Claude 키 (없으면 요약 생성 건너뜀, 캐시된 요약만 표시)
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}   # 미설정 시 claude-haiku-4-5
+          # AI 요약용 Gemini 무료 키 (없으면 요약 생성 건너뜀, 캐시된 요약만 표시)
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}   # 미설정 시 gemini-2.5-flash
         run: python generate.py
 
       - name: Commit & push if changed
