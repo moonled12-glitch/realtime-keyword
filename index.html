@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>실시간 검색어 · 지금 뜨는 키워드</title>
-<meta name="description" content="지금 대한민국에서 가장 많이 검색되는 실시간 인기 검색어 순위. 매시간 자동 갱신.">
+<title>실시간 검색어 · 구글 & 네이버 인기 검색어</title>
+<meta name="description" content="지금 대한민국에서 가장 많이 검색되는 실시간 인기 검색어 순위. 구글과 네이버(실검) 랭킹을 각각 제공. 매시간 자동 갱신.">
 <style>
   :root{
     --bg:#0d1017; --card:#161b26; --card2:#1c2230; --line:#252c3a;
     --txt:#e8ecf3; --sub:#8b95a7; --accent:#ff5a3c;
+    --google:#4285f4; --naver:#03c75a;
     --up:#ff4d4d; --down:#4d8bff; --new:#ff8a00; --same:#6b7688;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -19,7 +20,7 @@
   }
   .wrap{max-width:680px; margin:0 auto; padding:20px 16px 60px;}
 
-  header{text-align:center; padding:22px 0 18px;}
+  header{text-align:center; padding:22px 0 16px;}
   .logo{font-size:26px; font-weight:800; letter-spacing:-.5px;}
   .logo .dot{color:var(--accent);}
   .live{
@@ -36,23 +37,43 @@
     70%{box-shadow:0 0 0 7px rgba(255,90,60,0);}
     100%{box-shadow:0 0 0 0 rgba(255,90,60,0);}
   }
+  @media (prefers-reduced-motion: reduce){ .live .pulse{animation:none;} }
+
+  /* 탭 */
+  .tabs{display:flex; gap:8px; margin:8px 0 12px;}
+  .tab{
+    flex:1 1 0; display:flex; align-items:center; justify-content:center; gap:7px;
+    padding:11px 8px; border-radius:12px; cursor:pointer; user-select:none;
+    background:var(--card); border:1px solid var(--line);
+    font-size:15px; font-weight:700; color:var(--sub); transition:.15s;
+  }
+  .tab .ic{width:18px; height:18px; border-radius:50%; display:inline-block; flex:0 0 auto;}
+  .tab[data-tab="google"] .ic{background:var(--google);}
+  .tab[data-tab="naver"] .ic{background:var(--naver);}
+  .tab.active{color:var(--txt); background:var(--card2);}
+  .tab[data-tab="google"].active{border-color:var(--google);}
+  .tab[data-tab="naver"].active{border-color:var(--naver);}
+  .tab:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
   .meta{display:flex; justify-content:space-between; align-items:center;
-    font-size:12px; color:var(--sub); margin:14px 4px 10px;}
+    font-size:12px; color:var(--sub); margin:2px 4px 10px;}
   .meta b{color:var(--txt); font-weight:600;}
 
   ul.board{list-style:none; display:flex; flex-direction:column; gap:8px;}
+  ul.board[hidden]{display:none;}
   li.row{
     background:var(--card); border:1px solid var(--line); border-radius:14px;
     overflow:hidden; transition:border-color .15s;
   }
   li.row:hover{border-color:#33405a;}
   .head{display:flex; align-items:center; gap:12px; padding:13px 14px; cursor:pointer;}
+  .head:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
   .rank{
     flex:0 0 30px; text-align:center; font-size:19px; font-weight:800;
     font-variant-numeric:tabular-nums;
   }
-  li.row:nth-child(-n+3) .rank{color:var(--accent);}
+  .board.g li.row:nth-child(-n+3) .rank{color:var(--google);}
+  .board.n li.row:nth-child(-n+3) .rank{color:var(--naver);}
   .kw{flex:1 1 auto; min-width:0;}
   .kw .word{font-size:16px; font-weight:600; white-space:nowrap;
     overflow:hidden; text-overflow:ellipsis;}
@@ -66,22 +87,21 @@
   .caret{flex:0 0 auto; color:var(--sub); font-size:12px; transition:transform .2s;}
   li.open .caret{transform:rotate(180deg);}
 
-  .news{max-height:0; overflow:hidden; transition:max-height .25s ease;
+  .panel{max-height:0; overflow:hidden; transition:max-height .25s ease;
     background:var(--card2); border-top:1px solid transparent;}
-  li.open .news{max-height:400px; border-top-color:var(--line);}
-  .news-inner{padding:6px 14px 12px;}
-  .news a{display:flex; gap:10px; align-items:center; padding:9px 0;
+  li.open .panel{max-height:460px; border-top-color:var(--line);}
+  .panel-inner{padding:6px 14px 12px;}
+  .panel a.news{display:flex; gap:10px; align-items:center; padding:9px 0;
     color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);}
-  .news a:last-child{border-bottom:none;}
-  .news .thumb{flex:0 0 46px; width:46px; height:46px; border-radius:8px;
-    object-fit:cover; background:var(--line);}
-  .news .nt{font-size:13.5px; line-height:1.4; display:-webkit-box;
+  .panel a.news:last-of-type{border-bottom:none;}
+  .nt{font-size:13.5px; line-height:1.4; display:-webkit-box;
     -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-  .news .src{font-size:11px; color:var(--sub); margin-top:2px;}
-  .search-link{display:inline-block; margin-top:8px; font-size:12px;
-    color:var(--accent); text-decoration:none; font-weight:600;}
+  .src{font-size:11px; color:var(--sub); margin-top:2px;}
+  .links{display:flex; flex-wrap:wrap; gap:14px; margin-top:8px;}
+  .links a{font-size:12px; text-decoration:none; font-weight:600; color:var(--accent);}
 
-  footer{margin-top:26px; text-align:center; font-size:11.5px; color:var(--sub); line-height:1.7;}
+  footer{margin-top:26px; font-size:11.5px; color:var(--sub); line-height:1.7; text-align:center;}
+  footer .note{display:block; margin-top:8px; font-size:11px; opacity:.85;}
   footer a{color:var(--sub);}
 </style>
 </head>
@@ -92,21 +112,27 @@
     <div class="live"><span class="pulse"></span><span>지금 대한민국이 검색하는 키워드</span></div>
   </header>
 
-  <div class="meta">
-    <span>업데이트 <b id="updated">–</b></span>
-    <span id="next">자동 새로고침</span>
+  <div class="tabs" role="tablist">
+    <div class="tab active" data-tab="google" role="tab" tabindex="0" aria-selected="true"><span class="ic"></span>구글 실시간</div>
+    <div class="tab" data-tab="naver" role="tab" tabindex="0" aria-selected="false"><span class="ic"></span>네이버 실시간</div>
   </div>
 
-  <ul class="board" id="board"></ul>
+  <div class="meta">
+    <span>업데이트 <b id="updated">–</b></span>
+    <span id="srcinfo">–</span>
+  </div>
+
+  <ul class="board g" id="board-google"></ul>
+  <ul class="board n" id="board-naver" hidden></ul>
 
   <footer>
-    데이터 출처: Google Trends · 매시간 자동 갱신<br>
-    키워드를 누르면 관련 뉴스가 열리고, 오른쪽 검색 링크로 바로 검색할 수 있어요.
+    데이터 출처: 구글 트렌드 · <a href="https://signal.bz" target="_blank" rel="noopener">signal.bz</a> · 매시간 자동 갱신
+    <span class="note">※ 네이버는 2021년 공식 실시간 검색어를 폐지했습니다. "네이버 실시간"은 signal.bz의 실시간 검색어 집계를 표시한 것으로, 네이버 공식 순위가 아닙니다.</span>
   </footer>
 </div>
 
 <script>
-const DATA = {"updatedAt": "2026-07-10 23:59", "updatedAtISO": "2026-07-10T23:59:09.900017+09:00", "count": 10, "items": [{"keyword": "캐시워크 정답", "traffic": "100+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSl-V0knk8A_Blbh-loC6kj9kVVJ6sqMbhlEhLDCNIEQL6oPmNh2BUiFOypgK4", "news": [{"title": "[단독] 캐시워크 돈버는퀴즈 정답 7월 10일", "url": "https://www.bntnews.co.kr/article/view/bnt202607100041", "source": "BNT뉴스"}, {"title": "황금거위 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://www.ajunews.com/view/20260710062124664", "source": "아주경제"}, {"title": "'뷰카 오브제 듀얼 초미세 칫솔' 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://news.nate.com/view/20260709n19971", "source": "네이트"}], "rank": 1, "move": "new", "delta": 0}, {"keyword": "스파이더맨", "traffic": "1000+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSluf6qGmtfoYet01QE8AZ9QeDNhtVZNpKizJXrabYsIHdDKIFXygsngNzto9Y", "news": [{"title": "반칙 논란, 예매 전격 중단 된 '스파이더맨'", "url": "https://v.daum.net/v/20260710181237095", "source": "Daum"}, {"title": "'스파이더맨: 브랜드 뉴 데이', 북미 첫 주말 수익 3,475억 예상…국내 관객 수는?", "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008649303", "source": "SBS 뉴스"}, {"title": "'스파이더맨: 브랜드 뉴 데이', 서울스카이 555m 상공에 특별 테마존 오픈", "url": "https://www.newspim.com/news/view/20260710000237", "source": "뉴스핌"}], "rank": 2, "move": "new", "delta": 0}, {"keyword": "잉글랜드 축구 국가대표팀", "traffic": "200+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8iukfwbwfdwQUZVM-ZlMIk9H_-e-xTJMfUqAxK8z6hroJ8dUhJ0SIk1KSr4M", "news": [{"title": "잉글랜드 초대형 악재, 콴사 2경기 징계...홀란 7골 막아야 하는데 수비 한 축 이탈", "url": "https://v.daum.net/v/20260710145040082", "source": "Daum"}, {"title": "노르웨이 이어 잉글랜드도 초비상…8강 앞두고 바이러스 창궐→핵심 MF 격리 조치", "url": "https://sports.news.nate.com/view/20260710n31111", "source": "네이트"}, {"title": "[월드컵] 잉글랜드 수비수 콴사, 퇴장 징계로 2경기 출전 정지", "url": "https://www.yna.co.kr/view/AKR20260710021300007", "source": "연합뉴스"}], "rank": 3, "move": "new", "delta": 0}, {"keyword": "옥택연", "traffic": "200+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTzIgWw9q2yAA8mTwVgUDGqNfnFJ18OEcivDTvo9dSuJAzGTEuhq86_Q100FlQ", "news": [{"title": "'김부장' 특별출연 옥택연, 소지섭에 마지막 소원...\"꼭 살아남아라\"", "url": "https://v.daum.net/v/20260710225346514", "source": "Daum"}, {"title": "“같이 죽겠다” 소지섭 총구 막은 옥택연… 안방 울린 ‘처절 브로맨스’(김부장)", "url": "https://sports.khan.co.kr/article/202607102327013", "source": "스포츠경향"}, {"title": "‘김부장’ 소지섭X옥택연, ‘너는 김씨야’…‘코드네임 66’ 비밀 풀린다", "url": "https://sports.donga.com/ent/article/all/20260709/134264396/1", "source": "스포츠동아"}], "rank": 4, "move": "new", "delta": 0}, {"keyword": "맥스 할로웨이", "traffic": "2000+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0BgSw2fOjLdI05LNZ9mXS-g76V7zxkaDNQKDLt2mUW6KCzgX_1Sy5TXuNbwg", "news": [{"title": "UFC 세기의 '리턴매치'…정찬성은 할로웨이 vs 김동현은 맥그리거", "url": "https://v.daum.net/v/1XFewDtWDe", "source": "Daum"}, {"title": "\"미사일처럼 박살\" 맥그리거, '익사시켜 주마\" 할러웨이 선글라스 벗겨서 획~.. 살벌했던 복귀전 기자회견 - 머니투데이", "url": "https://www.mt.co.kr/sports/2026/07/10/202607101205773372O", "source": "머니투데이"}, {"title": "5년 만에 옥타곤 복귀하는 맥그리거 “나를 의심하는 사람이 틀렸다는 것을 증명하겠다” 12일 홀러웨이와 리턴매치", "url": "https://sports.khan.co.kr/article/202607091609003", "source": "스포츠경향"}], "rank": 5, "move": "new", "delta": 0}, {"keyword": "이규원", "traffic": "100+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSYRy9CCqJrnZKjut0-79ojXG8EPres_PPItVXyVFOd9Ks80m3aK9IRdGgcBJM", "news": [{"title": "‘현직 검사 신분으로 정치활동’ 이규원 전 검사, 해임 취소 소송에서 패소", "url": "https://v.daum.net/v/1iVZOoyOCg", "source": "Daum"}, {"title": "'김학의 허위보고서' 前검사, 선고유예 불복해 재판소원 청구", "url": "https://www.yna.co.kr/view/AKR20260710142700004", "source": "연합뉴스"}, {"title": "'검사 신분으로 총선 출마' 이규원…법원 \"해임 처분 정당\" - 머니투데이", "url": "https://www.mt.co.kr/society/2026/07/09/2026070917202912138", "source": "머니투데이"}], "rank": 6, "move": "new", "delta": 0}, {"keyword": "아서 페리", "traffic": "2000+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ59efIE9fvmPVBKAAhZSGrUucthUQGr0RxRgBcTnOEcPtOMK0e7YwmgRiKqz8", "news": [{"title": "와일드카드로 출전해 4강行…세계 114위 아서 페리 돌풍", "url": "https://v.daum.net/v/20260709180025643", "source": "Daum"}, {"title": "‘언더독’ 페리 4강 진출에…들썩이는 윔블던", "url": "https://www.sedaily.com/article/20065844", "source": "서울경제신문"}, {"title": "'114위의 반란' 페리, 코볼리 꺾고 윔블던 4강 진출", "url": "https://mobile.newsis.com/photo_view.html?pict_id=NISI20260709_0002181772&pID=1&cID=&sID=1&type=Main&idx=4", "source": "뉴시스"}], "rank": 7, "move": "new", "delta": 0}, {"keyword": "sbs", "traffic": "1000+", "image": "", "news": [], "rank": 8, "move": "new", "delta": 0}, {"keyword": "네이버치지직", "traffic": "200+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS-SXaMn219J7nmH4D7BV-NYFr6oWfSDyj7LKC55DxMTK2tvUri9rribKUhsS0", "news": [{"title": "韓 조기 탈락에도 이용자 역대 최대…네이버 '월드컵 베팅' 득일까", "url": "https://v.daum.net/v/20260710170803161", "source": "Daum"}, {"title": "OTT·뉴미디어 대전, 스포츠 중계권이 승부 갈랐다", "url": "https://www.edaily.co.kr/News/Read?newsId=01082406645512880&mediaCodeNo=258", "source": "이데일리"}, {"title": "韓 탈락에 꺾인 월드컵 특수…치지직, '게임 월드컵'으로 흥행 잇는다", "url": "https://www.newsis.com/view/NISX20260707_0003698563", "source": "뉴시스"}], "rank": 9, "move": "new", "delta": 0}, {"keyword": "이선민", "traffic": "100+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTXqPKMyI9OvQAFhwgCUnLeysL5MCXQdwb3PiBwbi5JsOc-eZqG-k0sWHJFgB0", "news": [{"title": "'놀면 뭐하니?' 유재석이 금오산서 빈 1조짜리 소원 정체는? - 머니투데이", "url": "https://www.mt.co.kr/entertainment/2026/07/10/2026071017187212487", "source": "머니투데이"}, {"title": "유재석, 소원도 남달랐다…“1조짜리다” 모두 긴장 (놀뭐)", "url": "https://sports.donga.com/ent/article/all/20260710/134273513/1", "source": "스포츠동아"}, {"title": "‘놀면뭐하니’ 이선민, 유재석 인기에 굴욕", "url": "https://v.daum.net/v/ptgI9wFYet", "source": "Daum"}], "rank": 10, "move": "new", "delta": 0}]};
+const DATA = {"updatedAt": "2026-07-11 00:11", "updatedAtISO": "2026-07-11T00:11:40.046973+09:00", "google": [{"keyword": "캐시워크 정답", "traffic": "100+", "news": [{"title": "[단독] 캐시워크 돈버는퀴즈 정답 7월 10일", "url": "https://www.bntnews.co.kr/article/view/bnt202607100041", "source": "BNT뉴스"}, {"title": "황금거위 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://www.ajunews.com/view/20260710062124664", "source": "아주경제"}, {"title": "'뷰카 오브제 듀얼 초미세 칫솔' 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://news.nate.com/view/20260709n19971", "source": "네이트"}], "rank": 1, "move": "new", "delta": 0}, {"keyword": "스파이더맨", "traffic": "1000+", "news": [{"title": "반칙 논란, 예매 전격 중단 된 '스파이더맨'", "url": "https://v.daum.net/v/20260710181237095", "source": "Daum"}, {"title": "'스파이더맨: 브랜드 뉴 데이', 북미 첫 주말 수익 3,475억 예상…국내 관객 수는?", "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008649303", "source": "SBS 뉴스"}, {"title": "'스파이더맨: 브랜드 뉴 데이', 서울스카이 555m 상공에 특별 테마존 오픈", "url": "https://www.newspim.com/news/view/20260710000237", "source": "뉴스핌"}], "rank": 2, "move": "new", "delta": 0}, {"keyword": "잉글랜드 축구 국가대표팀", "traffic": "200+", "news": [{"title": "잉글랜드 초대형 악재, 콴사 2경기 징계...홀란 7골 막아야 하는데 수비 한 축 이탈", "url": "https://v.daum.net/v/20260710145040082", "source": "Daum"}, {"title": "[월드컵] 잉글랜드 수비수 콴사, 퇴장 징계로 2경기 출전 정지", "url": "https://www.yna.co.kr/view/AKR20260710021300007", "source": "연합뉴스"}, {"title": "FIFA ‘이중잣대’ 논란[2026 북중미월드컵]", "url": "https://www.munhwa.com/article/11601736", "source": "문화일보"}], "rank": 3, "move": "new", "delta": 0}, {"keyword": "옥택연", "traffic": "200+", "news": [{"title": "'김부장' 특별출연 옥택연, 소지섭에 마지막 소원...\"꼭 살아남아라\"", "url": "https://v.daum.net/v/20260710225346514", "source": "Daum"}, {"title": "“같이 죽겠다” 소지섭 총구 막은 옥택연… 안방 울린 ‘처절 브로맨스’(김부장)", "url": "https://sports.khan.co.kr/article/202607102327013", "source": "스포츠경향"}, {"title": "‘김부장’ 소지섭X옥택연, ‘너는 김씨야’…‘코드네임 66’ 비밀 풀린다", "url": "https://sports.donga.com/ent/article/all/20260709/134264396/1", "source": "스포츠동아"}], "rank": 4, "move": "new", "delta": 0}, {"keyword": "맥스 할로웨이", "traffic": "2000+", "news": [{"title": "UFC 세기의 '리턴매치'…정찬성은 할로웨이 vs 김동현은 맥그리거", "url": "https://v.daum.net/v/1XFewDtWDe", "source": "Daum"}, {"title": "\"미사일처럼 박살\" 맥그리거, '익사시켜 주마\" 할러웨이 선글라스 벗겨서 획~.. 살벌했던 복귀전 기자회견 - 머니투데이", "url": "https://www.mt.co.kr/sports/2026/07/10/202607101205773372O", "source": "머니투데이"}, {"title": "5년 만에 옥타곤 복귀하는 맥그리거 “나를 의심하는 사람이 틀렸다는 것을 증명하겠다” 12일 홀러웨이와 리턴매치", "url": "https://sports.khan.co.kr/article/202607091609003", "source": "스포츠경향"}], "rank": 5, "move": "new", "delta": 0}, {"keyword": "이규원", "traffic": "100+", "news": [{"title": "‘현직 검사 신분으로 정치활동’ 이규원 전 검사, 해임 취소 소송에서 패소", "url": "https://v.daum.net/v/1iVZOoyOCg", "source": "Daum"}, {"title": "'김학의 허위보고서' 前검사, 선고유예 불복해 재판소원 청구", "url": "https://www.yna.co.kr/view/AKR20260710142700004", "source": "연합뉴스"}, {"title": "'검사 신분으로 총선 출마' 이규원…법원 \"해임 처분 정당\" - 머니투데이", "url": "https://www.mt.co.kr/society/2026/07/09/2026070917202912138", "source": "머니투데이"}], "rank": 6, "move": "new", "delta": 0}, {"keyword": "아서 페리", "traffic": "2000+", "news": [{"title": "와일드카드로 출전해 4강行…세계 114위 아서 페리 돌풍", "url": "https://v.daum.net/v/20260709180025643", "source": "Daum"}, {"title": "‘언더독’ 페리 4강 진출에…들썩이는 윔블던", "url": "https://www.sedaily.com/article/20065844", "source": "서울경제신문"}, {"title": "'114위의 반란' 페리, 코볼리 꺾고 윔블던 4강 진출", "url": "https://mobile.newsis.com/photo_view.html?pict_id=NISI20260709_0002181772&pID=1&cID=&sID=1&type=Main&idx=4", "source": "뉴시스"}], "rank": 7, "move": "new", "delta": 0}, {"keyword": "sbs", "traffic": "1000+", "news": [], "rank": 8, "move": "new", "delta": 0}, {"keyword": "네이버치지직", "traffic": "200+", "news": [{"title": "韓 조기 탈락에도 이용자 역대 최대…네이버 '월드컵 베팅' 득일까", "url": "https://v.daum.net/v/20260710170803161", "source": "Daum"}, {"title": "OTT·뉴미디어 대전, 스포츠 중계권이 승부 갈랐다", "url": "https://www.edaily.co.kr/News/Read?newsId=01082406645512880&mediaCodeNo=258", "source": "이데일리"}, {"title": "韓 탈락에 꺾인 월드컵 특수…치지직, '게임 월드컵'으로 흥행 잇는다", "url": "https://www.newsis.com/view/NISX20260707_0003698563", "source": "뉴시스"}], "rank": 9, "move": "new", "delta": 0}, {"keyword": "이선민", "traffic": "100+", "news": [{"title": "'놀면 뭐하니?' 유재석이 금오산서 빈 1조짜리 소원 정체는? - 머니투데이", "url": "https://www.mt.co.kr/entertainment/2026/07/10/2026071017187212487", "source": "머니투데이"}, {"title": "유재석, 소원도 남달랐다…“1조짜리다” 모두 긴장 (놀뭐)", "url": "https://sports.donga.com/ent/article/all/20260710/134273513/1", "source": "스포츠동아"}, {"title": "‘놀면뭐하니’ 이선민, 유재석 인기에 굴욕", "url": "https://v.daum.net/v/ptgI9wFYet", "source": "Daum"}], "rank": 10, "move": "new", "delta": 0}], "naver": [{"keyword": "김부장 흥행 역주행", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/1?keyword=99286662745798306", "rank": 1, "move": "same", "delta": 0}, {"keyword": "개표소 올다르크 경찰", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/2?keyword=6547281440410216942", "rank": 2, "move": "new", "delta": 0}, {"keyword": "박나래 검찰 송치", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/3?keyword=-2869332215867786559", "rank": 3, "move": "up", "delta": 0}, {"keyword": "캐시워크 정답", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/4?keyword=237007211981181533", "rank": 4, "move": "up", "delta": 0}, {"keyword": "임오경 손흥민 참고인 철회", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/5?keyword=3885519740989585999", "rank": 5, "move": "new", "delta": 0}, {"keyword": "스파이더맨", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/6?keyword=2884132805325385583", "rank": 6, "move": "up", "delta": 0}, {"keyword": "퓨처스 올스타전 MVP", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/7?keyword=-7713731084720689256", "rank": 7, "move": "down", "delta": 0}, {"keyword": "잉글랜드 축구 국가대표팀", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/8?keyword=-7506957467819319398", "rank": 8, "move": "up", "delta": 0}, {"keyword": "이동국 아내 층간소음 사과", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/9?keyword=7007558449720099144", "rank": 9, "move": "new", "delta": 0}, {"keyword": "옥택연", "summary": "https://summary.signal.bz/external/ai-summary/1783695600240/rank/10?keyword=7048217879605431605", "rank": 10, "move": "up", "delta": 0}]};
 
 function moveHTML(it){
   if(it.move === "new") return '<span class="badge-new">NEW</span>';
@@ -114,39 +140,77 @@ function moveHTML(it){
   if(it.move === "down") return '<span class="move down">▼ '+it.delta+'</span>';
   return '<span class="move same">–</span>';
 }
-
 function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function naverSearch(kw){return 'https://search.naver.com/search.naver?query='+encodeURIComponent(kw);}
+function googleSearch(kw){return 'https://www.google.com/search?q='+encodeURIComponent(kw);}
 
-function render(){
-  document.getElementById("updated").textContent = DATA.updatedAt;
-  const board = document.getElementById("board");
-  board.innerHTML = DATA.items.map(it=>{
-    const q = encodeURIComponent(it.keyword);
-    const news = (it.news||[]).map(n=>`
-      <a href="${esc(n.url)}" target="_blank" rel="noopener">
+function rowHTML(it, kind){
+  const news = (it.news||[]).map(n=>`
+      <a class="news" href="${esc(n.url)}" target="_blank" rel="noopener">
         <div class="nt">${esc(n.title)}<div class="src">${esc(n.source)}</div></div>
       </a>`).join("");
-    const newsBlock = it.news && it.news.length ? news : '<div class="src" style="padding:8px 0;">관련 뉴스가 없어요.</div>';
-    return `
+  const links = kind === "google"
+    ? `<a href="${naverSearch(it.keyword)}" target="_blank" rel="noopener">네이버 검색 →</a>
+       <a href="${googleSearch(it.keyword)}" target="_blank" rel="noopener">구글 검색 →</a>`
+    : `<a href="${naverSearch(it.keyword)}" target="_blank" rel="noopener">네이버 검색 →</a>`
+      + (it.summary ? `<a href="${esc(it.summary)}" target="_blank" rel="noopener">AI 요약 보기 →</a>` : "");
+  const body = (kind === "google" && (!it.news || !it.news.length))
+    ? '<div class="src" style="padding:6px 0;">관련 뉴스가 없어요.</div>' : news;
+  const vol = kind === "google"
+    ? `<div class="vol">검색량 ${esc(it.traffic)||'–'}</div>` : "";
+  return `
     <li class="row">
-      <div class="head" onclick="this.parentElement.classList.toggle('open')">
+      <div class="head" tabindex="0" role="button" aria-expanded="false"
+           onclick="toggleRow(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
         <div class="rank">${it.rank}</div>
-        <div class="kw">
-          <div class="word">${esc(it.keyword)}</div>
-          <div class="vol">검색량 ${esc(it.traffic)||'–'}</div>
-        </div>
+        <div class="kw"><div class="word">${esc(it.keyword)}</div>${vol}</div>
         ${moveHTML(it)}
         <div class="caret">▾</div>
       </div>
-      <div class="news"><div class="news-inner">
-        ${newsBlock}
-        <a class="search-link" href="https://search.naver.com/search.naver?query=${q}" target="_blank" rel="noopener">네이버에서 "${esc(it.keyword)}" 검색 →</a>
+      <div class="panel"><div class="panel-inner">
+        ${body}
+        <div class="links">${links}</div>
       </div></div>
     </li>`;
-  }).join("");
 }
 
-render();
+function toggleRow(head){
+  const li = head.parentElement;
+  li.classList.toggle('open');
+  head.setAttribute('aria-expanded', li.classList.contains('open'));
+}
+
+function renderBoard(id, items, kind){
+  const el = document.getElementById(id);
+  el.innerHTML = (items||[]).length
+    ? items.map(it=>rowHTML(it, kind)).join("")
+    : '<li class="row"><div class="head"><div class="kw"><div class="word" style="color:var(--sub);font-weight:500">데이터를 불러오지 못했어요.</div></div></div></li>';
+}
+
+const SRC = {
+  google: '구글 트렌드 기준',
+  naver:  'signal.bz 집계 기준'
+};
+
+function showTab(name){
+  document.querySelectorAll('.tab').forEach(t=>{
+    const on = t.dataset.tab === name;
+    t.classList.toggle('active', on);
+    t.setAttribute('aria-selected', on);
+  });
+  document.getElementById('board-google').hidden = name !== 'google';
+  document.getElementById('board-naver').hidden  = name !== 'naver';
+  document.getElementById('srcinfo').textContent = SRC[name];
+}
+
+document.getElementById('updated').textContent = DATA.updatedAt;
+renderBoard('board-google', DATA.google, 'google');
+renderBoard('board-naver',  DATA.naver,  'naver');
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click', ()=>showTab(t.dataset.tab));
+  t.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); showTab(t.dataset.tab);} });
+});
+showTab('google');
 
 // 정적 페이지가 GitHub Actions로 갱신되므로 5분마다 새로고침해 최신 데이터 반영
 setTimeout(()=>location.reload(), 5*60*1000);
