@@ -30,14 +30,14 @@
 키를 등록하면 각 키워드 펼침 패널에 **"🤖 AI 요약"**(왜 뜨는지 2~3문장)이 표시됩니다.
 
 - 동작: 구글 뉴스 RSS로 헤드라인 수집 → **Gemini**로 요약 → `summaries.json`에 캐시
-- 비용: **무료** (Google AI Studio 무료 키, gemini-2.5-flash). 사용량이 무료 한도 안이라 결제 불필요
+- 비용: **무료** (Google AI Studio 무료 키, gemini-flash-lite-latest). 사용량이 무료 한도 안이라 결제 불필요
 - 비용 억제: **새 키워드만** 생성(실행당 최대 12개), 캐시된 요약은 재사용
 - 키가 없으면 요약 생성만 건너뜀(사이트는 정상, 캐시된 요약은 계속 표시)
 
 1. [aistudio.google.com/apikey](https://aistudio.google.com/apikey) 에서 **무료 API 키** 발급 (결제카드 불필요)
 2. 저장소 **Settings → Secrets and variables → Actions**
    - Secret에 `GEMINI_API_KEY` 등록
-   - (선택) Variables에 `SUMMARY_MODEL` = `gemini-2.5-flash`(기본) 또는 `gemini-2.0-flash`(더 빠름)
+   - (선택) Variables에 `SUMMARY_MODEL` = `gemini-flash-lite-latest`(기본) 또는 `gemini-3.5-flash`(고품질)
 3. Actions에서 워크플로 실행 → 상위 키워드부터 요약이 채워짐
 
 - 약 10분마다 **GitHub Actions**가 자동으로 데이터를 받아 페이지를 다시 생성
