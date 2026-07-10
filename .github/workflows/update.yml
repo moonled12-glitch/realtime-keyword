@@ -25,18 +25,24 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install AI summary deps
+        run: pip install --quiet anthropic
+
       - name: Generate latest index.html
         env:
           # 네이버 데이터랩 API 키 (없으면 자동으로 signal.bz 폴백)
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          # AI 요약용 Claude 키 (없으면 요약 생성 건너뜀, 캐시된 요약만 표시)
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}   # 미설정 시 claude-haiku-4-5
         run: python generate.py
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html prev.json
+          git add index.html prev.json summaries.json
           if git diff --staged --quiet; then
             echo "No changes."
           else

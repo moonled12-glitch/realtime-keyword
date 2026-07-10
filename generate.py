@@ -15,12 +15,14 @@ import os
 import sys
 import html
 import urllib.request
+import urllib.parse
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
 GOOGLE_RSS = "https://trends.google.com/trending/rss?geo=KR"
 SIGNAL_API = "https://api.signal.bz/news/realtime"
 DATALAB_API = "https://openapi.naver.com/v1/datalab/search"
+GNEWS_RSS = "https://news.google.com/rss/search?q={}&hl=ko&gl=KR&ceid=KR:ko"
 HDRS = {"User-Agent": "Mozilla/5.0 (compatible; trends-updater/1.0)"}
 HT = "{https://trends.google.com/trending/rss}"
 KST = timezone(timedelta(hours=9))
@@ -30,6 +32,13 @@ MAX_NEWS = 3            # 항목당 관련 뉴스 최대 개수
 NAVER_ID = os.environ.get("NAVER_CLIENT_ID", "").strip()
 NAVER_SECRET = os.environ.get("NAVER_CLIENT_SECRET", "").strip()
 DATALAB_ANCHOR = "날씨"   # 배치 간 정규화용 기준 검색어 (항상 검색량이 큰 일반어)
+
+# AI 요약 (Claude) — 키가 있으면 새 키워드만 요약해 summaries.json에 캐시
+ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+SUMMARY_MODEL = os.environ.get("SUMMARY_MODEL", "").strip() or "claude-haiku-4-5"
+SUMMARIES_FILE = "summaries.json"
+SUMMARY_TOP_N = 10      # 소스별 상위 N개만 요약 대상
+MAX_NEW_SUMMARIES = 12  # 실행 1회당 신규 요약 상한 (비용 캡)
 
 SIGNAL_STATE = {"n": "new", "+": "up", "-": "down", "s": "same"}
 
@@ -133,6 +142,85 @@ def build_naver_datalab(google_keywords):
     return items
 
 
+# ---------- AI 요약 ----------
+def load_summaries():
+    if os.path.exists(SUMMARIES_FILE):
+        try:
+            return json.load(open(SUMMARIES_FILE, encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+
+def google_news_titles(keyword, limit=5):
+    """구글 뉴스 RSS에서 키워드 관련 최신 헤드라인 제목만 추출."""
+    raw = get(GNEWS_RSS.format(urllib.parse.quote(keyword)))
+    root = ET.fromstring(raw)
+    titles = []
+    for it in root.iter("item"):
+        t = txt(it.find("title"))
+        if t:
+            titles.append(html.unescape(t))
+        if len(titles) >= limit:
+            break
+    return titles
+
+
+def ai_summary(client, keyword, headlines):
+    joined = "\n".join(f"- {h}" for h in headlines)
+    resp = client.messages.create(
+        model=SUMMARY_MODEL,
+        max_tokens=400,
+        system="너는 실시간 검색어 큐레이터다. 아래 뉴스 헤드라인만 근거로 "
+               "이 키워드가 지금 왜 화제인지 한국어로 2~3문장으로 중립적이게 요약해라. "
+               "추측·과장 금지, 헤드라인에 없는 사실 추가 금지. 요약 본문만 출력.",
+        messages=[{"role": "user",
+                   "content": f'키워드: "{keyword}"\n\n관련 뉴스:\n{joined}'}],
+    )
+    return "".join(b.text for b in resp.content if b.type == "text").strip()
+
+
+def build_summaries(google, naver, cache):
+    """새 키워드만 요약해 캐시 갱신. 표시는 캐시만 있으면 되므로 키 없이도 유지."""
+    wanted = []
+    for it in google[:SUMMARY_TOP_N] + naver[:SUMMARY_TOP_N]:
+        kw = it["keyword"]
+        if kw not in wanted:
+            wanted.append(kw)
+
+    if ANTHROPIC_KEY:
+        try:
+            import anthropic
+            client = anthropic.Anthropic(api_key=ANTHROPIC_KEY)
+        except Exception as e:
+            print(f"anthropic init failed ({e}); skip summary generation")
+            client = None
+        if client:
+            made = 0
+            for kw in wanted:
+                if kw in cache:
+                    continue
+                if made >= MAX_NEW_SUMMARIES:
+                    print(f"summary cap reached ({MAX_NEW_SUMMARIES}); rest next run")
+                    break
+                try:
+                    titles = google_news_titles(kw)
+                    if not titles:
+                        continue
+                    cache[kw] = ai_summary(client, kw, titles)
+                    made += 1
+                except Exception as e:
+                    print(f"summary failed for {kw!r}: {e}")
+            print(f"AI summaries: {made} new via {SUMMARY_MODEL}")
+
+    # 현재 노출 키워드로 캐시 정리(무한 증가 방지) + 항목에 부착
+    pruned = {kw: cache[kw] for kw in wanted if kw in cache}
+    for it in google + naver:
+        if it["keyword"] in pruned:
+            it["aiSummary"] = pruned[it["keyword"]]
+    return pruned
+
+
 # ---------- 공통 ----------
 def load_prev():
     if not os.path.exists("prev.json"):
@@ -202,6 +290,11 @@ def main():
     if not google and not naver:
         print("both sources failed; keep existing index.html")
         sys.exit(0)
+
+    # AI 요약(캐시 기반, 새 키워드만 생성) — 항목에 aiSummary 부착
+    summaries = build_summaries(google, naver, load_summaries())
+    json.dump(summaries, open(SUMMARIES_FILE, "w", encoding="utf-8"),
+              ensure_ascii=False)
 
     now = datetime.now(KST)
     data = {
