@@ -59,6 +59,13 @@ def ad_html(label):
             '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>')
 
 
+def rail_html(label):
+    return (f'<div class="rail rail-{label}"><span class="ad-note">광고</span>'
+            f'<ins class="adsbygoogle" data-ad-client="{ADSENSE_CLIENT}" '
+            f'data-ad-slot="0000000000" data-label="home-{label}"></ins>'
+            '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>')
+
+
 def get(url):
     req = urllib.request.Request(url, headers=HDRS)
     with urllib.request.urlopen(req, timeout=20) as r:
@@ -331,7 +338,9 @@ def main():
     out = (tpl.replace("__TRENDS_DATA__", json.dumps(data, ensure_ascii=False))
               .replace("__ADSENSE_HEAD__", ADSENSE_HEAD)
               .replace("__AD_TOP__", ad_html("home-top"))
-              .replace("__AD_BOTTOM__", ad_html("home-bottom")))
+              .replace("__AD_BOTTOM__", ad_html("home-bottom"))
+              .replace("__AD_LEFT__", rail_html("left"))
+              .replace("__AD_RIGHT__", rail_html("right")))
     open("index.html", "w", encoding="utf-8").write(out)
 
     snap = {"google": prev["google"], "naver": prev["naver"]}

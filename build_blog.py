@@ -124,7 +124,20 @@ article h1{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.3;
 footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);
  font-size:12px;color:var(--sub);line-height:1.9;}
 footer a{color:var(--sub);}
+.rail{position:fixed;top:80px;width:160px;z-index:5;text-align:center;
+ background:var(--card);border:1px dashed var(--line);border-radius:10px;padding:8px 6px;}
+.rail-left{left:calc(50% - 540px);}
+.rail-right{right:calc(50% - 540px);}
+.rail .adsbygoogle{display:inline-block;width:160px;height:600px;}
+@media (max-width:1199px){.rail{display:none;}}
 """
+
+
+def rail(label):
+    return (f'<div class="rail rail-{label}"><span class="ad-note">광고</span>'
+            f'<ins class="adsbygoogle" data-ad-client="{ADSENSE_CLIENT}" '
+            f'data-ad-slot="0000000000" data-label="{label}"></ins>'
+            f'<script>(adsbygoogle=window.adsbygoogle||[]).push({{}});</script></div>')
 
 
 def nav():
@@ -157,7 +170,9 @@ def page(title, desc, body, canonical):
 {ADSENSE_HEAD}
 <style>{CSS}</style>
 </head>
-<body><div class="wrap">
+<body>
+{rail("left")}{rail("right")}
+<div class="wrap">
 {nav()}
 {body}
 {foot()}

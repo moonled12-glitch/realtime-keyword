@@ -112,10 +112,18 @@
   .ad{margin:14px 0; padding:10px; border:1px dashed var(--line); border-radius:12px;
     text-align:center; min-height:60px; background:var(--card);}
   .ad-note{display:block; font-size:10px; color:var(--sub); letter-spacing:.4px; margin-bottom:4px;}
+  .rail{position:fixed; top:80px; width:160px; z-index:5; text-align:center;
+    background:var(--card); border:1px dashed var(--line); border-radius:10px; padding:8px 6px;}
+  .rail-left{left:calc(50% - 540px);}
+  .rail-right{right:calc(50% - 540px);}
+  .rail .adsbygoogle{display:inline-block; width:160px; height:600px;}
+  @media (max-width:1199px){.rail{display:none;}}
 </style>
 __ADSENSE_HEAD__
 </head>
 <body>
+__AD_LEFT__
+__AD_RIGHT__
 <div class="wrap">
   <header>
     <div class="logo">실시간 검색<span class="dot">어</span></div>
