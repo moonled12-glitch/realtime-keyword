@@ -24,7 +24,7 @@
    - `NAVER_CLIENT_SECRET`
 3. Actions에서 워크플로 실행 → 네이버 탭이 "네이버 데이터랩 기준"으로 표시됨
    (키가 없거나 호출 실패 시 자동으로 signal.bz로 폴백)
-- 매시간 **GitHub Actions**가 자동으로 데이터를 받아 페이지를 다시 생성
+- 약 10분마다 **GitHub Actions**가 자동으로 데이터를 받아 페이지를 다시 생성
 - 백엔드 서버 없는 **정적 사이트** (GitHub Pages 배포 가능)
 
 ## 구조
@@ -35,7 +35,7 @@
 | `template.html` | UI 템플릿 (`__TRENDS_DATA__` 자리에 데이터 주입) |
 | `index.html` | 생성된 결과물 (배포되는 페이지) |
 | `prev.json` | 직전 순위 스냅샷 (변동 계산용) |
-| `.github/workflows/update.yml` | 매시간 자동 갱신 워크플로 |
+| `.github/workflows/update.yml` | 약 10분마다 자동 갱신 워크플로 |
 
 ## 로컬 실행
 
@@ -49,7 +49,7 @@ python -m http.server 8000   # http://localhost:8000
 
 1. 이 폴더를 GitHub 새 저장소에 push
 2. 저장소 **Settings → Pages** → Source를 `main` 브랜치 `/ (root)`로 설정
-3. Actions 탭에서 **Update trends data** 워크플로가 매시간 실행됨
+3. Actions 탭에서 **Update trends data** 워크플로가 약 10분마다 실행됨
    (수동 실행: Actions → 워크플로 선택 → *Run workflow*)
 
-> 참고: GitHub Actions cron은 지연될 수 있어 "매시간"은 근사값입니다.
+> 참고: GitHub Actions cron은 부하 시 지연·건너뜀이 있어 실제 간격은 10~20분으로 들쭉날쭉할 수 있습니다.

@@ -2,7 +2,7 @@ name: Update trends data
 
 on:
   schedule:
-    - cron: "0 * * * *"     # 매시 정각 (UTC) — 실행 지연 가능
+    - cron: "*/10 * * * *"  # 10분마다 (UTC) — GitHub 부하 시 지연/건너뜀 가능
   workflow_dispatch: {}      # 수동 실행 버튼
 
 permissions:
