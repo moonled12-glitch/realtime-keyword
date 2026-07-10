@@ -104,9 +104,11 @@ def parse_google(xml_bytes):
                     "title": html.unescape(title),
                     "url": url,
                     "source": txt(n.find(HT + "news_item_source")),
+                    "image": txt(n.find(HT + "news_item_picture")),
                 })
         items.append({"keyword": keyword,
                       "traffic": txt(it.find(HT + "approx_traffic")),
+                      "image": txt(it.find(HT + "picture")),
                       "news": news})
         if len(items) >= MAX_ITEMS:
             break

@@ -135,7 +135,9 @@
   .panel a.news{display:flex; gap:10px; align-items:center; padding:9px 0;
     color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);}
   .panel a.news:last-of-type{border-bottom:none;}
-  .nt{font-size:13.5px; line-height:1.4; display:-webkit-box;
+  .thumb{flex:0 0 auto; width:54px; height:54px; border-radius:8px; object-fit:cover;
+    background:var(--card2); border:1px solid var(--line);}
+  .nt{flex:1 1 auto; min-width:0; font-size:13.5px; line-height:1.4; display:-webkit-box;
     -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
   .src{font-size:11px; color:var(--sub); margin-top:2px;}
   .links{display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; align-items:center;}
@@ -215,6 +217,7 @@ function googleSearch(kw){return 'https://www.google.com/search?q='+encodeURICom
 function rowHTML(it, kind){
   const news = (it.news||[]).map(n=>`
       <a class="news" href="${esc(n.url)}" target="_blank" rel="noopener">
+        ${n.image ? `<img class="thumb" src="${esc(n.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}
         <div class="nt">${esc(n.title)}<div class="src">${esc(n.source)}</div></div>
       </a>`).join("");
   const links = kind === "google"
