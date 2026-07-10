@@ -25,8 +25,8 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Install AI summary deps
-        run: pip install --quiet google-genai
+      - name: Install deps (AI summary + blog build)
+        run: pip install --quiet google-genai markdown
 
       - name: Generate latest index.html
         env:
@@ -35,17 +35,29 @@ jobs:
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
           # AI 요약용 Gemini 무료 키 (없으면 요약 생성 건너뜀, 캐시된 요약만 표시)
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}   # 미설정 시 gemini-2.5-flash
+          SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}   # 미설정 시 gemini-flash-lite-latest
         run: python generate.py
+
+      - name: Generate blog drafts (사람이 편집·발행)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}
+        run: python draft_articles.py
+
+      - name: Build blog from posts/
+        env:
+          ADSENSE_CLIENT: ${{ vars.ADSENSE_CLIENT }}   # 승인 후 ca-pub-… 설정 시 광고 로더 삽입
+        run: python build_blog.py
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html prev.json summaries.json
+          # posts/ 는 자동 커밋 안 함(사용자가 직접 발행). drafts/blog/부속 파일만.
+          git add index.html prev.json summaries.json drafts blog sitemap.xml rss.xml privacy.html about.html
           if git diff --staged --quiet; then
             echo "No changes."
           else
-            git commit -m "Auto-update trends ($(date -u +%Y-%m-%dT%H:%MZ))"
+            git commit -m "Auto-update ($(date -u +%Y-%m-%dT%H:%MZ))"
             git push
           fi
