@@ -68,11 +68,12 @@
   /* 상단 네비 */
   .nav{display:flex; gap:14px; align-items:center; padding:12px 0 14px;
     border-bottom:1px solid var(--line); font-size:14px; font-weight:600;}
-  .nav .brand{font-size:18px; font-weight:800; letter-spacing:-.3px;
+  .nav .brand{font-size:25px; font-weight:800; letter-spacing:-.5px;
     margin-right:auto; text-decoration:none; color:var(--txt);}
   .nav .brand .dot{color:var(--accent);}
   .nav a{color:var(--sub); text-decoration:none;}
   .nav a:hover, .nav a.active{color:var(--txt);}
+  @media (max-width:420px){ .nav{gap:11px;} .nav .brand{font-size:21px;} .nav a{font-size:13px;} }
   header{text-align:center; padding:18px 0 12px;}
 
   /* 탭 */
