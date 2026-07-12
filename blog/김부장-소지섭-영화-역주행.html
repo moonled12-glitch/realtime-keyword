@@ -28,9 +28,10 @@ a{color:var(--accent);}
 .wrap{max-width:720px;margin:0 auto;padding:18px 16px 60px;}
 .nav{display:flex;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);
  font-size:14px;font-weight:600;}
-.nav .brand{font-size:17px;font-weight:800;letter-spacing:-.3px;margin-right:auto;}
+.nav .brand{font-size:25px;font-weight:800;letter-spacing:-.5px;margin-right:auto;}
 .nav .brand .dot{color:var(--accent);}
 .nav a{color:var(--sub);text-decoration:none;}
+@media (max-width:420px){.nav{gap:11px;}.nav .brand{font-size:21px;}.nav a{font-size:13px;}}
 .nav a:hover{color:var(--txt);}
 .ad{margin:22px 0;padding:10px;border:1px dashed var(--line);border-radius:10px;
  text-align:center;min-height:60px;background:var(--card);}
