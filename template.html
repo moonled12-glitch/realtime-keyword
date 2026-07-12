@@ -83,8 +83,31 @@ __ADSENSE_HEAD__
   .card-head h2{font-size:15.5px;font-weight:900;letter-spacing:-.02em;margin:0;}
   .card-head .time{margin-left:auto;font-size:11px;color:var(--muted);}
   ol.rank{list-style:none;margin:0;padding:6px 8px 10px;}
-  ol.rank a{text-decoration:none;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:9px;}
-  ol.rank a:hover{background:var(--bg);}
+  .rowbtn{width:100%;text-align:left;background:none;border:0;cursor:pointer;font:inherit;color:inherit;
+    display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:9px;}
+  .rowbtn:hover{background:var(--bg);}
+  .rowbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+  .caret{flex-shrink:0;color:var(--muted);font-size:11px;transition:transform .2s;}
+  li.open .caret{transform:rotate(180deg);}
+  .panel{max-height:0;overflow:hidden;transition:max-height .28s ease;}
+  li.open .panel{max-height:600px;}
+  .panel-in{padding:2px 14px 14px;}
+  .ai{font-size:13px;line-height:1.6;background:var(--accent-soft);border:1px solid var(--border);
+    border-radius:10px;padding:10px 12px;margin:4px 0 10px;color:var(--text);}
+  .ai b{color:var(--accent);font-weight:700;}
+  .news2{display:flex;gap:10px;align-items:center;padding:9px 0;text-decoration:none;color:var(--text);
+    border-top:1px solid var(--border);}
+  .thumb2{flex-shrink:0;width:50px;height:50px;border-radius:8px;object-fit:cover;
+    background:var(--bg);border:1px solid var(--border);}
+  .ntw{flex:1;min-width:0;}
+  .nt2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+    font-size:13px;line-height:1.4;}
+  .src2{display:block;font-size:11px;color:var(--muted);margin-top:2px;}
+  .plinks{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:11px;}
+  .plinks a{font-size:12px;font-weight:700;color:var(--accent);text-decoration:none;}
+  .closeb{margin-left:auto;background:none;border:1px solid var(--border);color:var(--muted);
+    border-radius:8px;padding:4px 11px;font-size:12px;font-weight:700;cursor:pointer;}
+  .closeb:hover{border-color:var(--accent);color:var(--accent);}
   .rn{flex-shrink:0;width:22px;text-align:center;font-size:16px;font-weight:900;color:var(--muted);}
   .rn.top{color:var(--accent);}
   .kw{flex:1;min-width:0;font-size:14.5px;font-weight:500;letter-spacing:-.01em;
@@ -212,18 +235,60 @@ function badgeHTML(it){
   return '<span class="bd flat">–</span>';
 }
 
+function panelBody(it, source){
+  let h = '';
+  if(it.aiSummary) h += '<div class="ai"><b>🤖 AI 요약</b><br>'+esc(it.aiSummary)+'</div>';
+  const news = it.news || [];
+  if(news.length){
+    h += news.map(function(n){
+      const thumb = n.image ? '<img class="thumb2" src="'+esc(n.image)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '';
+      return '<a class="news2" href="'+esc(n.url)+'" target="_blank" rel="noopener">'+thumb
+        + '<span class="ntw"><span class="nt2">'+esc(n.title)+'</span><span class="src2">'+esc(n.source)+'</span></span></a>';
+    }).join('');
+  } else if(!it.aiSummary){
+    h += '<div class="src2" style="padding:6px 0;">관련 정보가 없어요.</div>';
+  }
+  let links = '<a href="'+SEARCH_BASE.naver+encodeURIComponent(it.keyword)+'" target="_blank" rel="noopener">네이버 검색 →</a>'
+            + '<a href="'+SEARCH_BASE.google+encodeURIComponent(it.keyword)+'" target="_blank" rel="noopener">구글 검색 →</a>';
+  if(source==='naver' && it.summary) links += '<a href="'+esc(it.summary)+'" target="_blank" rel="noopener">AI 요약 보기 →</a>';
+  h += '<div class="plinks">'+links+'<button type="button" class="closeb" onclick="closeRow(this)">닫기 ▲</button></div>';
+  return h;
+}
+
 function renderList(id, source){
-  const base = SEARCH_BASE[source];
   const items = DATA[source] || [];
   const el = document.getElementById(id);
   el.innerHTML = items.length ? items.map(function(it){
     const rank = it.rank;
     const vol = (source==='google' && it.traffic) ? '<span class="vol">'+esc(it.traffic)+'</span>' : '';
-    return '<li><a href="'+base+encodeURIComponent(it.keyword)+'" target="_blank" rel="noopener">'
-      + '<span class="rn'+(rank<=3?' top':'')+'">'+rank+'</span>'
-      + '<span class="kw">'+esc(it.keyword)+'</span>'
-      + vol + badgeHTML(it) + '</a></li>';
+    return '<li>'
+      + '<div class="rowbtn" tabindex="0" role="button" aria-expanded="false" onclick="toggleRow(this)"'
+      + ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();this.click();}">'
+        + '<span class="rn'+(rank<=3?' top':'')+'">'+rank+'</span>'
+        + '<span class="kw">'+esc(it.keyword)+'</span>'
+        + vol + badgeHTML(it) + '<span class="caret">▾</span>'
+      + '</div>'
+      + '<div class="panel"><div class="panel-in">'+panelBody(it, source)+'</div></div>'
+      + '</li>';
   }).join('') : '<li style="padding:14px;color:var(--muted);font-size:13px;">데이터를 불러오지 못했어요.</li>';
+}
+
+function toggleRow(btn){
+  const li = btn.closest('li'), ol = li.parentElement;
+  const wasOpen = li.classList.contains('open');
+  ol.querySelectorAll('li.open').forEach(function(o){
+    o.classList.remove('open');
+    const b = o.querySelector('.rowbtn'); if(b) b.setAttribute('aria-expanded','false');
+  });
+  if(!wasOpen){ li.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+}
+function closeRow(btn){
+  const li = btn.closest('li'); li.classList.remove('open');
+  const b = li.querySelector('.rowbtn'); if(b) b.setAttribute('aria-expanded','false');
+}
+function openFirst(id){
+  const li = document.querySelector('#'+id+' li');
+  if(li){ li.classList.add('open'); const b=li.querySelector('.rowbtn'); if(b) b.setAttribute('aria-expanded','true'); }
 }
 
 function renderIssues(){
@@ -243,6 +308,8 @@ function renderIssues(){
 
 renderList('listGoogle', 'google');
 renderList('listNaver', 'naver');
+openFirst('listGoogle');
+openFirst('listNaver');
 renderIssues();
 const label = (DATA.updatedAt || '') + ' 기준';
 document.getElementById('timeGoogle').textContent = label;
