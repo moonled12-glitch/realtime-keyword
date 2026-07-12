@@ -4,347 +4,264 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>키워드픽 · 실시간 검색어 (구글·네이버 인기 검색어)</title>
-<meta name="description" content="키워드픽 - 지금 대한민국에서 가장 많이 검색되는 실시간 인기 검색어와 이슈. 구글·네이버 실시간 랭킹과 이슈 블로그를 제공합니다.">
+<meta name="description" content="키워드픽 - 지금 대한민국에서 가장 많이 검색되는 구글·네이버 실시간 인기 검색어와 이슈.">
 <script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<style>
-  :root{
-    --bg:#0d1017; --card:#161b26; --card2:#1c2230; --line:#252c3a;
-    --txt:#e8ecf3; --sub:#8b95a7; --accent:#ff5a3c;
-    --google:#4285f4; --naver:#03c75a;
-    --up:#ff4d4d; --down:#4d8bff; --new:#ff8a00; --same:#6b7688;
-  }
-  /* 라이트 테마: OS가 라이트이고 사용자가 토글 안 했을 때 + 명시적 라이트 선택 시 */
-  @media (prefers-color-scheme: light){
-    :root:not([data-theme]){
-      --bg:#f4f6f9; --card:#ffffff; --card2:#eef1f5; --line:#e0e5ec;
-      --txt:#1a1f2b; --sub:#5f6b7c; --accent:#ff5a3c;
-      --google:#1a73e8; --naver:#03b94f;
-      --up:#e5342f; --down:#2f6bff; --new:#e07b00; --same:#8b95a7;
-    }
-  }
-  :root[data-theme="light"]{
-    --bg:#f4f6f9; --card:#ffffff; --card2:#eef1f5; --line:#e0e5ec;
-    --txt:#1a1f2b; --sub:#5f6b7c; --accent:#ff5a3c;
-    --google:#1a73e8; --naver:#03b94f;
-    --up:#e5342f; --down:#2f6bff; --new:#e07b00; --same:#8b95a7;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background:var(--bg); color:var(--txt);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-    line-height:1.5; -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:680px; margin:0 auto; padding:20px 16px 60px;}
-
-  header{text-align:center; padding:22px 0 16px;}
-  .logo{font-size:26px; font-weight:800; letter-spacing:-.5px;}
-  .logo .dot{color:var(--accent);}
-  .live{
-    display:inline-flex; align-items:center; gap:6px; margin-top:10px;
-    font-size:13px; color:var(--sub); background:var(--card);
-    border:1px solid var(--line); padding:5px 12px; border-radius:999px;
-  }
-  .live .pulse{
-    width:8px; height:8px; border-radius:50%; background:var(--accent);
-    box-shadow:0 0 0 0 rgba(255,90,60,.6); animation:pulse 1.8s infinite;
-  }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(255,90,60,.55);}
-    70%{box-shadow:0 0 0 7px rgba(255,90,60,0);}
-    100%{box-shadow:0 0 0 0 rgba(255,90,60,0);}
-  }
-  @media (prefers-reduced-motion: reduce){ .live .pulse{animation:none;} }
-  .livewrap{display:inline-flex; align-items:center; gap:8px; margin-top:10px;}
-  .livewrap .live{margin-top:0;}
-  .themebtn{
-    width:30px; height:30px; flex:0 0 auto; border-radius:50%;
-    border:1px solid var(--line); background:var(--card); color:var(--txt);
-    cursor:pointer; font-size:14px; line-height:1; padding:0;
-    display:inline-flex; align-items:center; justify-content:center; transition:.15s;
-  }
-  .themebtn:hover{border-color:var(--accent);}
-  .themebtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-
-  /* 상단 네비 */
-  .nav{display:flex; gap:14px; align-items:center; padding:12px 0 14px;
-    border-bottom:1px solid var(--line); font-size:14px; font-weight:600;}
-  .nav .brand{font-size:25px; font-weight:800; letter-spacing:-.5px;
-    margin-right:auto; text-decoration:none; color:var(--txt);}
-  .nav .brand .dot{color:var(--accent);}
-  .nav a{color:var(--sub); text-decoration:none;}
-  .nav a:hover, .nav a.active{color:var(--txt);}
-  @media (max-width:420px){ .nav{gap:11px;} .nav .brand{font-size:21px;} .nav a{font-size:13px;} }
-  header{text-align:center; padding:18px 0 12px;}
-
-  /* 탭 */
-  .tabs{display:flex; gap:8px; margin:8px 0 12px;}
-  .tab{
-    flex:1 1 0; display:flex; align-items:center; justify-content:center; gap:7px;
-    padding:11px 8px; border-radius:12px; cursor:pointer; user-select:none;
-    background:var(--card); border:1px solid var(--line);
-    font-size:15px; font-weight:700; color:var(--sub); transition:.15s;
-  }
-  .tab .ic{width:18px; height:18px; border-radius:50%; display:inline-block; flex:0 0 auto;}
-  .tab[data-tab="google"] .ic{background:var(--google);}
-  .tab[data-tab="naver"] .ic{background:var(--naver);}
-  .tab.active{color:var(--txt); background:var(--card2);}
-  .tab[data-tab="google"].active{border-color:var(--google);}
-  .tab[data-tab="naver"].active{border-color:var(--naver);}
-  .tab:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-
-  .meta{display:flex; justify-content:space-between; align-items:center;
-    font-size:12px; color:var(--sub); margin:2px 4px 10px;}
-  .meta b{color:var(--txt); font-weight:600;}
-
-  ul.board{list-style:none; display:flex; flex-direction:column; gap:8px;}
-  ul.board[hidden]{display:none;}
-  li.row{
-    background:var(--card); border:1px solid var(--line); border-radius:14px;
-    overflow:hidden; transition:border-color .15s;
-  }
-  li.row:hover{border-color:#33405a;}
-  .head{display:flex; align-items:center; gap:12px; padding:13px 14px; cursor:pointer;}
-  .head:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
-  .rank{
-    flex:0 0 30px; text-align:center; font-size:19px; font-weight:800;
-    font-variant-numeric:tabular-nums;
-  }
-  .board.g li.row:nth-child(-n+3) .rank{color:var(--google);}
-  .board.n li.row:nth-child(-n+3) .rank{color:var(--naver);}
-  .kw{flex:1 1 auto; min-width:0;}
-  .kw .word{font-size:16px; font-weight:600; white-space:nowrap;
-    overflow:hidden; text-overflow:ellipsis;}
-  .vol{flex:0 0 auto; font-size:12px; color:var(--sub); white-space:nowrap; text-align:right;}
-  .move{flex:0 0 auto; display:flex; align-items:center; gap:3px;
-    font-size:12px; font-weight:700; font-variant-numeric:tabular-nums;}
-  .move.up{color:var(--up);} .move.down{color:var(--down);}
-  .move.same{color:var(--same);} .move.new{color:var(--new);}
-  .badge-new{background:var(--new); color:#fff; font-size:10px; font-weight:800;
-    padding:2px 6px; border-radius:6px; letter-spacing:.3px;}
-  .caret{flex:0 0 auto; color:var(--sub); font-size:12px; transition:transform .2s;}
-  li.open .caret{transform:rotate(180deg);}
-
-  .panel{max-height:0; overflow:hidden; transition:max-height .25s ease;
-    background:var(--card2); border-top:1px solid transparent;}
-  li.open .panel{max-height:640px; border-top-color:var(--line);}
-  .panel-inner{padding:6px 14px 12px;}
-  .ai{font-size:13.5px; line-height:1.55; color:var(--txt); margin:8px 0 4px;
-    padding:10px 12px; background:rgba(255,90,60,.08);
-    border:1px solid rgba(255,90,60,.25); border-radius:10px;}
-  .ai-tag{display:block; font-size:11px; font-weight:800; color:var(--accent);
-    margin-bottom:4px; letter-spacing:.3px;}
-  .panel a.news{display:flex; gap:10px; align-items:center; padding:9px 0;
-    color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);}
-  .panel a.news:last-of-type{border-bottom:none;}
-  .thumb{flex:0 0 auto; width:54px; height:54px; border-radius:8px; object-fit:cover;
-    background:var(--card2); border:1px solid var(--line);}
-  .nt{flex:1 1 auto; min-width:0; font-size:13.5px; line-height:1.4; display:-webkit-box;
-    -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-  .src{font-size:11px; color:var(--sub); margin-top:2px;}
-  .links{display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; align-items:center;}
-  .links a{font-size:12px; text-decoration:none; font-weight:600; color:var(--accent);}
-  .closebtn{margin-left:auto; background:none; border:1px solid var(--line); color:var(--sub);
-    border-radius:8px; padding:4px 11px; font-size:12px; font-weight:600; cursor:pointer;}
-  .closebtn:hover{border-color:var(--accent); color:var(--txt);}
-
-  footer{margin-top:26px; font-size:11.5px; color:var(--sub); line-height:1.7; text-align:center;}
-  footer .note{display:block; margin-top:8px; font-size:11px; opacity:.85;}
-  footer a{color:var(--sub);}
-
-  .ad{margin:14px 0; padding:10px; border:1px dashed var(--line); border-radius:12px;
-    text-align:center; min-height:60px; background:var(--card);}
-  .ad-note{display:block; font-size:10px; color:var(--sub); letter-spacing:.4px; margin-bottom:4px;}
-  .rail{position:fixed; top:80px; width:160px; z-index:5; text-align:center;
-    background:var(--card); border:1px dashed var(--line); border-radius:10px; padding:8px 6px;}
-  .rail-left{left:calc(50% - 540px);}
-  .rail-right{right:calc(50% - 540px);}
-  .rail .adsbygoogle{display:inline-block; width:160px; height:600px;}
-  @media (max-width:1199px){.rail{display:none;}}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 __ADSENSE_HEAD__
+<style>
+  /* ===== 테마 토큰 (라이트) ===== */
+  :root{
+    --bg:#f1f3f4; --surface:#ffffff; --text:#191c1f; --muted:#767b80;
+    --border:#e5e8ea; --accent:#0b7d63; --accent-soft:#e6f4ef;
+    --up:#e2452f; --down:#1f8a5b; --adbg:#f0f2f3;
+    --shadow:0 1px 3px rgba(20,30,40,.06);
+  }
+  /* ===== 다크 테마 ===== */
+  html[data-theme="dark"]{
+    --bg:#12151a; --surface:#1a1e25; --text:#e9ebee; --muted:#8b9299;
+    --border:#2a2f38; --accent:#2fbf8f; --accent-soft:#12281f; --adbg:#181b21;
+    --shadow:0 1px 3px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:'Noto Sans KR',system-ui,sans-serif; -webkit-font-smoothing:antialiased;
+    transition:background .25s,color .25s;}
+  a{color:inherit;}
+  @keyframes kpPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.82)}}
+  @keyframes kpFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+  /* 광고 자리 */
+  .ad-top{width:100%;display:flex;justify-content:center;padding:8px 20px 0;}
+  .ad-top>div{width:100%;max-width:970px;height:56px;background:var(--adbg);
+    border:1px dashed var(--border);border-radius:8px;display:flex;align-items:center;
+    justify-content:center;color:var(--muted);font-size:11px;letter-spacing:.14em;
+    font-family:ui-monospace,monospace;}
+  .ad-side{height:250px;background:var(--adbg);border:1px dashed var(--border);border-radius:14px;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;
+    letter-spacing:.14em;font-family:ui-monospace,monospace;}
+
+  /* 헤더 */
+  header{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--border);}
+  header .wrap{display:flex;align-items:center;gap:20px;padding-top:11px;padding-bottom:11px;}
+  .logo{text-decoration:none;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .logo .mark{width:26px;height:26px;border-radius:8px;background:var(--accent);color:#fff;
+    font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;}
+  .logo .name{font-weight:900;font-size:19px;letter-spacing:-.02em;}
+  nav.main{display:flex;gap:2px;margin-left:6px;}
+  nav.main a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);
+    padding:7px 12px;border-radius:8px;}
+  nav.main a:hover{background:var(--bg);}
+  nav.main a.active{color:var(--accent);font-weight:700;background:var(--accent-soft);}
+  .theme-btn{margin-left:auto;width:36px;height:36px;border-radius:9px;border:1px solid var(--border);
+    background:var(--surface);color:var(--text);cursor:pointer;font-size:15px;display:flex;
+    align-items:center;justify-content:center;}
+  .theme-btn:hover{background:var(--bg);}
+
+  /* 히어로 */
+  .hero{background:var(--surface);border-bottom:1px solid var(--border);}
+  .hero .wrap{padding-top:44px;padding-bottom:40px;display:flex;flex-direction:column;
+    align-items:center;text-align:center;animation:kpFade .5s ease both;}
+  .badge-live{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;
+    color:var(--accent);background:var(--accent-soft);padding:5px 12px;border-radius:999px;}
+  .badge-live .dot{width:6px;height:6px;border-radius:50%;background:var(--up);animation:kpPulse 1.6s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){ .badge-live .dot{animation:none;} }
+  .hero h1{font-weight:900;font-size:clamp(30px,5vw,44px);letter-spacing:-.03em;margin:16px 0 10px;}
+  .hero p{font-size:15px;color:var(--muted);margin:0;letter-spacing:-.01em;}
+
+  /* 본문 그리드 */
+  main.wrap{padding-top:24px;padding-bottom:56px;display:grid;
+    grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;min-width:0;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    box-shadow:var(--shadow);overflow:hidden;}
+  .card-head{display:flex;align-items:center;gap:9px;padding:15px 18px;border-bottom:1px solid var(--border);}
+  .card-head .src{width:24px;height:24px;border-radius:7px;color:#fff;font-weight:900;font-size:13px;
+    display:flex;align-items:center;justify-content:center;}
+  .card-head h2{font-size:15.5px;font-weight:900;letter-spacing:-.02em;margin:0;}
+  .card-head .time{margin-left:auto;font-size:11px;color:var(--muted);}
+  ol.rank{list-style:none;margin:0;padding:6px 8px 10px;}
+  ol.rank a{text-decoration:none;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:9px;}
+  ol.rank a:hover{background:var(--bg);}
+  .rn{flex-shrink:0;width:22px;text-align:center;font-size:16px;font-weight:900;color:var(--muted);}
+  .rn.top{color:var(--accent);}
+  .kw{flex:1;min-width:0;font-size:14.5px;font-weight:500;letter-spacing:-.01em;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .vol{flex-shrink:0;font-size:11px;color:var(--muted);}
+  .bd{flex-shrink:0;min-width:26px;text-align:right;font-size:11px;font-weight:700;}
+  .bd.up{color:var(--up);} .bd.down{color:var(--down);} .bd.flat{color:var(--muted);font-weight:400;}
+  .bd.new{background:var(--up);color:#fff;font-size:10px;width:18px;height:18px;border-radius:5px;
+    display:inline-flex;align-items:center;justify-content:center;min-width:18px;}
+
+  aside{display:flex;flex-direction:column;gap:20px;}
+  .issues{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    box-shadow:var(--shadow);padding:18px 20px;}
+  .issues h2{font-size:15px;font-weight:900;letter-spacing:-.02em;margin:0 0 3px;}
+  .issues .sub{font-size:12px;color:var(--muted);margin:0 0 14px;}
+  .issues a.item{text-decoration:none;display:block;padding:11px 0;border-top:1px solid var(--border);}
+  .issues a.item:hover{opacity:.7;}
+  .issues .tag{font-size:11px;font-weight:700;color:var(--accent);}
+  .issues .t{display:block;font-size:13.5px;font-weight:500;line-height:1.45;margin-top:3px;letter-spacing:-.01em;}
+  .issues .more{display:block;text-align:center;margin-top:14px;padding:9px;background:var(--bg);
+    border-radius:9px;font-size:13px;font-weight:700;text-decoration:none;color:var(--text);}
+  .issues .more:hover{background:var(--accent-soft);color:var(--accent);}
+
+  footer{border-top:1px solid var(--border);background:var(--surface);}
+  footer .wrap{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;gap:12px 24px;
+    align-items:center;justify-content:space-between;}
+  .foot-brand{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .foot-brand b{font-weight:900;color:var(--text);}
+  footer nav{display:flex;gap:18px;font-size:13px;}
+  footer nav a{color:var(--muted);text-decoration:none;}
+  footer nav a:hover{color:var(--text);}
+
+  @media(max-width:860px){
+    main.wrap{grid-template-columns:1fr;}
+    .cards{grid-template-columns:1fr;}
+  }
+</style>
 </head>
 <body>
-__AD_LEFT__
-__AD_RIGHT__
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="./">키워드<span class="dot">픽</span></a>
-    <a href="./" class="active">실시간</a>
-    <a href="blog/">블로그</a>
-    <a href="about.html">소개</a>
-    <button class="themebtn" id="themeToggle" type="button" aria-label="다크/라이트 모드 전환" title="테마 전환">🌙</button>
-  </div>
+
+  <!-- 광고 자리 (상단 배너) -->
+  <div class="ad-top"><div>광고 · 728 × 90</div></div>
+
   <header>
-    <div class="live"><span class="pulse"></span><span>지금 대한민국이 검색하는 키워드</span></div>
+    <div class="wrap">
+      <a class="logo" href="./">
+        <span class="mark">K</span><span class="name">키워드픽</span>
+      </a>
+      <nav class="main">
+        <a href="./" class="active">실시간</a>
+        <a href="./blog/">블로그</a>
+        <a href="./about.html">소개</a>
+      </nav>
+      <button class="theme-btn" id="themeBtn" aria-label="다크/라이트 모드 전환">🌙</button>
+    </div>
   </header>
 
-  <div class="tabs" role="tablist">
-    <div class="tab active" data-tab="google" role="tab" tabindex="0" aria-selected="true"><span class="ic"></span>구글 실시간</div>
-    <div class="tab" data-tab="naver" role="tab" tabindex="0" aria-selected="false"><span class="ic"></span>네이버 실시간</div>
-  </div>
+  <section class="hero">
+    <div class="wrap">
+      <div class="badge-live"><span class="dot"></span>지금 대한민국이 검색하는 키워드</div>
+      <h1>키워드픽</h1>
+      <p>구글·네이버 실시간 인기 검색어를 한눈에</p>
+    </div>
+  </section>
 
-  <div class="meta">
-    <span>업데이트 <b id="updated">–</b></span>
-    <span id="srcinfo">–</span>
-  </div>
+  <main class="wrap">
+    <div class="cards">
+      <!-- 구글 카드 -->
+      <section class="card">
+        <div class="card-head">
+          <span class="src" style="background:#4285f4;">G</span>
+          <h2>구글 실시간</h2>
+          <span class="time" id="timeGoogle"></span>
+        </div>
+        <ol class="rank" id="listGoogle"></ol>
+      </section>
+      <!-- 네이버 카드 -->
+      <section class="card">
+        <div class="card-head">
+          <span class="src" style="background:#03c75a;">N</span>
+          <h2>네이버 실시간</h2>
+          <span class="time" id="timeNaver"></span>
+        </div>
+        <ol class="rank" id="listNaver"></ol>
+      </section>
+    </div>
 
-  __AD_TOP__
-
-  <ul class="board g" id="board-google"></ul>
-  <ul class="board n" id="board-naver" hidden></ul>
-
-  __AD_BOTTOM__
+    <aside>
+      <!-- 광고 자리 (사이드) -->
+      <div class="ad-side">광고 · 300 × 250</div>
+      <section class="issues">
+        <h2>지금 뜨는 이슈</h2>
+        <p class="sub" id="issuesSub">AI 요약으로 보는 화제 키워드</p>
+        <div id="issues"></div>
+        <a class="more" href="./blog/">블로그 더 보기 →</a>
+      </section>
+    </aside>
+  </main>
 
   <footer>
-    <span id="srcline">데이터 출처: 구글 트렌드 · 매시간 자동 갱신</span>
-    <span class="note" id="footnote"></span>
-    <span class="note"><a href="privacy.html">개인정보처리방침</a></span>
+    <div class="wrap">
+      <div class="foot-brand"><b>키워드픽</b><span id="footSrc">데이터 출처: 구글 트렌드 · signal.bz</span></div>
+      <nav>
+        <a href="./about.html">소개</a>
+        <a href="./blog/">블로그</a>
+        <a href="./privacy.html">개인정보처리방침</a>
+      </nav>
+    </div>
   </footer>
-</div>
 
 <script>
+/* 데이터: generate.py 가 __TRENDS_DATA__ 를 실시간 데이터로 치환 */
 const DATA = __TRENDS_DATA__;
-
-function moveHTML(it){
-  if(it.move === "new") return '<span class="badge-new">NEW</span>';
-  if(it.move === "up")   return '<span class="move up">▲ '+it.delta+'</span>';
-  if(it.move === "down") return '<span class="move down">▼ '+it.delta+'</span>';
-  return '<span class="move same">–</span>';
-}
-function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function naverSearch(kw){return 'https://search.naver.com/search.naver?query='+encodeURIComponent(kw);}
-function googleSearch(kw){return 'https://www.google.com/search?q='+encodeURIComponent(kw);}
-
-function rowHTML(it, kind){
-  const news = (it.news||[]).map(n=>`
-      <a class="news" href="${esc(n.url)}" target="_blank" rel="noopener">
-        ${n.image ? `<img class="thumb" src="${esc(n.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}
-        <div class="nt">${esc(n.title)}<div class="src">${esc(n.source)}</div></div>
-      </a>`).join("");
-  const links = kind === "google"
-    ? `<a href="${naverSearch(it.keyword)}" target="_blank" rel="noopener">네이버 검색 →</a>
-       <a href="${googleSearch(it.keyword)}" target="_blank" rel="noopener">구글 검색 →</a>`
-    : `<a href="${naverSearch(it.keyword)}" target="_blank" rel="noopener">네이버 검색 →</a>
-       <a href="${googleSearch(it.keyword)}" target="_blank" rel="noopener">구글 검색 →</a>`
-      + (it.summary ? `<a href="${esc(it.summary)}" target="_blank" rel="noopener">AI 요약 보기 →</a>` : "");
-  const body = (!it.news || !it.news.length)
-    ? '<div class="src" style="padding:6px 0;">관련 뉴스가 없어요.</div>' : news;
-  const vol = kind === "google"
-    ? `<div class="vol">검색량 ${esc(it.traffic)||'–'}</div>`
-    : (it.metric ? `<div class="vol">${esc(it.metric)}</div>` : "");
-  return `
-    <li class="row">
-      <div class="head" tabindex="0" role="button" aria-expanded="false"
-           onclick="toggleRow(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
-        <div class="rank">${it.rank}</div>
-        <div class="kw"><div class="word">${esc(it.keyword)}</div></div>
-        ${vol}
-        ${moveHTML(it)}
-        <div class="caret">▾</div>
-      </div>
-      <div class="panel"><div class="panel-inner">
-        ${it.aiSummary ? `<div class="ai"><span class="ai-tag">🤖 AI 요약</span>${esc(it.aiSummary)}</div>` : ""}
-        ${body}
-        <div class="links">${links}<button type="button" class="closebtn" onclick="closeRow(this)">닫기 ▲</button></div>
-      </div></div>
-    </li>`;
-}
-
-function toggleRow(head){
-  const li = head.parentElement;
-  const board = li.closest('.board');
-  const wasOpen = li.classList.contains('open');
-  // 아코디언: 같은 보드에서 열린 항목 모두 닫기
-  board.querySelectorAll('li.open').forEach(o=>{
-    o.classList.remove('open');
-    o.querySelector('.head').setAttribute('aria-expanded','false');
-  });
-  if(!wasOpen){
-    li.classList.add('open');
-    head.setAttribute('aria-expanded','true');
-  }
-}
-
-// 패널 닫기 버튼
-function closeRow(btn){
-  const li = btn.closest('li.row');
-  if(!li) return;
-  li.classList.remove('open');
-  const h = li.querySelector('.head');
-  if(h) h.setAttribute('aria-expanded','false');
-}
-
-// 보드의 1위를 기본으로 펼침
-function openFirst(id){
-  const li = document.querySelector('#'+id+' li.row');
-  if(li){
-    li.classList.add('open');
-    const h = li.querySelector('.head');
-    if(h) h.setAttribute('aria-expanded','true');
-  }
-}
-
-function renderBoard(id, items, kind){
-  const el = document.getElementById(id);
-  el.innerHTML = (items||[]).length
-    ? items.map(it=>rowHTML(it, kind)).join("")
-    : '<li class="row"><div class="head"><div class="kw"><div class="word" style="color:var(--sub);font-weight:500">데이터를 불러오지 못했어요.</div></div></div></li>';
-}
-
-const NAVER_DATALAB = DATA.naverSource === 'datalab';
-const SRC = {
-  google: '구글 트렌드 기준',
-  naver:  NAVER_DATALAB ? '네이버 데이터랩 기준' : 'signal.bz 집계 기준'
+const SEARCH_BASE = {
+  google: 'https://www.google.com/search?q=',
+  naver:  'https://search.naver.com/search.naver?query='
 };
 
-document.getElementById('srcline').textContent =
-  NAVER_DATALAB ? '데이터 출처: 구글 트렌드 · 네이버 데이터랩 · 약 10분마다 자동 갱신'
-                : '데이터 출처: 구글 트렌드 · signal.bz · 약 10분마다 자동 갱신';
-document.getElementById('footnote').textContent =
-  NAVER_DATALAB
-    ? '※ 네이버는 2021년 공식 실시간 검색어를 폐지했습니다. "네이버 실시간"은 구글 트렌드 키워드를 네이버 데이터랩 검색비중으로 재정렬한 순위이며, 네이버 공식 실검이 아닙니다.'
-    : '※ 네이버는 2021년 공식 실시간 검색어를 폐지했습니다. "네이버 실시간"은 signal.bz의 실시간 검색어 집계를 표시한 것으로, 네이버 공식 순위가 아닙니다.';
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-function showTab(name){
-  document.querySelectorAll('.tab').forEach(t=>{
-    const on = t.dataset.tab === name;
-    t.classList.toggle('active', on);
-    t.setAttribute('aria-selected', on);
-  });
-  document.getElementById('board-google').hidden = name !== 'google';
-  document.getElementById('board-naver').hidden  = name !== 'naver';
-  document.getElementById('srcinfo').textContent = SRC[name];
+function badgeHTML(it){
+  if(it.move === 'new')  return '<span class="bd new">N</span>';
+  if(it.move === 'up')   return '<span class="bd up">▲'+it.delta+'</span>';
+  if(it.move === 'down') return '<span class="bd down">▼'+it.delta+'</span>';
+  return '<span class="bd flat">–</span>';
 }
 
-document.getElementById('updated').textContent = DATA.updatedAt;
-renderBoard('board-google', DATA.google, 'google');
-renderBoard('board-naver',  DATA.naver,  'naver');
-openFirst('board-google');   // 각 보드 1위 기본 펼침
-openFirst('board-naver');
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click', ()=>showTab(t.dataset.tab));
-  t.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); showTab(t.dataset.tab);} });
-});
-showTab('google');
+function renderList(id, source){
+  const base = SEARCH_BASE[source];
+  const items = DATA[source] || [];
+  const el = document.getElementById(id);
+  el.innerHTML = items.length ? items.map(function(it){
+    const rank = it.rank;
+    const vol = (source==='google' && it.traffic) ? '<span class="vol">'+esc(it.traffic)+'</span>' : '';
+    return '<li><a href="'+base+encodeURIComponent(it.keyword)+'" target="_blank" rel="noopener">'
+      + '<span class="rn'+(rank<=3?' top':'')+'">'+rank+'</span>'
+      + '<span class="kw">'+esc(it.keyword)+'</span>'
+      + vol + badgeHTML(it) + '</a></li>';
+  }).join('') : '<li style="padding:14px;color:var(--muted);font-size:13px;">데이터를 불러오지 못했어요.</li>';
+}
 
-// 다크/라이트 테마 토글
-function currentTheme(){
-  return document.documentElement.getAttribute('data-theme')
-    || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+function renderIssues(){
+  const seen={}, out=[];
+  ['google','naver'].forEach(function(s){ (DATA[s]||[]).forEach(function(it){
+    if(it.aiSummary && !seen[it.keyword] && out.length<4){ seen[it.keyword]=1; out.push(it); }
+  });});
+  const el = document.getElementById('issues');
+  if(!out.length){ el.innerHTML='<p style="font-size:13px;color:var(--muted);padding:6px 0;">요약 준비 중…</p>'; return; }
+  el.innerHTML = out.map(function(it){
+    const sum = it.aiSummary.length>72 ? it.aiSummary.slice(0,72)+'…' : it.aiSummary;
+    return '<a class="item" href="'+SEARCH_BASE.naver+encodeURIComponent(it.keyword)+'" target="_blank" rel="noopener">'
+      + '<span class="tag">'+esc(it.keyword)+'</span>'
+      + '<span class="t">'+esc(sum)+'</span></a>';
+  }).join('');
 }
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme', t);
-  try{ localStorage.setItem('theme', t); }catch(e){}
-  document.getElementById('themeToggle').textContent = (t === 'dark') ? '🌙' : '☀️';
-}
-(function initTheme(){
-  const btn = document.getElementById('themeToggle');
-  btn.textContent = (currentTheme() === 'dark') ? '🌙' : '☀️';
-  btn.addEventListener('click', ()=> applyTheme(currentTheme() === 'dark' ? 'light' : 'dark'));
+
+renderList('listGoogle', 'google');
+renderList('listNaver', 'naver');
+renderIssues();
+const label = (DATA.updatedAt || '') + ' 기준';
+document.getElementById('timeGoogle').textContent = label;
+document.getElementById('timeNaver').textContent = label;
+if(DATA.naverSource === 'datalab'){ document.getElementById('footSrc').textContent = '데이터 출처: 구글 트렌드 · 네이버 데이터랩'; }
+
+/* 다크/라이트 토글 (localStorage 'theme' — 블로그와 공유) */
+(function(){
+  const btn = document.getElementById('themeBtn');
+  function cur(){ return document.documentElement.getAttribute('data-theme') || 'light'; }
+  function apply(t){ document.documentElement.setAttribute('data-theme', t);
+    try{ localStorage.setItem('theme', t); }catch(e){}
+    btn.textContent = (t === 'dark') ? '☀️' : '🌙'; }
+  btn.textContent = (cur()==='dark') ? '☀️' : '🌙';
+  btn.addEventListener('click', function(){ apply(cur()==='dark' ? 'light':'dark'); });
 })();
 
-// 정적 페이지가 GitHub Actions로 갱신되므로 5분마다 새로고침해 최신 데이터 반영
-setTimeout(()=>location.reload(), 5*60*1000);
+/* 정적 페이지가 20분마다 자동 갱신되므로 5분마다 새로고침 */
+setTimeout(function(){ location.reload(); }, 5*60*1000);
 </script>
 </body>
 </html>
