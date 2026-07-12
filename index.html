@@ -4,347 +4,264 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>키워드픽 · 실시간 검색어 (구글·네이버 인기 검색어)</title>
-<meta name="description" content="키워드픽 - 지금 대한민국에서 가장 많이 검색되는 실시간 인기 검색어와 이슈. 구글·네이버 실시간 랭킹과 이슈 블로그를 제공합니다.">
+<meta name="description" content="키워드픽 - 지금 대한민국에서 가장 많이 검색되는 구글·네이버 실시간 인기 검색어와 이슈.">
 <script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<style>
-  :root{
-    --bg:#0d1017; --card:#161b26; --card2:#1c2230; --line:#252c3a;
-    --txt:#e8ecf3; --sub:#8b95a7; --accent:#ff5a3c;
-    --google:#4285f4; --naver:#03c75a;
-    --up:#ff4d4d; --down:#4d8bff; --new:#ff8a00; --same:#6b7688;
-  }
-  /* 라이트 테마: OS가 라이트이고 사용자가 토글 안 했을 때 + 명시적 라이트 선택 시 */
-  @media (prefers-color-scheme: light){
-    :root:not([data-theme]){
-      --bg:#f4f6f9; --card:#ffffff; --card2:#eef1f5; --line:#e0e5ec;
-      --txt:#1a1f2b; --sub:#5f6b7c; --accent:#ff5a3c;
-      --google:#1a73e8; --naver:#03b94f;
-      --up:#e5342f; --down:#2f6bff; --new:#e07b00; --same:#8b95a7;
-    }
-  }
-  :root[data-theme="light"]{
-    --bg:#f4f6f9; --card:#ffffff; --card2:#eef1f5; --line:#e0e5ec;
-    --txt:#1a1f2b; --sub:#5f6b7c; --accent:#ff5a3c;
-    --google:#1a73e8; --naver:#03b94f;
-    --up:#e5342f; --down:#2f6bff; --new:#e07b00; --same:#8b95a7;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background:var(--bg); color:var(--txt);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-    line-height:1.5; -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:680px; margin:0 auto; padding:20px 16px 60px;}
-
-  header{text-align:center; padding:22px 0 16px;}
-  .logo{font-size:26px; font-weight:800; letter-spacing:-.5px;}
-  .logo .dot{color:var(--accent);}
-  .live{
-    display:inline-flex; align-items:center; gap:6px; margin-top:10px;
-    font-size:13px; color:var(--sub); background:var(--card);
-    border:1px solid var(--line); padding:5px 12px; border-radius:999px;
-  }
-  .live .pulse{
-    width:8px; height:8px; border-radius:50%; background:var(--accent);
-    box-shadow:0 0 0 0 rgba(255,90,60,.6); animation:pulse 1.8s infinite;
-  }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(255,90,60,.55);}
-    70%{box-shadow:0 0 0 7px rgba(255,90,60,0);}
-    100%{box-shadow:0 0 0 0 rgba(255,90,60,0);}
-  }
-  @media (prefers-reduced-motion: reduce){ .live .pulse{animation:none;} }
-  .livewrap{display:inline-flex; align-items:center; gap:8px; margin-top:10px;}
-  .livewrap .live{margin-top:0;}
-  .themebtn{
-    width:30px; height:30px; flex:0 0 auto; border-radius:50%;
-    border:1px solid var(--line); background:var(--card); color:var(--txt);
-    cursor:pointer; font-size:14px; line-height:1; padding:0;
-    display:inline-flex; align-items:center; justify-content:center; transition:.15s;
-  }
-  .themebtn:hover{border-color:var(--accent);}
-  .themebtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-
-  /* 상단 네비 */
-  .nav{display:flex; gap:14px; align-items:center; padding:12px 0 14px;
-    border-bottom:1px solid var(--line); font-size:14px; font-weight:600;}
-  .nav .brand{font-size:25px; font-weight:800; letter-spacing:-.5px;
-    margin-right:auto; text-decoration:none; color:var(--txt);}
-  .nav .brand .dot{color:var(--accent);}
-  .nav a{color:var(--sub); text-decoration:none;}
-  .nav a:hover, .nav a.active{color:var(--txt);}
-  @media (max-width:420px){ .nav{gap:11px;} .nav .brand{font-size:21px;} .nav a{font-size:13px;} }
-  header{text-align:center; padding:18px 0 12px;}
-
-  /* 탭 */
-  .tabs{display:flex; gap:8px; margin:8px 0 12px;}
-  .tab{
-    flex:1 1 0; display:flex; align-items:center; justify-content:center; gap:7px;
-    padding:11px 8px; border-radius:12px; cursor:pointer; user-select:none;
-    background:var(--card); border:1px solid var(--line);
-    font-size:15px; font-weight:700; color:var(--sub); transition:.15s;
-  }
-  .tab .ic{width:18px; height:18px; border-radius:50%; display:inline-block; flex:0 0 auto;}
-  .tab[data-tab="google"] .ic{background:var(--google);}
-  .tab[data-tab="naver"] .ic{background:var(--naver);}
-  .tab.active{color:var(--txt); background:var(--card2);}
-  .tab[data-tab="google"].active{border-color:var(--google);}
-  .tab[data-tab="naver"].active{border-color:var(--naver);}
-  .tab:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-
-  .meta{display:flex; justify-content:space-between; align-items:center;
-    font-size:12px; color:var(--sub); margin:2px 4px 10px;}
-  .meta b{color:var(--txt); font-weight:600;}
-
-  ul.board{list-style:none; display:flex; flex-direction:column; gap:8px;}
-  ul.board[hidden]{display:none;}
-  li.row{
-    background:var(--card); border:1px solid var(--line); border-radius:14px;
-    overflow:hidden; transition:border-color .15s;
-  }
-  li.row:hover{border-color:#33405a;}
-  .head{display:flex; align-items:center; gap:12px; padding:13px 14px; cursor:pointer;}
-  .head:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
-  .rank{
-    flex:0 0 30px; text-align:center; font-size:19px; font-weight:800;
-    font-variant-numeric:tabular-nums;
-  }
-  .board.g li.row:nth-child(-n+3) .rank{color:var(--google);}
-  .board.n li.row:nth-child(-n+3) .rank{color:var(--naver);}
-  .kw{flex:1 1 auto; min-width:0;}
-  .kw .word{font-size:16px; font-weight:600; white-space:nowrap;
-    overflow:hidden; text-overflow:ellipsis;}
-  .vol{flex:0 0 auto; font-size:12px; color:var(--sub); white-space:nowrap; text-align:right;}
-  .move{flex:0 0 auto; display:flex; align-items:center; gap:3px;
-    font-size:12px; font-weight:700; font-variant-numeric:tabular-nums;}
-  .move.up{color:var(--up);} .move.down{color:var(--down);}
-  .move.same{color:var(--same);} .move.new{color:var(--new);}
-  .badge-new{background:var(--new); color:#fff; font-size:10px; font-weight:800;
-    padding:2px 6px; border-radius:6px; letter-spacing:.3px;}
-  .caret{flex:0 0 auto; color:var(--sub); font-size:12px; transition:transform .2s;}
-  li.open .caret{transform:rotate(180deg);}
-
-  .panel{max-height:0; overflow:hidden; transition:max-height .25s ease;
-    background:var(--card2); border-top:1px solid transparent;}
-  li.open .panel{max-height:640px; border-top-color:var(--line);}
-  .panel-inner{padding:6px 14px 12px;}
-  .ai{font-size:13.5px; line-height:1.55; color:var(--txt); margin:8px 0 4px;
-    padding:10px 12px; background:rgba(255,90,60,.08);
-    border:1px solid rgba(255,90,60,.25); border-radius:10px;}
-  .ai-tag{display:block; font-size:11px; font-weight:800; color:var(--accent);
-    margin-bottom:4px; letter-spacing:.3px;}
-  .panel a.news{display:flex; gap:10px; align-items:center; padding:9px 0;
-    color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line);}
-  .panel a.news:last-of-type{border-bottom:none;}
-  .thumb{flex:0 0 auto; width:54px; height:54px; border-radius:8px; object-fit:cover;
-    background:var(--card2); border:1px solid var(--line);}
-  .nt{flex:1 1 auto; min-width:0; font-size:13.5px; line-height:1.4; display:-webkit-box;
-    -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-  .src{font-size:11px; color:var(--sub); margin-top:2px;}
-  .links{display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; align-items:center;}
-  .links a{font-size:12px; text-decoration:none; font-weight:600; color:var(--accent);}
-  .closebtn{margin-left:auto; background:none; border:1px solid var(--line); color:var(--sub);
-    border-radius:8px; padding:4px 11px; font-size:12px; font-weight:600; cursor:pointer;}
-  .closebtn:hover{border-color:var(--accent); color:var(--txt);}
-
-  footer{margin-top:26px; font-size:11.5px; color:var(--sub); line-height:1.7; text-align:center;}
-  footer .note{display:block; margin-top:8px; font-size:11px; opacity:.85;}
-  footer a{color:var(--sub);}
-
-  .ad{margin:14px 0; padding:10px; border:1px dashed var(--line); border-radius:12px;
-    text-align:center; min-height:60px; background:var(--card);}
-  .ad-note{display:block; font-size:10px; color:var(--sub); letter-spacing:.4px; margin-bottom:4px;}
-  .rail{position:fixed; top:80px; width:160px; z-index:5; text-align:center;
-    background:var(--card); border:1px dashed var(--line); border-radius:10px; padding:8px 6px;}
-  .rail-left{left:calc(50% - 540px);}
-  .rail-right{right:calc(50% - 540px);}
-  .rail .adsbygoogle{display:inline-block; width:160px; height:600px;}
-  @media (max-width:1199px){.rail{display:none;}}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <!-- 애드센스 승인 후 ADSENSE_CLIENT 설정 시 로더/자동광고 스크립트가 삽입됩니다 -->
+<style>
+  /* ===== 테마 토큰 (라이트) ===== */
+  :root{
+    --bg:#f1f3f4; --surface:#ffffff; --text:#191c1f; --muted:#767b80;
+    --border:#e5e8ea; --accent:#0b7d63; --accent-soft:#e6f4ef;
+    --up:#e2452f; --down:#1f8a5b; --adbg:#f0f2f3;
+    --shadow:0 1px 3px rgba(20,30,40,.06);
+  }
+  /* ===== 다크 테마 ===== */
+  html[data-theme="dark"]{
+    --bg:#12151a; --surface:#1a1e25; --text:#e9ebee; --muted:#8b9299;
+    --border:#2a2f38; --accent:#2fbf8f; --accent-soft:#12281f; --adbg:#181b21;
+    --shadow:0 1px 3px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:'Noto Sans KR',system-ui,sans-serif; -webkit-font-smoothing:antialiased;
+    transition:background .25s,color .25s;}
+  a{color:inherit;}
+  @keyframes kpPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.82)}}
+  @keyframes kpFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+  /* 광고 자리 */
+  .ad-top{width:100%;display:flex;justify-content:center;padding:8px 20px 0;}
+  .ad-top>div{width:100%;max-width:970px;height:56px;background:var(--adbg);
+    border:1px dashed var(--border);border-radius:8px;display:flex;align-items:center;
+    justify-content:center;color:var(--muted);font-size:11px;letter-spacing:.14em;
+    font-family:ui-monospace,monospace;}
+  .ad-side{height:250px;background:var(--adbg);border:1px dashed var(--border);border-radius:14px;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;
+    letter-spacing:.14em;font-family:ui-monospace,monospace;}
+
+  /* 헤더 */
+  header{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--border);}
+  header .wrap{display:flex;align-items:center;gap:20px;padding-top:11px;padding-bottom:11px;}
+  .logo{text-decoration:none;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .logo .mark{width:26px;height:26px;border-radius:8px;background:var(--accent);color:#fff;
+    font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;}
+  .logo .name{font-weight:900;font-size:19px;letter-spacing:-.02em;}
+  nav.main{display:flex;gap:2px;margin-left:6px;}
+  nav.main a{text-decoration:none;font-size:14px;font-weight:500;color:var(--muted);
+    padding:7px 12px;border-radius:8px;}
+  nav.main a:hover{background:var(--bg);}
+  nav.main a.active{color:var(--accent);font-weight:700;background:var(--accent-soft);}
+  .theme-btn{margin-left:auto;width:36px;height:36px;border-radius:9px;border:1px solid var(--border);
+    background:var(--surface);color:var(--text);cursor:pointer;font-size:15px;display:flex;
+    align-items:center;justify-content:center;}
+  .theme-btn:hover{background:var(--bg);}
+
+  /* 히어로 */
+  .hero{background:var(--surface);border-bottom:1px solid var(--border);}
+  .hero .wrap{padding-top:44px;padding-bottom:40px;display:flex;flex-direction:column;
+    align-items:center;text-align:center;animation:kpFade .5s ease both;}
+  .badge-live{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;
+    color:var(--accent);background:var(--accent-soft);padding:5px 12px;border-radius:999px;}
+  .badge-live .dot{width:6px;height:6px;border-radius:50%;background:var(--up);animation:kpPulse 1.6s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){ .badge-live .dot{animation:none;} }
+  .hero h1{font-weight:900;font-size:clamp(30px,5vw,44px);letter-spacing:-.03em;margin:16px 0 10px;}
+  .hero p{font-size:15px;color:var(--muted);margin:0;letter-spacing:-.01em;}
+
+  /* 본문 그리드 */
+  main.wrap{padding-top:24px;padding-bottom:56px;display:grid;
+    grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;min-width:0;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    box-shadow:var(--shadow);overflow:hidden;}
+  .card-head{display:flex;align-items:center;gap:9px;padding:15px 18px;border-bottom:1px solid var(--border);}
+  .card-head .src{width:24px;height:24px;border-radius:7px;color:#fff;font-weight:900;font-size:13px;
+    display:flex;align-items:center;justify-content:center;}
+  .card-head h2{font-size:15.5px;font-weight:900;letter-spacing:-.02em;margin:0;}
+  .card-head .time{margin-left:auto;font-size:11px;color:var(--muted);}
+  ol.rank{list-style:none;margin:0;padding:6px 8px 10px;}
+  ol.rank a{text-decoration:none;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:9px;}
+  ol.rank a:hover{background:var(--bg);}
+  .rn{flex-shrink:0;width:22px;text-align:center;font-size:16px;font-weight:900;color:var(--muted);}
+  .rn.top{color:var(--accent);}
+  .kw{flex:1;min-width:0;font-size:14.5px;font-weight:500;letter-spacing:-.01em;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .vol{flex-shrink:0;font-size:11px;color:var(--muted);}
+  .bd{flex-shrink:0;min-width:26px;text-align:right;font-size:11px;font-weight:700;}
+  .bd.up{color:var(--up);} .bd.down{color:var(--down);} .bd.flat{color:var(--muted);font-weight:400;}
+  .bd.new{background:var(--up);color:#fff;font-size:10px;width:18px;height:18px;border-radius:5px;
+    display:inline-flex;align-items:center;justify-content:center;min-width:18px;}
+
+  aside{display:flex;flex-direction:column;gap:20px;}
+  .issues{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+    box-shadow:var(--shadow);padding:18px 20px;}
+  .issues h2{font-size:15px;font-weight:900;letter-spacing:-.02em;margin:0 0 3px;}
+  .issues .sub{font-size:12px;color:var(--muted);margin:0 0 14px;}
+  .issues a.item{text-decoration:none;display:block;padding:11px 0;border-top:1px solid var(--border);}
+  .issues a.item:hover{opacity:.7;}
+  .issues .tag{font-size:11px;font-weight:700;color:var(--accent);}
+  .issues .t{display:block;font-size:13.5px;font-weight:500;line-height:1.45;margin-top:3px;letter-spacing:-.01em;}
+  .issues .more{display:block;text-align:center;margin-top:14px;padding:9px;background:var(--bg);
+    border-radius:9px;font-size:13px;font-weight:700;text-decoration:none;color:var(--text);}
+  .issues .more:hover{background:var(--accent-soft);color:var(--accent);}
+
+  footer{border-top:1px solid var(--border);background:var(--surface);}
+  footer .wrap{padding-top:24px;padding-bottom:24px;display:flex;flex-wrap:wrap;gap:12px 24px;
+    align-items:center;justify-content:space-between;}
+  .foot-brand{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .foot-brand b{font-weight:900;color:var(--text);}
+  footer nav{display:flex;gap:18px;font-size:13px;}
+  footer nav a{color:var(--muted);text-decoration:none;}
+  footer nav a:hover{color:var(--text);}
+
+  @media(max-width:860px){
+    main.wrap{grid-template-columns:1fr;}
+    .cards{grid-template-columns:1fr;}
+  }
+</style>
 </head>
 <body>
-<div class="rail rail-left"><span class="ad-note">광고</span><ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0000000000" data-label="home-left"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
-<div class="rail rail-right"><span class="ad-note">광고</span><ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0000000000" data-label="home-right"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
-<div class="wrap">
-  <div class="nav">
-    <a class="brand" href="./">키워드<span class="dot">픽</span></a>
-    <a href="./" class="active">실시간</a>
-    <a href="blog/">블로그</a>
-    <a href="about.html">소개</a>
-    <button class="themebtn" id="themeToggle" type="button" aria-label="다크/라이트 모드 전환" title="테마 전환">🌙</button>
-  </div>
+
+  <!-- 광고 자리 (상단 배너) -->
+  <div class="ad-top"><div>광고 · 728 × 90</div></div>
+
   <header>
-    <div class="live"><span class="pulse"></span><span>지금 대한민국이 검색하는 키워드</span></div>
+    <div class="wrap">
+      <a class="logo" href="./">
+        <span class="mark">K</span><span class="name">키워드픽</span>
+      </a>
+      <nav class="main">
+        <a href="./" class="active">실시간</a>
+        <a href="./blog/">블로그</a>
+        <a href="./about.html">소개</a>
+      </nav>
+      <button class="theme-btn" id="themeBtn" aria-label="다크/라이트 모드 전환">🌙</button>
+    </div>
   </header>
 
-  <div class="tabs" role="tablist">
-    <div class="tab active" data-tab="google" role="tab" tabindex="0" aria-selected="true"><span class="ic"></span>구글 실시간</div>
-    <div class="tab" data-tab="naver" role="tab" tabindex="0" aria-selected="false"><span class="ic"></span>네이버 실시간</div>
-  </div>
+  <section class="hero">
+    <div class="wrap">
+      <div class="badge-live"><span class="dot"></span>지금 대한민국이 검색하는 키워드</div>
+      <h1>키워드픽</h1>
+      <p>구글·네이버 실시간 인기 검색어를 한눈에</p>
+    </div>
+  </section>
 
-  <div class="meta">
-    <span>업데이트 <b id="updated">–</b></span>
-    <span id="srcinfo">–</span>
-  </div>
+  <main class="wrap">
+    <div class="cards">
+      <!-- 구글 카드 -->
+      <section class="card">
+        <div class="card-head">
+          <span class="src" style="background:#4285f4;">G</span>
+          <h2>구글 실시간</h2>
+          <span class="time" id="timeGoogle"></span>
+        </div>
+        <ol class="rank" id="listGoogle"></ol>
+      </section>
+      <!-- 네이버 카드 -->
+      <section class="card">
+        <div class="card-head">
+          <span class="src" style="background:#03c75a;">N</span>
+          <h2>네이버 실시간</h2>
+          <span class="time" id="timeNaver"></span>
+        </div>
+        <ol class="rank" id="listNaver"></ol>
+      </section>
+    </div>
 
-  <div class="ad"><span class="ad-note">광고</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true" data-label="home-top"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
-
-  <ul class="board g" id="board-google"></ul>
-  <ul class="board n" id="board-naver" hidden></ul>
-
-  <div class="ad"><span class="ad-note">광고</span><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true" data-label="home-bottom"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+    <aside>
+      <!-- 광고 자리 (사이드) -->
+      <div class="ad-side">광고 · 300 × 250</div>
+      <section class="issues">
+        <h2>지금 뜨는 이슈</h2>
+        <p class="sub" id="issuesSub">AI 요약으로 보는 화제 키워드</p>
+        <div id="issues"></div>
+        <a class="more" href="./blog/">블로그 더 보기 →</a>
+      </section>
+    </aside>
+  </main>
 
   <footer>
-    <span id="srcline">데이터 출처: 구글 트렌드 · 매시간 자동 갱신</span>
-    <span class="note" id="footnote"></span>
-    <span class="note"><a href="privacy.html">개인정보처리방침</a></span>
+    <div class="wrap">
+      <div class="foot-brand"><b>키워드픽</b><span id="footSrc">데이터 출처: 구글 트렌드 · signal.bz</span></div>
+      <nav>
+        <a href="./about.html">소개</a>
+        <a href="./blog/">블로그</a>
+        <a href="./privacy.html">개인정보처리방침</a>
+      </nav>
+    </div>
   </footer>
-</div>
 
 <script>
-const DATA = {"updatedAt": "2026-07-12 20:45", "updatedAtISO": "2026-07-12T20:45:58.605450+09:00", "google": [{"keyword": "테더", "traffic": "200+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQpHO3z38ERfeCvioxB0OQV7aKNBCWiBbdvibQ_mFpZk1Vg-qmpTiQUA6DG-sw", "news": [{"title": "테더, 바이낸스에 4 BTC 이체…2분기 비트코인 매수 멈췄나", "url": "https://news.nate.com/view/20260711n11642", "source": "네이트", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQpHO3z38ERfeCvioxB0OQV7aKNBCWiBbdvibQ_mFpZk1Vg-qmpTiQUA6DG-sw"}, {"title": "테더 예비 지갑이 2분기 매수세가 주춤하면서 Binance 로 4 BTC를 전송했습니다", "url": "https://www.cryptopolitan.com/ko/tether-reserve-wallet-sends-4-btc-to-binance-as-q2-buying-stalls/", "source": "Cryptopolitan", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRwnPj63JQvJ9hNsybdPQCFjtbkWlNBvc8akWw8lA6k_Xo36aU3uOlwmIXIGTs"}, {"title": "'세계 2위 보유사' 테더, 비트코인 매입 중단…커지는 의구심", "url": "https://www.edaily.co.kr/News/Read?newsId=01482566645513864&mediaCodeNo=257", "source": "이데일리", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsKiqucnvFXfq5oiDkJjqiLOYORsPGXCQG2AMXOgCW_pyRBPwk-10f7tWmss"}], "rank": 1, "move": "new", "delta": 0, "aiSummary": "스테이블코인 발행사 테더의 전 최고투자책임자(CIO)가 보유 지분 일부 매각을 검토 중이라는 소식이 전해지며 시장의 관심을 받고 있습니다. 또한, 테더가 2분기 들어 비트코인 추가 매수를 중단하고 일부 물량을 이체한 정황이 포착되면서 향후 운영 전략에 대한 다양한 분석과 의구심이 제기되고 있습니다."}, {"keyword": "편의점", "traffic": "100+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRf9qBMLNzI28Iw_U66JxTKUDs0Fxsi08pFuZyugHNGDvWrO7ynLIHn44ZFs4U", "news": [{"title": "백화점은 질주, 마트는 '홈플 효과'…편의점도 웃었다", "url": "https://v.daum.net/v/UitnEjgR5L", "source": "Daum", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRf9qBMLNzI28Iw_U66JxTKUDs0Fxsi08pFuZyugHNGDvWrO7ynLIHn44ZFs4U"}, {"title": "유통가, 2분기 실적 전망 ‘맑음’...외국인 유입에 백화점 웃고·‘홈플 효과’에 마트도 반등", "url": "https://www.etoday.co.kr/news/view/2602741", "source": "이투데이", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqyG0Fa4awaE7NMQNXXJae8fRQs1bttJZ3UNkhDulmSy7opac0UNQYjZ9dgnw"}, {"title": "유통가 2분기 실적 훈풍 기대…업태별 명암은 엇갈려", "url": "https://www.mediapen.com/news/view/1109670", "source": "미디어펜", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSt8gXnC-hlzftTI1d25fWbIInM5usVMQ_iDG8UfWW_VyHdSHfdDRqlU8yiOIw"}], "rank": 2, "move": "new", "delta": 0, "aiSummary": "최근 편의점 업계는 건강 음료의 인기와 함께 피팅룸, 차박 공간 등 다양한 서비스를 도입하며 단순 소매점을 넘어선 생활 플랫폼으로 진화하고 있습니다. 이러한 변화와 함께 편의점 매출이 성장세를 보이고 있으며, 일자리 연계 등 지역 사회를 위한 새로운 역할도 수행하고 있습니다."}, {"keyword": "이기택", "traffic": "100+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ6HlQZJm8im9qKOCkVDIDM8piYX5i83Sgm0y88NrNH0bZidjDGOUpa2mEi3Jc", "news": [{"title": "'1박2일' 문세윤, 마지막 한접시까지 깨끗하게…역시 먹방 에이스 '감탄'", "url": "https://v.daum.net/v/20260712200327800", "source": "Daum", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ6HlQZJm8im9qKOCkVDIDM8piYX5i83Sgm0y88NrNH0bZidjDGOUpa2mEi3Jc"}, {"title": "'1박 2일' 멤버들, 집단 탈주 계획 \"PD 전화 받지 말자\"", "url": "https://www.newsis.com/view/NISX20260710_0003704525", "source": "뉴시스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSV7yLeSVPXqKD7JO17ynRUfv4SsPerSeCUU3li84MXlik8ucH652S7g8m9hPs"}, {"title": "‘1박 2일’ 이기택, 웃음기 싹 뺐다…입사 동기 맹공격에 이용진 주춤", "url": "https://enews.imbc.com/News/RetrieveNewsInfo/511189", "source": "iMBC 연예", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT0M_g5kW3ZcRd1zsLAygCF_9hg8SrZMIG5PSDqAfJcFTt9n8lwM1o0cOzQgaU"}], "rank": 3, "move": "new", "delta": 0, "aiSummary": "배우 이기택이 예능 프로그램 '1박 2일'에 출연하여 게임과 미션 수행 과정에서 보여준 활약으로 주목받고 있습니다. 특히 멤버들과의 대결이나 먹방 미션 등에서 보여준 예능감과 팀 내에서의 존재감이 시청자들의 관심을 끌고 있습니다."}, {"keyword": "찰리 반즈", "traffic": "200+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglOIbebB-_0nN4h_5AEzaodLeAZV7nCxvH2qrGEqRmPekQQ12wRuUT6tttw4", "news": [{"title": "前 롯데 에이스, 다저스에서도 끝내 버려졌다→DFA 통보... 美 \"멀티이닝 소화 능력 있어, 타 구단 관심 있을 것\"", "url": "https://v.daum.net/v/20260712112949345", "source": "Daum", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglOIbebB-_0nN4h_5AEzaodLeAZV7nCxvH2qrGEqRmPekQQ12wRuUT6tttw4"}, {"title": "롯데 에이스였는데 또 쫓겨나게 생겼다…LAD 불펜 개편에 직격탄, \"이닝 소화력 있어 관심받을 수도\"", "url": "https://www.chosun.com/sports/world-baseball/2026/07/12/MI3DAZJZHEZDMMLEG5SWMNLFMU/", "source": "조선일보", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSQENxz1tRKpLsVTXyI5ZjNE9KDFDKbiZ1sNf3pXSTryVvQGr_VQW-lohBkaN0"}, {"title": "롯데에서만 통산 35승을 기록한 에이스…MLB 복귀 꿈 이뤘지만, 다저스에서 DFA '거취 물음표'", "url": "https://sports.news.nate.com/view/20260712n11000", "source": "네이트", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTLtHjX3t-vDtadxf2Dla4psJSrXIQqeuuJZt2oWreOZV8y0P-uM3jJqUxyFi4"}], "rank": 4, "move": "new", "delta": 0, "aiSummary": "롯데 자이언츠에서 활약했던 투수 찰리 반즈가 최근 소속팀인 LA 다저스에서 유망주 투수에게 밀려 지명할당(DFA) 처리되었습니다. 메이저리그 복귀를 노렸던 반즈는 이번 조치로 거취가 불투명해졌으나, 현지에서는 그의 멀티 이닝 소화 능력을 바탕으로 타 구단의 관심을 받을 가능성이 제기되고 있습니다."}, {"keyword": "최우수산", "traffic": "100+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS8XRmd2aKf1n0Vq5TE-O7bcReqsO5zC04gVz97nqna9Mf5Da_0mN3dJt2Ut_g", "news": [{"title": "허경환, 리센느 기운 받아 유행어 역주행 노린다", "url": "https://www.newsis.com/view/NISX20260712_0003705721", "source": "뉴시스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS8XRmd2aKf1n0Vq5TE-O7bcReqsO5zC04gVz97nqna9Mf5Da_0mN3dJt2Ut_g"}, {"title": "'최우수산' 리센느 리브-메이-제나, 예능 최초 'Deja Vu' 라이브 공개", "url": "https://enews.imbc.com/News/RetrieveNewsInfo/511211", "source": "iMBC 연예", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT0KRZ6wCzLF-UHwN3-Vr2t6tTi-a1KeGMjZWj7SYC9y-aDf6_f45ef3ZGOME8"}, {"title": "허경환, 딸 같은 리센느 만났다...\"81년생 어머니와 동갑\" ('최우수산') - 조선비즈", "url": "https://biz.chosun.com/entertainment/enter_general/2026/07/12/MYYTMYTGHEZGCNBQMZRDIZJUGA/", "source": "Chosunbiz", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT3y_4ZFxaev0ybWcxB4wUljvL7JeO8Yfb-0Cw1Rqw9phu8Hf7yTqTQ_hP6px8"}], "rank": 5, "move": "new", "delta": 0, "aiSummary": "최근 예능 프로그램 등에서 언급된 '최우수산'이라는 키워드가 온라인상에서 화제가 되고 있습니다. 해당 키워드는 그룹 리센느의 라이브 무대와 개그맨 장동민, 허경환 등 방송인들의 발언을 통해 언급되며 유행어 역주행 가능성으로 주목받고 있습니다."}, {"keyword": "캐시워크 정답", "traffic": "200+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOD3N3fxpAJmsjWQLJxvKXekIMb8FyMZGceL5q_a889L703lkcQPjfX6Dhag8", "news": [{"title": "닥터버그 모기패치 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://www.ajunews.com/view/20260712165516616", "source": "아주경제", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOD3N3fxpAJmsjWQLJxvKXekIMb8FyMZGceL5q_a889L703lkcQPjfX6Dhag8"}, {"title": "'두부과자' 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://news.nate.com/view/20260712n10816", "source": "네이트", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR4NQRViQCBp94KbX9fFY18E1cgssKo0F_b8fQl-pn9MmyN2GVnL86wtMcbU24"}, {"title": "[캐시닥 퀴즈 정답] 캐시닥 오늘의 돈버는 퀴즈 7월 9일 10시 정답 공개", "url": "https://www.topstarnews.net/news/articleView.html?idxno=16128771", "source": "TopStarNews", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTaZF2f9vnWVKnNz7WsHDydBvRASqSQu2lnhxwZDWiM2YbWCSLwdGB15uAtcYk"}], "rank": 6, "move": "new", "delta": 0, "aiSummary": "캐시워크 앱에서 제공하는 '돈버는퀴즈'의 정답을 찾는 이용자가 늘어나면서 관련 정보가 매일 실시간으로 공유되고 있습니다. 황금거위, 배민, 키토선생 등 다양한 브랜드와 연계된 퀴즈 정답이 언론사를 통해 종합적으로 보도되면서 화제가 되고 있습니다."}, {"keyword": "지예은", "traffic": "100+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8W6vgcN9pmyhCS3RIT6_S4QOaoXZPmfQzujKr_HOyiXD4qJOnH2PZqc80SUQ", "news": [{"title": "'런닝맨' 지예은, 전주 1초 만에 정답…'지보아' 변신까지", "url": "https://www.news1.kr/entertain/broadcast-tv/6225539", "source": "뉴스1", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8W6vgcN9pmyhCS3RIT6_S4QOaoXZPmfQzujKr_HOyiXD4qJOnH2PZqc80SUQ"}, {"title": "'런닝맨' 지예은, 전주 1초 만에 정답…'지보아' 변신까지", "url": "https://news.nate.com/view/20260712n13895?mid=e0600", "source": "네이트", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgSHLzrIS3EIEgrgWpSDuIdc7uHYGv5wtHIiHOANNIigPGAzv7NSV4f2rykJk"}, {"title": "'런닝맨' 송은이, 김종국 잡으려다 실수 연발…\"누나 정신차려\"", "url": "https://v.daum.net/v/20260712190250129", "source": "Daum", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTMLYX9HpmABMqSyaocGttKoDfQfg0pQO0MJWPxVZvbsFtwb4XaZodDosh-Yg4"}], "rank": 7, "move": "new", "delta": 0, "aiSummary": "방송인 지예은이 SBS 예능 프로그램 '런닝맨'에서 90년대 드라마 '미스터Q' 속 김희선의 모습을 완벽하게 재현하며 화제를 모으고 있습니다. 특히 김종국의 과거 연인을 연상케 하는 메이크업과 스타일링으로 출연진의 주목을 받았으며, 퀴즈 대결에서도 활약하며 시청자들의 눈길을 끌었습니다."}, {"keyword": "홈플러스 성서점", "traffic": "500+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSfTvIrMr3N0zxBVOM4l0hYbrMCjO4J9l5mg1cfs_7z-IgPtWu6fIG2q4lF1Jc", "news": [{"title": "‘눈물의 떨이 할인’ 홈플러스…파산 막을 길은 ‘깜깜’", "url": "https://news.kbs.co.kr/news/view.do?ncd=8608436", "source": "KBS 뉴스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSfTvIrMr3N0zxBVOM4l0hYbrMCjO4J9l5mg1cfs_7z-IgPtWu6fIG2q4lF1Jc"}, {"title": "[속보] 정부, 홈플러스 6월 임금 333억 체불에 대지급금 지원키로", "url": "https://www.kookje.co.kr/news2011/asp/newsbody.asp?code=0200&key=20260710.99099003126", "source": "국제신문", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTQUIHQcC4sQyBUky2BROgB2sI9s5T9tQlddLOWzL4XneudkoFkqMY_i_NZECE"}, {"title": "홈플러스 운명의 시한 임박...도마 오른 'MBK식 인수'", "url": "https://m.ytn.co.kr/news_view.php?key=202607120538065775&s_mcd=0102", "source": "YTN", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRx2yhtPGYTv7dsxXP02GeujZHZo5vWgL2eGWW2-QJs52aiEulijnhTvVixkwc"}], "rank": 8, "move": "new", "delta": 0, "aiSummary": "홈플러스 성서점이 폐점 위기에 처하면서 입점 상인들이 계약 승계와 영업권 보장을 촉구하며 대책 마련을 요구하고 있습니다. 전기료 미납으로 인한 단전 우려와 함께, 폐점 시 협력업체들의 대규모 피해와 주변 상권 공동화에 대한 우려가 커지며 논란이 되고 있습니다."}, {"keyword": "혜은이", "traffic": "200+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSKDUzLnxA10JpEjZKJ_VWs8m6jpFb5nUPMLNt53-wnnPjHaHtM9R8Ic3F3ngM", "news": [{"title": "전영록 \"전처 딸 둘은 독립…재혼 두 아들은 서울대·배우\"", "url": "https://www.newsis.com/view/NISX20260712_0003705461", "source": "뉴시스", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSKDUzLnxA10JpEjZKJ_VWs8m6jpFb5nUPMLNt53-wnnPjHaHtM9R8Ic3F3ngM"}, {"title": "'2번 이혼' 혜은이, 전 남편 200억 빚 떠안았다..\"죽으라고 노래해 갚아\" [핫피플]", "url": "https://www.chosun.com/entertainments/broadcast/2026/07/12/MJSDKODGGFRDEOBYMM4DKNBWGQ/", "source": "조선일보", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQRd22zQRZpaUZ_3xrSUkly6xg_bFUM8v0uFgZZBFTCNLZ_tw19L94VyWEoMpQ"}, {"title": "전영록 “사망 기사 123개”…과거 가짜뉴스 피해 토로", "url": "https://v.daum.net/v/20260712171438226?f=m", "source": "Daum", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQdpZJilxbGSlA-yoXgbEmXIMClFHJ2EAT3K75QhLAcoHjCJp-f2U-jaiMA-eM"}], "rank": 9, "move": "new", "delta": 0, "aiSummary": "가수 혜은이가 한 방송에 출연해 과거 자신을 둘러싼 사망설과 숨겨둔 아들이 있다는 가짜 뉴스 등 각종 루머에 대해 직접 해명했습니다. 또한, 어린 시절부터 가장 역할을 하며 겪었던 100억 원대 빚 상환 과정과 과거 의상실을 운영했던 경험 등 자신의 인생사를 솔직하게 털어놓으며 주목받고 있습니다."}, {"keyword": "소비", "traffic": "200+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQG3204v7i1m8AlhTfd_7JHcDm3FW-3nIJcbzjowPuRCTlTaGdat73k1x25vOA", "news": [{"title": "버려지던 ‘참외’…“국내 첫 친환경 가죽 제품으로 변신”", "url": "https://v.daum.net/v/xP3vvCsAhK", "source": "Daum", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQG3204v7i1m8AlhTfd_7JHcDm3FW-3nIJcbzjowPuRCTlTaGdat73k1x25vOA"}, {"title": "버려지던 참외의 변신…칠곡군, 친환경 가죽 개발 및 상품화", "url": "https://www.yna.co.kr/view/AKR20260712040600053", "source": "연합뉴스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTI5tja64GrLGnJIciu-IVqrM2yukZSKDHWTy6KdrCw9xvulb5Ptfdw2Z4bk_Q"}, {"title": "칠곡군, 버려지던 참외…국내 첫 '비건 가죽' 재탄생", "url": "https://view.asiae.co.kr/article/2026071212231717758", "source": "아시아경제", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQjb1bnVqcLueDHNGGMHoty4CjNFOs-ZGp16bEx48H_VHQOZI8GsNdFfnApNNQ"}], "rank": 10, "move": "new", "delta": 0, "aiSummary": "최근 2030 세대를 중심으로 술 소비가 감소하고 가치 소비와 착한 소비가 확산하는 등 소비 트렌드 변화가 나타나고 있습니다. 또한 지역 축제 방문객 증가로 인한 소비 활성화 소식과 함께, 소비 회복세 속에서도 가계부채와 금리 부담으로 인해 카드업계가 긴장하는 등 경제적 상황이 맞물려 주목받고 있습니다."}], "naver": [{"keyword": "김부장, OTT 사기", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/1?keyword=-6998812726097888793", "rank": 1, "move": "new", "delta": 0, "news": [{"title": "참교육, 김부장 보려다 뒤통수…OTT 소액 '먹튀' 사기 벌써 수백명이 당했다 [사기공화국의 민낯] - 네이트", "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5BcmJRa3g3QjE4OVZOTERMU0V5emdMZzlkeEVQY0ZSdjhtSURnUkRSVENSNGJpNS1fcU9FYk53QWN5TzlFaFdJcmdWWHJkWWpKUVpv?oc=5", "source": "네이트"}, {"title": "‘OTT 분철 사기’ 확산…소액 피해에 신고도 꺼려:경찰연합신문 - 경찰연합신문", "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBqODIzQjlqSUh0YW5XWXNzOHhGZG5qUzV6TGttbTVOdF8tRXN3VjVTLVdldEVFVjRoZTE5RzdFNk5fSEhEdTEtckwtZVBIZW9E0gFsQVVfeXFMTUdoT1dpS2FycXdObWxrZm5JZE1kNHZiVXRKNGZ0andLS0VORnVCUnUxanV0a1ZmYVRvZlFVdXFiVk9yVW92OV9mTGN4OUtIZ21mdXlZM2xtdnFuUXhBellKN2ZJU1pOQVFQN1F5?oc=5", "source": "경찰연합신문"}, {"title": "넷플릭스·웨이브 등 OTT 계정 공유 사기…피해자 450명 육박 - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiRkFVX3lxTE9tWmNYdnZUM1dmNktna2RzQmlvM3ZqYTh5WnlzRkFQTU1zS205Sjd0b2gtWjkxZmt1c3B3VjZfdy0tRFNhbXc?oc=5", "source": "v.daum.net"}], "aiSummary": "유튜브 채널 '김부장'을 사칭하여 OTT 계정 공유를 명목으로 소액을 가로채는 '먹튀' 사기 피해자가 수백 명에 달하며 사회적 문제가 되고 있습니다. 이와 별개로, 배우 박준규가 과거 사기로 인한 경제적 어려움을 고백한 소식과 유튜브 채널 '김부장'의 시청률 흥행 소식이 동시에 전해지며 해당 키워드가 주목받고 있습니다."}, {"keyword": "첫 홀 버디 성공", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/2?keyword=4701884759297519436", "rank": 2, "move": "new", "delta": 0, "news": [{"title": "[포토]정윤지,첫 홀 버디 성공 - 이데일리", "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPc1daZEl4N1hXYldQY09SVjJrNW0zaEN4OTVnM3NxblhxdmpDWklVazg4WDc0ZEhyTEdyV3dZYy15bHY2WTltbjNxTlpKU0w0TG1va3ExOVBkM0JtOXV0aFJQQXpBSC1TRFdXeU9GaXo2MEVFal9QVDMzWFlfTXB3QQ?oc=5", "source": "이데일리"}, {"title": "[포토]문정민,첫 홀 버디 성공 감사 - 네이트", "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5ZMGtNd2lTZEZ3MjZseWZBbngwSlhPbFlXb1Q1dTk1OGlBcy14UERaOTFqU0o4c2FPV005TTNsQmtSakluSUFtTG9LV3Y4eWRlSzFvX0xHNS13T19H?oc=5", "source": "네이트"}, {"title": "[포토]고지우,나이스 첫 홀 버디 성공 - 네이트", "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1XamRJUzRZcUIzNWhUNXRfR0ZDcmdUMFZXbWhRQXV3SlRxMnhzcU14X1dpUVBwY2xhdkNKOUxESjVDMGxWVmN4b04xZGdHb3BNdEllTkxieXotdkFMWTh2aXU2NkU0UE42anc?oc=5", "source": "네이트"}], "aiSummary": "현재 진행 중인 골프 대회에서 정윤지, 문정민, 고지우, 최민경, 김아현 등 여러 선수들이 경기 시작과 동시에 첫 홀에서 버디를 기록하며 주목받고 있습니다. 선수들의 경기 장면을 담은 포토 뉴스가 연이어 보도되면서 관련 키워드가 화제가 되고 있습니다."}, {"keyword": "통일부 북 협조 요청", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/3?keyword=6750725405994114855", "rank": 3, "move": "new", "delta": 0, "news": [{"title": "통일부, 북한에 \"실종 해군 수색·송환 협조 요청…NLL 이북 표류 가능성\" - JTBC", "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBYTzc3VG5hc21Od211bEF4TExhb2ttZUJUeU91LTBjamR4OW5ZeGdmekVQTUJlaV9iR2ZDOHJqNC1vVU5TT3lYUmdzWlZRbm1XVTZjMw?oc=5", "source": "JTBC"}, {"title": "통일부 \"동해 해군장병 실종...北에 수색 · 송환 협조 요청\" - SPN 서울평양뉴스", "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE91d05WeXNOcVpleGhmVTRTa2VsNnV1b2pNZnBhRDlIR0ZjTVJkT0x6djNOTy0yd1pzOVpVM3dvR21SdlR2Qk1qNXZ0ZDlLWUpOSVAwUGloY0hQdDFxVksycVcxT0NGNE5qRGFR?oc=5", "source": "SPN 서울평양뉴스"}, {"title": "통일부, 동해 해군장병 실종에 \"수색·송환 관련 대북 협조 요청\" - 조선일보", "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPMmtqaWpwSDZsWF9DMFZIbUhVYVRwcDRLWktsYUhCc0xWVV9xNmx2ZkgyYTlkYlNYWGp6bHFfTHJTQm53UjdJZko5SUpBMEh4ZG5tbEY0Rjhsc1NUZUJPZ1Q5cHpwNE5oX1dyeHg1ajRvMUtLWk5CYzJmR3RNbHMwY095NldzM1hrRVBVMzhKXzZwQQ?oc=5", "source": "조선일보"}], "aiSummary": "동해상에서 해군 장병이 실종됨에 따라 통일부가 북한 측에 수색 및 송환 협조를 요청했습니다. 이는 실종 장병이 북방한계선(NLL) 이북으로 표류했을 가능성을 고려한 조치입니다."}, {"keyword": "캐시워크 정답", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/4?keyword=237007211981181533", "rank": 4, "move": "new", "delta": 0, "news": [{"title": "[단독] 캐시워크 돈버는퀴즈 정답 7월 12일 - bntnews.co.kr", "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5YUVdoODdydHFDcTl4clB4OTlhaTc2UnQ3WmQtbmx4dkRDTzVJcnhVZS1sbVpjWEx0bmtDRnRMQmo0QmJfOVlkUFMwa0dVdVluUGlxMjd0N0hXLWVDR1l6YU8zNTI?oc=5", "source": "bntnews.co.kr"}, {"title": "닥터버그 모기패치 캐시워크 돈 버는 퀴즈, 정답은? - 아주경제", "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5hV19ISWVLWDhqaXpYd0JCZ1FwV3J1SlFqQ3R4RGp6NDB6Tjd2OGVxNzd1RU1rXzUtczRUcGJQS0VVU2N6X3NIOWRuQVhsdnU0M0o5SThmZWYyUdIBWEFVX3lxTE9sREh4R252S2lsa0JKMDRmWlRjUGdyS29JV1hUUlF3V0w3aHlWbG9aZldPYW9pa0tjRkFnQ3cxd3J3QmtRR2pDTFZ1MnVGbnJ6UzRrMWZzTzY?oc=5", "source": "아주경제"}, {"title": "[7월 11일 캐시워크 돈버는퀴즈 종합]\"키토선생, 황금거위,배민,푸드루트, 픽스 녹음기\" 등 전체 문제+정답! - 이코노미톡뉴스", "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5DQ2dJYkhZWVY0WTh6OTJNRFZXc1RpZVcyaVVmTGVOTVZMQU1kTUN4Nm4wQTFyNWpGbDYxVGstQllwczRXZGxNRnVHdjNFemJuYS1qY0JrNUl1bWk2TVl3ZWF4M1VoVmJ5bEh4Yw?oc=5", "source": "이코노미톡뉴스"}], "aiSummary": "캐시워크 앱에서 제공하는 '돈버는퀴즈'의 정답을 찾는 이용자가 늘어나면서 관련 정보가 매일 실시간으로 공유되고 있습니다. 황금거위, 배민, 키토선생 등 다양한 브랜드와 연계된 퀴즈 정답이 언론사를 통해 종합적으로 보도되면서 화제가 되고 있습니다."}, {"keyword": "결혼의 완성", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/5?keyword=9048086069542892674", "rank": 5, "move": "same", "delta": 0, "news": [{"title": "'결혼의 완성' 남궁민·이설, 불화 원인은 딸 죽음…시청률 분당 최고 7.3% [종합] - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFAyVEtBb1FfdHE0bEx0V0N2NXRUTWxJT194blpJM1YyVnZrM1NUMlEtM2Z2TlJ4U0pPeG1MYkExSzctNXBZSHQzYjJ1a19tV28?oc=5", "source": "v.daum.net"}, {"title": "\"20% '김부장' 잡아라\" 소지섭VS남궁민VS지성, '대상' 배우 다 나왔다 [Oh!쎈 이슈] - OSEN", "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBsZWZnTlF4b0lIZ0VBSXZXNmVyeTBNR1Byd1FkN2g5eTB1V01RRWJlMHN6eXVocUJUZmFNSnZZM3BWV3NuWnBiX1ZQVmZDczB1S0FJ?oc=5", "source": "OSEN"}, {"title": "‘결혼의 완성’ 일촉즉발 총구 대치 - bntnews.co.kr", "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1LVnQzYTh4RkxNWVhhWnlLY29KbGFlb29wLWZBNnlIUEZpMWNhYm1xU21PQ3JqZHJabTIxS0doTXBobHF1SnVmcG5TRFV3elJWOUFTT2Q0MWZjajh6V2VOU2o0Sko?oc=5", "source": "bntnews.co.kr"}], "aiSummary": "드라마 '결혼의 완성'에서 남궁민과 박병은이 총구를 겨누며 격렬한 몸싸움을 벌이는 살벌한 대면 장면이 공개되어 화제입니다. 또한, 주연 배우 남궁민이 작품을 위해 체중을 감량한 사실이 알려지고, 작품과 함께 보기 좋은 콘텐츠가 추천되는 등 드라마에 대한 관심이 이어지고 있습니다."}, {"keyword": "지예은", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/6?keyword=-6164752864331185297", "rank": 6, "move": "new", "delta": 0, "news": [{"title": "지예은, 김종국 前여자친구 메이크업..김희선 완벽 패러디 ('런닝맨') - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE80U0VVUndiQkhfV0RjaXVvVVlBS3o2cF9fUW5qNWZkdlNPRF9UaFBWUHlxbWNxcVZRMzJQV3ZwN1VBTVIzREZXZk5PbnNCekE?oc=5", "source": "v.daum.net"}, {"title": "'런닝맨' 지예은, 전주 1초 만에 정답…'지보아' 변신까지 - 뉴스1", "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1CcHF0ZXFBRW9WX2J4OTNOZ1h5clpwU2g5MGxNT0VKX0Z1M2lQSmo4aVNHSUxNczRPbWVKNy1sN2NULWloUlpxUWZObHp4b3ppSmpvTUJEdkkzQUZTa0Rtag?oc=5", "source": "뉴스1"}, {"title": "“나한테 반했더라” 지예은 ‘미스터Q’ 김희선 메이크업 완벽 재현 (‘런닝맨’) - 매일경제", "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBNaG5Ic00tanpVTVA4NlhXX0hwTllFSlhydWk0SGQtamp3aGl0dkU3Zm12UUFKMGF1S0xtTE9aSko5WF9PM0x6TW9oaWlsanotcEszcEp2d3h1RmRhQmdsV2ZKYUNCdw?oc=5", "source": "매일경제"}], "aiSummary": "방송인 지예은이 SBS 예능 프로그램 '런닝맨'에서 90년대 드라마 '미스터Q' 속 김희선의 모습을 완벽하게 재현하며 화제를 모으고 있습니다. 특히 김종국의 과거 연인을 연상케 하는 메이크업과 스타일링으로 출연진의 주목을 받았으며, 퀴즈 대결에서도 활약하며 시청자들의 눈길을 끌었습니다."}, {"keyword": "리센느 관련 논란", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/7?keyword=-9104515871358584189", "rank": 7, "move": "new", "delta": 0, "news": [{"title": "리센느 ‘무섭노’ 논란, 거제시까지 나섰다…“경남지역 일상적 방언” - 한겨레", "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1CQV9yZk9rTzZLWC0yeExSemNtdHFrQTVFYk5mM2xaT3pRWXdlNS1LZktXMmxWcVlkSW51anFMZW5YZXQzcUxHVE0yV0N2MkxrZlhxOE1CQ1Izd1VuYVlWb3BSb2FrWFpOZXJqSlZIbEhCQQ?oc=5", "source": "한겨레"}, {"title": "조국 \"리센느 겨냥한 적 없어…일베식 '노' 논란 유감\" - 이데일리", "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNZHZTSG5xTllkbGtxVlJyUDhFOEh6eTRaOFJVTmpxczB1Njl4azlPUGJFMHhkQlBYUUNIR1V0SGdzWnotMzZMRXBBbUY4WmppNkpidXVPb3BOaG5lSUVwV0xiWFA0YlpYdUc4YVU2eGpXcjNUWFdnQ3FpQ1JZU205Qg?oc=5", "source": "이데일리"}, {"title": "리센느 원이 '일베' 논란에 거제시도 나서 \"일상적 방언…정치적 해석 부적절\" - 프레시안", "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1Wb1FEd2s4VWxNOTg1S2hZdFhJSHdONGtxLXBxM041SWs3a1RDaVZUNEV0QmJSeWF4RmFhNnBRTWJPRnVqeElqcVRoYm1nMHFDNmN2WUxxVjdVX3lZWG1kQnIxcjZCeTlhVi13?oc=5", "source": "프레시안"}], "aiSummary": "그룹 리센느 멤버 원이가 사용한 '무섭노'라는 표현이 온라인상에서 특정 커뮤니티 용어라는 의혹이 제기되며 논란이 일었습니다. 이에 대해 거제시는 해당 표현이 경남 지역의 일상적인 방언일 뿐이라며 정치적 해석을 경계했고, 조국 조국혁신당 대표 또한 해당 논란과 무관하다는 입장을 밝혔습니다."}, {"keyword": "홈플러스 성서점", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/8?keyword=-1845495143238517422", "rank": 8, "move": "new", "delta": 0, "news": [{"title": "손님은 몰리고 진열대는 비었다…청산 앞둔 홈플러스 성서점, 웃지 못하는 사람들 - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5RX0xQdnVvNXM3anJjclZ4QTJFM0V1TUZ6UkFlSld3eGtMcWtPZ3Y4UWQ2ZXdsX01SR2xwUnBiUjVxMzJjMHRjMDEzaGdSajg?oc=5", "source": "v.daum.net"}, {"title": "[단독] 전기료 못 낸 성서 홈플러스…단전 우려 고조 - 매일신문", "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE8tbWV3ejYzeVFoOFZyTVluZEVIZFI2bkc3QWRnaWNmV2JFeDlLNF9mUkRaT0NVYy1WTUQyRmhtVFplQzhVVExzZlU2dnkzUFg1RDM1QjFsU2FJcjRYTGI0clFR?oc=5", "source": "매일신문"}, {"title": "[홈플러스 파산위기] 대구 점포 4곳 협력·입점업체 피해규모 수백억원대 추산…폐점땐 주변 상권 공동화 불가피 - 영남일보", "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5YMmFDLVl3MTNaRE03dlZqNElsSUF4YXZCZTY0ckdNSkd1ZTJpMEhWb0k2Mi13cW5paERBV0VXbTRkUERzdzJFVWE0cDVBM2R4cllLVEhFNWZoS1RVRS1sMXliM3JOZEtRbXJZ?oc=5", "source": "영남일보"}], "aiSummary": "홈플러스 성서점이 폐점 위기에 처하면서 입점 상인들이 계약 승계와 영업권 보장을 촉구하며 대책 마련을 요구하고 있습니다. 전기료 미납으로 인한 단전 우려와 함께, 폐점 시 협력업체들의 대규모 피해와 주변 상권 공동화에 대한 우려가 커지며 논란이 되고 있습니다."}, {"keyword": "포레스텔라", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/9?keyword=8990350748627441967", "rank": 9, "move": "new", "delta": 0, "news": [{"title": "포레스텔라(Forestella) - Champions | KBS 260712 방송 - KBS", "url": "https://news.google.com/rss/articles/CBMiwgJBVV95cUxNbGtIODFzNmktdl9paUNQUXgwbVBOWEVnOTNLTGhEQzdZT21aLWZ5VmhOQXF2aVBzdktNZ1hRVVdwVExHMTUyMndqOFY2UVo0SUN0TzhLTDF6TXJvdE5hREkzdndsdGxwR2xXRVBiLWc3UGcxVGJMVmEtdllfNF9QR2JBUUY1SkRKeFhJVi1NeGp0OVBPNTNKRFR5QXEyMmxPZDdscmdpMU1xVVhLRmozRTBuZExQWUdUdkZQR0pndWJlTmE1YXpnTVFCNm0yMUhWX3dmQ0dISWhONVNHYzk1Mi1YMU1FekVFZElxWWx4UVgycnFYa0ExMFlLWkhnRWxqNzQzLWhvdUV2ajBwS2xsSWljS1JrV2YzN01wYS1rejMwc2ZycUxaOENLamU3bnRDd2pzUDkzTjM4dXB1RzJMMDRB?oc=5", "source": "KBS"}, {"title": "'열린음악회' 출연진 라인업 노라조·인순이 - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE55bzluVk91RzRKTU13VXJndWdWUnBLTWpEeHlVTDRKTjB1TElJNlVWOWtfMkRET2JLaEZ4WkhRUDRuYlVubjRkOWFzYVdtdEk?oc=5", "source": "v.daum.net"}, {"title": "포레스텔라 ‘불후의 명곡 레드카펫’ [MK포토] - 매일경제", "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1fM21pQVdndWxod2FjSmVveC0wOVotRXhDUVhEbHpWTjRscFRPX0FzWEJMZVpEeHhYQ2F6dXlNdlgtOHNOcU1mR2U1UUR2bDl4OG04WjJMRQ?oc=5", "source": "매일경제"}]}, {"keyword": "혜은이", "summary": "https://summary.signal.bz/external/ai-summary/1783855800253/rank/10?keyword=-7276156605100127313", "rank": 10, "move": "new", "delta": 0, "news": [{"title": "'2번 이혼' 혜은이, 전 남편 200억 빚 떠안았다..\"죽으라고 노래해 갚아\" [핫피플] - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5XTGIwcjRzU05JTlRzOFBUYmdqY1Bna24wUFhYVkhwQmZmWEVLdXpYUUs4SWV5ZlItTFF6RFY3OEVKSkRBejNXN0RMM1JnQ3c?oc=5", "source": "v.daum.net"}, {"title": "김주하, 한 여성에 고소고발 당해 경찰 조사 \"안 째려 봤다\" 억울(데이앤나잇)[결정적장면] - 네이트", "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5CZUJZY0dDbjNJSks3eEdtYTFPSkNxZFRFOHhrWTFxTmxWT1lydTY1TlFHVlM0WWhuMlE4R0FIaU5aVmNISXByWV9Ma2pfM3ViRENv?oc=5", "source": "네이트"}, {"title": "전영록, “K-떼창의 시초였다”…혜은이와 50년 우정 고백 - TopStarNews", "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5zZDdMYkphR2lIaDMwYXI2VE4teDZZWVpaLXBQbE1aQWw1M3V0QWFEZGlsRENETFk0QmRWRDF1X2pObVVtWTR6Mmk3UVhVdWZidkVkR1BrWVpYN0lLM3puYkprQWVvTkU5ZVQwNFRYMklGQQ?oc=5", "source": "TopStarNews"}], "aiSummary": "가수 혜은이가 한 방송에 출연해 과거 자신을 둘러싼 사망설과 숨겨둔 아들이 있다는 가짜 뉴스 등 각종 루머에 대해 직접 해명했습니다. 또한, 어린 시절부터 가장 역할을 하며 겪었던 100억 원대 빚 상환 과정과 과거 의상실을 운영했던 경험 등 자신의 인생사를 솔직하게 털어놓으며 주목받고 있습니다."}], "naverSource": "signal"};
-
-function moveHTML(it){
-  if(it.move === "new") return '<span class="badge-new">NEW</span>';
-  if(it.move === "up")   return '<span class="move up">▲ '+it.delta+'</span>';
-  if(it.move === "down") return '<span class="move down">▼ '+it.delta+'</span>';
-  return '<span class="move same">–</span>';
-}
-function esc(s){return (s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function naverSearch(kw){return 'https://search.naver.com/search.naver?query='+encodeURIComponent(kw);}
-function googleSearch(kw){return 'https://www.google.com/search?q='+encodeURIComponent(kw);}
-
-function rowHTML(it, kind){
-  const news = (it.news||[]).map(n=>`
-      <a class="news" href="${esc(n.url)}" target="_blank" rel="noopener">
-        ${n.image ? `<img class="thumb" src="${esc(n.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}
-        <div class="nt">${esc(n.title)}<div class="src">${esc(n.source)}</div></div>
-      </a>`).join("");
-  const links = kind === "google"
-    ? `<a href="${naverSearch(it.keyword)}" target="_blank" rel="noopener">네이버 검색 →</a>
-       <a href="${googleSearch(it.keyword)}" target="_blank" rel="noopener">구글 검색 →</a>`
-    : `<a href="${naverSearch(it.keyword)}" target="_blank" rel="noopener">네이버 검색 →</a>
-       <a href="${googleSearch(it.keyword)}" target="_blank" rel="noopener">구글 검색 →</a>`
-      + (it.summary ? `<a href="${esc(it.summary)}" target="_blank" rel="noopener">AI 요약 보기 →</a>` : "");
-  const body = (!it.news || !it.news.length)
-    ? '<div class="src" style="padding:6px 0;">관련 뉴스가 없어요.</div>' : news;
-  const vol = kind === "google"
-    ? `<div class="vol">검색량 ${esc(it.traffic)||'–'}</div>`
-    : (it.metric ? `<div class="vol">${esc(it.metric)}</div>` : "");
-  return `
-    <li class="row">
-      <div class="head" tabindex="0" role="button" aria-expanded="false"
-           onclick="toggleRow(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
-        <div class="rank">${it.rank}</div>
-        <div class="kw"><div class="word">${esc(it.keyword)}</div></div>
-        ${vol}
-        ${moveHTML(it)}
-        <div class="caret">▾</div>
-      </div>
-      <div class="panel"><div class="panel-inner">
-        ${it.aiSummary ? `<div class="ai"><span class="ai-tag">🤖 AI 요약</span>${esc(it.aiSummary)}</div>` : ""}
-        ${body}
-        <div class="links">${links}<button type="button" class="closebtn" onclick="closeRow(this)">닫기 ▲</button></div>
-      </div></div>
-    </li>`;
-}
-
-function toggleRow(head){
-  const li = head.parentElement;
-  const board = li.closest('.board');
-  const wasOpen = li.classList.contains('open');
-  // 아코디언: 같은 보드에서 열린 항목 모두 닫기
-  board.querySelectorAll('li.open').forEach(o=>{
-    o.classList.remove('open');
-    o.querySelector('.head').setAttribute('aria-expanded','false');
-  });
-  if(!wasOpen){
-    li.classList.add('open');
-    head.setAttribute('aria-expanded','true');
-  }
-}
-
-// 패널 닫기 버튼
-function closeRow(btn){
-  const li = btn.closest('li.row');
-  if(!li) return;
-  li.classList.remove('open');
-  const h = li.querySelector('.head');
-  if(h) h.setAttribute('aria-expanded','false');
-}
-
-// 보드의 1위를 기본으로 펼침
-function openFirst(id){
-  const li = document.querySelector('#'+id+' li.row');
-  if(li){
-    li.classList.add('open');
-    const h = li.querySelector('.head');
-    if(h) h.setAttribute('aria-expanded','true');
-  }
-}
-
-function renderBoard(id, items, kind){
-  const el = document.getElementById(id);
-  el.innerHTML = (items||[]).length
-    ? items.map(it=>rowHTML(it, kind)).join("")
-    : '<li class="row"><div class="head"><div class="kw"><div class="word" style="color:var(--sub);font-weight:500">데이터를 불러오지 못했어요.</div></div></div></li>';
-}
-
-const NAVER_DATALAB = DATA.naverSource === 'datalab';
-const SRC = {
-  google: '구글 트렌드 기준',
-  naver:  NAVER_DATALAB ? '네이버 데이터랩 기준' : 'signal.bz 집계 기준'
+/* 데이터: generate.py 가 {"updatedAt": "2026-07-12 21:44", "updatedAtISO": "2026-07-12T21:44:32.376441+09:00", "google": [{"keyword": "hle", "traffic": "100+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQrUOiY0NJHDKF7rdjkwbzcihxHg-Iy2gZvWpHQF48NiQ--u9L24DhiSg0IpWY", "news": [{"title": "LYON's coach Rigby on LCK: \"They've been cocky, honestly, and they're getting punished for that\"", "url": "https://www.sheepesports.com/en/all/articles/lyon-s-coach-rigby-on-lck-they-ve-been-cocky-honestly-and-they-re-getting-punished-for-that/en", "source": "Sheep Esports", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQrUOiY0NJHDKF7rdjkwbzcihxHg-Iy2gZvWpHQF48NiQ--u9L24DhiSg0IpWY"}, {"title": "HLE Kanavi: \"We lost pretty heavily to BLG, but if we meet again in the final, I think we can win\"", "url": "https://www.sheepesports.com/en/lol/articles/hle-kanavi-we-lost-pretty-heavily-to-blg-but-if-we-meet-again-in-the-final-i-think-we-can-win/en", "source": "Sheep Esports", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTy_h9W0n6k_NLN44EDHF7Ebg7Fyiseb9zqGjZmg5Zm7JBo3rTLBoo8lUhXY0"}, {"title": "LEC Summer Split 2026 Schedule, Format, Roadtrips and Everything You Need to Know", "url": "https://www.sheepesports.com/en/all/articles/lec-summer-split-2026-schedule-format-roadtrips-and-everything-you-need-to-know/en", "source": "Sheep Esports", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR7zSxV0arvkXjAs0Up3GtGYWk450cM1XETfIrn_69HTkMnM39W7-WC7HWIKOk"}], "rank": 1, "move": "new", "delta": 0, "aiSummary": "한화생명e스포츠(HLE)가 국제 대회인 MSI에서 결승 진출을 확정하며 큰 주목을 받고 있습니다. 특히 리옹(LYON)과의 경기에서 접전을 펼치며 결승에 오른 점과, 결승전에서 빌리빌리게이밍(BLG)과 맞붙게 된 대진 상황이 팬들의 관심을 모으고 있습니다."}, {"keyword": "롤드컵", "traffic": "100+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQQXF4EfmoSvvsrulo_VALmavKiA6YNKgsa8Byz8uT9EmTk9Hh88oxJaqA-Cqc", "news": [{"title": "[김용우가 만난 사람] LPL 해설자 '밀러', \"2018년 롤드컵 결승의 밤, 절대 잊지 못할 것“", "url": "https://v.daum.net/v/VcnYdB71Cl", "source": "Daum", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQQXF4EfmoSvvsrulo_VALmavKiA6YNKgsa8Byz8uT9EmTk9Hh88oxJaqA-Cqc"}, {"title": "한화생명, 창단 첫 MSI 우승…BLG에 3:2 역전승", "url": "https://www.yna.co.kr/view/AKR20260712051500017", "source": "연합뉴스", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSjykLzgzFFkLtUf-M4BqPQtoITzeC-pIC_T2sDHbAyyJZ7OZXZDCU9jnzOTMs"}, {"title": "‘강림한 제우스 대장군’…한화생명, 이틀 연속 실버스크랩스 타종 2-2 원점 [MSI]", "url": "https://v.daum.net/v/20260712200437818", "source": "Daum", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS7GjyH9Dvn-c_lEBH0_36GyEzztRb_AT9BgQic42lrIQhLAZwrRWZ8CEkL_GU"}], "rank": 2, "move": "new", "delta": 0, "aiSummary": "최근 열린 MSI 대회에서 한화생명이 BLG를 꺾고 우승을 차지하며 롤드컵 진출을 확정 지어 큰 화제가 되고 있습니다. 반면, 롤드컵 최강자로 불리던 T1은 이번 MSI에서 탈락하며 대조적인 행보를 보였습니다. 또한, 과거 롤드컵 결승전에 대한 회고와 선수들의 주요 대회 석권 기록 등이 언급되며 롤드컵을 향한 관심이 이어지고 있습니다."}, {"keyword": "임이자", "traffic": "100+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-ZBJadpALWJmXAhVXqgJ5cDLg1PLE2EppZxG6DFSzTqcZb-XNLyDEWafidIQ", "news": [{"title": "노란봉투법 '눈감은' 대법원…\"당황\" 속 무거워진 '선례'의 짐", "url": "https://www.nocutnews.co.kr/news/6546616", "source": "www.nocutnews.co.kr", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-ZBJadpALWJmXAhVXqgJ5cDLg1PLE2EppZxG6DFSzTqcZb-XNLyDEWafidIQ"}, {"title": "대법, CJ대한통운 손 들어줬다…택배기사 단체교섭 의무 인정 2심 파기", "url": "https://www.etnews.com/20260709000245", "source": "전자신문", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxt1hjWRqCjgGth3kXQA7Fxq_LNekPJ4uKL4gSyaEXtCLT2_VLi-_QE0Usfo"}, {"title": "경총 \"대법 판결 취지 존중…노란봉투법 보완해야\"", "url": "https://www.yna.co.kr/view/MYH20260710024600038", "source": "연합뉴스", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQRnAJ8q4Sfv-0tmxe8h7yIb4UbRwWv2CpO1Q5A0HIeMYTnH7Py9CXlJBEzhtQ"}], "rank": 3, "move": "new", "delta": 0, "aiSummary": "임이자 의원이 더불어민주당의 입법 행태를 강하게 비판하며 '노란봉투법'의 입법 명분이 대법원 판결로 인해 흔들리고 있다고 주장했습니다. 이와 함께 지역구인 상주와 문경의 재해예방 현장을 방문해 침수 위험을 점검하고 안전 대책을 강조하는 의정 활동을 수행했습니다."}, {"keyword": "충남 아산 fc 대 경남", "traffic": "200+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoNLV04dsCptLCRyKowsF6FrwgSc1le9EoMdVWFjEZPPW3yJlM1B57Ja-gbE", "news": [{"title": "[K리그2 인터뷰] 배성재 감독 \"단레이까지 떠났지만 국내 선수로 연습 경기서 전북 잡아 자신감 생겨\"", "url": "https://sports.news.nate.com/view/20260712n13783", "source": "네이트", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoNLV04dsCptLCRyKowsF6FrwgSc1le9EoMdVWFjEZPPW3yJlM1B57Ja-gbE"}, {"title": "'천안전 극적 승리' 경남, 충남아산 원정서 후반기 연승 가동할까… 배성재 감독 \"승리 위해 모든 것 쏟겠다\"", "url": "https://www.maxportsnews.com/news/articleView.html?idxno=8514", "source": "맥스포츠뉴스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTTeA9i4w8sbR5hHmdooSBJ57guyLI4nlWRtx8BGII7ZX3T66zllwK3EED1igI"}, {"title": "경남FC 단레이 대체자 누가될까…김현오·이중민 등 장신 공격수 거론", "url": "https://www.idomin.com/news/articleView.html?idxno=2009564", "source": "경남도민일보", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQlmf4KlqdUM8O5VFXIaeVWWBPapB0YufWh0kwZIUMtym7oYvJwS1vozaRwB80"}], "rank": 4, "move": "new", "delta": 0, "aiSummary": "K리그2 충남아산FC와 경남FC의 맞대결을 앞두고 양 팀의 경기 준비 상황이 주목받고 있습니다. 특히 이번 경기는 배성재 캐스터와의 인연으로 '배성재 더비'라 불리며 관심을 모으고 있으며, 충남아산은 신규 여름 MD 상품을 출시하는 등 홈경기 분위기 조성에 나섰습니다."}, {"keyword": "테더", "traffic": "500+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQpHO3z38ERfeCvioxB0OQV7aKNBCWiBbdvibQ_mFpZk1Vg-qmpTiQUA6DG-sw", "news": [{"title": "테더, 바이낸스에 4 BTC 이체…2분기 비트코인 매수 멈췄나", "url": "https://news.nate.com/view/20260711n11642", "source": "네이트", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQpHO3z38ERfeCvioxB0OQV7aKNBCWiBbdvibQ_mFpZk1Vg-qmpTiQUA6DG-sw"}, {"title": "테더 예비 지갑이 2분기 매수세가 주춤하면서 Binance 로 4 BTC를 전송했습니다", "url": "https://www.cryptopolitan.com/ko/tether-reserve-wallet-sends-4-btc-to-binance-as-q2-buying-stalls/", "source": "Cryptopolitan", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRwnPj63JQvJ9hNsybdPQCFjtbkWlNBvc8akWw8lA6k_Xo36aU3uOlwmIXIGTs"}, {"title": "'세계 2위 보유사' 테더, 비트코인 매입 중단…커지는 의구심", "url": "https://www.edaily.co.kr/News/Read?newsId=01482566645513864&mediaCodeNo=257", "source": "이데일리", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsKiqucnvFXfq5oiDkJjqiLOYORsPGXCQG2AMXOgCW_pyRBPwk-10f7tWmss"}], "rank": 5, "move": "down", "delta": 4, "aiSummary": "스테이블코인 발행사 테더의 전 최고투자책임자(CIO)가 보유 지분 일부 매각을 검토 중이라는 소식이 전해지며 시장의 관심을 받고 있습니다. 또한, 테더가 2분기 들어 비트코인 추가 매수를 중단하고 일부 물량을 이체한 정황이 포착되면서 향후 운영 전략에 대한 다양한 분석과 의구심이 제기되고 있습니다."}, {"keyword": "편의점", "traffic": "200+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRf9qBMLNzI28Iw_U66JxTKUDs0Fxsi08pFuZyugHNGDvWrO7ynLIHn44ZFs4U", "news": [{"title": "백화점은 질주, 마트는 '홈플 효과'…편의점도 웃었다", "url": "https://v.daum.net/v/UitnEjgR5L", "source": "Daum", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRf9qBMLNzI28Iw_U66JxTKUDs0Fxsi08pFuZyugHNGDvWrO7ynLIHn44ZFs4U"}, {"title": "유통가, 2분기 실적 전망 ‘맑음’...외국인 유입에 백화점 웃고·‘홈플 효과’에 마트도 반등", "url": "https://www.etoday.co.kr/news/view/2602741", "source": "이투데이", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqyG0Fa4awaE7NMQNXXJae8fRQs1bttJZ3UNkhDulmSy7opac0UNQYjZ9dgnw"}, {"title": "유통가 2분기 실적 훈풍 기대…업태별 명암은 엇갈려", "url": "https://www.mediapen.com/news/view/1109670", "source": "미디어펜", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSt8gXnC-hlzftTI1d25fWbIInM5usVMQ_iDG8UfWW_VyHdSHfdDRqlU8yiOIw"}], "rank": 6, "move": "down", "delta": 4, "aiSummary": "최근 편의점 업계는 건강 음료의 인기와 함께 피팅룸, 차박 공간 등 다양한 서비스를 도입하며 단순 소매점을 넘어선 생활 플랫폼으로 진화하고 있습니다. 이러한 변화와 함께 편의점 매출이 성장세를 보이고 있으며, 일자리 연계 등 지역 사회를 위한 새로운 역할도 수행하고 있습니다."}, {"keyword": "이기택", "traffic": "100+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTcFhlDFQ6ylqwjFarDefwGKh7dDeUmLV-zyz1RGWs8JFDxDQv6CjWnASWsjMg", "news": [{"title": "'1박2일' 이용진, 눈치게임 완승…이준과 차량 탑승권 획득", "url": "https://v.daum.net/v/20260712211046636", "source": "Daum", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTcFhlDFQ6ylqwjFarDefwGKh7dDeUmLV-zyz1RGWs8JFDxDQv6CjWnASWsjMg"}, {"title": "'1박2일' 문세윤, 마지막 한접시까지 깨끗하게…역시 먹방 에이스 '감탄'", "url": "https://www.news1.kr/entertain/broadcast-tv/6225551", "source": "뉴스1", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSphFa42fy13Urjgde0O7em8XahmrCCcXQV6jNGQO8xCWvFSfc4joJM0SOvtws"}, {"title": "'1박 2일' 멤버들, 집단 탈주 계획 \"PD 전화 받지 말자\"", "url": "https://www.newsis.com/view/NISX20260710_0003704525", "source": "뉴시스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSV7yLeSVPXqKD7JO17ynRUfv4SsPerSeCUU3li84MXlik8ucH652S7g8m9hPs"}], "rank": 7, "move": "down", "delta": 4, "aiSummary": "배우 이기택이 예능 프로그램 '1박 2일'에 출연하여 게임과 미션 수행 과정에서 보여준 활약으로 주목받고 있습니다. 특히 멤버들과의 대결이나 먹방 미션 등에서 보여준 예능감과 팀 내에서의 존재감이 시청자들의 관심을 끌고 있습니다."}, {"keyword": "찰리 반즈", "traffic": "500+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglOIbebB-_0nN4h_5AEzaodLeAZV7nCxvH2qrGEqRmPekQQ12wRuUT6tttw4", "news": [{"title": "前 롯데 에이스, 다저스에서도 끝내 버려졌다→DFA 통보... 美 \"멀티이닝 소화 능력 있어, 타 구단 관심 있을 것\"", "url": "https://v.daum.net/v/20260712112949345", "source": "Daum", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglOIbebB-_0nN4h_5AEzaodLeAZV7nCxvH2qrGEqRmPekQQ12wRuUT6tttw4"}, {"title": "롯데 에이스였는데 또 쫓겨나게 생겼다…LAD 불펜 개편에 직격탄, \"이닝 소화력 있어 관심받을 수도\"", "url": "https://www.chosun.com/sports/world-baseball/2026/07/12/MI3DAZJZHEZDMMLEG5SWMNLFMU/", "source": "조선일보", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSQENxz1tRKpLsVTXyI5ZjNE9KDFDKbiZ1sNf3pXSTryVvQGr_VQW-lohBkaN0"}, {"title": "롯데에서만 통산 35승을 기록한 에이스…MLB 복귀 꿈 이뤘지만, 다저스에서 DFA '거취 물음표'", "url": "https://sports.news.nate.com/view/20260712n11000", "source": "네이트", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTLtHjX3t-vDtadxf2Dla4psJSrXIQqeuuJZt2oWreOZV8y0P-uM3jJqUxyFi4"}], "rank": 8, "move": "down", "delta": 4, "aiSummary": "롯데 자이언츠에서 활약했던 투수 찰리 반즈가 최근 소속팀인 LA 다저스에서 유망주 투수에게 밀려 지명할당(DFA) 처리되었습니다. 메이저리그 복귀를 노렸던 반즈는 이번 조치로 거취가 불투명해졌으나, 현지에서는 그의 멀티 이닝 소화 능력을 바탕으로 타 구단의 관심을 받을 가능성이 제기되고 있습니다."}, {"keyword": "최우수산", "traffic": "200+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSDaNVZOrU_W24qhwTpVm17iJJ9Td0WVvyWZg1zyIwFOiz7fgYMdqKfJqVdmIQ", "news": [{"title": "허경환, 딸 같은 리센느 만났다...\"81년생 어머니와 동갑\" ('최우수산')", "url": "https://v.daum.net/v/20260712114437646", "source": "Daum", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSDaNVZOrU_W24qhwTpVm17iJJ9Td0WVvyWZg1zyIwFOiz7fgYMdqKfJqVdmIQ"}, {"title": "허경환, 리센느 기운 받아 유행어 역주행 노린다", "url": "https://www.newsis.com/view/NISX20260712_0003705721", "source": "뉴시스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS8XRmd2aKf1n0Vq5TE-O7bcReqsO5zC04gVz97nqna9Mf5Da_0mN3dJt2Ut_g"}, {"title": "'최우수산' 리센느 리브-메이-제나, 예능 최초 'Deja Vu' 라이브 공개", "url": "https://enews.imbc.com/News/RetrieveNewsInfo/511211", "source": "iMBC 연예", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT0KRZ6wCzLF-UHwN3-Vr2t6tTi-a1KeGMjZWj7SYC9y-aDf6_f45ef3ZGOME8"}], "rank": 9, "move": "down", "delta": 4, "aiSummary": "최근 예능 프로그램 등에서 언급된 '최우수산'이라는 키워드가 온라인상에서 화제가 되고 있습니다. 해당 키워드는 그룹 리센느의 라이브 무대와 개그맨 장동민, 허경환 등 방송인들의 발언을 통해 언급되며 유행어 역주행 가능성으로 주목받고 있습니다."}, {"keyword": "캐시워크 정답", "traffic": "200+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOD3N3fxpAJmsjWQLJxvKXekIMb8FyMZGceL5q_a889L703lkcQPjfX6Dhag8", "news": [{"title": "닥터버그 모기패치 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://www.ajunews.com/view/20260712165516616", "source": "아주경제", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOD3N3fxpAJmsjWQLJxvKXekIMb8FyMZGceL5q_a889L703lkcQPjfX6Dhag8"}, {"title": "'두부과자' 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://news.nate.com/view/20260712n10816", "source": "네이트", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR4NQRViQCBp94KbX9fFY18E1cgssKo0F_b8fQl-pn9MmyN2GVnL86wtMcbU24"}, {"title": "[캐시닥 퀴즈 정답] 캐시닥 오늘의 돈버는 퀴즈 7월 9일 10시 정답 공개", "url": "https://www.topstarnews.net/news/articleView.html?idxno=16128771", "source": "TopStarNews", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTaZF2f9vnWVKnNz7WsHDydBvRASqSQu2lnhxwZDWiM2YbWCSLwdGB15uAtcYk"}], "rank": 10, "move": "down", "delta": 4, "aiSummary": "캐시워크 앱에서 제공하는 '돈버는퀴즈'의 정답을 찾는 이용자가 늘어나면서 관련 정보가 매일 실시간으로 공유되고 있습니다. 황금거위, 배민, 키토선생 등 다양한 브랜드와 연계된 퀴즈 정답이 언론사를 통해 종합적으로 보도되면서 화제가 되고 있습니다."}], "naver": [{"keyword": "의정부고 졸업사진", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/1?keyword=-1996191355613269687", "rank": 1, "move": "new", "delta": 0, "news": [{"title": "젠슨황·홍명보부터 참교육·김부장까지…의정부고 졸업사진 - 동아일보", "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE53OHhMTGpOWmdMQl8xbDFGMkpDVzBvejhQQTJKbmQ5X0ZNUWwtOG5KMUJVYW9UckJHSmJ1aVN5R3hEdWctcG9oQkNoUmN5OEZJUk1sRVN3aUVuZUkyQ3FDUTlGeVNtR1k1ZDFsa3BMNk1jUk9pNlHSAWZBVV95cUxOeVNwSU41eUhxM2hrc0lFdm5oWm9qSDFkTkRsajNJSl9yZGxXTWRMMVRxUW1YdlVDS2JUdDg3TVhnbS16Nkd0MlpXTjdZRWFEQkEwVHFydUJySGJHdllPZi1TaW1VaFE?oc=5", "source": "동아일보"}, {"title": "의정부고가 딱 알려줄게, 2025 밈 트렌드 - esquirekorea.co.kr", "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBUQ2hzRE85Vmg4d1hBRlVYaVZmZUVSTVYyYkdYSWRmbW5weHc2MkZrRW9WMnRpZmNvRjlrSUc0cW1jT0hrT2ZjM3NSNjdtSi1HdmZFX1ZtZ0NXZw?oc=5", "source": "esquirekorea.co.kr"}, {"title": "의정부고에 나타난 방시혁·과즙세연?…올해도 빵 터진 졸업사진 - 연합뉴스TV", "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9MSkVrNzd1YS1YU1J0UnZrMUFhV2luVUpVWkZXc2k4TzhmSDRNcE1jOWoxRmowTm9DQnZ1QWJtbktYZDJPbWcxb3NEaXdjQ05ka3RHelpxNGFLT1lSWWhBWDU0aGpYZzg?oc=5", "source": "연합뉴스TV"}], "aiSummary": "매년 화제를 모으는 의정부고등학교의 졸업사진이 올해도 공개되어 큰 관심을 받고 있습니다. 학생들은 젠슨 황, 홍명보 감독, 방시혁 의장과 과즙세연 등 올해의 주요 인물과 유행하는 밈을 재치 있게 패러디했습니다."}, {"keyword": "서울 전역 열대야주의보", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/2?keyword=5103697983561757976", "rank": 2, "move": "new", "delta": 0, "news": [{"title": "서울 전역에 열대야주의보…서울 동남·서남권에 폭염경보 유지 - 연합뉴스", "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBiZG1CMUhUUGxqUEFNR21rNVo5VHQyTHFmSXRGU2U1QzZoMTA3N0txVXBfTkZadE5wUnF3LW40alozVi1zVTBxeXNwelFVbV9WdzVwRWwyMjc1OTDSAWBBVV95cUxPOWxWTV9Ec1ZVdFNYZVRmXzQ5b2x5V0tnTTNvQ05VMm1KOGZfM1BudHQzQTg1d3dwM3VtQnVLSlhDd0pDcGQ4VFBMaFdGMlpSWUhLVHRhbGUtZkFUakp5QlQ?oc=5", "source": "연합뉴스"}, {"title": "서울 전역 '열대야주의보'…오늘 낮 기온 35도까지 올라 - nocutnews.co.kr", "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE94RUYxeTY4a1YyeFVWOVlGZXFEZ0lIT01GMElMWGdrMmN4b19QNE1MZEZ0Z2tFTnVqQV9SVU9mdFFMeTlIYWJvVXJmVldHaTcxOVE?oc=5", "source": "nocutnews.co.kr"}, {"title": "서울 전역 '열대야주의보' 발효...체감온도 33도 이상 - 파이낸셜뉴스", "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9MWkFwaGt2MlY3Z0l0V0VmZVBYUGIzeGtuRjhNSjlHUW5DQm1sZEpYZzdiV1p1dHJvb3ZCMUl0R0x6Yi1qNkdkbEhqYmJNRDNTdEt4NTRSckxsQQ?oc=5", "source": "파이낸셜뉴스"}], "aiSummary": "서울 전역에 열대야주의보가 발효된 가운데, 일부 지역에는 폭염경보가 유지되고 낮 기온이 35도까지 오르는 등 무더위가 이어지고 있습니다. 지난밤 서울에서 올해 첫 열대야가 관측된 이후 전국 대부분 지역으로 폭염과 열대야 현상이 확대되면서 관련 주의보가 내려졌습니다."}, {"keyword": "정경호 감독, 목표 하나씩 달성중", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/3?keyword=2415702460415547240", "rank": 3, "move": "new", "delta": 0, "news": []}, {"keyword": "임이자", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/4?keyword=-6825854160210311505", "rank": 4, "move": "new", "delta": 0, "news": [{"title": "임이자 의원, “입법 폭주 민주당은 석고대죄해야” - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE43cWFPYjlkaVpFblBTSjBOcDdpOGR3V2V5SnBHOVNaTVNpVzQ1VWxWNjNqRWMtSEV4eVdDX0ROek14c3gwaC03QWU1NA?oc=5", "source": "v.daum.net"}, {"title": "임이자 의원, “‘노란봉투법 ’ 입법 명분과 정당성 근본부터 흔들려” - everynews.co.kr", "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9heTVDZWpBY0dQUGRsaHdNLW5xYkcxZzdTLVREclp1OGg1ajlyYjNUUlNmN1N1ank4Ty1mckk4MllhSmcyUmUzMndDUVk3UTlKYVBWc1FHcHRvNVAxZDNfYmtEb0NjZG8tdHlFQ2Z3?oc=5", "source": "everynews.co.kr"}, {"title": "임이자 의원, “입법 폭주 민주당은 석고대죄해야” - hidomin.com", "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBtQ3VBZ3dKVVlLZGotZXBab0QwTldEYTV6YjM3bFBtVHdlczloUVVMZC1RSjdCSGpXUC1NckEwblhFc0JUaG1Ob0tfdGx3Tkp3a094dEpDdzRTMjlJRk5lVGJMVkRTWVJGREE?oc=5", "source": "hidomin.com"}], "aiSummary": "임이자 의원이 더불어민주당의 입법 행태를 강하게 비판하며 '노란봉투법'의 입법 명분이 대법원 판결로 인해 흔들리고 있다고 주장했습니다. 이와 함께 지역구인 상주와 문경의 재해예방 현장을 방문해 침수 위험을 점검하고 안전 대책을 강조하는 의정 활동을 수행했습니다."}, {"keyword": "결혼의 완성", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/5?keyword=9048086069542892674", "rank": 5, "move": "same", "delta": 0, "news": [{"title": "'결혼의 완성' 남궁민·이설, 불화 원인은 딸 죽음…시청률 분당 최고 7.3% [종합] - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFAyVEtBb1FfdHE0bEx0V0N2NXRUTWxJT194blpJM1YyVnZrM1NUMlEtM2Z2TlJ4U0pPeG1MYkExSzctNXBZSHQzYjJ1a19tV28?oc=5", "source": "v.daum.net"}, {"title": "\"20% '김부장' 잡아라\" 소지섭VS남궁민VS지성, '대상' 배우 다 나왔다 [Oh!쎈 이슈] - OSEN", "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBsZWZnTlF4b0lIZ0VBSXZXNmVyeTBNR1Byd1FkN2g5eTB1V01RRWJlMHN6eXVocUJUZmFNSnZZM3BWV3NuWnBiX1ZQVmZDczB1S0FJ?oc=5", "source": "OSEN"}, {"title": "‘결혼의 완성’ 일촉즉발 총구 대치 - bntnews.co.kr", "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1LVnQzYTh4RkxNWVhhWnlLY29KbGFlb29wLWZBNnlIUEZpMWNhYm1xU21PQ3JqZHJabTIxS0doTXBobHF1SnVmcG5TRFV3elJWOUFTT2Q0MWZjajh6V2VOU2o0Sko?oc=5", "source": "bntnews.co.kr"}], "aiSummary": "드라마 '결혼의 완성'에서 남궁민과 박병은이 총구를 겨누며 격렬한 몸싸움을 벌이는 살벌한 대면 장면이 공개되어 화제입니다. 또한, 주연 배우 남궁민이 작품을 위해 체중을 감량한 사실이 알려지고, 작품과 함께 보기 좋은 콘텐츠가 추천되는 등 드라마에 대한 관심이 이어지고 있습니다."}, {"keyword": "테더", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/6?keyword=-4033408829790221299", "rank": 6, "move": "new", "delta": 0, "news": [{"title": "'세계 2위 보유사' 테더, 비트코인 매입 중단…커지는 의구심 - 이데일리TV", "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5TOWVQenFubnNQVmlpandBT0RidXczcTdvMGtpWVM4cTRpSlB3QXllMVg4M1RhZl9rdHNETDRpOE9BenZadjNvN1M1MDUtczlKbzBQaEl3Sll6MjJiOVQ2MU9UT2E0dk9zaGZIUEVMc3Y5TW5zM0lOY0lCWQ?oc=5", "source": "이데일리TV"}, {"title": "테더 전 CIO, 지분 일부 매각 추진…1.26% 보유 지분 처분 검토 - TradingView", "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBEbFc3VXlwamhIU0puWHVTM28yQU1oTWRoSEltMmxhb0NqM1NlcUVaMUhyYnVGVFVwX2ZTY2V6VC0tRXAxeG81ckU5OEhkejRLd0VDMFlaSXV4RXhNbWwxbTdyTmZ6bjFXV20wbQ?oc=5", "source": "TradingView"}, {"title": "테더맥스, 리브랜딩 한 달… 출금 기준 낮추고 글로벌리그 선보여 - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBSckZHdUg5NXF2QWkzNEFMUU04M2JjLVhiOGc5bVEwMzhJNVZaRHhGM1lpTThUbUIzd1BVVzcwXzB0a1djNUY3cFhyc29KV1E?oc=5", "source": "v.daum.net"}], "aiSummary": "스테이블코인 발행사 테더의 전 최고투자책임자(CIO)가 보유 지분 일부 매각을 검토 중이라는 소식이 전해지며 시장의 관심을 받고 있습니다. 또한, 테더가 2분기 들어 비트코인 추가 매수를 중단하고 일부 물량을 이체한 정황이 포착되면서 향후 운영 전략에 대한 다양한 분석과 의구심이 제기되고 있습니다."}, {"keyword": "리센느 관련 유감 표명", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/7?keyword=-7683323748132060558", "rank": 7, "move": "new", "delta": 0, "news": [{"title": "조국, 1주일 만에 “리센느에 상처 줘 유감…야호!” - 채널A", "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE00aUpEbHdMQkN2bFhVcnRQRkwxTDBRWkRycDJQdUkydkJicHBwUVE5Tl9hZXg5ZXVralNta1hDV216OEw2MXJQa0JZNklqVDdEU3JmV2NNZkZSZ1BGX3fSAWNBVV95cUxOWGNiRTdicEhjWV9mVFZuMEx3ZDBISXdDZWdONjJqVmhMQ0xvUzRGLS0zRXdlOG9QcUhfNUhEaUdKZWNKcGR2OS1GUjlCTUlQSEU3Z2Q4SFhtcXctbjR5Qk5veUU?oc=5", "source": "채널A"}, {"title": "조국 \"리센느 겨냥한 적 없어…일베식 '노' 논란 유감\" - 이데일리", "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNZHZTSG5xTllkbGtxVlJyUDhFOEh6eTRaOFJVTmpxczB1Njl4azlPUGJFMHhkQlBYUUNIR1V0SGdzWnotMzZMRXBBbUY4WmppNkpidXVPb3BOaG5lSUVwV0xiWFA0YlpYdUc4YVU2eGpXcjNUWFdnQ3FpQ1JZU205Qg?oc=5", "source": "이데일리"}, {"title": "조국, '무섭노' 논란 해명…\"리센느 겨냥한 적 없다, '리센느, 야호!'\" - hidomin.com", "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE05VlIyUG1paXdvYTRrTHhiM0ZLN3ZySlAybWYwQlp3ejdzdTdwbVFUR285N2pLQ3dOSVd2WFR4X1hObk12TVNtNElFYTdtajZzR2d6ZFVWMWcwbm5qai1FTHB1bW9vZlFvRlE?oc=5", "source": "hidomin.com"}], "aiSummary": "조국 조국혁신당 대표가 자신의 SNS 게시물에 사용한 '무섭노'라는 표현이 특정 커뮤니티의 용어라는 논란이 일자, 아이돌 그룹 리센느를 겨냥한 것이 아니라고 해명했습니다. 조 대표는 리센느에게 상처를 준 점에 대해 유감을 표하며, 해당 표현은 사투리일 뿐 특정 대상을 비하할 의도가 없었음을 밝혔습니다."}, {"keyword": "편의점", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/8?keyword=2139172466953498279", "rank": 8, "move": "new", "delta": 0, "news": [{"title": "“이젠 맛보다 건강”…바나나우유 제치고 편의점 장악한 이 음료 - 중앙일보", "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE16YkNaSHpNQmsxak83eDUzT203dEdvUkZlTWFrME91NlFTVHI1M2owUFZwelNLc1FWLXZhaWstV21uYVNYMFNSYjBpb0RJNVBnd1p0MVVB?oc=5", "source": "중앙일보"}, {"title": "피팅룸에 ‘차박’장까지… 日 편의점 무한 진화 - 조선일보", "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPZlVBUjJhdW5NTDNtaFR3TmJucThtNWprR2tsZ05DWTRscURBaktBYmh0MFJydGdWYkJKMkpad1hSU05FZWp1aFo4VVFHSE9YRmcxeGtUNkZHTDBHX1c3Mld1Q2dGZW44V0RyMkF2c0MyUGY0MXFkdDI5R2VwRS1lNHJmX242d3hUZGJoTVdCMk9RbHFXbURTYVo1X2dTQQ?oc=5", "source": "조선일보"}, {"title": "[인터뷰] 염규석 한국편의점산업협 부회장 '이제 편의점은 소매점서 생활 플랫폼으로 성장 중입니다' - 부산일보", "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBmS2s2TngyLVRJY3JWTkhER1ZwTmJLT2tJZmYxV01nWGx4NVBTczZzRUxmdEE0VGFXUjFJbUlOMVoyYkw2c0FvbHB3Ui1CVVpqeU01eGhwSGdDQjhBZXBwZXNaeldpYlZJOUNOZ0xPbzBMbHY5amY2VVNicGg?oc=5", "source": "부산일보"}], "aiSummary": "최근 편의점 업계는 건강 음료의 인기와 함께 피팅룸, 차박 공간 등 다양한 서비스를 도입하며 단순 소매점을 넘어선 생활 플랫폼으로 진화하고 있습니다. 이러한 변화와 함께 편의점 매출이 성장세를 보이고 있으며, 일자리 연계 등 지역 사회를 위한 새로운 역할도 수행하고 있습니다."}, {"keyword": "아파트 드라마", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/9?keyword=-3914599475107977297", "rank": 9, "move": "new", "delta": 0, "news": [{"title": "'아파트' 등장인물관계도, 원작, 몇부작, OTT는? - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBNQm1URFNxejVCX2tzOGpHOVlQVThOa1E4ekhTWWxIT1MxSHVlR04xdk9GajRmaVJwTFBoZ2t1SXRMelp4T2o2OVJpTXdFWGs?oc=5", "source": "v.daum.net"}, {"title": "JTBC 드라마 '아파트', 첫 회부터 최고 시청률 기록하며 화제! - NANOOM ENERGY", "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE40dTluQ0dkWkJXYUdtaE9EOHk1Q3hwWm91dVZuSE1KVUdXU2Z6V1lzbWE2aXNCRzdwWjJ5eXRnZ2hPTjV1U0E4Snl4TU9PRDVzVFpkNS1uNUd0QmVuLWUyNlRPOVZ0aV9yTWYw?oc=5", "source": "NANOOM ENERGY"}, {"title": "드라마 아파트, 첫 방송 - bntnews.co.kr", "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1DSFlQM1dxSnY0VFpNcWxMUnk3REpRdjRLN0xnSFVCT2ZEUXo5VVIwOHd1S2pjS0o3ZjYtWlNva0tsXzh1S3pCQTBhWDZ4MFFoTDY4bmt2SC1lTk9QSFlxSURQRVc?oc=5", "source": "bntnews.co.kr"}], "aiSummary": "JTBC의 새 토일드라마 '아파트'가 첫 방송을 시작하며 주연 배우 지성과 하윤경의 출연으로 관심을 모으고 있습니다. 해당 드라마는 신축 대단지 아파트를 둘러싼 이야기를 다루며 제작 지원 소식과 함께 배우들의 인터뷰가 공개되었습니다. 한편, 대한주택관리사협회는 드라마 방영과 관련해 JTBC의 재승인 불허를 촉구하는 성명을 발표하며 논란이 일고 있습니다."}, {"keyword": "이기택", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/10?keyword=1172665204816732156", "rank": 10, "move": "new", "delta": 0, "news": [{"title": "“다 먹어야 탈출”… 이기택 → 딘딘, 짬뽕 먹다 군만두 폭탄에 ‘경악’ (1박2일) - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9LYVVJbGZfNGNFYW05UFZYcnMwMDVSZXJBNDI5ZG1TS25yUW9JVlJwWkdFZlROdTkwZGlLdGxNUDV5djlmS1FRRHM2QUxvLU0?oc=5", "source": "v.daum.net"}, {"title": "이기택, '팀 운' 좋은 게 능력...스스로 증명했다 (1박 2일)[종합] - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE4ySHJpZzAwcFB2MUF1WklIaXUyelA1aEtVaDBYbkdqSUlLYV9pdHZ5TFh2ZWdLN011aG5Udmg5el9KNEV1WjJMQWVNNDduZlk?oc=5", "source": "v.daum.net"}, {"title": "'1박2일' 이용진vs이기택 얼굴 도장 펜싱 맞대결 결과는? - gukjenews.com", "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBUMVJSY3ZfRkdySFZ2Mnc4SVZXU0d2aU9VQTA1dUdpQ3NLaHVLcVRwRHNlX3d4eTZmamZJcThJVEx6WE5LQ1MyV2cwYlR0Zk01UGExeUJmdFRpeU9ORFpUVjBLSzVIQWw2ZmJJaWtR?oc=5", "source": "gukjenews.com"}], "aiSummary": "배우 이기택이 예능 프로그램 '1박 2일'에 출연하여 게임과 미션 수행 과정에서 보여준 활약으로 주목받고 있습니다. 특히 멤버들과의 대결이나 먹방 미션 등에서 보여준 예능감과 팀 내에서의 존재감이 시청자들의 관심을 끌고 있습니다."}], "naverSource": "signal"} 를 실시간 데이터로 치환 */
+const DATA = {"updatedAt": "2026-07-12 21:44", "updatedAtISO": "2026-07-12T21:44:32.376441+09:00", "google": [{"keyword": "hle", "traffic": "100+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQrUOiY0NJHDKF7rdjkwbzcihxHg-Iy2gZvWpHQF48NiQ--u9L24DhiSg0IpWY", "news": [{"title": "LYON's coach Rigby on LCK: \"They've been cocky, honestly, and they're getting punished for that\"", "url": "https://www.sheepesports.com/en/all/articles/lyon-s-coach-rigby-on-lck-they-ve-been-cocky-honestly-and-they-re-getting-punished-for-that/en", "source": "Sheep Esports", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQrUOiY0NJHDKF7rdjkwbzcihxHg-Iy2gZvWpHQF48NiQ--u9L24DhiSg0IpWY"}, {"title": "HLE Kanavi: \"We lost pretty heavily to BLG, but if we meet again in the final, I think we can win\"", "url": "https://www.sheepesports.com/en/lol/articles/hle-kanavi-we-lost-pretty-heavily-to-blg-but-if-we-meet-again-in-the-final-i-think-we-can-win/en", "source": "Sheep Esports", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTy_h9W0n6k_NLN44EDHF7Ebg7Fyiseb9zqGjZmg5Zm7JBo3rTLBoo8lUhXY0"}, {"title": "LEC Summer Split 2026 Schedule, Format, Roadtrips and Everything You Need to Know", "url": "https://www.sheepesports.com/en/all/articles/lec-summer-split-2026-schedule-format-roadtrips-and-everything-you-need-to-know/en", "source": "Sheep Esports", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR7zSxV0arvkXjAs0Up3GtGYWk450cM1XETfIrn_69HTkMnM39W7-WC7HWIKOk"}], "rank": 1, "move": "new", "delta": 0, "aiSummary": "한화생명e스포츠(HLE)가 국제 대회인 MSI에서 결승 진출을 확정하며 큰 주목을 받고 있습니다. 특히 리옹(LYON)과의 경기에서 접전을 펼치며 결승에 오른 점과, 결승전에서 빌리빌리게이밍(BLG)과 맞붙게 된 대진 상황이 팬들의 관심을 모으고 있습니다."}, {"keyword": "롤드컵", "traffic": "100+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQQXF4EfmoSvvsrulo_VALmavKiA6YNKgsa8Byz8uT9EmTk9Hh88oxJaqA-Cqc", "news": [{"title": "[김용우가 만난 사람] LPL 해설자 '밀러', \"2018년 롤드컵 결승의 밤, 절대 잊지 못할 것“", "url": "https://v.daum.net/v/VcnYdB71Cl", "source": "Daum", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQQXF4EfmoSvvsrulo_VALmavKiA6YNKgsa8Byz8uT9EmTk9Hh88oxJaqA-Cqc"}, {"title": "한화생명, 창단 첫 MSI 우승…BLG에 3:2 역전승", "url": "https://www.yna.co.kr/view/AKR20260712051500017", "source": "연합뉴스", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSjykLzgzFFkLtUf-M4BqPQtoITzeC-pIC_T2sDHbAyyJZ7OZXZDCU9jnzOTMs"}, {"title": "‘강림한 제우스 대장군’…한화생명, 이틀 연속 실버스크랩스 타종 2-2 원점 [MSI]", "url": "https://v.daum.net/v/20260712200437818", "source": "Daum", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS7GjyH9Dvn-c_lEBH0_36GyEzztRb_AT9BgQic42lrIQhLAZwrRWZ8CEkL_GU"}], "rank": 2, "move": "new", "delta": 0, "aiSummary": "최근 열린 MSI 대회에서 한화생명이 BLG를 꺾고 우승을 차지하며 롤드컵 진출을 확정 지어 큰 화제가 되고 있습니다. 반면, 롤드컵 최강자로 불리던 T1은 이번 MSI에서 탈락하며 대조적인 행보를 보였습니다. 또한, 과거 롤드컵 결승전에 대한 회고와 선수들의 주요 대회 석권 기록 등이 언급되며 롤드컵을 향한 관심이 이어지고 있습니다."}, {"keyword": "임이자", "traffic": "100+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-ZBJadpALWJmXAhVXqgJ5cDLg1PLE2EppZxG6DFSzTqcZb-XNLyDEWafidIQ", "news": [{"title": "노란봉투법 '눈감은' 대법원…\"당황\" 속 무거워진 '선례'의 짐", "url": "https://www.nocutnews.co.kr/news/6546616", "source": "www.nocutnews.co.kr", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-ZBJadpALWJmXAhVXqgJ5cDLg1PLE2EppZxG6DFSzTqcZb-XNLyDEWafidIQ"}, {"title": "대법, CJ대한통운 손 들어줬다…택배기사 단체교섭 의무 인정 2심 파기", "url": "https://www.etnews.com/20260709000245", "source": "전자신문", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxt1hjWRqCjgGth3kXQA7Fxq_LNekPJ4uKL4gSyaEXtCLT2_VLi-_QE0Usfo"}, {"title": "경총 \"대법 판결 취지 존중…노란봉투법 보완해야\"", "url": "https://www.yna.co.kr/view/MYH20260710024600038", "source": "연합뉴스", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQRnAJ8q4Sfv-0tmxe8h7yIb4UbRwWv2CpO1Q5A0HIeMYTnH7Py9CXlJBEzhtQ"}], "rank": 3, "move": "new", "delta": 0, "aiSummary": "임이자 의원이 더불어민주당의 입법 행태를 강하게 비판하며 '노란봉투법'의 입법 명분이 대법원 판결로 인해 흔들리고 있다고 주장했습니다. 이와 함께 지역구인 상주와 문경의 재해예방 현장을 방문해 침수 위험을 점검하고 안전 대책을 강조하는 의정 활동을 수행했습니다."}, {"keyword": "충남 아산 fc 대 경남", "traffic": "200+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoNLV04dsCptLCRyKowsF6FrwgSc1le9EoMdVWFjEZPPW3yJlM1B57Ja-gbE", "news": [{"title": "[K리그2 인터뷰] 배성재 감독 \"단레이까지 떠났지만 국내 선수로 연습 경기서 전북 잡아 자신감 생겨\"", "url": "https://sports.news.nate.com/view/20260712n13783", "source": "네이트", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoNLV04dsCptLCRyKowsF6FrwgSc1le9EoMdVWFjEZPPW3yJlM1B57Ja-gbE"}, {"title": "'천안전 극적 승리' 경남, 충남아산 원정서 후반기 연승 가동할까… 배성재 감독 \"승리 위해 모든 것 쏟겠다\"", "url": "https://www.maxportsnews.com/news/articleView.html?idxno=8514", "source": "맥스포츠뉴스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTTeA9i4w8sbR5hHmdooSBJ57guyLI4nlWRtx8BGII7ZX3T66zllwK3EED1igI"}, {"title": "경남FC 단레이 대체자 누가될까…김현오·이중민 등 장신 공격수 거론", "url": "https://www.idomin.com/news/articleView.html?idxno=2009564", "source": "경남도민일보", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQlmf4KlqdUM8O5VFXIaeVWWBPapB0YufWh0kwZIUMtym7oYvJwS1vozaRwB80"}], "rank": 4, "move": "new", "delta": 0, "aiSummary": "K리그2 충남아산FC와 경남FC의 맞대결을 앞두고 양 팀의 경기 준비 상황이 주목받고 있습니다. 특히 이번 경기는 배성재 캐스터와의 인연으로 '배성재 더비'라 불리며 관심을 모으고 있으며, 충남아산은 신규 여름 MD 상품을 출시하는 등 홈경기 분위기 조성에 나섰습니다."}, {"keyword": "테더", "traffic": "500+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQpHO3z38ERfeCvioxB0OQV7aKNBCWiBbdvibQ_mFpZk1Vg-qmpTiQUA6DG-sw", "news": [{"title": "테더, 바이낸스에 4 BTC 이체…2분기 비트코인 매수 멈췄나", "url": "https://news.nate.com/view/20260711n11642", "source": "네이트", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQpHO3z38ERfeCvioxB0OQV7aKNBCWiBbdvibQ_mFpZk1Vg-qmpTiQUA6DG-sw"}, {"title": "테더 예비 지갑이 2분기 매수세가 주춤하면서 Binance 로 4 BTC를 전송했습니다", "url": "https://www.cryptopolitan.com/ko/tether-reserve-wallet-sends-4-btc-to-binance-as-q2-buying-stalls/", "source": "Cryptopolitan", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRwnPj63JQvJ9hNsybdPQCFjtbkWlNBvc8akWw8lA6k_Xo36aU3uOlwmIXIGTs"}, {"title": "'세계 2위 보유사' 테더, 비트코인 매입 중단…커지는 의구심", "url": "https://www.edaily.co.kr/News/Read?newsId=01482566645513864&mediaCodeNo=257", "source": "이데일리", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXsKiqucnvFXfq5oiDkJjqiLOYORsPGXCQG2AMXOgCW_pyRBPwk-10f7tWmss"}], "rank": 5, "move": "down", "delta": 4, "aiSummary": "스테이블코인 발행사 테더의 전 최고투자책임자(CIO)가 보유 지분 일부 매각을 검토 중이라는 소식이 전해지며 시장의 관심을 받고 있습니다. 또한, 테더가 2분기 들어 비트코인 추가 매수를 중단하고 일부 물량을 이체한 정황이 포착되면서 향후 운영 전략에 대한 다양한 분석과 의구심이 제기되고 있습니다."}, {"keyword": "편의점", "traffic": "200+", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRf9qBMLNzI28Iw_U66JxTKUDs0Fxsi08pFuZyugHNGDvWrO7ynLIHn44ZFs4U", "news": [{"title": "백화점은 질주, 마트는 '홈플 효과'…편의점도 웃었다", "url": "https://v.daum.net/v/UitnEjgR5L", "source": "Daum", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRf9qBMLNzI28Iw_U66JxTKUDs0Fxsi08pFuZyugHNGDvWrO7ynLIHn44ZFs4U"}, {"title": "유통가, 2분기 실적 전망 ‘맑음’...외국인 유입에 백화점 웃고·‘홈플 효과’에 마트도 반등", "url": "https://www.etoday.co.kr/news/view/2602741", "source": "이투데이", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqyG0Fa4awaE7NMQNXXJae8fRQs1bttJZ3UNkhDulmSy7opac0UNQYjZ9dgnw"}, {"title": "유통가 2분기 실적 훈풍 기대…업태별 명암은 엇갈려", "url": "https://www.mediapen.com/news/view/1109670", "source": "미디어펜", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSt8gXnC-hlzftTI1d25fWbIInM5usVMQ_iDG8UfWW_VyHdSHfdDRqlU8yiOIw"}], "rank": 6, "move": "down", "delta": 4, "aiSummary": "최근 편의점 업계는 건강 음료의 인기와 함께 피팅룸, 차박 공간 등 다양한 서비스를 도입하며 단순 소매점을 넘어선 생활 플랫폼으로 진화하고 있습니다. 이러한 변화와 함께 편의점 매출이 성장세를 보이고 있으며, 일자리 연계 등 지역 사회를 위한 새로운 역할도 수행하고 있습니다."}, {"keyword": "이기택", "traffic": "100+", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTcFhlDFQ6ylqwjFarDefwGKh7dDeUmLV-zyz1RGWs8JFDxDQv6CjWnASWsjMg", "news": [{"title": "'1박2일' 이용진, 눈치게임 완승…이준과 차량 탑승권 획득", "url": "https://v.daum.net/v/20260712211046636", "source": "Daum", "image": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTcFhlDFQ6ylqwjFarDefwGKh7dDeUmLV-zyz1RGWs8JFDxDQv6CjWnASWsjMg"}, {"title": "'1박2일' 문세윤, 마지막 한접시까지 깨끗하게…역시 먹방 에이스 '감탄'", "url": "https://www.news1.kr/entertain/broadcast-tv/6225551", "source": "뉴스1", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSphFa42fy13Urjgde0O7em8XahmrCCcXQV6jNGQO8xCWvFSfc4joJM0SOvtws"}, {"title": "'1박 2일' 멤버들, 집단 탈주 계획 \"PD 전화 받지 말자\"", "url": "https://www.newsis.com/view/NISX20260710_0003704525", "source": "뉴시스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSV7yLeSVPXqKD7JO17ynRUfv4SsPerSeCUU3li84MXlik8ucH652S7g8m9hPs"}], "rank": 7, "move": "down", "delta": 4, "aiSummary": "배우 이기택이 예능 프로그램 '1박 2일'에 출연하여 게임과 미션 수행 과정에서 보여준 활약으로 주목받고 있습니다. 특히 멤버들과의 대결이나 먹방 미션 등에서 보여준 예능감과 팀 내에서의 존재감이 시청자들의 관심을 끌고 있습니다."}, {"keyword": "찰리 반즈", "traffic": "500+", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglOIbebB-_0nN4h_5AEzaodLeAZV7nCxvH2qrGEqRmPekQQ12wRuUT6tttw4", "news": [{"title": "前 롯데 에이스, 다저스에서도 끝내 버려졌다→DFA 통보... 美 \"멀티이닝 소화 능력 있어, 타 구단 관심 있을 것\"", "url": "https://v.daum.net/v/20260712112949345", "source": "Daum", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRglOIbebB-_0nN4h_5AEzaodLeAZV7nCxvH2qrGEqRmPekQQ12wRuUT6tttw4"}, {"title": "롯데 에이스였는데 또 쫓겨나게 생겼다…LAD 불펜 개편에 직격탄, \"이닝 소화력 있어 관심받을 수도\"", "url": "https://www.chosun.com/sports/world-baseball/2026/07/12/MI3DAZJZHEZDMMLEG5SWMNLFMU/", "source": "조선일보", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSQENxz1tRKpLsVTXyI5ZjNE9KDFDKbiZ1sNf3pXSTryVvQGr_VQW-lohBkaN0"}, {"title": "롯데에서만 통산 35승을 기록한 에이스…MLB 복귀 꿈 이뤘지만, 다저스에서 DFA '거취 물음표'", "url": "https://sports.news.nate.com/view/20260712n11000", "source": "네이트", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTLtHjX3t-vDtadxf2Dla4psJSrXIQqeuuJZt2oWreOZV8y0P-uM3jJqUxyFi4"}], "rank": 8, "move": "down", "delta": 4, "aiSummary": "롯데 자이언츠에서 활약했던 투수 찰리 반즈가 최근 소속팀인 LA 다저스에서 유망주 투수에게 밀려 지명할당(DFA) 처리되었습니다. 메이저리그 복귀를 노렸던 반즈는 이번 조치로 거취가 불투명해졌으나, 현지에서는 그의 멀티 이닝 소화 능력을 바탕으로 타 구단의 관심을 받을 가능성이 제기되고 있습니다."}, {"keyword": "최우수산", "traffic": "200+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSDaNVZOrU_W24qhwTpVm17iJJ9Td0WVvyWZg1zyIwFOiz7fgYMdqKfJqVdmIQ", "news": [{"title": "허경환, 딸 같은 리센느 만났다...\"81년생 어머니와 동갑\" ('최우수산')", "url": "https://v.daum.net/v/20260712114437646", "source": "Daum", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSDaNVZOrU_W24qhwTpVm17iJJ9Td0WVvyWZg1zyIwFOiz7fgYMdqKfJqVdmIQ"}, {"title": "허경환, 리센느 기운 받아 유행어 역주행 노린다", "url": "https://www.newsis.com/view/NISX20260712_0003705721", "source": "뉴시스", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS8XRmd2aKf1n0Vq5TE-O7bcReqsO5zC04gVz97nqna9Mf5Da_0mN3dJt2Ut_g"}, {"title": "'최우수산' 리센느 리브-메이-제나, 예능 최초 'Deja Vu' 라이브 공개", "url": "https://enews.imbc.com/News/RetrieveNewsInfo/511211", "source": "iMBC 연예", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT0KRZ6wCzLF-UHwN3-Vr2t6tTi-a1KeGMjZWj7SYC9y-aDf6_f45ef3ZGOME8"}], "rank": 9, "move": "down", "delta": 4, "aiSummary": "최근 예능 프로그램 등에서 언급된 '최우수산'이라는 키워드가 온라인상에서 화제가 되고 있습니다. 해당 키워드는 그룹 리센느의 라이브 무대와 개그맨 장동민, 허경환 등 방송인들의 발언을 통해 언급되며 유행어 역주행 가능성으로 주목받고 있습니다."}, {"keyword": "캐시워크 정답", "traffic": "200+", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOD3N3fxpAJmsjWQLJxvKXekIMb8FyMZGceL5q_a889L703lkcQPjfX6Dhag8", "news": [{"title": "닥터버그 모기패치 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://www.ajunews.com/view/20260712165516616", "source": "아주경제", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOD3N3fxpAJmsjWQLJxvKXekIMb8FyMZGceL5q_a889L703lkcQPjfX6Dhag8"}, {"title": "'두부과자' 캐시워크 돈 버는 퀴즈, 정답은?", "url": "https://news.nate.com/view/20260712n10816", "source": "네이트", "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR4NQRViQCBp94KbX9fFY18E1cgssKo0F_b8fQl-pn9MmyN2GVnL86wtMcbU24"}, {"title": "[캐시닥 퀴즈 정답] 캐시닥 오늘의 돈버는 퀴즈 7월 9일 10시 정답 공개", "url": "https://www.topstarnews.net/news/articleView.html?idxno=16128771", "source": "TopStarNews", "image": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTaZF2f9vnWVKnNz7WsHDydBvRASqSQu2lnhxwZDWiM2YbWCSLwdGB15uAtcYk"}], "rank": 10, "move": "down", "delta": 4, "aiSummary": "캐시워크 앱에서 제공하는 '돈버는퀴즈'의 정답을 찾는 이용자가 늘어나면서 관련 정보가 매일 실시간으로 공유되고 있습니다. 황금거위, 배민, 키토선생 등 다양한 브랜드와 연계된 퀴즈 정답이 언론사를 통해 종합적으로 보도되면서 화제가 되고 있습니다."}], "naver": [{"keyword": "의정부고 졸업사진", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/1?keyword=-1996191355613269687", "rank": 1, "move": "new", "delta": 0, "news": [{"title": "젠슨황·홍명보부터 참교육·김부장까지…의정부고 졸업사진 - 동아일보", "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE53OHhMTGpOWmdMQl8xbDFGMkpDVzBvejhQQTJKbmQ5X0ZNUWwtOG5KMUJVYW9UckJHSmJ1aVN5R3hEdWctcG9oQkNoUmN5OEZJUk1sRVN3aUVuZUkyQ3FDUTlGeVNtR1k1ZDFsa3BMNk1jUk9pNlHSAWZBVV95cUxOeVNwSU41eUhxM2hrc0lFdm5oWm9qSDFkTkRsajNJSl9yZGxXTWRMMVRxUW1YdlVDS2JUdDg3TVhnbS16Nkd0MlpXTjdZRWFEQkEwVHFydUJySGJHdllPZi1TaW1VaFE?oc=5", "source": "동아일보"}, {"title": "의정부고가 딱 알려줄게, 2025 밈 트렌드 - esquirekorea.co.kr", "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBUQ2hzRE85Vmg4d1hBRlVYaVZmZUVSTVYyYkdYSWRmbW5weHc2MkZrRW9WMnRpZmNvRjlrSUc0cW1jT0hrT2ZjM3NSNjdtSi1HdmZFX1ZtZ0NXZw?oc=5", "source": "esquirekorea.co.kr"}, {"title": "의정부고에 나타난 방시혁·과즙세연?…올해도 빵 터진 졸업사진 - 연합뉴스TV", "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9MSkVrNzd1YS1YU1J0UnZrMUFhV2luVUpVWkZXc2k4TzhmSDRNcE1jOWoxRmowTm9DQnZ1QWJtbktYZDJPbWcxb3NEaXdjQ05ka3RHelpxNGFLT1lSWWhBWDU0aGpYZzg?oc=5", "source": "연합뉴스TV"}], "aiSummary": "매년 화제를 모으는 의정부고등학교의 졸업사진이 올해도 공개되어 큰 관심을 받고 있습니다. 학생들은 젠슨 황, 홍명보 감독, 방시혁 의장과 과즙세연 등 올해의 주요 인물과 유행하는 밈을 재치 있게 패러디했습니다."}, {"keyword": "서울 전역 열대야주의보", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/2?keyword=5103697983561757976", "rank": 2, "move": "new", "delta": 0, "news": [{"title": "서울 전역에 열대야주의보…서울 동남·서남권에 폭염경보 유지 - 연합뉴스", "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBiZG1CMUhUUGxqUEFNR21rNVo5VHQyTHFmSXRGU2U1QzZoMTA3N0txVXBfTkZadE5wUnF3LW40alozVi1zVTBxeXNwelFVbV9WdzVwRWwyMjc1OTDSAWBBVV95cUxPOWxWTV9Ec1ZVdFNYZVRmXzQ5b2x5V0tnTTNvQ05VMm1KOGZfM1BudHQzQTg1d3dwM3VtQnVLSlhDd0pDcGQ4VFBMaFdGMlpSWUhLVHRhbGUtZkFUakp5QlQ?oc=5", "source": "연합뉴스"}, {"title": "서울 전역 '열대야주의보'…오늘 낮 기온 35도까지 올라 - nocutnews.co.kr", "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE94RUYxeTY4a1YyeFVWOVlGZXFEZ0lIT01GMElMWGdrMmN4b19QNE1MZEZ0Z2tFTnVqQV9SVU9mdFFMeTlIYWJvVXJmVldHaTcxOVE?oc=5", "source": "nocutnews.co.kr"}, {"title": "서울 전역 '열대야주의보' 발효...체감온도 33도 이상 - 파이낸셜뉴스", "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9MWkFwaGt2MlY3Z0l0V0VmZVBYUGIzeGtuRjhNSjlHUW5DQm1sZEpYZzdiV1p1dHJvb3ZCMUl0R0x6Yi1qNkdkbEhqYmJNRDNTdEt4NTRSckxsQQ?oc=5", "source": "파이낸셜뉴스"}], "aiSummary": "서울 전역에 열대야주의보가 발효된 가운데, 일부 지역에는 폭염경보가 유지되고 낮 기온이 35도까지 오르는 등 무더위가 이어지고 있습니다. 지난밤 서울에서 올해 첫 열대야가 관측된 이후 전국 대부분 지역으로 폭염과 열대야 현상이 확대되면서 관련 주의보가 내려졌습니다."}, {"keyword": "정경호 감독, 목표 하나씩 달성중", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/3?keyword=2415702460415547240", "rank": 3, "move": "new", "delta": 0, "news": []}, {"keyword": "임이자", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/4?keyword=-6825854160210311505", "rank": 4, "move": "new", "delta": 0, "news": [{"title": "임이자 의원, “입법 폭주 민주당은 석고대죄해야” - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE43cWFPYjlkaVpFblBTSjBOcDdpOGR3V2V5SnBHOVNaTVNpVzQ1VWxWNjNqRWMtSEV4eVdDX0ROek14c3gwaC03QWU1NA?oc=5", "source": "v.daum.net"}, {"title": "임이자 의원, “‘노란봉투법 ’ 입법 명분과 정당성 근본부터 흔들려” - everynews.co.kr", "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9heTVDZWpBY0dQUGRsaHdNLW5xYkcxZzdTLVREclp1OGg1ajlyYjNUUlNmN1N1ank4Ty1mckk4MllhSmcyUmUzMndDUVk3UTlKYVBWc1FHcHRvNVAxZDNfYmtEb0NjZG8tdHlFQ2Z3?oc=5", "source": "everynews.co.kr"}, {"title": "임이자 의원, “입법 폭주 민주당은 석고대죄해야” - hidomin.com", "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBtQ3VBZ3dKVVlLZGotZXBab0QwTldEYTV6YjM3bFBtVHdlczloUVVMZC1RSjdCSGpXUC1NckEwblhFc0JUaG1Ob0tfdGx3Tkp3a094dEpDdzRTMjlJRk5lVGJMVkRTWVJGREE?oc=5", "source": "hidomin.com"}], "aiSummary": "임이자 의원이 더불어민주당의 입법 행태를 강하게 비판하며 '노란봉투법'의 입법 명분이 대법원 판결로 인해 흔들리고 있다고 주장했습니다. 이와 함께 지역구인 상주와 문경의 재해예방 현장을 방문해 침수 위험을 점검하고 안전 대책을 강조하는 의정 활동을 수행했습니다."}, {"keyword": "결혼의 완성", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/5?keyword=9048086069542892674", "rank": 5, "move": "same", "delta": 0, "news": [{"title": "'결혼의 완성' 남궁민·이설, 불화 원인은 딸 죽음…시청률 분당 최고 7.3% [종합] - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFAyVEtBb1FfdHE0bEx0V0N2NXRUTWxJT194blpJM1YyVnZrM1NUMlEtM2Z2TlJ4U0pPeG1MYkExSzctNXBZSHQzYjJ1a19tV28?oc=5", "source": "v.daum.net"}, {"title": "\"20% '김부장' 잡아라\" 소지섭VS남궁민VS지성, '대상' 배우 다 나왔다 [Oh!쎈 이슈] - OSEN", "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBsZWZnTlF4b0lIZ0VBSXZXNmVyeTBNR1Byd1FkN2g5eTB1V01RRWJlMHN6eXVocUJUZmFNSnZZM3BWV3NuWnBiX1ZQVmZDczB1S0FJ?oc=5", "source": "OSEN"}, {"title": "‘결혼의 완성’ 일촉즉발 총구 대치 - bntnews.co.kr", "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1LVnQzYTh4RkxNWVhhWnlLY29KbGFlb29wLWZBNnlIUEZpMWNhYm1xU21PQ3JqZHJabTIxS0doTXBobHF1SnVmcG5TRFV3elJWOUFTT2Q0MWZjajh6V2VOU2o0Sko?oc=5", "source": "bntnews.co.kr"}], "aiSummary": "드라마 '결혼의 완성'에서 남궁민과 박병은이 총구를 겨누며 격렬한 몸싸움을 벌이는 살벌한 대면 장면이 공개되어 화제입니다. 또한, 주연 배우 남궁민이 작품을 위해 체중을 감량한 사실이 알려지고, 작품과 함께 보기 좋은 콘텐츠가 추천되는 등 드라마에 대한 관심이 이어지고 있습니다."}, {"keyword": "테더", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/6?keyword=-4033408829790221299", "rank": 6, "move": "new", "delta": 0, "news": [{"title": "'세계 2위 보유사' 테더, 비트코인 매입 중단…커지는 의구심 - 이데일리TV", "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5TOWVQenFubnNQVmlpandBT0RidXczcTdvMGtpWVM4cTRpSlB3QXllMVg4M1RhZl9rdHNETDRpOE9BenZadjNvN1M1MDUtczlKbzBQaEl3Sll6MjJiOVQ2MU9UT2E0dk9zaGZIUEVMc3Y5TW5zM0lOY0lCWQ?oc=5", "source": "이데일리TV"}, {"title": "테더 전 CIO, 지분 일부 매각 추진…1.26% 보유 지분 처분 검토 - TradingView", "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBEbFc3VXlwamhIU0puWHVTM28yQU1oTWRoSEltMmxhb0NqM1NlcUVaMUhyYnVGVFVwX2ZTY2V6VC0tRXAxeG81ckU5OEhkejRLd0VDMFlaSXV4RXhNbWwxbTdyTmZ6bjFXV20wbQ?oc=5", "source": "TradingView"}, {"title": "테더맥스, 리브랜딩 한 달… 출금 기준 낮추고 글로벌리그 선보여 - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBSckZHdUg5NXF2QWkzNEFMUU04M2JjLVhiOGc5bVEwMzhJNVZaRHhGM1lpTThUbUIzd1BVVzcwXzB0a1djNUY3cFhyc29KV1E?oc=5", "source": "v.daum.net"}], "aiSummary": "스테이블코인 발행사 테더의 전 최고투자책임자(CIO)가 보유 지분 일부 매각을 검토 중이라는 소식이 전해지며 시장의 관심을 받고 있습니다. 또한, 테더가 2분기 들어 비트코인 추가 매수를 중단하고 일부 물량을 이체한 정황이 포착되면서 향후 운영 전략에 대한 다양한 분석과 의구심이 제기되고 있습니다."}, {"keyword": "리센느 관련 유감 표명", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/7?keyword=-7683323748132060558", "rank": 7, "move": "new", "delta": 0, "news": [{"title": "조국, 1주일 만에 “리센느에 상처 줘 유감…야호!” - 채널A", "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE00aUpEbHdMQkN2bFhVcnRQRkwxTDBRWkRycDJQdUkydkJicHBwUVE5Tl9hZXg5ZXVralNta1hDV216OEw2MXJQa0JZNklqVDdEU3JmV2NNZkZSZ1BGX3fSAWNBVV95cUxOWGNiRTdicEhjWV9mVFZuMEx3ZDBISXdDZWdONjJqVmhMQ0xvUzRGLS0zRXdlOG9QcUhfNUhEaUdKZWNKcGR2OS1GUjlCTUlQSEU3Z2Q4SFhtcXctbjR5Qk5veUU?oc=5", "source": "채널A"}, {"title": "조국 \"리센느 겨냥한 적 없어…일베식 '노' 논란 유감\" - 이데일리", "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNZHZTSG5xTllkbGtxVlJyUDhFOEh6eTRaOFJVTmpxczB1Njl4azlPUGJFMHhkQlBYUUNIR1V0SGdzWnotMzZMRXBBbUY4WmppNkpidXVPb3BOaG5lSUVwV0xiWFA0YlpYdUc4YVU2eGpXcjNUWFdnQ3FpQ1JZU205Qg?oc=5", "source": "이데일리"}, {"title": "조국, '무섭노' 논란 해명…\"리센느 겨냥한 적 없다, '리센느, 야호!'\" - hidomin.com", "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE05VlIyUG1paXdvYTRrTHhiM0ZLN3ZySlAybWYwQlp3ejdzdTdwbVFUR285N2pLQ3dOSVd2WFR4X1hObk12TVNtNElFYTdtajZzR2d6ZFVWMWcwbm5qai1FTHB1bW9vZlFvRlE?oc=5", "source": "hidomin.com"}], "aiSummary": "조국 조국혁신당 대표가 자신의 SNS 게시물에 사용한 '무섭노'라는 표현이 특정 커뮤니티의 용어라는 논란이 일자, 아이돌 그룹 리센느를 겨냥한 것이 아니라고 해명했습니다. 조 대표는 리센느에게 상처를 준 점에 대해 유감을 표하며, 해당 표현은 사투리일 뿐 특정 대상을 비하할 의도가 없었음을 밝혔습니다."}, {"keyword": "편의점", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/8?keyword=2139172466953498279", "rank": 8, "move": "new", "delta": 0, "news": [{"title": "“이젠 맛보다 건강”…바나나우유 제치고 편의점 장악한 이 음료 - 중앙일보", "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE16YkNaSHpNQmsxak83eDUzT203dEdvUkZlTWFrME91NlFTVHI1M2owUFZwelNLc1FWLXZhaWstV21uYVNYMFNSYjBpb0RJNVBnd1p0MVVB?oc=5", "source": "중앙일보"}, {"title": "피팅룸에 ‘차박’장까지… 日 편의점 무한 진화 - 조선일보", "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPZlVBUjJhdW5NTDNtaFR3TmJucThtNWprR2tsZ05DWTRscURBaktBYmh0MFJydGdWYkJKMkpad1hSU05FZWp1aFo4VVFHSE9YRmcxeGtUNkZHTDBHX1c3Mld1Q2dGZW44V0RyMkF2c0MyUGY0MXFkdDI5R2VwRS1lNHJmX242d3hUZGJoTVdCMk9RbHFXbURTYVo1X2dTQQ?oc=5", "source": "조선일보"}, {"title": "[인터뷰] 염규석 한국편의점산업협 부회장 '이제 편의점은 소매점서 생활 플랫폼으로 성장 중입니다' - 부산일보", "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBmS2s2TngyLVRJY3JWTkhER1ZwTmJLT2tJZmYxV01nWGx4NVBTczZzRUxmdEE0VGFXUjFJbUlOMVoyYkw2c0FvbHB3Ui1CVVpqeU01eGhwSGdDQjhBZXBwZXNaeldpYlZJOUNOZ0xPbzBMbHY5amY2VVNicGg?oc=5", "source": "부산일보"}], "aiSummary": "최근 편의점 업계는 건강 음료의 인기와 함께 피팅룸, 차박 공간 등 다양한 서비스를 도입하며 단순 소매점을 넘어선 생활 플랫폼으로 진화하고 있습니다. 이러한 변화와 함께 편의점 매출이 성장세를 보이고 있으며, 일자리 연계 등 지역 사회를 위한 새로운 역할도 수행하고 있습니다."}, {"keyword": "아파트 드라마", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/9?keyword=-3914599475107977297", "rank": 9, "move": "new", "delta": 0, "news": [{"title": "'아파트' 등장인물관계도, 원작, 몇부작, OTT는? - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBNQm1URFNxejVCX2tzOGpHOVlQVThOa1E4ekhTWWxIT1MxSHVlR04xdk9GajRmaVJwTFBoZ2t1SXRMelp4T2o2OVJpTXdFWGs?oc=5", "source": "v.daum.net"}, {"title": "JTBC 드라마 '아파트', 첫 회부터 최고 시청률 기록하며 화제! - NANOOM ENERGY", "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE40dTluQ0dkWkJXYUdtaE9EOHk1Q3hwWm91dVZuSE1KVUdXU2Z6V1lzbWE2aXNCRzdwWjJ5eXRnZ2hPTjV1U0E4Snl4TU9PRDVzVFpkNS1uNUd0QmVuLWUyNlRPOVZ0aV9yTWYw?oc=5", "source": "NANOOM ENERGY"}, {"title": "드라마 아파트, 첫 방송 - bntnews.co.kr", "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1DSFlQM1dxSnY0VFpNcWxMUnk3REpRdjRLN0xnSFVCT2ZEUXo5VVIwOHd1S2pjS0o3ZjYtWlNva0tsXzh1S3pCQTBhWDZ4MFFoTDY4bmt2SC1lTk9QSFlxSURQRVc?oc=5", "source": "bntnews.co.kr"}], "aiSummary": "JTBC의 새 토일드라마 '아파트'가 첫 방송을 시작하며 주연 배우 지성과 하윤경의 출연으로 관심을 모으고 있습니다. 해당 드라마는 신축 대단지 아파트를 둘러싼 이야기를 다루며 제작 지원 소식과 함께 배우들의 인터뷰가 공개되었습니다. 한편, 대한주택관리사협회는 드라마 방영과 관련해 JTBC의 재승인 불허를 촉구하는 성명을 발표하며 논란이 일고 있습니다."}, {"keyword": "이기택", "summary": "https://summary.signal.bz/external/ai-summary/1783859400575/rank/10?keyword=1172665204816732156", "rank": 10, "move": "new", "delta": 0, "news": [{"title": "“다 먹어야 탈출”… 이기택 → 딘딘, 짬뽕 먹다 군만두 폭탄에 ‘경악’ (1박2일) - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9LYVVJbGZfNGNFYW05UFZYcnMwMDVSZXJBNDI5ZG1TS25yUW9JVlJwWkdFZlROdTkwZGlLdGxNUDV5djlmS1FRRHM2QUxvLU0?oc=5", "source": "v.daum.net"}, {"title": "이기택, '팀 운' 좋은 게 능력...스스로 증명했다 (1박 2일)[종합] - v.daum.net", "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE4ySHJpZzAwcFB2MUF1WklIaXUyelA1aEtVaDBYbkdqSUlLYV9pdHZ5TFh2ZWdLN011aG5Udmg5el9KNEV1WjJMQWVNNDduZlk?oc=5", "source": "v.daum.net"}, {"title": "'1박2일' 이용진vs이기택 얼굴 도장 펜싱 맞대결 결과는? - gukjenews.com", "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBUMVJSY3ZfRkdySFZ2Mnc4SVZXU0d2aU9VQTA1dUdpQ3NLaHVLcVRwRHNlX3d4eTZmamZJcThJVEx6WE5LQ1MyV2cwYlR0Zk01UGExeUJmdFRpeU9ORFpUVjBLSzVIQWw2ZmJJaWtR?oc=5", "source": "gukjenews.com"}], "aiSummary": "배우 이기택이 예능 프로그램 '1박 2일'에 출연하여 게임과 미션 수행 과정에서 보여준 활약으로 주목받고 있습니다. 특히 멤버들과의 대결이나 먹방 미션 등에서 보여준 예능감과 팀 내에서의 존재감이 시청자들의 관심을 끌고 있습니다."}], "naverSource": "signal"};
+const SEARCH_BASE = {
+  google: 'https://www.google.com/search?q=',
+  naver:  'https://search.naver.com/search.naver?query='
 };
 
-document.getElementById('srcline').textContent =
-  NAVER_DATALAB ? '데이터 출처: 구글 트렌드 · 네이버 데이터랩 · 약 10분마다 자동 갱신'
-                : '데이터 출처: 구글 트렌드 · signal.bz · 약 10분마다 자동 갱신';
-document.getElementById('footnote').textContent =
-  NAVER_DATALAB
-    ? '※ 네이버는 2021년 공식 실시간 검색어를 폐지했습니다. "네이버 실시간"은 구글 트렌드 키워드를 네이버 데이터랩 검색비중으로 재정렬한 순위이며, 네이버 공식 실검이 아닙니다.'
-    : '※ 네이버는 2021년 공식 실시간 검색어를 폐지했습니다. "네이버 실시간"은 signal.bz의 실시간 검색어 집계를 표시한 것으로, 네이버 공식 순위가 아닙니다.';
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-function showTab(name){
-  document.querySelectorAll('.tab').forEach(t=>{
-    const on = t.dataset.tab === name;
-    t.classList.toggle('active', on);
-    t.setAttribute('aria-selected', on);
-  });
-  document.getElementById('board-google').hidden = name !== 'google';
-  document.getElementById('board-naver').hidden  = name !== 'naver';
-  document.getElementById('srcinfo').textContent = SRC[name];
+function badgeHTML(it){
+  if(it.move === 'new')  return '<span class="bd new">N</span>';
+  if(it.move === 'up')   return '<span class="bd up">▲'+it.delta+'</span>';
+  if(it.move === 'down') return '<span class="bd down">▼'+it.delta+'</span>';
+  return '<span class="bd flat">–</span>';
 }
 
-document.getElementById('updated').textContent = DATA.updatedAt;
-renderBoard('board-google', DATA.google, 'google');
-renderBoard('board-naver',  DATA.naver,  'naver');
-openFirst('board-google');   // 각 보드 1위 기본 펼침
-openFirst('board-naver');
-document.querySelectorAll('.tab').forEach(t=>{
-  t.addEventListener('click', ()=>showTab(t.dataset.tab));
-  t.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); showTab(t.dataset.tab);} });
-});
-showTab('google');
+function renderList(id, source){
+  const base = SEARCH_BASE[source];
+  const items = DATA[source] || [];
+  const el = document.getElementById(id);
+  el.innerHTML = items.length ? items.map(function(it){
+    const rank = it.rank;
+    const vol = (source==='google' && it.traffic) ? '<span class="vol">'+esc(it.traffic)+'</span>' : '';
+    return '<li><a href="'+base+encodeURIComponent(it.keyword)+'" target="_blank" rel="noopener">'
+      + '<span class="rn'+(rank<=3?' top':'')+'">'+rank+'</span>'
+      + '<span class="kw">'+esc(it.keyword)+'</span>'
+      + vol + badgeHTML(it) + '</a></li>';
+  }).join('') : '<li style="padding:14px;color:var(--muted);font-size:13px;">데이터를 불러오지 못했어요.</li>';
+}
 
-// 다크/라이트 테마 토글
-function currentTheme(){
-  return document.documentElement.getAttribute('data-theme')
-    || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+function renderIssues(){
+  const seen={}, out=[];
+  ['google','naver'].forEach(function(s){ (DATA[s]||[]).forEach(function(it){
+    if(it.aiSummary && !seen[it.keyword] && out.length<4){ seen[it.keyword]=1; out.push(it); }
+  });});
+  const el = document.getElementById('issues');
+  if(!out.length){ el.innerHTML='<p style="font-size:13px;color:var(--muted);padding:6px 0;">요약 준비 중…</p>'; return; }
+  el.innerHTML = out.map(function(it){
+    const sum = it.aiSummary.length>72 ? it.aiSummary.slice(0,72)+'…' : it.aiSummary;
+    return '<a class="item" href="'+SEARCH_BASE.naver+encodeURIComponent(it.keyword)+'" target="_blank" rel="noopener">'
+      + '<span class="tag">'+esc(it.keyword)+'</span>'
+      + '<span class="t">'+esc(sum)+'</span></a>';
+  }).join('');
 }
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme', t);
-  try{ localStorage.setItem('theme', t); }catch(e){}
-  document.getElementById('themeToggle').textContent = (t === 'dark') ? '🌙' : '☀️';
-}
-(function initTheme(){
-  const btn = document.getElementById('themeToggle');
-  btn.textContent = (currentTheme() === 'dark') ? '🌙' : '☀️';
-  btn.addEventListener('click', ()=> applyTheme(currentTheme() === 'dark' ? 'light' : 'dark'));
+
+renderList('listGoogle', 'google');
+renderList('listNaver', 'naver');
+renderIssues();
+const label = (DATA.updatedAt || '') + ' 기준';
+document.getElementById('timeGoogle').textContent = label;
+document.getElementById('timeNaver').textContent = label;
+if(DATA.naverSource === 'datalab'){ document.getElementById('footSrc').textContent = '데이터 출처: 구글 트렌드 · 네이버 데이터랩'; }
+
+/* 다크/라이트 토글 (localStorage 'theme' — 블로그와 공유) */
+(function(){
+  const btn = document.getElementById('themeBtn');
+  function cur(){ return document.documentElement.getAttribute('data-theme') || 'light'; }
+  function apply(t){ document.documentElement.setAttribute('data-theme', t);
+    try{ localStorage.setItem('theme', t); }catch(e){}
+    btn.textContent = (t === 'dark') ? '☀️' : '🌙'; }
+  btn.textContent = (cur()==='dark') ? '☀️' : '🌙';
+  btn.addEventListener('click', function(){ apply(cur()==='dark' ? 'light':'dark'); });
 })();
 
-// 정적 페이지가 GitHub Actions로 갱신되므로 5분마다 새로고침해 최신 데이터 반영
-setTimeout(()=>location.reload(), 5*60*1000);
+/* 정적 페이지가 20분마다 자동 갱신되므로 5분마다 새로고침 */
+setTimeout(function(){ location.reload(); }, 5*60*1000);
 </script>
 </body>
 </html>
