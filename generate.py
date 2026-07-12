@@ -39,7 +39,7 @@ GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 SUMMARY_MODEL = os.environ.get("SUMMARY_MODEL", "").strip() or "gemini-flash-lite-latest"
 SUMMARIES_FILE = "summaries.json"
 SUMMARY_TOP_N = 10      # 소스별 상위 N개만 요약 대상
-MAX_NEW_SUMMARIES = 12  # 실행 1회당 신규 요약 상한 (비용 캡)
+MAX_NEW_SUMMARIES = 20  # 실행 1회당 신규 요약 상한 (구글+네이버 상위 모두 커버)
 SUMMARY_CACHE_MAX = 120 # 캐시 보존 상한 (회전 대비, 재생성/할당량 절약)
 GEMINI_SLEEP = 4.5      # 호출 간격(초) — Gemini 무료 분당 한도(RPM) 회피
 
