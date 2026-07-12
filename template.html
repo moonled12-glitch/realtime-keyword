@@ -71,9 +71,8 @@ __ADSENSE_HEAD__
   .hero h1{font-weight:900;font-size:clamp(30px,5vw,44px);letter-spacing:-.03em;margin:16px 0 10px;}
   .hero p{font-size:15px;color:var(--muted);margin:0;letter-spacing:-.01em;}
 
-  /* 본문 그리드 */
-  main.wrap{padding-top:24px;padding-bottom:56px;display:grid;
-    grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;}
+  /* 본문 */
+  main.wrap{padding-top:24px;padding-bottom:56px;}
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;min-width:0;}
   .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
     box-shadow:var(--shadow);overflow:hidden;}
@@ -194,17 +193,6 @@ __ADSENSE_HEAD__
         <ol class="rank" id="listNaver"></ol>
       </section>
     </div>
-
-    <aside>
-      <!-- 광고 자리 (사이드) -->
-      <div class="ad-side">광고 · 300 × 250</div>
-      <section class="issues">
-        <h2>지금 뜨는 이슈</h2>
-        <p class="sub" id="issuesSub">AI 요약으로 보는 화제 키워드</p>
-        <div id="issues"></div>
-        <a class="more" href="./blog/">블로그 더 보기 →</a>
-      </section>
-    </aside>
   </main>
 
   <footer>
@@ -291,26 +279,10 @@ function openFirst(id){
   if(li){ li.classList.add('open'); const b=li.querySelector('.rowbtn'); if(b) b.setAttribute('aria-expanded','true'); }
 }
 
-function renderIssues(){
-  const seen={}, out=[];
-  ['google','naver'].forEach(function(s){ (DATA[s]||[]).forEach(function(it){
-    if(it.aiSummary && !seen[it.keyword] && out.length<4){ seen[it.keyword]=1; out.push(it); }
-  });});
-  const el = document.getElementById('issues');
-  if(!out.length){ el.innerHTML='<p style="font-size:13px;color:var(--muted);padding:6px 0;">요약 준비 중…</p>'; return; }
-  el.innerHTML = out.map(function(it){
-    const sum = it.aiSummary.length>72 ? it.aiSummary.slice(0,72)+'…' : it.aiSummary;
-    return '<a class="item" href="'+SEARCH_BASE.naver+encodeURIComponent(it.keyword)+'" target="_blank" rel="noopener">'
-      + '<span class="tag">'+esc(it.keyword)+'</span>'
-      + '<span class="t">'+esc(sum)+'</span></a>';
-  }).join('');
-}
-
 renderList('listGoogle', 'google');
 renderList('listNaver', 'naver');
 openFirst('listGoogle');
 openFirst('listNaver');
-renderIssues();
 const label = (DATA.updatedAt || '') + ' 기준';
 document.getElementById('timeGoogle').textContent = label;
 document.getElementById('timeNaver').textContent = label;
