@@ -60,5 +60,13 @@ jobs:
             echo "No changes."
           else
             git commit -m "Auto-update ($(date -u +%Y-%m-%dT%H:%MZ))"
-            git push
+            # remote가 앞서 있을 수 있음(관리자 이미지 업로드 등) → rebase 후 push, 충돌 대비 재시도
+            for i in 1 2 3 4 5; do
+              if git push origin HEAD:main; then
+                echo "pushed on attempt $i"; break
+              fi
+              echo "push rejected, rebasing (attempt $i)"
+              git pull --rebase --autostash origin main || true
+              sleep 3
+            done
           fi

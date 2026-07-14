@@ -12,6 +12,7 @@
 #      (B) signal.bz 실시간 검색어 집계     ← 키가 없으면 자동 폴백 (네이버는 2021년 공식 실검 폐지)
 import json
 import os
+import re
 import sys
 import time
 import html
@@ -88,6 +89,18 @@ def txt(el):
 
 
 # ---------- 구글 ----------
+# 대한민국 기준으로 한정: 한국 시장이 아닌 스크립트(러시아어/그리스어/히브리어/
+# 아랍어/태국어/데바나가리/일본어 가나/중국어 한자 등)가 포함된 키워드는 제외.
+# 한글·영문·숫자·기호는 통과(예: nvda, ionq, IVE 같은 한국 내 영문 키워드 허용).
+_FOREIGN_SCRIPT = re.compile(
+    "[Ͱ-ϿЀ-ӿ֐-׿؀-ۿ"
+    "ऀ-ॿ฀-๿぀-ヿ㐀-䶿一-鿿]")
+
+
+def is_korean_market(kw):
+    return not _FOREIGN_SCRIPT.search(kw)
+
+
 def parse_google(xml_bytes):
     root = ET.fromstring(xml_bytes)
     items = []
@@ -95,6 +108,8 @@ def parse_google(xml_bytes):
         keyword = txt(it.find("title"))
         if not keyword:
             continue
+        if not is_korean_market(keyword):
+            continue  # 러시아어/중국어/태국어 등 해외 트렌드 제외 → 대한민국 한정
         news = []
         for n in it.findall(HT + "news_item")[:MAX_NEWS]:
             title = txt(n.find(HT + "news_item_title"))
