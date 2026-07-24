@@ -90,6 +90,10 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:'Noto Sans KR',
 a{color:inherit;}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
 .content-wrap{max-width:720px;margin:0 auto;padding:0 20px;}
+/* 글 본문 카드: 페이지 배경과 구분되도록 면 처리 */
+.post{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+ padding:28px 32px;margin:10px 0 8px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+@media(max-width:640px){.post{padding:22px 18px;border-radius:12px;}}
 .ad-top{width:100%;display:flex;justify-content:center;padding:8px 20px 0;}
 .ad-top>div{width:100%;max-width:970px;height:56px;background:var(--adbg);border:1px dashed var(--border);
  border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);
@@ -227,7 +231,7 @@ def render_article(p):
     body_html = markdown.markdown(p["body_md"], extensions=["extra", "sane_lists"])
     tags = "".join(f'<a href="{PREFIX}/blog/">#{esc(t)}</a>' for t in p["tags"])
     canonical = f'{BASE}{PREFIX}/blog/{p["slug"]}.html'
-    inner = f"""<article>
+    inner = f"""<article class="post">
   <h1>{esc(p["title"])}</h1>
   <div class="meta">{esc(p["date"])}{' · ' + esc(p["keyword"]) if p["keyword"] else ''}</div>
   {f'<div class="tags">{tags}</div>' if tags else ''}
@@ -287,7 +291,7 @@ ABOUT_MD = """## 소개
 
 
 def render_static(title, md):
-    body = f'<article class="static-body">{markdown.markdown(md, extensions=["extra"])}</article>'
+    body = f'<article class="post static-body">{markdown.markdown(md, extensions=["extra"])}</article>'
     slug = "privacy" if "개인정보" in title else "about"
     active = "소개" if slug == "about" else ""
     return page(f"{title} · {SITE_NAME}", title, f"{BASE}{PREFIX}/{slug}.html", body, active)

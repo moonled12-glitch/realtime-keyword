@@ -25,6 +25,10 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:'Noto Sans KR',
 a{color:inherit;}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
 .content-wrap{max-width:720px;margin:0 auto;padding:0 20px;}
+/* 글 본문 카드: 페이지 배경과 구분되도록 면 처리 */
+.post{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+ padding:28px 32px;margin:10px 0 8px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+@media(max-width:640px){.post{padding:22px 18px;border-radius:12px;}}
 .ad-top{width:100%;display:flex;justify-content:center;padding:8px 20px 0;}
 .ad-top>div{width:100%;max-width:970px;height:56px;background:var(--adbg);border:1px dashed var(--border);
  border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);
@@ -100,7 +104,7 @@ footer nav a:hover{color:var(--text);}
 <body>
 <div class="ad-top"><div>광고 · 728 × 90</div></div><header><div class="wrap"><a class="logo" href="/realtime-keyword/"><span class="mark">K</span><span class="name">키워드픽</span></a><nav class="main"><a href="/realtime-keyword/">실시간</a><a class="active" href="/realtime-keyword/blog/">블로그</a><a href="/realtime-keyword/about.html">소개</a></nav><button class="theme-btn" id="themeBtn" aria-label="다크/라이트 모드 전환">🌙</button></div></header>
 <main><div class="content-wrap">
-<article>
+<article class="post">
   <h1>SK하이닉스 나스닥 상장, 무엇이 달라지나 — ADR·AI 반도체·국내 증시 영향 정리</h1>
   <div class="meta">2026-07-24 · SK하이닉스 나스닥 상장</div>
   <div class="tags"><a href="/realtime-keyword/blog/">#SK하이닉스</a><a href="/realtime-keyword/blog/">#나스닥상장</a><a href="/realtime-keyword/blog/">#ADR</a><a href="/realtime-keyword/blog/">#AI반도체</a><a href="/realtime-keyword/blog/">#국내증시</a></div>
