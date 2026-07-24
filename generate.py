@@ -392,6 +392,9 @@ def main():
               .replace("__AD_RIGHT__", rail_html("right")))
     open("index.html", "w", encoding="utf-8").write(out)
 
+    # 블로그 사이드바(및 외부)에서 실시간으로 불러쓸 공유 데이터
+    json.dump(data, open("trends.json", "w", encoding="utf-8"), ensure_ascii=False)
+
     snap = {"google": prev["google"], "naver": prev["naver"]}
     if google:
         snap["google"] = {it["keyword"]: it["rank"] for it in google}

@@ -116,6 +116,24 @@ a{color:inherit;}
 .rank-list a:hover{background:var(--bg);color:var(--accent);}
 .rank-list .rk{flex:0 0 20px;text-align:center;font-weight:800;color:var(--accent);font-size:13px;}
 .rank-list .rkw{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* 실시간 검색어 보드(홈과 동일 구조: 순위·AI요약·관련뉴스, 자동 fetch) */
+.side-rt-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px;margin-bottom:6px;}
+.side-rt-head .side-h{margin:0;}
+.rt-time{font-size:11px;color:var(--muted);white-space:nowrap;}
+.rt-item{border-bottom:1px solid var(--border);}
+.rt-item:last-child{border-bottom:0;}
+.rt-row{width:100%;display:flex;align-items:center;gap:9px;padding:8px 2px;background:none;border:0;cursor:pointer;text-align:left;color:var(--text);font-size:14px;font-family:inherit;}
+.rt-row:hover{color:var(--accent);}
+.rt-rk{flex:0 0 18px;text-align:center;font-weight:800;color:var(--accent);font-size:13px;}
+.rt-kw{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;}
+.rt-b{flex:0 0 auto;font-size:10px;font-weight:800;}
+.rt-b.up{color:#e5484d;} .rt-b.down{color:#3b82f6;} .rt-b.new{color:var(--accent);} .rt-b.same{color:var(--muted);}
+.rt-panel{display:none;padding:2px 2px 12px 29px;}
+.rt-item.open .rt-panel{display:block;}
+.rt-sum{font-size:12.5px;line-height:1.6;color:var(--text);background:var(--accent-soft);border-radius:8px;padding:9px 11px;margin-bottom:8px;}
+.rt-news{display:flex;flex-direction:column;gap:5px;}
+.rt-news a{font-size:12px;color:var(--muted);text-decoration:none;line-height:1.4;}
+.rt-news a:hover{color:var(--accent);}
 .side-posts{list-style:none;margin:0;padding:0;}
 .side-posts a{display:flex;gap:10px;align-items:center;padding:6px 4px;text-decoration:none;color:var(--text);border-radius:8px;}
 .side-posts a:hover{background:var(--bg);}
@@ -253,15 +271,58 @@ def load_trends():
         return []
 
 
+RT_SCRIPT = """<script>
+(function(){
+  var PREFIX="__PREFIX__";
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function badge(m,d){
+    if(m==='up')return '<span class="rt-b up">\\u25B2'+d+'</span>';
+    if(m==='down')return '<span class="rt-b down">\\u25BC'+d+'</span>';
+    if(m==='new')return '<span class="rt-b new">NEW</span>';
+    return '<span class="rt-b same">\\u2013</span>';
+  }
+  fetch(PREFIX+'/trends.json?_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+    var t=document.getElementById('rtTime'); if(t&&d.updatedAt)t.textContent=d.updatedAt+' 기준';
+    var board=document.getElementById('rtBoard'); if(!board)return;
+    var items=(d.naver&&d.naver.length?d.naver:d.google)||[];
+    items=items.slice(0,10);
+    if(!items.length)return;
+    board.innerHTML=items.map(function(it,i){
+      var sum=it.aiSummary||it.summary||'';
+      var news=(it.news||[]).slice(0,3).map(function(n){
+        return '<a href="'+n.url+'" target="_blank" rel="noopener">'+esc(n.title)+'</a>';}).join('');
+      var panel=(sum?'<div class="rt-sum">\\uD83E\\uDD16 '+esc(sum)+'</div>':'')+(news?'<div class="rt-news">'+news+'</div>':'');
+      return '<div class="rt-item">'
+        +'<button type="button" class="rt-row" aria-expanded="false">'
+        +'<span class="rt-rk">'+(i+1)+'</span><span class="rt-kw">'+esc(it.keyword)+'</span>'+badge(it.move,it.delta)+'</button>'
+        +(panel?'<div class="rt-panel">'+panel+'</div>':'')+'</div>';
+    }).join('');
+    board.querySelectorAll('.rt-row').forEach(function(b){
+      b.addEventListener('click',function(){
+        var it=b.parentNode; it.classList.toggle('open');
+        b.setAttribute('aria-expanded', it.classList.contains('open')?'true':'false');
+      });
+    });
+  }).catch(function(){});
+})();
+</script>"""
+
+
 def build_sidebar(posts, current_slug=None):
     trends = load_trends()
-    rank_items = ""
+    # JS/JSON 실패 시 폴백용 기본 목록(서버 렌더)
+    fb = ""
     for i, kw in enumerate(trends, 1):
         url = "https://news.google.com/search?q=" + urllib.parse.quote(kw) + "&hl=ko&gl=KR&ceid=KR:ko"
-        rank_items += (f'<li><a href="{url}" target="_blank" rel="noopener">'
-                       f'<span class="rk">{i}</span><span class="rkw">{esc(kw)}</span></a></li>')
-    trend_card = (f'<div class="side-card"><h3 class="side-h">🔥 실시간 검색어</h3>'
-                  f'<ol class="rank-list">{rank_items}</ol></div>') if trends else ""
+        fb += (f'<li><a href="{url}" target="_blank" rel="noopener">'
+               f'<span class="rk">{i}</span><span class="rkw">{esc(kw)}</span></a></li>')
+    trend_card = (
+        '<div class="side-card">'
+        '<div class="side-rt-head"><h3 class="side-h">🔥 실시간 검색어</h3>'
+        '<span class="rt-time" id="rtTime"></span></div>'
+        f'<div id="rtBoard"><ol class="rank-list">{fb}</ol></div>'
+        '</div>' + RT_SCRIPT.replace("__PREFIX__", PREFIX)
+    )
     feat = [p for p in posts if p["slug"] != current_slug][:6]
     post_items = ""
     for p in feat:

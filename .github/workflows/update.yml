@@ -53,7 +53,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # posts/·drafts/ 는 자동 커밋 안 함(사용자가 직접 작성·발행). 생성물만 커밋.
-          git add index.html prev.json summaries.json blog sitemap.xml rss.xml privacy.html about.html
+          git add index.html prev.json summaries.json trends.json blog sitemap.xml rss.xml privacy.html about.html
           if git diff --staged --quiet; then
             echo "No changes."
           else

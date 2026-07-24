@@ -37,6 +37,24 @@ a{color:inherit;}
 .rank-list a:hover{background:var(--bg);color:var(--accent);}
 .rank-list .rk{flex:0 0 20px;text-align:center;font-weight:800;color:var(--accent);font-size:13px;}
 .rank-list .rkw{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* 실시간 검색어 보드(홈과 동일 구조: 순위·AI요약·관련뉴스, 자동 fetch) */
+.side-rt-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px;margin-bottom:6px;}
+.side-rt-head .side-h{margin:0;}
+.rt-time{font-size:11px;color:var(--muted);white-space:nowrap;}
+.rt-item{border-bottom:1px solid var(--border);}
+.rt-item:last-child{border-bottom:0;}
+.rt-row{width:100%;display:flex;align-items:center;gap:9px;padding:8px 2px;background:none;border:0;cursor:pointer;text-align:left;color:var(--text);font-size:14px;font-family:inherit;}
+.rt-row:hover{color:var(--accent);}
+.rt-rk{flex:0 0 18px;text-align:center;font-weight:800;color:var(--accent);font-size:13px;}
+.rt-kw{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;}
+.rt-b{flex:0 0 auto;font-size:10px;font-weight:800;}
+.rt-b.up{color:#e5484d;} .rt-b.down{color:#3b82f6;} .rt-b.new{color:var(--accent);} .rt-b.same{color:var(--muted);}
+.rt-panel{display:none;padding:2px 2px 12px 29px;}
+.rt-item.open .rt-panel{display:block;}
+.rt-sum{font-size:12.5px;line-height:1.6;color:var(--text);background:var(--accent-soft);border-radius:8px;padding:9px 11px;margin-bottom:8px;}
+.rt-news{display:flex;flex-direction:column;gap:5px;}
+.rt-news a{font-size:12px;color:var(--muted);text-decoration:none;line-height:1.4;}
+.rt-news a:hover{color:var(--accent);}
 .side-posts{list-style:none;margin:0;padding:0;}
 .side-posts a{display:flex;gap:10px;align-items:center;padding:6px 4px;text-decoration:none;color:var(--text);border-radius:8px;}
 .side-posts a:hover{background:var(--bg);}

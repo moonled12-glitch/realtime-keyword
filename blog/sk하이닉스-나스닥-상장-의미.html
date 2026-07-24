@@ -37,6 +37,24 @@ a{color:inherit;}
 .rank-list a:hover{background:var(--bg);color:var(--accent);}
 .rank-list .rk{flex:0 0 20px;text-align:center;font-weight:800;color:var(--accent);font-size:13px;}
 .rank-list .rkw{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* 실시간 검색어 보드(홈과 동일 구조: 순위·AI요약·관련뉴스, 자동 fetch) */
+.side-rt-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px;margin-bottom:6px;}
+.side-rt-head .side-h{margin:0;}
+.rt-time{font-size:11px;color:var(--muted);white-space:nowrap;}
+.rt-item{border-bottom:1px solid var(--border);}
+.rt-item:last-child{border-bottom:0;}
+.rt-row{width:100%;display:flex;align-items:center;gap:9px;padding:8px 2px;background:none;border:0;cursor:pointer;text-align:left;color:var(--text);font-size:14px;font-family:inherit;}
+.rt-row:hover{color:var(--accent);}
+.rt-rk{flex:0 0 18px;text-align:center;font-weight:800;color:var(--accent);font-size:13px;}
+.rt-kw{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;}
+.rt-b{flex:0 0 auto;font-size:10px;font-weight:800;}
+.rt-b.up{color:#e5484d;} .rt-b.down{color:#3b82f6;} .rt-b.new{color:var(--accent);} .rt-b.same{color:var(--muted);}
+.rt-panel{display:none;padding:2px 2px 12px 29px;}
+.rt-item.open .rt-panel{display:block;}
+.rt-sum{font-size:12.5px;line-height:1.6;color:var(--text);background:var(--accent-soft);border-radius:8px;padding:9px 11px;margin-bottom:8px;}
+.rt-news{display:flex;flex-direction:column;gap:5px;}
+.rt-news a{font-size:12px;color:var(--muted);text-decoration:none;line-height:1.4;}
+.rt-news a:hover{color:var(--accent);}
 .side-posts{list-style:none;margin:0;padding:0;}
 .side-posts a{display:flex;gap:10px;align-items:center;padding:6px 4px;text-decoration:none;color:var(--text);border-radius:8px;}
 .side-posts a:hover{background:var(--bg);}
@@ -190,7 +208,41 @@ footer nav a:hover{color:var(--text);}
   <div class="ad">광고 · 반응형</div>
   <div class="ai-notice">이 블로그 포스팅은 AI로 수집된 내용을 기반으로 작성되었습니다.</div>
   <a class="backlink" href="/realtime-keyword/blog/">← 목록으로</a>
-</article></div><aside class="sidebar"><div class="side-card"><h3 class="side-h">🔥 실시간 검색어</h3><ol class="rank-list"><li><a href="https://news.google.com/search?q=000660&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">1</span><span class="rkw">000660</span></a></li><li><a href="https://news.google.com/search?q=%EC%8A%A4%ED%8E%98%EC%9D%B8%20%EC%B6%95%EA%B5%AC%20%EA%B5%AD%EA%B0%80%EB%8C%80%ED%91%9C%ED%8C%80&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">2</span><span class="rkw">스페인 축구 국가대표팀</span></a></li><li><a href="https://news.google.com/search?q=000270&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">3</span><span class="rkw">000270</span></a></li><li><a href="https://news.google.com/search?q=005930&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">4</span><span class="rkw">005930</span></a></li><li><a href="https://news.google.com/search?q=%EB%B3%B4%ED%86%B5%EC%A3%BC&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">5</span><span class="rkw">보통주</span></a></li><li><a href="https://news.google.com/search?q=%EA%B5%90%EB%8F%84%EA%B4%80&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">6</span><span class="rkw">교도관</span></a></li><li><a href="https://news.google.com/search?q=%EC%97%BC%EA%B2%BD%EC%97%BD&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">7</span><span class="rkw">염경엽</span></a></li><li><a href="https://news.google.com/search?q=%EC%95%88%EB%AF%BC%EC%84%9D&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">8</span><span class="rkw">안민석</span></a></li><li><a href="https://news.google.com/search?q=%EA%B9%80%ED%98%9C%EC%84%B1&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">9</span><span class="rkw">김혜성</span></a></li><li><a href="https://news.google.com/search?q=%EA%B9%80%EA%B0%80%EC%98%81&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">10</span><span class="rkw">김가영</span></a></li></ol></div><div class="side-card"><h3 class="side-h">📝 블로그 인기 글</h3><ul class="side-posts"><li><a href="/realtime-keyword/blog/누리호-폭발엔진-공개.html"><span class="sp-thumb"><img src="../img/누리호발사사진2-mryocu7l.jpg" alt="" loading="lazy"></span><span class="sp-t">누리호 &#x27;폭발한 엔진&#x27;이 전시된 이유 — 실패를 자산으로 만든 우주개발 이야기</span></a></li><li><a href="/realtime-keyword/blog/캐시워크-돈버는퀴즈-정답-찾는법.html"><span class="sp-thumb"><img src="../img/스크린샷-2026-07-24-145549-mryj2b3v.png" alt="" loading="lazy"></span><span class="sp-t">캐시워크 돈버는퀴즈 정답, 매일 빠르게 찾는 방법 (초보 가이드)</span></a></li><li><a href="/realtime-keyword/blog/머스크-테슬라-스페이스x-급락-합병설.html"><span class="sp-thumb"><img src="../img/spacex-uj3hvdfquji-unsplash-mryo73ih.jpg" alt="" loading="lazy"></span><span class="sp-t">머스크의 한 주 - 테슬라·스페이스X 동반 급락, 합병설, 스타십 13차 발사 정리</span></a></li><li><a href="/realtime-keyword/blog/촉법소년-범죄와-우리-사회의-과제-정책적-논의를-중심으로.html"><span class="sp-thumb"><img src="../img/다운로드-mrk7q6zb.jpg" alt="" loading="lazy"></span><span class="sp-t">촉법소년 범죄와 우리 사회의 과제: 정책적 논의를 중심으로</span></a></li><li><a href="/realtime-keyword/blog/example-welcome.html"><span class="sp-thumb sp-noimg"></span><span class="sp-t">실시간 검색어 블로그를 시작합니다</span></a></li><li><a href="/realtime-keyword/blog/김부장-소지섭-영화-역주행.html"><span class="sp-thumb"><img src="../img/kimbujang-drama.jpg" alt="" loading="lazy"></span><span class="sp-t">김부장&#x27; 21% 돌풍에 14년 전 소지섭 영화 &#x27;회사원&#x27;까지 역주행</span></a></li></ul></div></aside></main>
+</article></div><aside class="sidebar"><div class="side-card"><div class="side-rt-head"><h3 class="side-h">🔥 실시간 검색어</h3><span class="rt-time" id="rtTime"></span></div><div id="rtBoard"><ol class="rank-list"><li><a href="https://news.google.com/search?q=000660&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">1</span><span class="rkw">000660</span></a></li><li><a href="https://news.google.com/search?q=%EC%8A%A4%ED%8E%98%EC%9D%B8%20%EC%B6%95%EA%B5%AC%20%EA%B5%AD%EA%B0%80%EB%8C%80%ED%91%9C%ED%8C%80&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">2</span><span class="rkw">스페인 축구 국가대표팀</span></a></li><li><a href="https://news.google.com/search?q=000270&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">3</span><span class="rkw">000270</span></a></li><li><a href="https://news.google.com/search?q=005930&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">4</span><span class="rkw">005930</span></a></li><li><a href="https://news.google.com/search?q=%EB%B3%B4%ED%86%B5%EC%A3%BC&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">5</span><span class="rkw">보통주</span></a></li><li><a href="https://news.google.com/search?q=%EA%B5%90%EB%8F%84%EA%B4%80&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">6</span><span class="rkw">교도관</span></a></li><li><a href="https://news.google.com/search?q=%EC%97%BC%EA%B2%BD%EC%97%BD&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">7</span><span class="rkw">염경엽</span></a></li><li><a href="https://news.google.com/search?q=%EC%95%88%EB%AF%BC%EC%84%9D&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">8</span><span class="rkw">안민석</span></a></li><li><a href="https://news.google.com/search?q=%EA%B9%80%ED%98%9C%EC%84%B1&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">9</span><span class="rkw">김혜성</span></a></li><li><a href="https://news.google.com/search?q=%EA%B9%80%EA%B0%80%EC%98%81&hl=ko&gl=KR&ceid=KR:ko" target="_blank" rel="noopener"><span class="rk">10</span><span class="rkw">김가영</span></a></li></ol></div></div><script>
+(function(){
+  var PREFIX="/realtime-keyword";
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function badge(m,d){
+    if(m==='up')return '<span class="rt-b up">\u25B2'+d+'</span>';
+    if(m==='down')return '<span class="rt-b down">\u25BC'+d+'</span>';
+    if(m==='new')return '<span class="rt-b new">NEW</span>';
+    return '<span class="rt-b same">\u2013</span>';
+  }
+  fetch(PREFIX+'/trends.json?_='+Date.now()).then(function(r){return r.json();}).then(function(d){
+    var t=document.getElementById('rtTime'); if(t&&d.updatedAt)t.textContent=d.updatedAt+' 기준';
+    var board=document.getElementById('rtBoard'); if(!board)return;
+    var items=(d.naver&&d.naver.length?d.naver:d.google)||[];
+    items=items.slice(0,10);
+    if(!items.length)return;
+    board.innerHTML=items.map(function(it,i){
+      var sum=it.aiSummary||it.summary||'';
+      var news=(it.news||[]).slice(0,3).map(function(n){
+        return '<a href="'+n.url+'" target="_blank" rel="noopener">'+esc(n.title)+'</a>';}).join('');
+      var panel=(sum?'<div class="rt-sum">\uD83E\uDD16 '+esc(sum)+'</div>':'')+(news?'<div class="rt-news">'+news+'</div>':'');
+      return '<div class="rt-item">'
+        +'<button type="button" class="rt-row" aria-expanded="false">'
+        +'<span class="rt-rk">'+(i+1)+'</span><span class="rt-kw">'+esc(it.keyword)+'</span>'+badge(it.move,it.delta)+'</button>'
+        +(panel?'<div class="rt-panel">'+panel+'</div>':'')+'</div>';
+    }).join('');
+    board.querySelectorAll('.rt-row').forEach(function(b){
+      b.addEventListener('click',function(){
+        var it=b.parentNode; it.classList.toggle('open');
+        b.setAttribute('aria-expanded', it.classList.contains('open')?'true':'false');
+      });
+    });
+  }).catch(function(){});
+})();
+</script><div class="side-card"><h3 class="side-h">📝 블로그 인기 글</h3><ul class="side-posts"><li><a href="/realtime-keyword/blog/누리호-폭발엔진-공개.html"><span class="sp-thumb"><img src="../img/누리호발사사진2-mryocu7l.jpg" alt="" loading="lazy"></span><span class="sp-t">누리호 &#x27;폭발한 엔진&#x27;이 전시된 이유 — 실패를 자산으로 만든 우주개발 이야기</span></a></li><li><a href="/realtime-keyword/blog/머스크-테슬라-스페이스x-급락-합병설.html"><span class="sp-thumb"><img src="../img/spacex-uj3hvdfquji-unsplash-mryo73ih.jpg" alt="" loading="lazy"></span><span class="sp-t">머스크의 한 주 - 테슬라·스페이스X 동반 급락, 합병설, 스타십 13차 발사 정리</span></a></li><li><a href="/realtime-keyword/blog/캐시워크-돈버는퀴즈-정답-찾는법.html"><span class="sp-thumb"><img src="../img/스크린샷-2026-07-24-145549-mryj2b3v.png" alt="" loading="lazy"></span><span class="sp-t">캐시워크 돈버는퀴즈 정답, 매일 빠르게 찾는 방법 (초보 가이드)</span></a></li><li><a href="/realtime-keyword/blog/촉법소년-범죄와-우리-사회의-과제-정책적-논의를-중심으로.html"><span class="sp-thumb"><img src="../img/다운로드-mrk7q6zb.jpg" alt="" loading="lazy"></span><span class="sp-t">촉법소년 범죄와 우리 사회의 과제: 정책적 논의를 중심으로</span></a></li><li><a href="/realtime-keyword/blog/example-welcome.html"><span class="sp-thumb sp-noimg"></span><span class="sp-t">실시간 검색어 블로그를 시작합니다</span></a></li><li><a href="/realtime-keyword/blog/김부장-소지섭-영화-역주행.html"><span class="sp-thumb"><img src="../img/kimbujang-drama.jpg" alt="" loading="lazy"></span><span class="sp-t">김부장&#x27; 21% 돌풍에 14년 전 소지섭 영화 &#x27;회사원&#x27;까지 역주행</span></a></li></ul></div></aside></main>
 <footer><div class="wrap"><div class="foot-brand"><b>키워드픽</b><span>데이터 출처: 구글 트렌드 · signal.bz</span></div><nav><a href="/realtime-keyword/about.html">소개</a><a href="/realtime-keyword/blog/">블로그</a><a href="/realtime-keyword/privacy.html">개인정보처리방침</a></nav></div></footer>
 <script>(function(){var b=document.getElementById('themeBtn');if(!b)return;function cur(){return document.documentElement.getAttribute('data-theme')||'light';}function ap(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('theme',t);}catch(e){}b.textContent=(t==='dark')?'\u2600\ufe0f':'\ud83c\udf19';}b.textContent=(cur()==='dark')?'\u2600\ufe0f':'\ud83c\udf19';b.addEventListener('click',function(){ap(cur()==='dark'?'light':'dark');});})();</script>
 </body>
