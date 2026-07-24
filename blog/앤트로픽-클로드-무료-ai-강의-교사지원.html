@@ -101,6 +101,15 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body li{margin:5px 0;}
 .article-body a{color:var(--accent);word-break:break-all;}
 .article-body blockquote{border-left:3px solid var(--accent);margin:14px 0;padding:4px 14px;color:var(--muted);}
+/* 본문 표: 테두리·헤더 배경·행 구분 (한눈에 보기 쉽게) */
+.tablewrap{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch;}
+.article-body table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--surface);
+ border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.article-body th,.article-body td{border:1px solid var(--border);padding:10px 13px;text-align:left;vertical-align:top;line-height:1.55;}
+.article-body thead th{background:var(--accent-soft);color:var(--text);font-weight:800;white-space:nowrap;}
+.article-body tbody tr:nth-child(even){background:var(--bg);}
+.article-body tbody td:first-child{font-weight:700;white-space:nowrap;color:var(--text);}
+@media(max-width:640px){.article-body table{font-size:13px;}.article-body th,.article-body td{padding:8px 9px;}}
 .article-body img{max-width:100%;height:auto;border-radius:10px;display:block;}
 .article-body figure{margin:20px auto;text-align:center;}
 .article-body figure img{max-width:100%;height:auto;border-radius:10px;display:inline-block;}
@@ -172,7 +181,7 @@ footer nav a:hover{color:var(--text);}
 <figure class="medium"><img src="../img/스크린샷-2026-07-25-024212-mrz8ghmn.png" alt=""></figure>
 
 <h2>한눈에 보기</h2>
-<table>
+<div class="tablewrap"><table>
 <thead>
 <tr>
 <th>구분</th>
@@ -202,7 +211,7 @@ footer nav a:hover{color:var(--text);}
 <td>수업 표준 연계·학생정보 보호</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2>1. Anthropic Academy — 누구나 무료로 듣는 AI 강의</h2>
 <p>앤트로픽이 공식 오픈한 <strong>무료 학습 플랫폼</strong>입니다. 보도에 따르면 <strong>150개가 넘는 레슨</strong>과 십여 개의 강좌가 제공되며, 크게 세 갈래로 나뉩니다.</p>
 <figure class="large"><img src="../img/anthropic-academy-courses.svg" alt="Anthropic Academy 무료 강의 3개 트랙: AI Fluency, 제품 교육, 개발자 심화"><figcaption>Anthropic Academy 강의 구성 요약 (자료 정리: 키워드픽)</figcaption></figure>

@@ -101,6 +101,15 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body li{margin:5px 0;}
 .article-body a{color:var(--accent);word-break:break-all;}
 .article-body blockquote{border-left:3px solid var(--accent);margin:14px 0;padding:4px 14px;color:var(--muted);}
+/* 본문 표: 테두리·헤더 배경·행 구분 (한눈에 보기 쉽게) */
+.tablewrap{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch;}
+.article-body table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--surface);
+ border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.article-body th,.article-body td{border:1px solid var(--border);padding:10px 13px;text-align:left;vertical-align:top;line-height:1.55;}
+.article-body thead th{background:var(--accent-soft);color:var(--text);font-weight:800;white-space:nowrap;}
+.article-body tbody tr:nth-child(even){background:var(--bg);}
+.article-body tbody td:first-child{font-weight:700;white-space:nowrap;color:var(--text);}
+@media(max-width:640px){.article-body table{font-size:13px;}.article-body th,.article-body td{padding:8px 9px;}}
 .article-body img{max-width:100%;height:auto;border-radius:10px;display:block;}
 .article-body figure{margin:20px auto;text-align:center;}
 .article-body figure img{max-width:100%;height:auto;border-radius:10px;display:inline-block;}
@@ -182,7 +191,7 @@ footer nav a:hover{color:var(--text);}
 </ul>
 <p>즉, '아재폰' 이미지를 벗고 <strong>일상용 + 대화면</strong>의 균형을 잡는 방향으로 진화했습니다.</p>
 <div class="ad">광고 · 반응형</div><h2>어떤 모델을 골라야 할까 (라인업 비교)</h2>
-<table>
+<div class="tablewrap"><table>
 <thead>
 <tr>
 <th>구분</th>
@@ -211,7 +220,7 @@ footer nav a:hover{color:var(--text);}
 <td>성능·스펙 강화(최상위)</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <blockquote>
 <p>⚠️ 정확한 화면 크기·칩셋·RAM·배터리·카메라 화소·가격은 <strong>삼성전자 공식 사양</strong>을 반드시 확인하세요. (모델·용량·색상별로 다릅니다.)</p>
 </blockquote>

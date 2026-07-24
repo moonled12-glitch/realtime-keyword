@@ -58,6 +58,7 @@ def parse_post(path):
         "description": meta.get("description", ""),
         "tags": tags,
         "category": (meta.get("category") or "기타").strip() or "기타",
+        "order": (meta.get("order") or "").strip(),  # 발행 시각(정밀 정렬용). 없으면 date로 대체
         "published": str(meta.get("published", "")).lower() in ("true", "1", "yes"),
         "body_md": body,
         "thumb": first_image(body),  # 목록 썸네일용 첫 이미지
@@ -180,6 +181,15 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body li{margin:5px 0;}
 .article-body a{color:var(--accent);word-break:break-all;}
 .article-body blockquote{border-left:3px solid var(--accent);margin:14px 0;padding:4px 14px;color:var(--muted);}
+/* 본문 표: 테두리·헤더 배경·행 구분 (한눈에 보기 쉽게) */
+.tablewrap{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch;}
+.article-body table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--surface);
+ border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.article-body th,.article-body td{border:1px solid var(--border);padding:10px 13px;text-align:left;vertical-align:top;line-height:1.55;}
+.article-body thead th{background:var(--accent-soft);color:var(--text);font-weight:800;white-space:nowrap;}
+.article-body tbody tr:nth-child(even){background:var(--bg);}
+.article-body tbody td:first-child{font-weight:700;white-space:nowrap;color:var(--text);}
+@media(max-width:640px){.article-body table{font-size:13px;}.article-body th,.article-body td{padding:8px 9px;}}
 .article-body img{max-width:100%;height:auto;border-radius:10px;display:block;}
 .article-body figure{margin:20px auto;text-align:center;}
 .article-body figure img{max-width:100%;height:auto;border-radius:10px;display:inline-block;}
@@ -379,6 +389,8 @@ def content_with_mid_ad(body_html):
 
 def render_article(p, posts):
     body_html = markdown.markdown(p["body_md"], extensions=["extra", "sane_lists"])
+    # 표를 가로 스크롤 래퍼로 감싸기(모바일 대응)
+    body_html = body_html.replace("<table>", '<div class="tablewrap"><table>').replace("</table>", "</table></div>")
     tags = "".join(f'<a href="{PREFIX}/blog/">#{esc(t)}</a>' for t in p["tags"])
     canonical = f'{BASE}{PREFIX}/blog/{p["slug"]}.html'
     inner = f"""<article class="post">
@@ -530,7 +542,8 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     posts = [parse_post(f) for f in glob.glob(os.path.join(POSTS_DIR, "*.md"))]
     posts = [p for p in posts if p["published"]]
-    posts.sort(key=lambda p: p["date"], reverse=True)
+    # 최신 발행 글이 맨 위로: 정밀 시각(order) 우선, 없으면 date 사용
+    posts.sort(key=lambda p: (p.get("order") or p["date"]), reverse=True)
 
     for p in posts:
         open(os.path.join(OUT_DIR, f'{p["slug"]}.html'), "w", encoding="utf-8").write(render_article(p, posts))

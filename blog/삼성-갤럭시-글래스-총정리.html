@@ -101,6 +101,15 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body li{margin:5px 0;}
 .article-body a{color:var(--accent);word-break:break-all;}
 .article-body blockquote{border-left:3px solid var(--accent);margin:14px 0;padding:4px 14px;color:var(--muted);}
+/* 본문 표: 테두리·헤더 배경·행 구분 (한눈에 보기 쉽게) */
+.tablewrap{overflow-x:auto;margin:18px 0;-webkit-overflow-scrolling:touch;}
+.article-body table{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--surface);
+ border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.article-body th,.article-body td{border:1px solid var(--border);padding:10px 13px;text-align:left;vertical-align:top;line-height:1.55;}
+.article-body thead th{background:var(--accent-soft);color:var(--text);font-weight:800;white-space:nowrap;}
+.article-body tbody tr:nth-child(even){background:var(--bg);}
+.article-body tbody td:first-child{font-weight:700;white-space:nowrap;color:var(--text);}
+@media(max-width:640px){.article-body table{font-size:13px;}.article-body th,.article-body td{padding:8px 9px;}}
 .article-body img{max-width:100%;height:auto;border-radius:10px;display:block;}
 .article-body figure{margin:20px auto;text-align:center;}
 .article-body figure img{max-width:100%;height:auto;border-radius:10px;display:inline-block;}
@@ -185,7 +194,7 @@ footer nav a:hover{color:var(--text);}
 <div class="ad">광고 · 반응형</div><h2>눈여겨볼 점 — '디스플레이 없는' 1세대</h2>
 <p>기술적으로 주목할 부분은 <strong>첫 모델에 디스플레이(화면)가 없다</strong>는 점입니다. 눈앞에 영상을 띄우는 대신, <strong>카메라·마이크·스피커·AI</strong>를 중심으로 한 '보고 듣고 말하는' 방식입니다. 이는 현재 스마트안경 시장을 이끄는 <strong>메타의 레이밴 메타</strong>와 유사한 접근으로, 무게·배터리·가격 부담을 줄이려는 선택으로 풀이됩니다. 보도에 따르면 <strong>메타와 같은 계열의 칩</strong>을 쓰면서도 디스플레이는 배제했습니다. 화면을 넣은 디스플레이형(OLEDoS 등)은 차세대 과제로 거론됩니다.</p>
 <h2>삼성 vs 메타 vs 애플 — 스마트안경 경쟁 구도</h2>
-<table>
+<div class="tablewrap"><table>
 <thead>
 <tr>
 <th>구분</th>
@@ -220,7 +229,7 @@ footer nav a:hover{color:var(--text);}
 <td>자체</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>삼성은 <strong>구글과의 XR 협력</strong>을 바탕으로, 갤럭시폰·워치 등 기존 생태계와의 연결을 강점으로 내세웁니다. 이미 시장을 선점한 메타, 고성능 XR로 접근하는 애플 사이에서 삼성이 어떤 차별점을 만들지가 관전 포인트입니다.</p>
 <h2>출시는 언제?</h2>
 <p>삼성은 갤럭시 글래스를 <strong>2026년 내(연내) 정식 출시</strong>할 예정이라고 밝혔습니다. 다만 구체적인 출시일·가격·정확한 사양은 정식 발표 시점에 확정되므로, 공식 발표를 통해 확인하는 것이 정확합니다.</p>
