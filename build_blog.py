@@ -55,6 +55,7 @@ def parse_post(path):
         "keyword": meta.get("keyword", ""),
         "description": meta.get("description", ""),
         "tags": tags,
+        "category": (meta.get("category") or "기타").strip() or "기타",
         "published": str(meta.get("published", "")).lower() in ("true", "1", "yes"),
         "body_md": body,
         "thumb": first_image(body),  # 목록 썸네일용 첫 이미지
@@ -154,6 +155,21 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .backlink{display:inline-block;margin-top:24px;color:var(--accent);text-decoration:none;font-weight:700;font-size:14px;}
 .page-h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:4px 0 3px;}
 .page-sub{font-size:14px;color:var(--muted);margin:0 0 18px;}
+/* 카테고리 필터 바 */
+.catbar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;}
+.catbtn{font-size:13px;font-weight:700;padding:7px 14px;border-radius:999px;cursor:pointer;
+ border:1px solid var(--border);background:var(--surface);color:var(--muted);}
+.catbtn:hover{color:var(--text);}
+.catbtn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+/* 목록 카테고리 뱃지 */
+.cat-badge{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);
+ background:var(--accent-soft);padding:2px 8px;border-radius:999px;margin-bottom:5px;}
+/* 페이지네이션 */
+.pager{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:26px 0 6px;}
+.pg{min-width:36px;height:36px;padding:0 10px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700;
+ border:1px solid var(--border);background:var(--surface);color:var(--text);}
+.pg:hover{border-color:var(--accent);color:var(--accent);}
+.pg.on{background:var(--accent);border-color:var(--accent);color:#fff;}
 .postlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
 .postlist li{background:var(--surface);border:1px solid var(--border);border-radius:14px;
  box-shadow:var(--shadow);overflow:hidden;}
@@ -248,6 +264,7 @@ def render_article(p):
     tags = "".join(f'<a href="{PREFIX}/blog/">#{esc(t)}</a>' for t in p["tags"])
     canonical = f'{BASE}{PREFIX}/blog/{p["slug"]}.html'
     inner = f"""<article class="post">
+  <span class="cat-badge">{esc(p.get("category") or "기타")}</span>
   <h1>{esc(p["title"])}</h1>
   <div class="meta">{esc(p["date"])}{' · ' + esc(p["keyword"]) if p["keyword"] else ''}</div>
   {f'<div class="tags">{tags}</div>' if tags else ''}
@@ -259,25 +276,71 @@ def render_article(p):
     return page(p["title"], p["description"] or p["title"], canonical, inner, "블로그")
 
 
+# 카테고리 표시 순서(존재하는 것만 노출)
+CATEGORY_ORDER = ["시사", "경제", "사회", "연예", "IT·과학", "스포츠", "생활", "기타"]
+
+
 def render_index(posts):
     items = ""
     for p in posts:
+        cat = p.get("category") or "기타"
         thumb = (f'<div class="pl-thumb"><img src="{esc(p["thumb"])}" alt="" loading="lazy"></div>'
                  if p.get("thumb") else "")
-        items += (f'<li><a class="pl-link" href="{PREFIX}/blog/{p["slug"]}.html">'
+        items += (f'<li data-cat="{esc(cat)}"><a class="pl-link" href="{PREFIX}/blog/{p["slug"]}.html">'
                   f'{thumb}'
                   f'<div class="pl-text">'
+                  f'<span class="cat-badge">{esc(cat)}</span>'
                   f'<span class="t">{esc(p["title"])}</span>'
                   f'<div class="d">{esc(p["date"])}{" · " + esc(p["keyword"]) if p["keyword"] else ""}</div>'
                   f'<div class="x">{esc(p["description"])}</div>'
                   f'</div></a></li>')
+    # 존재하는 카테고리만, 지정 순서로 필터 버튼 생성
+    present = {p.get("category") or "기타" for p in posts}
+    cats = [c for c in CATEGORY_ORDER if c in present] + sorted(present - set(CATEGORY_ORDER))
+    catbar_html = ('<div class="catbar"><button class="catbtn on" data-cat="전체">전체</button>'
+                   + "".join(f'<button class="catbtn" data-cat="{esc(c)}">{esc(c)}</button>' for c in cats)
+                   + '</div>')
     body = (f'<h1 class="page-h1">블로그</h1>'
             f'<p class="page-sub">실시간 인기 검색어를 소재로 직접 쓴 글</p>'
             f'{adbox()}'
-            f'<ul class="postlist">{items or "<li>아직 발행된 글이 없습니다.</li>"}</ul>')
+            f'{catbar_html}'
+            f'<ul class="postlist" id="postlist">{items or "<li>아직 발행된 글이 없습니다.</li>"}</ul>'
+            f'<div class="pager" id="pager"></div>'
+            f'{INDEX_JS}')
     return page(f"블로그 · {SITE_NAME}",
                 "실시간 인기 검색어를 소재로 직접 작성한 블로그 글 모음",
                 f"{BASE}{PREFIX}/blog/", body, "블로그")
+
+
+INDEX_JS = """<script>
+(function(){
+  var PER=20, cat='전체', page=1;
+  var list=document.getElementById('postlist');
+  if(!list) return;
+  var items=[].slice.call(list.querySelectorAll('li'));
+  var pager=document.getElementById('pager');
+  function filtered(){ return cat==='전체'?items:items.filter(function(li){return li.getAttribute('data-cat')===cat;}); }
+  function render(){
+    var f=filtered(), pages=Math.max(1,Math.ceil(f.length/PER));
+    if(page>pages)page=pages;
+    items.forEach(function(li){li.style.display='none';});
+    f.slice((page-1)*PER, page*PER).forEach(function(li){li.style.display='';});
+    var h='';
+    if(pages>1){ for(var p=1;p<=pages;p++){ h+='<button class="pg'+(p===page?' on':'')+'" data-p="'+p+'">'+p+'</button>'; } }
+    pager.innerHTML=h;
+  }
+  document.querySelectorAll('.catbtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.catbtn').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); cat=b.getAttribute('data-cat'); page=1; render();
+    });
+  });
+  pager.addEventListener('click',function(e){
+    if(e.target && e.target.className.indexOf('pg')>-1){ page=parseInt(e.target.getAttribute('data-p'),10); render(); window.scrollTo(0,0); }
+  });
+  render();
+})();
+</script>"""
 
 
 PRIVACY_MD = """## 개인정보처리방침
