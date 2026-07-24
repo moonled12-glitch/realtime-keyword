@@ -173,6 +173,8 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body figure.ph{background:var(--surface);border:1px dashed var(--border);border-radius:10px;
  min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
  color:var(--muted);font-size:13px;line-height:1.6;}
+.ai-notice{margin-top:22px;padding:11px 14px;background:var(--bg);border:1px solid var(--border);
+ border-radius:8px;font-size:12.5px;color:var(--muted);line-height:1.5;}
 .backlink{display:inline-block;margin-top:24px;color:var(--accent);text-decoration:none;font-weight:700;font-size:14px;}
 .page-h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:4px 0 3px;}
 .page-sub{font-size:14px;color:var(--muted);margin:0 0 18px;}
@@ -326,6 +328,7 @@ def render_article(p, posts):
   {adbox()}
   <div class="article-body">{content_with_mid_ad(body_html)}</div>
   {adbox()}
+  <div class="ai-notice">이 블로그 포스팅은 AI로 수집된 내용을 기반으로 작성되었습니다.</div>
   <a class="backlink" href="{PREFIX}/blog/">← 목록으로</a>
 </article>"""
     return page(p["title"], p["description"] or p["title"], canonical, inner, "블로그",
@@ -370,7 +373,7 @@ def render_index(posts):
 
 INDEX_JS = """<script>
 (function(){
-  var PER=20, cat='전체', page=1;
+  var PER=10, cat='전체', page=1;
   var list=document.getElementById('postlist');
   if(!list) return;
   var items=[].slice.call(list.querySelectorAll('li'));
