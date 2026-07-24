@@ -3,6 +3,7 @@ title: "실시간 검색어 블로그를 시작합니다"
 date: 2026-07-11
 keyword: "공지"
 category: 기타
+order: 2026-07-11T01:34:08+09:00
 tags: 공지, 실시간검색어
 description: "이 블로그가 무엇을 다루는지, 어떻게 글이 발행되는지 소개합니다."
 published: true

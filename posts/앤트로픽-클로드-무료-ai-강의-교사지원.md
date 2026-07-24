@@ -4,10 +4,10 @@ date: 2026-07-25
 keyword: "앤트로픽 클로드 무료 강의"
 tags: 앤트로픽, 클로드, AI교육, AnthropicAcademy, 클로드포티처스
 category: IT·과학
+order: 2026-07-25T02:47:55+09:00
 description: "클로드를 만든 앤트로픽이 무료 AI 강의 플랫폼 'Anthropic Academy'와 교사 지원 프로그램 'Claude for Teachers'를 공개했습니다. 무엇을, 누가, 어디서 무료로 이용할 수 있는지 정리했습니다."
 published: true
 ---
-
 AI 챗봇 **'클로드(Claude)'** 를 만든 **앤트로픽(Anthropic)** 이 2026년 들어 교육 분야에서 두 가지 큰 행보를 보였습니다. 하나는 **누구나 무료로 듣는 AI 강의 플랫폼**, 다른 하나는 **교사 대상 무료 지원**인데요. 무엇을, 누가, 어디서 이용할 수 있는지 한 번에 정리했습니다.
 
 
