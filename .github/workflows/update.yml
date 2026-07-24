@@ -39,11 +39,9 @@ jobs:
           ADSENSE_CLIENT: ${{ vars.ADSENSE_CLIENT }} # 홈 광고/자동광고 (승인 후 ca-pub-… 설정)
         run: python generate.py
 
-      - name: Generate blog drafts (사람이 편집·발행)
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          SUMMARY_MODEL: ${{ vars.SUMMARY_MODEL }}
-        run: python draft_articles.py
+      # (자동 초안 생성 비활성화) — 초안은 수동으로 직접 작성. 실시간 검색어 갱신만 유지.
+      # - name: Generate blog drafts
+      #   run: python draft_articles.py
 
       - name: Build blog from posts/
         env:
@@ -54,8 +52,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # posts/ 는 자동 커밋 안 함(사용자가 직접 발행). drafts/blog/부속 파일만.
-          git add index.html prev.json summaries.json drafts blog sitemap.xml rss.xml privacy.html about.html
+          # posts/·drafts/ 는 자동 커밋 안 함(사용자가 직접 작성·발행). 생성물만 커밋.
+          git add index.html prev.json summaries.json blog sitemap.xml rss.xml privacy.html about.html
           if git diff --staged --quiet; then
             echo "No changes."
           else
