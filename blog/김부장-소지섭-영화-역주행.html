@@ -60,9 +60,13 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body li{margin:5px 0;}
 .article-body a{color:var(--accent);word-break:break-all;}
 .article-body blockquote{border-left:3px solid var(--accent);margin:14px 0;padding:4px 14px;color:var(--muted);}
-.article-body img{max-width:100%;border-radius:10px;display:block;}
-.article-body figure{margin:20px 0;}
-.article-body figure img{width:100%;border-radius:10px;}
+.article-body img{max-width:100%;height:auto;border-radius:10px;display:block;}
+.article-body figure{margin:20px auto;text-align:center;}
+.article-body figure img{max-width:100%;height:auto;border-radius:10px;display:inline-block;}
+/* 이미지 크기 옵션: figure class 로 조절 (기본=중간) */
+.article-body figure.small{max-width:340px;}
+.article-body figure.medium{max-width:560px;}
+.article-body figure.large{max-width:100%;}
 .article-body figcaption{font-size:12px;color:var(--muted);text-align:center;margin-top:6px;}
 .article-body figure.ph{background:var(--surface);border:1px dashed var(--border);border-radius:10px;
  min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
