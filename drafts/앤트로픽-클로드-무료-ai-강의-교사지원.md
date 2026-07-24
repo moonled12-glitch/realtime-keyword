@@ -23,6 +23,8 @@ AI 챗봇 **'클로드(Claude)'** 를 만든 **앤트로픽(Anthropic)** 이 202
 
 앤트로픽이 공식 오픈한 **무료 학습 플랫폼**입니다. 보도에 따르면 **150개가 넘는 레슨**과 십여 개의 강좌가 제공되며, 크게 세 갈래로 나뉩니다.
 
+<figure class="large"><img src="../img/anthropic-academy-courses.svg" alt="Anthropic Academy 무료 강의 3개 트랙: AI Fluency, 제품 교육, 개발자 심화"><figcaption>Anthropic Academy 강의 구성 요약 (자료 정리: 키워드픽)</figcaption></figure>
+
 - **AI Fluency(AI 활용 기초)** — 비개발자·일반인을 위한 AI 이해·활용 과정
 - **제품 교육** — 클로드를 실무에서 잘 쓰는 법
 - **개발자 심화** — API·**클로드 코드(Claude Code)** 등 개발 활용
