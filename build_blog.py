@@ -47,6 +47,7 @@ def parse_post(path):
             meta[k.strip()] = v.strip().strip('"').strip("'")
     slug = os.path.splitext(os.path.basename(path))[0]
     tags = [t.strip() for t in re.split(r"[,，]", meta.get("tags", "")) if t.strip()]
+    body = body.strip()
     return {
         "slug": slug,
         "title": meta.get("title", slug),
@@ -55,8 +56,18 @@ def parse_post(path):
         "description": meta.get("description", ""),
         "tags": tags,
         "published": str(meta.get("published", "")).lower() in ("true", "1", "yes"),
-        "body_md": body.strip(),
+        "body_md": body,
+        "thumb": first_image(body),  # 목록 썸네일용 첫 이미지
     }
+
+
+def first_image(body):
+    """본문에서 첫 이미지 URL 추출(썸네일용). placeholder(figure.ph)는 img가 없어 자동 제외."""
+    m = re.search(r'<img[^>]+src="([^"]+)"', body)
+    if m:
+        return m.group(1)
+    m = re.search(r'!\[[^\]]*\]\(([^)\s]+)', body)  # 마크다운 이미지 ![](url)
+    return m.group(1) if m else ""
 
 
 # ---------- 광고 (자리표시자 + 자동광고 로더) ----------
@@ -145,12 +156,17 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .page-sub{font-size:14px;color:var(--muted);margin:0 0 18px;}
 .postlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
 .postlist li{background:var(--surface);border:1px solid var(--border);border-radius:14px;
- box-shadow:var(--shadow);padding:16px 18px;}
-.postlist a.t{font-size:18px;font-weight:800;text-decoration:none;color:var(--text);display:block;letter-spacing:-.01em;}
-.postlist a.t:hover{color:var(--accent);}
+ box-shadow:var(--shadow);overflow:hidden;}
+.pl-link{display:flex;gap:14px;align-items:center;padding:14px 16px;text-decoration:none;color:inherit;}
+.pl-thumb{flex:0 0 auto;width:132px;height:90px;border-radius:10px;overflow:hidden;background:var(--bg);}
+.pl-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.pl-text{min-width:0;}
+.postlist .t{font-size:18px;font-weight:800;color:var(--text);display:block;letter-spacing:-.01em;}
+.pl-link:hover .t{color:var(--accent);}
 .postlist .d{font-size:12px;color:var(--muted);margin:4px 0;}
 .postlist .x{font-size:14px;color:var(--muted);line-height:1.5;display:-webkit-box;
  -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+@media(max-width:520px){.pl-thumb{width:100px;height:74px;}.pl-link{gap:11px;padding:12px 13px;}.postlist .t{font-size:16px;}}
 .static-body{font-size:15.5px;line-height:1.85;}
 .static-body h2{font-size:22px;font-weight:900;margin:6px 0 12px;letter-spacing:-.02em;}
 .static-body h3{font-size:16px;font-weight:800;margin:20px 0 6px;}
@@ -246,9 +262,15 @@ def render_article(p):
 def render_index(posts):
     items = ""
     for p in posts:
-        items += (f'<li><a class="t" href="{PREFIX}/blog/{p["slug"]}.html">{esc(p["title"])}</a>'
+        thumb = (f'<div class="pl-thumb"><img src="{esc(p["thumb"])}" alt="" loading="lazy"></div>'
+                 if p.get("thumb") else "")
+        items += (f'<li><a class="pl-link" href="{PREFIX}/blog/{p["slug"]}.html">'
+                  f'{thumb}'
+                  f'<div class="pl-text">'
+                  f'<span class="t">{esc(p["title"])}</span>'
                   f'<div class="d">{esc(p["date"])}{" · " + esc(p["keyword"]) if p["keyword"] else ""}</div>'
-                  f'<div class="x">{esc(p["description"])}</div></li>')
+                  f'<div class="x">{esc(p["description"])}</div>'
+                  f'</div></a></li>')
     body = (f'<h1 class="page-h1">블로그</h1>'
             f'<p class="page-sub">실시간 인기 검색어를 소재로 직접 쓴 글</p>'
             f'{adbox()}'
