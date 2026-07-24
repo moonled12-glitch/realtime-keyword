@@ -6,6 +6,8 @@ import os
 import re
 import html
 import glob
+import json
+import urllib.parse
 import markdown
 from datetime import datetime, timezone, timedelta
 
@@ -102,6 +104,25 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:'Noto Sans KR',
 a{color:inherit;}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
 .content-wrap{max-width:720px;margin:0 auto;padding:0 20px;}
+/* 2단 레이아웃(본문 + 우측 사이드바) */
+.layout{display:flex;gap:28px;align-items:flex-start;}
+.content-col{flex:1;min-width:0;max-width:720px;}
+.sidebar{flex:0 0 300px;position:sticky;top:72px;}
+@media(max-width:940px){.layout{flex-direction:column;}.sidebar{flex:auto;width:100%;position:static;}.content-col{max-width:none;}}
+.side-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px 16px;margin-bottom:16px;box-shadow:var(--shadow);}
+.side-h{font-size:15px;font-weight:800;margin:0 0 8px;}
+.rank-list{list-style:none;margin:0;padding:0;}
+.rank-list a{display:flex;align-items:center;gap:10px;padding:7px 4px;text-decoration:none;color:var(--text);font-size:14px;border-radius:6px;}
+.rank-list a:hover{background:var(--bg);color:var(--accent);}
+.rank-list .rk{flex:0 0 20px;text-align:center;font-weight:800;color:var(--accent);font-size:13px;}
+.rank-list .rkw{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.side-posts{list-style:none;margin:0;padding:0;}
+.side-posts a{display:flex;gap:10px;align-items:center;padding:6px 4px;text-decoration:none;color:var(--text);border-radius:8px;}
+.side-posts a:hover{background:var(--bg);}
+.sp-thumb{flex:0 0 54px;width:54px;height:40px;border-radius:6px;overflow:hidden;background:var(--bg);display:block;}
+.sp-thumb img{width:100%;height:100%;object-fit:cover;}
+.sp-noimg{background:var(--border);}
+.sp-t{font-size:13px;line-height:1.4;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 /* 글 본문 카드: 페이지 배경과 구분되도록 면 처리 */
 .post{background:var(--surface);border:1px solid var(--border);border-radius:16px;
  padding:28px 32px;margin:10px 0 8px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
@@ -220,7 +241,43 @@ def foot():
             f'</div></footer>')
 
 
-def page(title, desc, canonical, body, active):
+def load_trends():
+    """prev.json에서 현재 구글 실시간 검색어 상위 10개."""
+    try:
+        d = json.load(open("prev.json", encoding="utf-8"))
+        g = sorted(d.get("google", {}).items(), key=lambda x: x[1])
+        return [k for k, _ in g][:10]
+    except Exception:
+        return []
+
+
+def build_sidebar(posts, current_slug=None):
+    trends = load_trends()
+    rank_items = ""
+    for i, kw in enumerate(trends, 1):
+        url = "https://news.google.com/search?q=" + urllib.parse.quote(kw) + "&hl=ko&gl=KR&ceid=KR:ko"
+        rank_items += (f'<li><a href="{url}" target="_blank" rel="noopener">'
+                       f'<span class="rk">{i}</span><span class="rkw">{esc(kw)}</span></a></li>')
+    trend_card = (f'<div class="side-card"><h3 class="side-h">🔥 실시간 검색어</h3>'
+                  f'<ol class="rank-list">{rank_items}</ol></div>') if trends else ""
+    feat = [p for p in posts if p["slug"] != current_slug][:6]
+    post_items = ""
+    for p in feat:
+        thumb = (f'<span class="sp-thumb"><img src="{esc(p["thumb"])}" alt="" loading="lazy"></span>'
+                 if p.get("thumb") else '<span class="sp-thumb sp-noimg"></span>')
+        post_items += (f'<li><a href="{PREFIX}/blog/{p["slug"]}.html">{thumb}'
+                       f'<span class="sp-t">{esc(p["title"])}</span></a></li>')
+    posts_card = (f'<div class="side-card"><h3 class="side-h">📝 블로그 인기 글</h3>'
+                  f'<ul class="side-posts">{post_items}</ul></div>') if post_items else ""
+    return trend_card + posts_card
+
+
+def page(title, desc, canonical, body, active, sidebar=""):
+    if sidebar:
+        main = (f'<main class="wrap layout"><div class="content-col">{body}</div>'
+                f'<aside class="sidebar">{sidebar}</aside></main>')
+    else:
+        main = f'<main><div class="content-wrap">{body}</div></main>'
     return f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -241,9 +298,7 @@ def page(title, desc, canonical, body, active):
 </head>
 <body>
 {header(active)}
-<main><div class="content-wrap">
-{body}
-</div></main>
+{main}
 {foot()}
 {THEME_JS}
 </body>
@@ -259,7 +314,7 @@ def content_with_mid_ad(body_html):
     return "".join((adbox() + sec) if i == mid else sec for i, sec in enumerate(sections))
 
 
-def render_article(p):
+def render_article(p, posts):
     body_html = markdown.markdown(p["body_md"], extensions=["extra", "sane_lists"])
     tags = "".join(f'<a href="{PREFIX}/blog/">#{esc(t)}</a>' for t in p["tags"])
     canonical = f'{BASE}{PREFIX}/blog/{p["slug"]}.html'
@@ -273,7 +328,8 @@ def render_article(p):
   {adbox()}
   <a class="backlink" href="{PREFIX}/blog/">← 목록으로</a>
 </article>"""
-    return page(p["title"], p["description"] or p["title"], canonical, inner, "블로그")
+    return page(p["title"], p["description"] or p["title"], canonical, inner, "블로그",
+                sidebar=build_sidebar(posts, current_slug=p["slug"]))
 
 
 # 카테고리 표시 순서(존재하는 것만 노출)
@@ -309,7 +365,7 @@ def render_index(posts):
             f'{INDEX_JS}')
     return page(f"블로그 · {SITE_NAME}",
                 "실시간 인기 검색어를 소재로 직접 작성한 블로그 글 모음",
-                f"{BASE}{PREFIX}/blog/", body, "블로그")
+                f"{BASE}{PREFIX}/blog/", body, "블로그", sidebar=build_sidebar(posts))
 
 
 INDEX_JS = """<script>
@@ -413,7 +469,7 @@ def main():
     posts.sort(key=lambda p: p["date"], reverse=True)
 
     for p in posts:
-        open(os.path.join(OUT_DIR, f'{p["slug"]}.html'), "w", encoding="utf-8").write(render_article(p))
+        open(os.path.join(OUT_DIR, f'{p["slug"]}.html'), "w", encoding="utf-8").write(render_article(p, posts))
     open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8").write(render_index(posts))
     open("privacy.html", "w", encoding="utf-8").write(render_static("개인정보처리방침", PRIVACY_MD))
     open("about.html", "w", encoding="utf-8").write(render_static("소개", ABOUT_MD))
