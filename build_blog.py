@@ -277,7 +277,7 @@ def render_article(p):
 
 
 # 카테고리 표시 순서(존재하는 것만 노출)
-CATEGORY_ORDER = ["시사", "경제", "사회", "연예", "IT·과학", "스포츠", "생활", "기타"]
+CATEGORY_ORDER = ["시사", "경제", "사회", "연예", "IT·과학", "게임", "스포츠", "생활", "기타"]
 
 
 def render_index(posts):
@@ -302,8 +302,8 @@ def render_index(posts):
                    + '</div>')
     body = (f'<h1 class="page-h1">블로그</h1>'
             f'<p class="page-sub">실시간 인기 검색어를 소재로 직접 쓴 글</p>'
-            f'{adbox()}'
             f'{catbar_html}'
+            f'{adbox()}'
             f'<ul class="postlist" id="postlist">{items or "<li>아직 발행된 글이 없습니다.</li>"}</ul>'
             f'<div class="pager" id="pager"></div>'
             f'{INDEX_JS}')
