@@ -206,6 +206,20 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body figure.ph{background:var(--surface);border:1px dashed var(--border);border-radius:10px;
  min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
  color:var(--muted);font-size:13px;line-height:1.6;}
+/* 관련 글(함께 보면 좋은 글): 썸네일+제목 한 줄 카드 */
+.related{margin:28px 0 4px;}
+.related-h{font-size:16px;font-weight:800;margin:0 0 12px;}
+.related-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+.related-list a{display:flex;gap:13px;align-items:center;padding:10px 12px;border:1px solid var(--border);
+ border-radius:12px;text-decoration:none;color:var(--text);background:var(--bg);}
+.related-list a:hover{border-color:var(--accent);background:var(--surface);}
+.rel-thumb{flex:0 0 78px;width:78px;height:58px;border-radius:8px;overflow:hidden;background:var(--surface);}
+.rel-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.rel-thumb.noimg{background:var(--border);}
+.rel-body{min-width:0;display:flex;flex-direction:column;gap:3px;}
+.rel-cat{font-size:11px;font-weight:700;color:var(--accent);}
+.rel-t{font-size:15px;font-weight:700;line-height:1.4;word-break:keep-all;
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .ai-notice{margin-top:22px;padding:11px 14px;background:var(--bg);border:1px solid var(--border);
  border-radius:8px;font-size:12.5px;color:var(--muted);line-height:1.5;}
 .backlink{display:inline-block;margin-top:24px;color:var(--accent);text-decoration:none;font-weight:700;font-size:14px;}
@@ -403,8 +417,33 @@ def content_with_mid_ad(body_html):
     return "".join((adbox() + sec) if i == mid else sec for i, sec in enumerate(sections))
 
 
+def related_posts(p, posts):
+    """같은 카테고리 우선, 부족하면 최신글로 채워 최대 4개(자기 자신 제외)."""
+    others = [x for x in posts if x["slug"] != p["slug"]]
+    same = [x for x in others if x.get("category") == p.get("category")]
+    rest = [x for x in others if x not in same]
+    return (same + rest)[:4]
+
+
+def related_html(p, posts):
+    rel = related_posts(p, posts)
+    if not rel:
+        return ""
+    items = ""
+    for r in rel:
+        thumb = (f'<span class="rel-thumb"><img src="{esc(r["thumb"])}" alt="" loading="lazy"></span>'
+                 if r.get("thumb") else '<span class="rel-thumb noimg"></span>')
+        items += (f'<li><a href="{PREFIX}/blog/{r["slug"]}.html">{thumb}'
+                  f'<span class="rel-body"><span class="rel-cat">{esc(r.get("category") or "기타")}</span>'
+                  f'<span class="rel-t">{esc(r["title"])}</span></span></a></li>')
+    return (f'<div class="related"><h3 class="related-h">📎 함께 보면 좋은 글</h3>'
+            f'<ul class="related-list">{items}</ul></div>')
+
+
 def render_article(p, posts):
-    body_html = markdown.markdown(p["body_md"], extensions=["extra", "sane_lists"])
+    # 수동 '함께 보면 좋은 글' 블록쿼트 제거(자동 관련글 섹션으로 대체)
+    body_md = re.sub(r'(?m)^>\s*함께 보면 좋은 글:.*(?:\n^>.*)*\n?', '', p["body_md"])
+    body_html = markdown.markdown(body_md, extensions=["extra", "sane_lists"])
     # 표를 가로 스크롤 래퍼로 감싸기(모바일 대응)
     body_html = body_html.replace("<table>", '<div class="tablewrap"><table>').replace("</table>", "</table></div>")
     tags = "".join(f'<a href="{PREFIX}/blog/">#{esc(t)}</a>' for t in p["tags"])
@@ -416,6 +455,7 @@ def render_article(p, posts):
   {f'<div class="tags">{tags}</div>' if tags else ''}
   {adbox()}
   <div class="article-body">{content_with_mid_ad(body_html)}</div>
+  {related_html(p, posts)}
   {adbox()}
   <div class="ai-notice">이 블로그 포스팅은 AI로 수집된 내용을 기반으로 작성되었습니다.</div>
   <a class="backlink" href="{PREFIX}/blog/">← 목록으로</a>

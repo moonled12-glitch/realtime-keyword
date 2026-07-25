@@ -127,6 +127,20 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body figure.ph{background:var(--surface);border:1px dashed var(--border);border-radius:10px;
  min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
  color:var(--muted);font-size:13px;line-height:1.6;}
+/* 관련 글(함께 보면 좋은 글): 썸네일+제목 한 줄 카드 */
+.related{margin:28px 0 4px;}
+.related-h{font-size:16px;font-weight:800;margin:0 0 12px;}
+.related-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+.related-list a{display:flex;gap:13px;align-items:center;padding:10px 12px;border:1px solid var(--border);
+ border-radius:12px;text-decoration:none;color:var(--text);background:var(--bg);}
+.related-list a:hover{border-color:var(--accent);background:var(--surface);}
+.rel-thumb{flex:0 0 78px;width:78px;height:58px;border-radius:8px;overflow:hidden;background:var(--surface);}
+.rel-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.rel-thumb.noimg{background:var(--border);}
+.rel-body{min-width:0;display:flex;flex-direction:column;gap:3px;}
+.rel-cat{font-size:11px;font-weight:700;color:var(--accent);}
+.rel-t{font-size:15px;font-weight:700;line-height:1.4;word-break:keep-all;
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .ai-notice{margin-top:22px;padding:11px 14px;background:var(--bg);border:1px solid var(--border);
  border-radius:8px;font-size:12.5px;color:var(--muted);line-height:1.5;}
 .backlink{display:inline-block;margin-top:24px;color:var(--accent);text-decoration:none;font-weight:700;font-size:14px;}
@@ -199,11 +213,6 @@ footer nav a:hover{color:var(--text);}
 <p>데뷔작에서 '미움받는 캐릭터'를 인상 깊게 소화한 만큼, 유지안이 다음 작품에서 어떤 얼굴을 보여줄지에도 관심이 모입니다. 악역으로 강한 눈도장을 찍은 신예가 어떤 스펙트럼을 펼칠지가 관전 포인트입니다.</p>
 <h2>정리</h2>
 <p>유지안은 ① '김부장'에서 빌런 '주혜리'로 ② <strong>데뷔작부터 연기력 호평</strong>을 받았고 ③ "소중한 첫걸음"이라는 겸손한 소감을 남긴 <strong>주목할 신예</strong>입니다. 미움받는 악역을 설득력 있게 그려낸 그의 다음 행보가 기대됩니다.</p>
-<blockquote>
-<p>함께 보면 좋은 글:
-- <a href="/realtime-keyword/blog/인물탐구-서수민-김부장-소지섭-딸.html">[인물탐구] '김부장' 소지섭 딸 役 신예 서수민은 누구?</a>
-- <a href="/realtime-keyword/blog/김부장-마지막회-액션-결말.html">'김부장' 마지막회 앞두고 — 소지섭 '융단폭격' 액션과 결말 관전 포인트</a></p>
-</blockquote>
 <hr />
 <h3>참고 자료 (2026.6~7 보도)</h3>
 <ul>
@@ -212,6 +221,7 @@ footer nav a:hover{color:var(--text);}
 <li>유지안, 데뷔작부터 '분노 유발 빌런' 눈도장 — JTBC</li>
 <li>'김부장' 유지안, 데뷔작 종영 소감 "소중한 첫걸음" — 스타뉴스·톱스타뉴스</li>
 </ul></div>
+  <div class="related"><h3 class="related-h">📎 함께 보면 좋은 글</h3><ul class="related-list"><li><a href="/blog/김부장-결말-종영-총정리.html"><span class="rel-thumb"><img src="../img/스크린샷-2026-07-26-022628-ms0n7jmq.png" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">연예</span><span class="rel-t">&#x27;김부장&#x27; 결말 총정리 — 해피엔딩·시청률 23%·시즌2 암시까지</span></span></a></li><li><a href="/blog/스파이더맨-브랜드뉴데이-정리.html"><span class="rel-thumb"><img src="../img/common-mrz85g3s.jpg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">연예</span><span class="rel-t">&#x27;스파이더맨: 브랜드 뉴 데이&#x27; 관람 전 체크포인트 — 예매·특별관·테마존 총정리</span></span></a></li><li><a href="/blog/하트시그널5-정리.html"><span class="rel-thumb"><img src="../img/스크린샷-2026-07-25-023047-mrz7vgkk.png" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">연예</span><span class="rel-t">&#x27;하트시그널5&#x27; 종영 앞두고 최고조 — 관전 포인트와 최종 선택 관계도 정리</span></span></a></li><li><a href="/blog/현역가왕3-홍지윤-정리.html"><span class="rel-thumb noimg"></span><span class="rel-body"><span class="rel-cat">연예</span><span class="rel-t">&#x27;현역가왕3&#x27; 우승 홍지윤, SM C&amp;C 전속계약 — 우승 이후 행보 정리</span></span></a></li></ul></div>
   <div class="ad">광고 · 반응형</div>
   <div class="ai-notice">이 블로그 포스팅은 AI로 수집된 내용을 기반으로 작성되었습니다.</div>
   <a class="backlink" href="/blog/">← 목록으로</a>

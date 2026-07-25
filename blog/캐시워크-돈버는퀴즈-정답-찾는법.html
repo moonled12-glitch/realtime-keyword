@@ -127,6 +127,20 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .article-body figure.ph{background:var(--surface);border:1px dashed var(--border);border-radius:10px;
  min-height:200px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
  color:var(--muted);font-size:13px;line-height:1.6;}
+/* 관련 글(함께 보면 좋은 글): 썸네일+제목 한 줄 카드 */
+.related{margin:28px 0 4px;}
+.related-h{font-size:16px;font-weight:800;margin:0 0 12px;}
+.related-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+.related-list a{display:flex;gap:13px;align-items:center;padding:10px 12px;border:1px solid var(--border);
+ border-radius:12px;text-decoration:none;color:var(--text);background:var(--bg);}
+.related-list a:hover{border-color:var(--accent);background:var(--surface);}
+.rel-thumb{flex:0 0 78px;width:78px;height:58px;border-radius:8px;overflow:hidden;background:var(--surface);}
+.rel-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.rel-thumb.noimg{background:var(--border);}
+.rel-body{min-width:0;display:flex;flex-direction:column;gap:3px;}
+.rel-cat{font-size:11px;font-weight:700;color:var(--accent);}
+.rel-t{font-size:15px;font-weight:700;line-height:1.4;word-break:keep-all;
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .ai-notice{margin-top:22px;padding:11px 14px;background:var(--bg);border:1px solid var(--border);
  border-radius:8px;font-size:12.5px;color:var(--muted);line-height:1.5;}
 .backlink{display:inline-block;margin-top:24px;color:var(--accent);text-decoration:none;font-weight:700;font-size:14px;}
@@ -208,6 +222,7 @@ footer nav a:hover{color:var(--text);}
 <ul>
 <li>캐시워크 돈버는퀴즈 정답 종합 — 비즈월드 / 이코노미톡뉴스 등</li>
 </ul></div>
+  <div class="related"><h3 class="related-h">📎 함께 보면 좋은 글</h3><ul class="related-list"><li><a href="/blog/가족관계증명서-인터넷-발급-방법.html"><span class="rel-thumb"><img src="../img/스크린샷-2026-07-25-012745-mrz5myvl.png" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">기타</span><span class="rel-t">가족관계증명서 인터넷 발급 방법 총정리 (2026) — 무료 발급·종류·주의사항</span></span></a></li><li><a href="/blog/디지털자산-시장-정리.html"><span class="rel-thumb"><img src="../img/shutter-speed-abwo6gciute-unsplash-mryp48yt.jpg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">기타</span><span class="rel-t">디지털 자산 시장, 지금 무슨 일이? — 글로벌 규제·인프라 투자 흐름 정리</span></span></a></li><li><a href="/blog/example-welcome.html"><span class="rel-thumb noimg"></span><span class="rel-body"><span class="rel-cat">기타</span><span class="rel-t">실시간 검색어 블로그를 시작합니다</span></span></a></li><li><a href="/blog/여름-전기요금-절약법.html"><span class="rel-thumb noimg"></span><span class="rel-body"><span class="rel-cat">생활</span><span class="rel-t">여름 전기요금 절약법 총정리 — 누진제 이해부터 에어컨 꿀팁·에너지캐시백까지</span></span></a></li></ul></div>
   <div class="ad">광고 · 반응형</div>
   <div class="ai-notice">이 블로그 포스팅은 AI로 수집된 내용을 기반으로 작성되었습니다.</div>
   <a class="backlink" href="/blog/">← 목록으로</a>
