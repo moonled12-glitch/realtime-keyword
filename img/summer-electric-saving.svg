@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="558" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <!-- header -->
+  <text x="50" y="72" font-size="40" font-weight="800" fill="#191c1f">🌞 여름 전기요금 절약 5가지</text>
+  <text x="52" y="108" font-size="21" font-weight="700" fill="#0b7d63">누진 상위 구간만 피해도 요금이 확 줄어요</text>
+  <line x1="50" y1="132" x2="850" y2="132" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- rows -->
+  <g font-size="25" fill="#23282d">
+    <!-- 1 -->
+    <circle cx="78" cy="188" r="24" fill="#0b7d63"/>
+    <text x="78" y="197" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">1</text>
+    <text x="120" y="197" font-weight="700">에어컨 26℃ + 선풍기 함께 돌리기</text>
+
+    <!-- 2 -->
+    <circle cx="78" cy="264" r="24" fill="#0b7d63"/>
+    <text x="78" y="273" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">2</text>
+    <text x="120" y="273" font-weight="700">인버터 에어컨은 약하게 &#39;계속&#39; 유지</text>
+
+    <!-- 3 -->
+    <circle cx="78" cy="340" r="24" fill="#0b7d63"/>
+    <text x="78" y="349" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">3</text>
+    <text x="120" y="349" font-weight="700">2주마다 에어컨 필터 청소</text>
+
+    <!-- 4 -->
+    <circle cx="78" cy="416" r="24" fill="#0b7d63"/>
+    <text x="78" y="425" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">4</text>
+    <text x="120" y="425" font-weight="700">안 쓰는 코드 뽑기 (대기전력 차단)</text>
+
+    <!-- 5 -->
+    <circle cx="78" cy="492" r="24" fill="#0b7d63"/>
+    <text x="78" y="501" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">5</text>
+    <text x="120" y="501" font-weight="700">한전 &#39;에너지캐시백&#39; 신청하기</text>
+  </g>
+
+  <!-- bottom bar -->
+  <rect x="0" y="540" width="900" height="20" fill="#0b7d63"/>
+  <text x="850" y="530" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>
