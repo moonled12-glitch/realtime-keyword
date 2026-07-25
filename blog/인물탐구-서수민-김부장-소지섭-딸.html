@@ -237,8 +237,13 @@ footer nav a:hover{color:var(--text);}
     }).join('');
     board.querySelectorAll('.rt-row').forEach(function(b){
       b.addEventListener('click',function(){
-        var it=b.parentNode; it.classList.toggle('open');
-        b.setAttribute('aria-expanded', it.classList.contains('open')?'true':'false');
+        var it=b.parentNode, willOpen=!it.classList.contains('open');
+        // 홈 실시간처럼 한 번에 하나만: 다른 항목은 모두 닫기
+        board.querySelectorAll('.rt-item.open').forEach(function(x){
+          x.classList.remove('open');
+          var r=x.querySelector('.rt-row'); if(r) r.setAttribute('aria-expanded','false');
+        });
+        if(willOpen){ it.classList.add('open'); b.setAttribute('aria-expanded','true'); }
       });
     });
   }).catch(function(){});
