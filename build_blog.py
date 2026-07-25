@@ -15,7 +15,7 @@ KST = timezone(timedelta(hours=9))
 POSTS_DIR = "posts"
 OUT_DIR = "blog"
 
-ADSENSE_CLIENT = os.environ.get("ADSENSE_CLIENT", "").strip() or "ca-pub-XXXXXXXXXXXXXXXX"
+ADSENSE_CLIENT = os.environ.get("ADSENSE_CLIENT", "").strip() or "ca-pub-5032586877771894"
 SITE_NAME = "키워드픽"
 
 

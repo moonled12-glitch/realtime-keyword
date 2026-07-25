@@ -47,7 +47,7 @@ GEMINI_SLEEP = 4.5      # 호출 간격(초) — Gemini 무료 분당 한도(RPM
 SIGNAL_STATE = {"n": "new", "+": "up", "-": "down", "s": "same"}
 
 # 홈(실시간 보드) 애드센스 — 승인 후 ADSENSE_CLIENT(ca-pub-…) 설정 시 활성화. 자동광고도 이 로더로 동작.
-ADSENSE_CLIENT = os.environ.get("ADSENSE_CLIENT", "").strip() or "ca-pub-XXXXXXXXXXXXXXXX"
+ADSENSE_CLIENT = os.environ.get("ADSENSE_CLIENT", "").strip() or "ca-pub-5032586877771894"
 _ADS_ON = ADSENSE_CLIENT != "ca-pub-XXXXXXXXXXXXXXXX"
 ADSENSE_HEAD = (
     f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
