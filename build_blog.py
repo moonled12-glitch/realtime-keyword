@@ -278,7 +278,7 @@ def header(active):
             f'<header><div class="wrap">'
             f'<a class="logo" href="{PREFIX}/"><span class="mark">K</span><span class="name">키워드픽</span></a>'
             f'<nav class="main">{link("실시간", PREFIX+"/")}{link("블로그", PREFIX+"/blog/")}'
-            f'{link("소개", PREFIX+"/about.html")}</nav>'
+            f'{link("소개", PREFIX+"/about.html")}{link("문의", PREFIX+"/contact.html")}</nav>'
             f'<button class="theme-btn" id="themeBtn" aria-label="다크/라이트 모드 전환">🌙</button>'
             f'</div></header>')
 
@@ -287,6 +287,7 @@ def foot():
     return (f'<footer><div class="wrap">'
             f'<div class="foot-brand"><b>키워드픽</b><span>데이터 출처: 구글 트렌드 · signal.bz</span></div>'
             f'<nav><a href="{PREFIX}/about.html">소개</a><a href="{PREFIX}/blog/">블로그</a>'
+            f'<a href="{PREFIX}/contact.html">문의하기</a>'
             f'<a href="{PREFIX}/privacy.html">개인정보처리방침</a></nav>'
             f'</div></footer>')
 
@@ -564,6 +565,22 @@ ABOUT_MD = """## 소개
 정보의 정확성을 위해 노력하지만, 각 글은 발행 시점 기준이며 최신 사실과 다를 수 있습니다.
 """
 
+CONTACT_MD = """## 문의하기
+
+키워드픽(KeywordPick)을 방문해 주셔서 감사합니다.
+사이트 운영·콘텐츠·제휴·광고, 또는 오류 제보 등 문의사항이 있으시면 아래 이메일로 연락해 주세요.
+
+- **이메일**: [tax@kadea.co.kr](mailto:tax@kadea.co.kr)
+
+보내주신 문의는 확인 후 순차적으로 답변드립니다.
+콘텐츠 관련 정정 요청, 저작권 문의도 이메일로 접수하고 있으며, 확인되는 대로 신속히 처리하겠습니다.
+
+### 운영 정보
+- 사이트명: 키워드픽 (KeywordPick)
+- 주소: keywordpick.co.kr
+- 제공 서비스: 구글·네이버 실시간 인기 검색어 및 이슈 정리 블로그
+"""
+
 
 def render_static(title, md):
     body = f'<article class="post static-body">{markdown.markdown(md, extensions=["extra"])}</article>'
@@ -608,6 +625,7 @@ def main():
     open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8").write(render_index(posts))
     open("privacy.html", "w", encoding="utf-8").write(render_static("개인정보처리방침", PRIVACY_MD))
     open("about.html", "w", encoding="utf-8").write(render_static("소개", ABOUT_MD))
+    open("contact.html", "w", encoding="utf-8").write(render_static("문의하기", CONTACT_MD))
     open("sitemap.xml", "w", encoding="utf-8").write(build_sitemap(posts))
     open("rss.xml", "w", encoding="utf-8").write(build_rss(posts))
     print(f"blog built: {len(posts)} post(s) → {OUT_DIR}/, +privacy/about, sitemap.xml, rss.xml "
