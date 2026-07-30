@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="518" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <!-- header -->
+  <text x="48" y="66" font-size="38" font-weight="800" fill="#191c1f">📊 삼성전자 2026년 2분기 실적</text>
+  <text x="50" y="100" font-size="20" font-weight="700" fill="#0b7d63">역대 분기 최대 매출 · 반도체가 이끌었다</text>
+  <line x1="48" y1="122" x2="852" y2="122" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- stat tiles -->
+  <g>
+    <rect x="48" y="146" width="388" height="150" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="72" y="188" font-size="19" font-weight="700" fill="#6b46c1">매출</text>
+    <text x="72" y="244" font-size="52" font-weight="800" fill="#191c1f">171.5조원</text>
+    <text x="72" y="278" font-size="16" fill="#767b80">역대 분기 최대 실적</text>
+  </g>
+  <g>
+    <rect x="464" y="146" width="388" height="150" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="488" y="188" font-size="19" font-weight="700" fill="#2563eb">영업이익</text>
+    <text x="488" y="244" font-size="48" font-weight="800" fill="#191c1f">역대 최대</text>
+    <text x="488" y="278" font-size="16" fill="#767b80">사상 최대 분기 이익 경신</text>
+  </g>
+
+  <!-- highlight rows -->
+  <g>
+    <rect x="48" y="320" width="804" height="66" rx="12" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="360" font-size="22" font-weight="800" fill="#12805c">반도체 ▲</text>
+    <text x="230" y="360" font-size="19" fill="#23282d">실적 견인 — HBM·AI 메모리 수요 호조, '피크아웃' 우려 진정</text>
+  </g>
+  <g>
+    <rect x="48" y="398" width="804" height="66" rx="12" fill="#fdf2f2" stroke="#f5d5d5"/>
+    <text x="72" y="438" font-size="22" font-weight="800" fill="#e5484d">스마트폰 ▼</text>
+    <text x="230" y="438" font-size="19" fill="#23282d">사상 첫 분기 적자 — 부품가·경쟁 심화 영향</text>
+  </g>
+
+  <!-- bottom bar -->
+  <rect x="0" y="500" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="490" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>
