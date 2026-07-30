@@ -221,7 +221,7 @@ article h1{font-size:28px;font-weight:900;letter-spacing:-.02em;line-height:1.32
 .rel-cat{font-size:11px;font-weight:700;color:var(--accent);}
 .rel-t{font-size:15px;font-weight:700;line-height:1.4;word-break:keep-all;
  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.ai-notice{margin-top:22px;padding:11px 14px;background:var(--bg);border:1px solid var(--border);
+.post-note{margin-top:22px;padding:11px 14px;background:var(--bg);border:1px solid var(--border);
  border-radius:8px;font-size:12.5px;color:var(--muted);line-height:1.5;}
 .backlink{display:inline-block;margin-top:24px;color:var(--accent);text-decoration:none;font-weight:700;font-size:14px;}
 .page-h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:0 0 3px;word-break:keep-all;overflow-wrap:break-word;}
@@ -444,8 +444,15 @@ def related_html(p, posts):
 
 
 def render_article(p, posts):
+    body_md = p["body_md"]
     # 수동 '함께 보면 좋은 글' 블록쿼트 제거(자동 관련글 섹션으로 대체)
-    body_md = re.sub(r'(?m)^>\s*함께 보면 좋은 글:.*(?:\n^>.*)*\n?', '', p["body_md"])
+    body_md = re.sub(r'(?m)^>\s*함께 보면 좋은 글:.*(?:\n^>.*)*\n?', '', body_md)
+    # 편집용 메모 '※ 이 글은 초안입니다…' 문단 제거(발행본에 노출 방지)
+    body_md = re.sub(r'(?ms)^※\s*이 글은 초안입니다.*?(?=\n\n|\Z)', '', body_md)
+    # 빈 이미지 자리표시자(figure.ph) 제거
+    body_md = re.sub(r'<figure class="ph">.*?</figure>', '', body_md, flags=re.S)
+    # 본문 끝에 남는 빈 '---' 구분선 정리
+    body_md = re.sub(r'(?m)^-{3,}\s*$(?:\s*\n)+(?=###|\Z)', '', body_md).strip()
     body_html = markdown.markdown(body_md, extensions=["extra", "sane_lists"])
     # 표를 가로 스크롤 래퍼로 감싸기(모바일 대응)
     body_html = body_html.replace("<table>", '<div class="tablewrap"><table>').replace("</table>", "</table></div>")
@@ -460,7 +467,7 @@ def render_article(p, posts):
   <div class="article-body">{content_with_mid_ad(body_html)}</div>
   {related_html(p, posts)}
   {adbox()}
-  <div class="ai-notice">이 블로그 포스팅은 AI로 수집된 내용을 기반으로 작성되었습니다.</div>
+  <div class="post-note">본 포스팅은 공개된 뉴스와 자료를 바탕으로 편집·정리한 콘텐츠입니다.</div>
   <a class="backlink" href="{PREFIX}/blog/">← 목록으로</a>
 </article>"""
     return page(p["title"], p["description"] or p["title"], canonical, inner, "블로그",
