@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="498" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <!-- header -->
+  <text x="48" y="66" font-size="36" font-weight="800" fill="#191c1f">📉 미국 2026년 2분기 GDP 성장률</text>
+  <line x1="48" y1="90" x2="852" y2="90" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- big number -->
+  <g>
+    <rect x="48" y="112" width="360" height="180" rx="16" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="228" y="170" text-anchor="middle" font-size="20" font-weight="700" fill="#2563eb">2분기 성장률(속보치)</text>
+    <text x="228" y="240" text-anchor="middle" font-size="72" font-weight="800" fill="#191c1f">1.5%</text>
+    <text x="228" y="276" text-anchor="middle" font-size="17" fill="#e5484d" font-weight="700">전망치 하회 · 둔화</text>
+  </g>
+
+  <!-- factors -->
+  <g>
+    <rect x="432" y="112" width="420" height="82" rx="12" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="456" y="148" font-size="20" font-weight="800" fill="#12805c">▲ 성장 지탱</text>
+    <text x="456" y="177" font-size="18" fill="#23282d">견조한 소비 · AI 관련 투자</text>
+
+    <rect x="432" y="210" width="420" height="82" rx="12" fill="#fdf2f2" stroke="#f5d5d5"/>
+    <text x="456" y="246" font-size="20" font-weight="800" fill="#e5484d">▼ 성장 발목</text>
+    <text x="456" y="275" font-size="18" fill="#23282d">정부지출 감소 · 무역적자 확대(수입↑)</text>
+  </g>
+
+  <!-- korea note -->
+  <rect x="48" y="316" width="804" height="120" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+  <text x="72" y="352" font-size="19" font-weight="800" fill="#6b46c1">🇰🇷 한국 투자자 체크</text>
+  <text x="72" y="386" font-size="17" fill="#23282d">· 미국 경기 둔화는 환율·금리·증시(코스피·서학개미)에 파급될 수 있음</text>
+  <text x="72" y="414" font-size="17" fill="#23282d">· 단, 소비·AI 투자가 버팀목 — 침체보다는 '완만한 둔화' 해석</text>
+
+  <!-- bottom bar -->
+  <rect x="0" y="480" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="470" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>
