@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="518" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="62" font-size="36" font-weight="800" fill="#191c1f">🎬 힉스필드로 영상 만들기 4단계</text>
+  <text x="50" y="96" font-size="19" font-weight="700" fill="#0b7d63">사진 한 장이면 시네마틱 숏폼 영상이 뚝딱</text>
+  <line x1="48" y1="118" x2="852" y2="118" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <circle cx="82" cy="176" r="26" fill="#0b7d63"/><text x="82" y="186" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">1</text>
+    <text x="128" y="172" font-size="23" font-weight="800" fill="#191c1f">📷 소재 준비</text>
+    <text x="128" y="201" font-size="17" fill="#5b6167">원하는 장면을 사진 또는 텍스트로 입력</text>
+
+    <circle cx="82" cy="256" r="26" fill="#0b7d63"/><text x="82" y="266" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">2</text>
+    <text x="128" y="252" font-size="23" font-weight="800" fill="#191c1f">🤖 AI 모델 선택</text>
+    <text x="128" y="281" font-size="17" fill="#5b6167">Kling·Sora·Veo 등 15종+ 중 골라 사용</text>
+
+    <circle cx="82" cy="336" r="26" fill="#0b7d63"/><text x="82" y="346" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">3</text>
+    <text x="128" y="332" font-size="23" font-weight="800" fill="#191c1f">🎥 카메라·효과 선택</text>
+    <text x="128" y="361" font-size="17" fill="#5b6167">70+ 시네마틱 카메라 무빙 프리셋 적용</text>
+
+    <circle cx="82" cy="416" r="26" fill="#0b7d63"/><text x="82" y="426" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">4</text>
+    <text x="128" y="412" font-size="23" font-weight="800" fill="#191c1f">⚡ 생성 완료</text>
+    <text x="128" y="441" font-size="17" fill="#5b6167">크레딧이 소모되며 영상이 만들어짐</text>
+  </g>
+
+  <text x="48" y="480" font-size="15" fill="#767b80">※ 모델·해상도·길이에 따라 소모 크레딧이 다릅니다 (고급 모델일수록 많이 소모).</text>
+
+  <rect x="0" y="500" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="490" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>
