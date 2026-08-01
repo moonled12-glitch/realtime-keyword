@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="538" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="62" font-size="36" font-weight="800" fill="#191c1f">🆓 제미나이 무료, 이만큼 됩니다</text>
+  <text x="50" y="96" font-size="19" font-weight="700" fill="#0b7d63">구글 계정만 있으면 $0 · 카드 등록 없음 (2026년 기준)</text>
+  <line x1="48" y1="118" x2="852" y2="118" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- cards -->
+  <g>
+    <rect x="48" y="142" width="256" height="118" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="72" y="184" font-size="34">💬</text>
+    <text x="120" y="180" font-size="20" font-weight="800" fill="#191c1f">대화</text>
+    <text x="120" y="212" font-size="26" font-weight="800" fill="#6b46c1">하루 30회</text>
+  </g>
+  <g>
+    <rect x="322" y="142" width="256" height="118" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="346" y="184" font-size="34">🎨</text>
+    <text x="394" y="180" font-size="20" font-weight="800" fill="#191c1f">이미지 생성</text>
+    <text x="394" y="212" font-size="26" font-weight="800" fill="#2563eb">하루 20장</text>
+  </g>
+  <g>
+    <rect x="596" y="142" width="256" height="118" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="620" y="184" font-size="34">🔎</text>
+    <text x="668" y="180" font-size="20" font-weight="800" fill="#191c1f">딥리서치</text>
+    <text x="668" y="212" font-size="26" font-weight="800" fill="#12805c">월 5회</text>
+  </g>
+  <g>
+    <rect x="48" y="278" width="390" height="110" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="318" font-size="30">🎵</text>
+    <text x="116" y="314" font-size="19" font-weight="800" fill="#191c1f">음악·오디오</text>
+    <text x="116" y="346" font-size="19" fill="#5b6167">음악 하루 10곡 · 오디오 요약 20회</text>
+  </g>
+  <g>
+    <rect x="456" y="278" width="396" height="110" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="480" y="318" font-size="30">⚡</text>
+    <text x="524" y="314" font-size="19" font-weight="800" fill="#191c1f">사용 모델(무료)</text>
+    <text x="524" y="346" font-size="19" fill="#5b6167">Gemini Flash + 상위 모델 일부 이용</text>
+  </g>
+
+  <text x="48" y="428" font-size="16" fill="#767b80">※ 한도·모델명은 수시로 바뀌며, 앱(gemini.google.com)과 API는 별도 무료 정책입니다.</text>
+
+  <rect x="0" y="520" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="510" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>
