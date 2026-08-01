@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="558" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="66" font-size="38" font-weight="800" fill="#191c1f">🤖 좋은 프롬프트 5원칙</text>
+  <text x="50" y="100" font-size="20" font-weight="700" fill="#0b7d63">이렇게 물으면 AI 답이 확 좋아집니다</text>
+  <line x1="48" y1="122" x2="852" y2="122" stroke="#eef0f2" stroke-width="2"/>
+
+  <g font-size="24" fill="#23282d">
+    <circle cx="80" cy="182" r="26" fill="#0b7d63"/><text x="80" y="192" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">1</text>
+    <text x="126" y="178" font-weight="800">구체적으로 요청하기</text>
+    <text x="126" y="207" font-size="17" fill="#5b6167">무엇을·어떤 형식으로·분량까지 명확히</text>
+
+    <circle cx="80" cy="258" r="26" fill="#0b7d63"/><text x="80" y="268" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">2</text>
+    <text x="126" y="254" font-weight="800">역할을 정해주기</text>
+    <text x="126" y="283" font-size="17" fill="#5b6167">"너는 ○○ 전문가야"로 관점 부여</text>
+
+    <circle cx="80" cy="334" r="26" fill="#0b7d63"/><text x="80" y="344" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">3</text>
+    <text x="126" y="330" font-weight="800">예시를 보여주기</text>
+    <text x="126" y="359" font-size="17" fill="#5b6167">원하는 결과의 샘플·형식을 함께 제시</text>
+
+    <circle cx="80" cy="410" r="26" fill="#0b7d63"/><text x="80" y="420" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">4</text>
+    <text x="126" y="406" font-weight="800">단계로 나누기</text>
+    <text x="126" y="435" font-size="17" fill="#5b6167">복잡한 일은 여러 단계로 쪼개서 요청</text>
+
+    <circle cx="80" cy="486" r="26" fill="#0b7d63"/><text x="80" y="496" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">5</text>
+    <text x="126" y="482" font-weight="800">피드백으로 다듬기</text>
+    <text x="126" y="511" font-size="17" fill="#5b6167">"더 짧게/다른 톤으로" 등 수정 요청 반복</text>
+  </g>
+
+  <rect x="0" y="540" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="530" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>
