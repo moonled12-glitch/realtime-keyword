@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="518" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="450" y="56" text-anchor="middle" font-size="34" font-weight="800" fill="#191c1f">🔌 MCP — 클로드를 내 도구에 연결</text>
+  <text x="450" y="88" text-anchor="middle" font-size="18" font-weight="700" fill="#0b7d63">파일·깃허브·DB·웹까지, 클로드가 직접 접근</text>
+
+  <!-- connector lines (center 450,300) -->
+  <g stroke="#cdeede" stroke-width="3">
+    <line x1="450" y1="300" x2="450" y2="168"/>
+    <line x1="450" y1="300" x2="678" y2="212"/>
+    <line x1="450" y1="300" x2="678" y2="392"/>
+    <line x1="450" y1="300" x2="450" y2="452"/>
+    <line x1="450" y1="300" x2="222" y2="392"/>
+    <line x1="450" y1="300" x2="222" y2="212"/>
+  </g>
+
+  <!-- center: Claude -->
+  <circle cx="450" cy="300" r="66" fill="#0b7d63"/>
+  <text x="450" y="296" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">클로드</text>
+  <text x="450" y="322" text-anchor="middle" font-size="14" fill="#cdeede">+ MCP</text>
+
+  <!-- nodes -->
+  <g font-size="17" font-weight="700" fill="#23282d">
+    <g><rect x="378" y="130" width="144" height="52" rx="12" fill="#f7f5ff" stroke="#e6ddff"/><text x="450" y="162" text-anchor="middle">📁 내 파일</text></g>
+    <g><rect x="606" y="186" width="144" height="52" rx="12" fill="#eef5ff" stroke="#d5e6fb"/><text x="678" y="218" text-anchor="middle">🐙 GitHub</text></g>
+    <g><rect x="606" y="366" width="144" height="52" rx="12" fill="#f2f9f5" stroke="#cdeede"/><text x="678" y="398" text-anchor="middle">🗄️ 데이터베이스</text></g>
+    <g><rect x="378" y="426" width="144" height="52" rx="12" fill="#fff6ed" stroke="#f6dcc0"/><text x="450" y="458" text-anchor="middle">🔍 웹 검색</text></g>
+    <g><rect x="150" y="366" width="144" height="52" rx="12" fill="#eef5ff" stroke="#d5e6fb"/><text x="222" y="398" text-anchor="middle">🗺️ 지도</text></g>
+    <g><rect x="150" y="186" width="144" height="52" rx="12" fill="#f7f5ff" stroke="#e6ddff"/><text x="222" y="218" text-anchor="middle">🌐 각종 앱·API</text></g>
+  </g>
+
+  <rect x="0" y="500" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="490" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>
