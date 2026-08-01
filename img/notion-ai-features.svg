@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="498" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="34" font-weight="800" fill="#191c1f">📝 Notion AI로 할 수 있는 것</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">메모·문서 앱 노션에 AI가 붙었다</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+  <g>
+    <rect x="48" y="138" width="390" height="150" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="72" y="182" font-size="30">💬</text><text x="116" y="178" font-size="20" font-weight="800" fill="#191c1f">워크스페이스 질문답변</text>
+    <text x="72" y="222" font-size="16" fill="#5b6167">내 노션 페이지 전체를 뒤져</text>
+    <text x="72" y="248" font-size="16" fill="#5b6167">출처와 함께 답을 정리 (Q&amp;A)</text>
+  </g>
+  <g>
+    <rect x="462" y="138" width="390" height="150" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="182" font-size="30">✍️</text><text x="530" y="178" font-size="20" font-weight="800" fill="#191c1f">글쓰기·편집</text>
+    <text x="486" y="222" font-size="16" fill="#5b6167">초안 작성·요약·톤 변경·</text>
+    <text x="486" y="248" font-size="16" fill="#5b6167">맞춤법·번역까지</text>
+  </g>
+  <g>
+    <rect x="48" y="304" width="390" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="348" font-size="30">🗂️</text><text x="116" y="344" font-size="20" font-weight="800" fill="#191c1f">DB 자동화</text>
+    <text x="72" y="388" font-size="16" fill="#5b6167">표(데이터베이스) 내용 요약·</text>
+    <text x="72" y="414" font-size="16" fill="#5b6167">태그 생성·감정 분석·번역 자동</text>
+  </g>
+  <g>
+    <rect x="462" y="304" width="390" height="150" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="486" y="348" font-size="30">🤖</text><text x="530" y="344" font-size="20" font-weight="800" fill="#191c1f">노션 에이전트</text>
+    <text x="486" y="388" font-size="16" fill="#5b6167">답만 하는 게 아니라</text>
+    <text x="486" y="414" font-size="16" fill="#5b6167">직접 작업을 수행 (최신 기능)</text>
+  </g>
+  <rect x="0" y="480" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="470" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>

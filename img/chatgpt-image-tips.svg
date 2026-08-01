@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="458" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="32" font-weight="800" fill="#191c1f">✨ 이미지 잘 뽑는 프롬프트 팁</text>
+  <line x1="48" y1="84" x2="852" y2="84" stroke="#eef0f2" stroke-width="2"/>
+  <g font-size="20">
+    <circle cx="80" cy="146" r="24" fill="#0b7d63"/><text x="80" y="155" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">1</text>
+    <text x="124" y="142" font-size="22" font-weight="800" fill="#191c1f">구체적으로 묘사</text>
+    <text x="124" y="170" font-size="17" fill="#5b6167">대상·배경·분위기·색감·구도까지</text>
+
+    <circle cx="80" cy="222" r="24" fill="#0b7d63"/><text x="80" y="231" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">2</text>
+    <text x="124" y="218" font-size="22" font-weight="800" fill="#191c1f">스타일 지정</text>
+    <text x="124" y="246" font-size="17" fill="#5b6167">"수채화풍", "3D 렌더", "실사" 등</text>
+
+    <circle cx="80" cy="298" r="24" fill="#0b7d63"/><text x="80" y="307" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">3</text>
+    <text x="124" y="294" font-size="22" font-weight="800" fill="#191c1f">글자도 넣기</text>
+    <text x="124" y="322" font-size="17" fill="#5b6167">최신 모델은 이미지 속 텍스트도 잘 씀</text>
+
+    <circle cx="80" cy="374" r="24" fill="#0b7d63"/><text x="80" y="383" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">4</text>
+    <text x="124" y="370" font-size="22" font-weight="800" fill="#191c1f">대화로 수정</text>
+    <text x="124" y="398" font-size="17" fill="#5b6167">"배경 더 밝게", "글자 크게" 반복 요청</text>
+  </g>
+  <rect x="0" y="440" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="430" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>

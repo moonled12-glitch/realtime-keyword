@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="32" font-weight="800" fill="#191c1f">💳 Perplexity 요금제 (2026년 기준)</text>
+  <line x1="48" y1="84" x2="852" y2="84" stroke="#eef0f2" stroke-width="2"/>
+  <g>
+    <rect x="48" y="108" width="256" height="220" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="176" y="152" text-anchor="middle" font-size="22" font-weight="800" fill="#12805c">Free</text>
+    <text x="176" y="196" text-anchor="middle" font-size="40" font-weight="800" fill="#191c1f">$0</text>
+    <text x="176" y="244" text-anchor="middle" font-size="16" fill="#5b6167">기본 검색 무제한</text>
+    <text x="176" y="270" text-anchor="middle" font-size="16" fill="#5b6167">Pro 검색 하루 약 5회</text>
+    <text x="176" y="296" text-anchor="middle" font-size="16" fill="#5b6167">Comet 브라우저 무료</text>
+  </g>
+  <g>
+    <rect x="322" y="108" width="256" height="220" rx="14" fill="#eef5ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="450" y="152" text-anchor="middle" font-size="22" font-weight="800" fill="#2563eb">Pro ⭐</text>
+    <text x="450" y="196" text-anchor="middle" font-size="40" font-weight="800" fill="#191c1f">$20/월</text>
+    <text x="450" y="244" text-anchor="middle" font-size="16" fill="#5b6167">Pro 검색 무제한</text>
+    <text x="450" y="270" text-anchor="middle" font-size="16" fill="#5b6167">Deep Research 하루 20회</text>
+    <text x="450" y="296" text-anchor="middle" font-size="16" fill="#5b6167">최신 고급 모델 사용</text>
+  </g>
+  <g>
+    <rect x="596" y="108" width="256" height="220" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="724" y="152" text-anchor="middle" font-size="22" font-weight="800" fill="#6b46c1">Max</text>
+    <text x="724" y="196" text-anchor="middle" font-size="40" font-weight="800" fill="#191c1f">$200/월</text>
+    <text x="724" y="244" text-anchor="middle" font-size="16" fill="#5b6167">Labs·고급 기능 무제한</text>
+    <text x="724" y="270" text-anchor="middle" font-size="16" fill="#5b6167">헤비 유저·전문가용</text>
+    <text x="724" y="296" text-anchor="middle" font-size="15" fill="#8a7bbd">학생 Edu Pro $10/월</text>
+  </g>
+</svg>

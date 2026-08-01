@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="358" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">💳 Runway 요금제 (2026)</text>
+  <line x1="48" y1="84" x2="852" y2="84" stroke="#eef0f2" stroke-width="2"/>
+  <g>
+    <rect x="48" y="108" width="256" height="220" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="176" y="152" text-anchor="middle" font-size="22" font-weight="800" fill="#12805c">Free</text>
+    <text x="176" y="196" text-anchor="middle" font-size="38" font-weight="800" fill="#191c1f">$0</text>
+    <text x="176" y="240" text-anchor="middle" font-size="16" fill="#5b6167">125 크레딧 (1회 제공)</text>
+    <text x="176" y="266" text-anchor="middle" font-size="16" fill="#5b6167">품질 체험용</text>
+  </g>
+  <g>
+    <rect x="322" y="108" width="256" height="220" rx="14" fill="#eef5ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="450" y="152" text-anchor="middle" font-size="22" font-weight="800" fill="#2563eb">Standard ⭐</text>
+    <text x="450" y="196" text-anchor="middle" font-size="34" font-weight="800" fill="#191c1f">$15/월</text>
+    <text x="450" y="240" text-anchor="middle" font-size="16" fill="#5b6167">월 625 크레딧</text>
+    <text x="450" y="266" text-anchor="middle" font-size="16" fill="#5b6167">입문·개인 창작</text>
+  </g>
+  <g>
+    <rect x="596" y="108" width="256" height="220" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="724" y="152" text-anchor="middle" font-size="22" font-weight="800" fill="#6b46c1">Pro</text>
+    <text x="724" y="196" text-anchor="middle" font-size="34" font-weight="800" fill="#191c1f">$35/월</text>
+    <text x="724" y="240" text-anchor="middle" font-size="16" fill="#5b6167">월 2,250 크레딧</text>
+    <text x="724" y="266" text-anchor="middle" font-size="15" fill="#8a7bbd">5초 720p ≈ 5크레딧</text>
+  </g>
+</svg>

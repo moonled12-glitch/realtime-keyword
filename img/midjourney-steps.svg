@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="34" font-weight="800" fill="#191c1f">🖼️ 미드저니 시작하기 4단계</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">이젠 디스코드 없이 웹에서 바로</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+  <g font-size="19">
+    <circle cx="80" cy="168" r="24" fill="#0b7d63"/><text x="80" y="177" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">1</text>
+    <text x="124" y="164" font-size="21" font-weight="800" fill="#191c1f">가입 (midjourney.com)</text>
+    <text x="124" y="192" font-size="16" fill="#5b6167">구글 또는 디스코드 계정으로 로그인</text>
+
+    <circle cx="80" cy="240" r="24" fill="#0b7d63"/><text x="80" y="249" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">2</text>
+    <text x="124" y="236" font-size="21" font-weight="800" fill="#191c1f">프롬프트 입력</text>
+    <text x="124" y="264" font-size="16" fill="#5b6167">원하는 장면을 영어/한글로 묘사</text>
+
+    <circle cx="80" cy="312" r="24" fill="#0b7d63"/><text x="80" y="321" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">3</text>
+    <text x="124" y="308" font-size="21" font-weight="800" fill="#191c1f">4장 생성 → 고르기</text>
+    <text x="124" y="336" font-size="16" fill="#5b6167">마음에 드는 것 업스케일·변형(Vary)</text>
+  </g>
+  <g>
+    <rect x="560" y="150" width="292" height="200" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="706" y="192" text-anchor="middle" font-size="19" font-weight="800" fill="#6b46c1">4. 활용</text>
+    <text x="706" y="230" text-anchor="middle" font-size="16" fill="#5b6167">유료 플랜 이미지는</text>
+    <text x="706" y="256" text-anchor="middle" font-size="16" fill="#5b6167">상업적 이용 가능</text>
+    <text x="706" y="296" text-anchor="middle" font-size="15" fill="#8a7bbd">※ 무료 체험은 없음(유료만)</text>
+  </g>
+</svg>

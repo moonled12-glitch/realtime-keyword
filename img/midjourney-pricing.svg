@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="318" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="56" font-size="30" font-weight="800" fill="#191c1f">💳 미드저니 요금제 (2026 · 월 기준)</text>
+  <line x1="48" y1="80" x2="852" y2="80" stroke="#eef0f2" stroke-width="2"/>
+  <g>
+    <rect x="40" y="102" width="196" height="188" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="138" y="140" text-anchor="middle" font-size="20" font-weight="800" fill="#12805c">Basic</text>
+    <text x="138" y="182" text-anchor="middle" font-size="34" font-weight="800" fill="#191c1f">$10</text>
+    <text x="138" y="222" text-anchor="middle" font-size="15" fill="#5b6167">빠른 생성 3.3시간</text>
+    <text x="138" y="248" text-anchor="middle" font-size="15" fill="#5b6167">입문·연습용</text>
+  </g>
+  <g>
+    <rect x="248" y="102" width="196" height="188" rx="14" fill="#eef5ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="346" y="140" text-anchor="middle" font-size="20" font-weight="800" fill="#2563eb">Standard ⭐</text>
+    <text x="346" y="182" text-anchor="middle" font-size="34" font-weight="800" fill="#191c1f">$30</text>
+    <text x="346" y="222" text-anchor="middle" font-size="15" fill="#5b6167">빠른 15시간 + </text>
+    <text x="346" y="248" text-anchor="middle" font-size="15" fill="#5b6167">Relax 무제한</text>
+  </g>
+  <g>
+    <rect x="456" y="102" width="196" height="188" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="554" y="140" text-anchor="middle" font-size="20" font-weight="800" fill="#6b46c1">Pro</text>
+    <text x="554" y="182" text-anchor="middle" font-size="34" font-weight="800" fill="#191c1f">$60</text>
+    <text x="554" y="222" text-anchor="middle" font-size="15" fill="#5b6167">빠른 30시간</text>
+    <text x="554" y="248" text-anchor="middle" font-size="15" fill="#5b6167">프라이빗 모드</text>
+  </g>
+  <g>
+    <rect x="664" y="102" width="196" height="188" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="762" y="140" text-anchor="middle" font-size="20" font-weight="800" fill="#c9821f">Mega</text>
+    <text x="762" y="182" text-anchor="middle" font-size="34" font-weight="800" fill="#191c1f">$120</text>
+    <text x="762" y="222" text-anchor="middle" font-size="15" fill="#5b6167">빠른 60시간</text>
+    <text x="762" y="248" text-anchor="middle" font-size="15" fill="#5b6167">대량 작업용</text>
+  </g>
+</svg>

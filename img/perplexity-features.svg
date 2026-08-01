@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="518" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="62" font-size="36" font-weight="800" fill="#191c1f">🔍 Perplexity — 출처까지 주는 AI 검색</text>
+  <text x="50" y="96" font-size="19" font-weight="700" fill="#0b7d63">챗봇 + 검색엔진을 합친 '답변 엔진'</text>
+  <line x1="48" y1="118" x2="852" y2="118" stroke="#eef0f2" stroke-width="2"/>
+  <g>
+    <rect x="48" y="142" width="390" height="150" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="72" y="186" font-size="30">🌐</text><text x="116" y="182" font-size="21" font-weight="800" fill="#191c1f">실시간 웹 검색</text>
+    <text x="72" y="228" font-size="17" fill="#5b6167">최신 정보를 웹에서 찾아 답변</text>
+    <text x="72" y="256" font-size="17" fill="#5b6167">('아는 척'이 아니라 실제 검색)</text>
+  </g>
+  <g>
+    <rect x="462" y="142" width="390" height="150" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="186" font-size="30">📑</text><text x="530" y="182" font-size="21" font-weight="800" fill="#191c1f">출처(각주) 표시</text>
+    <text x="486" y="228" font-size="17" fill="#5b6167">답변마다 근거 링크를 달아줘</text>
+    <text x="486" y="256" font-size="17" fill="#5b6167">사실 확인이 쉬움</text>
+  </g>
+  <g>
+    <rect x="48" y="308" width="390" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="352" font-size="30">🧠</text><text x="116" y="348" font-size="21" font-weight="800" fill="#191c1f">Deep Research</text>
+    <text x="72" y="394" font-size="17" fill="#5b6167">여러 자료를 모아 심층 리포트 작성</text>
+    <text x="72" y="422" font-size="17" fill="#5b6167">(무료도 월 소량 제공)</text>
+  </g>
+  <g>
+    <rect x="462" y="308" width="390" height="150" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="486" y="352" font-size="30">☄️</text><text x="530" y="348" font-size="21" font-weight="800" fill="#191c1f">Comet AI 브라우저</text>
+    <text x="486" y="394" font-size="17" fill="#5b6167">2026년 무료 개방 — 페이지 요약·</text>
+    <text x="486" y="422" font-size="17" fill="#5b6167">음성·쇼핑 도우미 내장</text>
+  </g>
+  <rect x="0" y="500" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="490" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>
