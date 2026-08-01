@@ -4,7 +4,7 @@ date: 2026-08-01
 keyword: "클로드 MCP 활용법"
 tags: 클로드, MCP, ModelContextProtocol, AI생산성, 앤트로픽
 category: IT·과학
-order: 2026-08-01T04:46:52.381Z
+order: 2026-08-01T04:48:32.546Z
 description: "클로드(Claude)를 MCP로 내 파일·깃허브·데이터베이스·웹에 연결하는 방법을 초보자도 이해하기 쉽게 정리했습니다. MCP 개념부터 설치, 대표 서버, 주의점까지 담았습니다."
 published: true
 ---
