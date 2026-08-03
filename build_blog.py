@@ -620,6 +620,56 @@ def build_rss(posts):
             '</channel></rss>')
 
 
+def render_home_blog(posts):
+    """홈(index.html)에 주입할 '최신 블로그 글' 섹션 — 실제 HTML(SEO·애드센스 대응)."""
+    cards = ""
+    for p in posts[:9]:
+        raw = p.get("thumb") or ""
+        # 홈은 루트에 있으므로 blog 기준 상대경로(../img/..)를 루트 기준(img/..)으로 변환
+        th = raw if raw.startswith("http") else (raw[3:] if raw.startswith("../") else raw)
+        thumb = (f'<span class="hb-thumb"><img src="{esc(th)}" alt="" loading="lazy"></span>'
+                 if raw else '<span class="hb-thumb hb-noimg"></span>')
+        cat = esc(p.get("category") or "기타")
+        cards += (f'<a class="hb-card" href="{PREFIX}/blog/{p["slug"]}.html">'
+                  f'{thumb}<span class="hb-body">'
+                  f'<span class="hb-cat">{cat}</span>'
+                  f'<span class="hb-title">{esc(p["title"])}</span>'
+                  f'<span class="hb-desc">{esc(p["description"])}</span>'
+                  f'<span class="hb-date">{esc(p["date"])}</span>'
+                  f'</span></a>')
+    intro = ("키워드픽은 매일 구글·네이버에서 화제가 되는 검색어를 살펴보고, 그 배경과 맥락을 직접 "
+             "정리해 알기 쉽게 풀어 씁니다. 단순 순위 나열이 아니라 ‘왜 이 키워드가 떴는지’, "
+             "‘무엇을 알아두면 좋은지’까지 담았습니다.")
+    style = ("<style>"
+        ".home-blog{margin:36px 0 8px;}"
+        ".home-blog .hb-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px;}"
+        ".home-blog h2{font-size:22px;font-weight:800;color:var(--text);margin:0;}"
+        ".home-blog .hb-more{font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;white-space:nowrap;}"
+        ".home-blog .hb-intro{font-size:14px;line-height:1.75;color:var(--muted);margin:0 0 18px;max-width:760px;}"
+        ".hb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}"
+        ".hb-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);"
+        "border-radius:14px;overflow:hidden;text-decoration:none;transition:.15s;}"
+        ".hb-card:hover{border-color:var(--accent);transform:translateY(-2px);}"
+        ".hb-thumb{display:block;width:100%;aspect-ratio:16/9;background:var(--accent-soft);overflow:hidden;}"
+        ".hb-thumb img{width:100%;height:100%;object-fit:cover;display:block;}"
+        ".hb-noimg{background:linear-gradient(135deg,var(--accent-soft),var(--surface));}"
+        ".hb-body{display:flex;flex-direction:column;gap:6px;padding:13px 15px 15px;}"
+        ".hb-cat{align-self:flex-start;font-size:11px;font-weight:700;color:var(--accent);"
+        "background:var(--accent-soft);padding:2px 9px;border-radius:999px;}"
+        ".hb-title{font-size:16px;font-weight:700;line-height:1.4;color:var(--text);word-break:keep-all;}"
+        ".hb-desc{font-size:13px;line-height:1.6;color:var(--muted);display:-webkit-box;"
+        "-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}"
+        ".hb-date{font-size:12px;color:var(--muted);margin-top:2px;}"
+        "@media(max-width:860px){.hb-grid{grid-template-columns:repeat(2,1fr);}}"
+        "@media(max-width:560px){.hb-grid{grid-template-columns:1fr;}}"
+        "</style>")
+    return (f'{style}<section class="home-blog">'
+            f'<div class="hb-head"><h2>키워드픽 블로그 — 지금 뜨는 이슈 깊이 보기</h2>'
+            f'<a class="hb-more" href="{PREFIX}/blog/">전체 글 보기 →</a></div>'
+            f'<p class="hb-intro">{intro}</p>'
+            f'<div class="hb-grid">{cards}</div></section>')
+
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     posts = [parse_post(f) for f in glob.glob(os.path.join(POSTS_DIR, "*.md"))]
@@ -635,6 +685,21 @@ def main():
     open("contact.html", "w", encoding="utf-8").write(render_static("문의하기", CONTACT_MD))
     open("sitemap.xml", "w", encoding="utf-8").write(build_sitemap(posts))
     open("rss.xml", "w", encoding="utf-8").write(build_rss(posts))
+
+    # 홈(index.html)에 '최신 블로그 글' 섹션 주입 — generate.py가 남긴 <!--HOME_BLOG--> 자리 치환.
+    # 실제 HTML로 넣어 애드센스 심사·검색 크롤러가 첫 화면에서 바로 콘텐츠를 읽도록 함.
+    try:
+        if os.path.exists("index.html"):
+            html = open("index.html", encoding="utf-8").read()
+            if "<!--HOME_BLOG-->" in html:
+                html = html.replace("<!--HOME_BLOG-->", render_home_blog(posts))
+                open("index.html", "w", encoding="utf-8").write(html)
+                print("home blog section injected into index.html")
+            else:
+                print("note: <!--HOME_BLOG--> marker not found in index.html (skip)")
+    except Exception as e:
+        print("home blog inject skipped:", e)
+
     print(f"blog built: {len(posts)} post(s) → {OUT_DIR}/, +privacy/about, sitemap.xml, rss.xml "
           f"(base={BASE}{PREFIX})")
 
