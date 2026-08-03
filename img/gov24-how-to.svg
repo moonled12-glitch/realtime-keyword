@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="438" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">🖥️ 인터넷 발급 4단계 &amp; 채널 비교</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 4단계 -->
+  <g>
+    <circle cx="72" cy="128" r="18" fill="#0b7d63"/><text x="72" y="135" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">1</text>
+    <text x="102" y="134" font-size="17" fill="#191c1f">정부24(gov.kr) 접속 → 간편인증/공동인증 로그인</text>
+  </g>
+  <g>
+    <circle cx="72" cy="176" r="18" fill="#0b7d63"/><text x="72" y="183" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">2</text>
+    <text x="102" y="182" font-size="17" fill="#191c1f">발급할 서류 검색(예: 주민등록등본)</text>
+  </g>
+  <g>
+    <circle cx="72" cy="224" r="18" fill="#0b7d63"/><text x="72" y="231" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">3</text>
+    <text x="102" y="230" font-size="17" fill="#191c1f">용도·주소 표기 등 선택 후 신청</text>
+  </g>
+  <g>
+    <circle cx="72" cy="272" r="18" fill="#0b7d63"/><text x="72" y="279" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">4</text>
+    <text x="102" y="278" font-size="17" fill="#191c1f">프린터로 출력 또는 전자문서지갑에 저장</text>
+  </g>
+
+  <!-- 채널 비교 -->
+  <line x1="48" y1="306" x2="852" y2="306" stroke="#eef0f2" stroke-width="2"/>
+  <g font-size="16">
+    <rect x="48" y="322" width="256" height="92" rx="12" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="176" y="352" text-anchor="middle" font-size="17" font-weight="800" fill="#12805c">인터넷(정부24)</text>
+    <text x="176" y="382" text-anchor="middle" fill="#5b6167">수수료 무료 · 24시간</text>
+
+    <rect x="322" y="322" width="256" height="92" rx="12" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="450" y="352" text-anchor="middle" font-size="17" font-weight="800" fill="#2563eb">무인민원발급기</text>
+    <text x="450" y="382" text-anchor="middle" fill="#5b6167">약 200원 · 지문 확인</text>
+
+    <rect x="596" y="322" width="256" height="92" rx="12" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="724" y="352" text-anchor="middle" font-size="17" font-weight="800" fill="#c67c1e">주민센터 방문</text>
+    <text x="724" y="382" text-anchor="middle" fill="#5b6167">수수료 발생 · 창구 확인</text>
+  </g>
+</svg>

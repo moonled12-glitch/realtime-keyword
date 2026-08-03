@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="418" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">🏢 대체휴무, 누가 쉬나</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="390" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="144" font-size="20" font-weight="800" fill="#12805c">✅ 확실히 쉼</text>
+    <text x="72" y="180" font-size="16" fill="#5b6167">관공서·주민센터, 학교</text>
+    <text x="72" y="208" font-size="16" fill="#5b6167">은행(창구) — 앱·인터넷뱅킹은 가능</text>
+    <text x="72" y="236" font-size="16" fill="#5b6167">공무원, 우체국 등</text>
+  </g>
+  <g>
+    <rect x="462" y="104" width="390" height="150" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="486" y="144" font-size="20" font-weight="800" fill="#c67c1e">△ 회사마다 다름</text>
+    <text x="486" y="180" font-size="16" fill="#5b6167">상시 5인 이상 사업장 → 유급휴일</text>
+    <text x="486" y="208" font-size="16" fill="#5b6167">5인 미만 → 법정 의무 아님</text>
+    <text x="486" y="236" font-size="15" fill="#8a9099">(취업규칙·근로계약에 따름)</text>
+  </g>
+
+  <g>
+    <rect x="48" y="270" width="804" height="110" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="72" y="308" font-size="20" font-weight="800" fill="#2563eb">💸 대체휴일에 일한다면 (5인 이상)</text>
+    <text x="72" y="344" font-size="16" fill="#5b6167">8시간 이내 <tspan font-weight="800" fill="#191c1f">통상임금의 1.5배</tspan>, 8시간 초과분은 <tspan font-weight="800" fill="#191c1f">2배</tspan></text>
+    <text x="72" y="370" font-size="15" fill="#8a9099">또는 노사 합의에 따라 보상휴가로 대체 가능</text>
+  </g>
+</svg>

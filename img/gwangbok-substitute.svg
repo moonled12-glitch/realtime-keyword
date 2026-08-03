@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">🇰🇷 광복절 대체휴무, 왜 8월 17일?</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 3일 -->
+  <g>
+    <rect x="60" y="120" width="240" height="170" rx="14" fill="#fdecea" stroke="#f6c9c2"/>
+    <text x="180" y="162" text-anchor="middle" font-size="20" font-weight="800" fill="#c0392b">8/15 (토)</text>
+    <text x="180" y="200" text-anchor="middle" font-size="22" font-weight="800" fill="#191c1f">광복절</text>
+    <text x="180" y="238" text-anchor="middle" font-size="15" fill="#8a9099">공휴일이지만</text>
+    <text x="180" y="262" text-anchor="middle" font-size="15" fill="#8a9099">토요일과 겹침</text>
+  </g>
+  <text x="318" y="212" font-size="30" fill="#b0b6bc">→</text>
+  <g>
+    <rect x="352" y="120" width="240" height="170" rx="14" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="472" y="162" text-anchor="middle" font-size="20" font-weight="800" fill="#767b80">8/16 (일)</text>
+    <text x="472" y="200" text-anchor="middle" font-size="22" font-weight="800" fill="#191c1f">일요일</text>
+    <text x="472" y="238" text-anchor="middle" font-size="15" fill="#8a9099">그래서 다음</text>
+    <text x="472" y="262" text-anchor="middle" font-size="15" fill="#8a9099">평일로 대체</text>
+  </g>
+  <text x="610" y="212" font-size="30" fill="#b0b6bc">→</text>
+  <g>
+    <rect x="644" y="120" width="200" height="170" rx="14" fill="#f2f9f5" stroke="#0b7d63" stroke-width="2"/>
+    <text x="744" y="162" text-anchor="middle" font-size="20" font-weight="800" fill="#12805c">8/17 (월)</text>
+    <text x="744" y="200" text-anchor="middle" font-size="20" font-weight="800" fill="#191c1f">대체공휴일</text>
+    <text x="744" y="240" text-anchor="middle" font-size="16" fill="#12805c" font-weight="700">쉬는 날 ✔</text>
+  </g>
+
+  <text x="48" y="340" font-size="16" fill="#5b6167">→ 결과적으로 <tspan font-weight="800" fill="#191c1f">8월 15일(토)~17일(월) 3일 연휴</tspan>가 됩니다.</text>
+</svg>

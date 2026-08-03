@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="478" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="34" font-weight="800" fill="#191c1f">📄 정부24에서 뗄 수 있는 서류</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">대부분 인터넷 발급 무료 · 24시간</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="138" width="390" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="180" font-size="21" font-weight="800" fill="#12805c">🏠 주민·거주</text>
+    <text x="72" y="214" font-size="16" fill="#5b6167">주민등록표 등본 / 초본</text>
+    <text x="72" y="242" font-size="16" fill="#5b6167">전입세대 열람, 인감·본인서명확인</text>
+    <text x="72" y="270" font-size="16" fill="#5b6167">확정일자 열람</text>
+  </g>
+  <g>
+    <rect x="462" y="138" width="390" height="150" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="180" font-size="21" font-weight="800" fill="#2563eb">🏢 부동산·세금</text>
+    <text x="486" y="214" font-size="16" fill="#5b6167">건축물대장 / 토지(임야)대장</text>
+    <text x="486" y="242" font-size="16" fill="#5b6167">지방세 납세증명 / 세목별 과세증명</text>
+    <text x="486" y="270" font-size="16" fill="#5b6167">지방세 완납증명</text>
+  </g>
+  <g>
+    <rect x="48" y="304" width="390" height="150" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="346" font-size="21" font-weight="800" fill="#c67c1e">🎓 자격·기타</text>
+    <text x="72" y="380" font-size="16" fill="#5b6167">병적증명서, 운전경력증명서</text>
+    <text x="72" y="408" font-size="16" fill="#5b6167">소득금액증명(홈택스 연계)</text>
+    <text x="72" y="436" font-size="16" fill="#5b6167">각종 확인서·신청 민원</text>
+  </g>
+  <g>
+    <rect x="462" y="304" width="390" height="150" rx="14" fill="#fdecea" stroke="#f6c9c2"/>
+    <text x="486" y="346" font-size="21" font-weight="800" fill="#c0392b">⚠️ 여기선 안 됨</text>
+    <text x="486" y="380" font-size="16" fill="#5b6167">가족관계·기본·혼인관계증명서는</text>
+    <text x="486" y="408" font-size="16" fill="#5b6167">대법원 <tspan font-weight="800" fill="#191c1f">전자가족관계등록시스템</tspan></text>
+    <text x="486" y="436" font-size="16" fill="#5b6167">에서 발급(정부24 아님)</text>
+  </g>
+</svg>
