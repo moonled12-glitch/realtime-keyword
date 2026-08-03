@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="468" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="34" font-weight="800" fill="#191c1f">📝 실업급여 신청 4단계</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">비자발적 퇴사 → 이직일 다음날부터 12개월 안에 신청</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <circle cx="76" cy="170" r="20" fill="#0b7d63"/><text x="76" y="177" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">1</text>
+    <text x="112" y="164" font-size="20" font-weight="800" fill="#191c1f">고용24에서 구직 등록</text>
+    <text x="112" y="192" font-size="16" fill="#5b6167">워크넷/고용24 온라인 구직 신청 + 수급자격 교육(온라인) 수강</text>
+  </g>
+  <g>
+    <circle cx="76" cy="250" r="20" fill="#0b7d63"/><text x="76" y="257" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">2</text>
+    <text x="112" y="244" font-size="20" font-weight="800" fill="#191c1f">거주지 고용센터 방문</text>
+    <text x="112" y="272" font-size="16" fill="#5b6167">수급자격 인정 신청(신분증 지참) — 이직확인서·피보험 이력 확인</text>
+  </g>
+  <g>
+    <circle cx="76" cy="330" r="20" fill="#0b7d63"/><text x="76" y="337" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">3</text>
+    <text x="112" y="324" font-size="20" font-weight="800" fill="#191c1f">수급자격 인정</text>
+    <text x="112" y="352" font-size="16" fill="#5b6167">비자발적 이직·피보험 180일 등 요건 충족 시 수급자격 인정</text>
+  </g>
+  <g>
+    <circle cx="76" cy="410" r="20" fill="#0b7d63"/><text x="76" y="417" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">4</text>
+    <text x="112" y="404" font-size="20" font-weight="800" fill="#191c1f">실업인정 → 구직급여 지급</text>
+    <text x="112" y="432" font-size="16" fill="#5b6167">1~4주마다 재취업활동을 신고하면 급여가 계좌로 입금</text>
+  </g>
+</svg>

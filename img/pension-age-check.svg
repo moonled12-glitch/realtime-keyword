@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="418" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">👵 노령연금, 몇 살부터 받나</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 출생연도별 연령 -->
+  <g font-size="16">
+    <rect x="48" y="102" width="516" height="252" rx="14" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="72" y="136" font-size="17" font-weight="800" fill="#2563eb">출생연도</text>
+    <text x="420" y="136" font-size="17" font-weight="800" fill="#2563eb">수급 개시 연령</text>
+    <line x1="72" y1="150" x2="540" y2="150" stroke="#e0e5ea"/>
+    <text x="72" y="182" fill="#5b6167">1953~1956년생</text><text x="420" y="182" font-weight="700" fill="#191c1f">61세</text>
+    <text x="72" y="216" fill="#5b6167">1957~1960년생</text><text x="420" y="216" font-weight="700" fill="#191c1f">62세</text>
+    <text x="72" y="250" fill="#5b6167">1961~1964년생</text><text x="420" y="250" font-weight="700" fill="#191c1f">63세</text>
+    <text x="72" y="284" fill="#5b6167">1965~1968년생</text><text x="420" y="284" font-weight="700" fill="#191c1f">64세</text>
+    <text x="72" y="318" fill="#c0392b" font-weight="700">1969년생 이후</text><text x="420" y="318" font-weight="800" fill="#c0392b">65세</text>
+  </g>
+
+  <!-- 예상연금 조회 -->
+  <g>
+    <rect x="588" y="102" width="264" height="252" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="612" y="140" font-size="18" font-weight="800" fill="#12805c">🔎 예상연금 조회</text>
+    <text x="612" y="178" font-size="15" fill="#5b6167">국민연금공단(NPS)</text>
+    <text x="612" y="202" font-size="15" fill="#5b6167">홈페이지·'내 곁에 국민연금' 앱</text>
+    <text x="612" y="238" font-size="15" fill="#5b6167">→ '내 연금 알아보기'</text>
+    <text x="612" y="270" font-size="15" fill="#5b6167">가입기간·소득 이력 기반</text>
+    <text x="612" y="294" font-size="15" fill="#5b6167">예상 수령액 확인 가능</text>
+    <text x="612" y="330" font-size="14" fill="#8a9099">최소 가입 10년이면 수급</text>
+  </g>
+
+  <text x="48" y="392" font-size="14" fill="#8a9099">※ 최소 가입기간(120개월) 미달 시 반환일시금으로 지급될 수 있습니다.</text>
+</svg>

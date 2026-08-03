@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="338" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">💵 실수령액은 이렇게 계산돼요</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 세전 -->
+  <rect x="40" y="120" width="180" height="120" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+  <text x="130" y="165" text-anchor="middle" font-size="18" font-weight="800" fill="#2563eb">세전 급여</text>
+  <text x="130" y="200" text-anchor="middle" font-size="15" fill="#5b6167">(계약 연봉 ÷ 12)</text>
+
+  <text x="248" y="188" font-size="32" fill="#b0b6bc">−</text>
+
+  <!-- 공제 -->
+  <rect x="280" y="108" width="300" height="144" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+  <text x="430" y="142" text-anchor="middle" font-size="18" font-weight="800" fill="#c67c1e">공제 항목</text>
+  <text x="304" y="176" font-size="15" fill="#5b6167">① 4대보험(국민·건강·장기·고용)</text>
+  <text x="304" y="204" font-size="15" fill="#5b6167">② 소득세(간이세액표)</text>
+  <text x="304" y="232" font-size="15" fill="#5b6167">③ 지방소득세(소득세의 10%)</text>
+
+  <text x="608" y="188" font-size="32" fill="#b0b6bc">=</text>
+
+  <!-- 실수령 -->
+  <rect x="640" y="120" width="212" height="120" rx="14" fill="#f2f9f5" stroke="#0b7d63" stroke-width="2"/>
+  <text x="746" y="165" text-anchor="middle" font-size="18" font-weight="800" fill="#12805c">실수령액</text>
+  <text x="746" y="200" text-anchor="middle" font-size="15" fill="#5b6167">통장에 찍히는 돈</text>
+
+  <text x="48" y="300" font-size="15" fill="#8a9099">※ 부양가족 수·비과세 항목에 따라 소득세가 달라져 실수령액도 사람마다 다릅니다.</text>
+</svg>

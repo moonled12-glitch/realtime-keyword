@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="438" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="32" font-weight="800" fill="#191c1f">📈 국민연금 보험료율 인상 로드맵</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">2026년부터 매년 0.5%p씩 → 2033년 13%</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 계단 막대: 2025~2033 -->
+  <g font-size="14" fill="#5b6167" text-anchor="middle">
+    <rect x="70"  y="300" width="70" height="60"  rx="6" fill="#cdeede"/><text x="105" y="290" font-weight="800" fill="#191c1f">9.0%</text><text x="105" y="380">2025</text>
+    <rect x="158" y="285" width="70" height="75"  rx="6" fill="#0b7d63"/><text x="193" y="275" font-weight="800" fill="#0b7d63">9.5%</text><text x="193" y="380">2026</text>
+    <rect x="246" y="270" width="70" height="90"  rx="6" fill="#7fc3ac"/><text x="281" y="260" font-weight="800" fill="#191c1f">10.0%</text><text x="281" y="380">2027</text>
+    <rect x="334" y="255" width="70" height="105" rx="6" fill="#7fc3ac"/><text x="369" y="245" font-weight="800" fill="#191c1f">10.5%</text><text x="369" y="380">2028</text>
+    <rect x="422" y="240" width="70" height="120" rx="6" fill="#7fc3ac"/><text x="457" y="230" font-weight="800" fill="#191c1f">11.0%</text><text x="457" y="380">2029</text>
+    <rect x="510" y="225" width="70" height="135" rx="6" fill="#7fc3ac"/><text x="545" y="215" font-weight="800" fill="#191c1f">11.5%</text><text x="545" y="380">2030</text>
+    <rect x="598" y="210" width="70" height="150" rx="6" fill="#7fc3ac"/><text x="633" y="200" font-weight="800" fill="#191c1f">12.0%</text><text x="633" y="380">2031</text>
+    <rect x="686" y="195" width="70" height="165" rx="6" fill="#7fc3ac"/><text x="721" y="185" font-weight="800" fill="#191c1f">12.5%</text><text x="721" y="380">2032</text>
+    <rect x="774" y="180" width="70" height="180" rx="6" fill="#c0392b"/><text x="809" y="170" font-weight="800" fill="#c0392b">13.0%</text><text x="809" y="380">2033</text>
+  </g>
+  <text x="48" y="416" font-size="14" fill="#8a9099">※ 직장가입자는 회사와 절반씩 부담(2026년 근로자 4.75%).</text>
+</svg>

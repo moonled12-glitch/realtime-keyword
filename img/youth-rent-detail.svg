@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="358" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">🏠 청년월세 특별지원 한눈에</text>
+  <line x1="48" y1="84" x2="852" y2="84" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="108" width="256" height="220" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="176" y="152" text-anchor="middle" font-size="20" font-weight="800" fill="#12805c">지원 금액</text>
+    <text x="176" y="200" text-anchor="middle" font-size="30" font-weight="800" fill="#191c1f">월 최대</text>
+    <text x="176" y="240" text-anchor="middle" font-size="34" font-weight="800" fill="#12805c">20만원</text>
+    <text x="176" y="278" text-anchor="middle" font-size="15" fill="#5b6167">실제 납부 월세 한도 내</text>
+  </g>
+  <g>
+    <rect x="322" y="108" width="256" height="220" rx="14" fill="#eef5ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="450" y="152" text-anchor="middle" font-size="20" font-weight="800" fill="#2563eb">지원 기간</text>
+    <text x="450" y="200" text-anchor="middle" font-size="30" font-weight="800" fill="#191c1f">최장</text>
+    <text x="450" y="240" text-anchor="middle" font-size="34" font-weight="800" fill="#2563eb">24개월</text>
+    <text x="450" y="278" text-anchor="middle" font-size="15" fill="#5b6167">2년간 총 480만원</text>
+  </g>
+  <g>
+    <rect x="596" y="108" width="256" height="220" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="724" y="152" text-anchor="middle" font-size="20" font-weight="800" fill="#c67c1e">주요 조건</text>
+    <text x="724" y="196" text-anchor="middle" font-size="16" fill="#5b6167">무주택·부모와 별거</text>
+    <text x="724" y="224" text-anchor="middle" font-size="16" fill="#5b6167">청년가구 중위소득 60%↓</text>
+    <text x="724" y="252" text-anchor="middle" font-size="16" fill="#5b6167">원가구 중위소득 100%↓</text>
+    <text x="724" y="290" text-anchor="middle" font-size="14" fill="#8a9099">복지로에서 신청</text>
+  </g>
+</svg>
