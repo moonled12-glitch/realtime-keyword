@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="428" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">📝 국가장학금 신청 절차 &amp; 성적 기준</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 절차 -->
+  <g>
+    <circle cx="72" cy="122" r="17" fill="#0b7d63"/><text x="72" y="129" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">1</text>
+    <text x="100" y="128" font-size="16" fill="#191c1f">한국장학재단 홈페이지·앱에서 신청(공동/간편인증)</text>
+  </g>
+  <g>
+    <circle cx="72" cy="168" r="17" fill="#0b7d63"/><text x="72" y="175" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">2</text>
+    <text x="100" y="174" font-size="16" fill="#191c1f">가구원 정보제공 동의 + 금융정보 제공 동의</text>
+  </g>
+  <g>
+    <circle cx="72" cy="214" r="17" fill="#0b7d63"/><text x="72" y="221" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">3</text>
+    <text x="100" y="220" font-size="16" fill="#191c1f">소득분위(학자금 지원구간) 심사 → 결과 확인</text>
+  </g>
+  <g>
+    <circle cx="72" cy="260" r="17" fill="#0b7d63"/><text x="72" y="267" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">4</text>
+    <text x="100" y="266" font-size="16" fill="#191c1f">학교로 등록금 차감 또는 계좌 지급</text>
+  </g>
+
+  <line x1="48" y1="292" x2="852" y2="292" stroke="#eef0f2" stroke-width="2"/>
+  <g>
+    <rect x="48" y="308" width="390" height="96" rx="12" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="72" y="342" font-size="17" font-weight="800" fill="#2563eb">📚 성적 기준</text>
+    <text x="72" y="372" font-size="15" fill="#5b6167">직전 학기 12학점 이상 +</text>
+    <text x="72" y="394" font-size="15" fill="#5b6167">100점 만점 80점(B학점) 이상</text>
+  </g>
+  <g>
+    <rect x="462" y="308" width="390" height="96" rx="12" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="486" y="342" font-size="17" font-weight="800" fill="#12805c">🗓️ 신청 시기(학기별)</text>
+    <text x="486" y="372" font-size="15" fill="#5b6167">1학기: 전년 11~12월(1차)·2월(2차)</text>
+    <text x="486" y="394" font-size="15" fill="#5b6167">2학기: 5~6월(1차)·8월(2차)</text>
+  </g>
+</svg>

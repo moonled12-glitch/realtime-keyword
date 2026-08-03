@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">💰 청년내일저축계좌 구조 (2026)</text>
+  <text x="50" y="90" font-size="17" font-weight="700" fill="#0b7d63">중위소득 50% 이하 청년 · 3년 만기</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 본인 -->
+  <rect x="48" y="140" width="230" height="150" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+  <text x="163" y="180" text-anchor="middle" font-size="18" font-weight="800" fill="#2563eb">내가 저축</text>
+  <text x="163" y="222" text-anchor="middle" font-size="30" font-weight="800" fill="#191c1f">월 10만원</text>
+  <text x="163" y="258" text-anchor="middle" font-size="15" fill="#5b6167">3년 = 360만원</text>
+
+  <text x="292" y="222" font-size="34" fill="#b0b6bc">+</text>
+
+  <!-- 정부 -->
+  <rect x="330" y="140" width="230" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+  <text x="445" y="180" text-anchor="middle" font-size="18" font-weight="800" fill="#12805c">정부가 지원</text>
+  <text x="445" y="222" text-anchor="middle" font-size="30" font-weight="800" fill="#191c1f">월 30만원</text>
+  <text x="445" y="258" text-anchor="middle" font-size="15" fill="#5b6167">3년 = 1,080만원</text>
+
+  <text x="574" y="222" font-size="34" fill="#b0b6bc">=</text>
+
+  <!-- 만기 -->
+  <rect x="612" y="140" width="240" height="150" rx="14" fill="#fff6ed" stroke="#f6a94c" stroke-width="2"/>
+  <text x="732" y="180" text-anchor="middle" font-size="18" font-weight="800" fill="#c67c1e">3년 뒤</text>
+  <text x="732" y="224" text-anchor="middle" font-size="30" font-weight="800" fill="#c0392b">약 1,440만원</text>
+  <text x="732" y="260" text-anchor="middle" font-size="14" fill="#8a9099">+ 이자·지원금 포함</text>
+
+  <text x="48" y="340" font-size="15" fill="#8a9099">※ 3년간 근로 지속·교육 이수 등 조건을 충족해야 정부지원금 전액을 받습니다.</text>
+</svg>
