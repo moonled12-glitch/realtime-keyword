@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">🏠 재산 요건 &amp; 신청 일정</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 재산 요건 -->
+  <text x="48" y="120" font-size="19" font-weight="800" fill="#0b7d63">재산 요건 (가구 합계)</text>
+  <g>
+    <rect x="48" y="136" width="390" height="70" rx="12" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="168" font-size="16" font-weight="700" fill="#12805c">1.7억원 미만</text>
+    <text x="72" y="192" font-size="15" fill="#5b6167">산정액 100% 지급</text>
+
+    <rect x="462" y="136" width="390" height="70" rx="12" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="486" y="168" font-size="16" font-weight="700" fill="#c67c1e">1.7억 ~ 2.4억 미만</text>
+    <text x="486" y="192" font-size="15" fill="#5b6167">산정액의 50%만 지급</text>
+  </g>
+  <g>
+    <rect x="48" y="216" width="804" height="56" rx="12" fill="#fdecea" stroke="#f6c9c2"/>
+    <text x="72" y="250" font-size="16" font-weight="700" fill="#c0392b">2.4억원 이상 → 지급 대상에서 제외</text>
+  </g>
+
+  <!-- 일정 -->
+  <text x="48" y="312" font-size="19" font-weight="800" fill="#2563eb">📅 정기신청 일정</text>
+  <text x="48" y="344" font-size="16" fill="#5b6167">신청: <tspan font-weight="800" fill="#191c1f">5월 1일 ~ 6월 1일</tspan>  ·  지급: <tspan font-weight="800" fill="#191c1f">8월 말 ~ 9월 초</tspan> 계좌 입금</text>
+  <text x="48" y="368" font-size="14" fill="#8a9099">※ 근로소득자는 반기신청도 가능 · 기한 후 신청 시 지급액 일부 감액</text>
+</svg>

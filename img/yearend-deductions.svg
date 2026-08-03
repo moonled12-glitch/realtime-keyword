@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="478" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">💡 놓치기 쉬운 주요 공제</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="390" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="144" font-size="20" font-weight="800" fill="#12805c">💳 신용카드 등</text>
+    <text x="72" y="180" font-size="15" fill="#5b6167">총급여 25% 초과 사용분 공제</text>
+    <text x="72" y="206" font-size="15" fill="#5b6167">신용 15% · 체크/현금 30%</text>
+    <text x="72" y="232" font-size="15" fill="#5b6167">전통시장·대중교통 40%</text>
+  </g>
+  <g>
+    <rect x="462" y="104" width="390" height="150" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="144" font-size="20" font-weight="800" fill="#2563eb">🏦 연금계좌</text>
+    <text x="486" y="180" font-size="15" fill="#5b6167">연금저축 + IRP 합산 900만원 한도</text>
+    <text x="486" y="206" font-size="15" fill="#5b6167">세액공제 12~15%</text>
+    <text x="486" y="232" font-size="15" fill="#8a9099">노후 대비 + 절세 동시에</text>
+  </g>
+  <g>
+    <rect x="48" y="270" width="390" height="150" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="310" font-size="20" font-weight="800" fill="#c67c1e">🏥 의료비·교육비</text>
+    <text x="72" y="346" font-size="15" fill="#5b6167">의료비: 총급여 3% 초과분 15%</text>
+    <text x="72" y="372" font-size="15" fill="#5b6167">교육비: 본인·자녀 교육비 공제</text>
+    <text x="72" y="398" font-size="15" fill="#8a9099">난임 시술 등은 공제율 우대</text>
+  </g>
+  <g>
+    <rect x="462" y="270" width="390" height="150" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="486" y="310" font-size="20" font-weight="800" fill="#6b46c1">🏠 주거 관련</text>
+    <text x="486" y="346" font-size="15" fill="#5b6167">월세 세액공제(무주택·소득 요건)</text>
+    <text x="486" y="372" font-size="15" fill="#5b6167">주택청약저축 납입액 소득공제</text>
+    <text x="486" y="398" font-size="15" fill="#8a9099">전·월세 사는 무주택자 필수</text>
+  </g>
+
+  <rect x="0" y="460" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="450" text-anchor="end" font-size="13" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>

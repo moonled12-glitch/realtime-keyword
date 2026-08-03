@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">💡 연납이란? &amp; 신청 방법</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 개념 -->
+  <g>
+    <rect x="48" y="104" width="804" height="96" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="140" font-size="19" font-weight="800" fill="#c67c1e">원래는 1년에 2번(6월·12월) 나눠 부과</text>
+    <text x="72" y="176" font-size="16" fill="#5b6167">→ 이를 <tspan font-weight="800" fill="#191c1f">1월에 1년치 미리 한 번에</tspan> 납부하면 세액을 공제(할인)해 줍니다.</text>
+  </g>
+
+  <!-- 신청 방법 -->
+  <text x="48" y="238" font-size="19" font-weight="800" fill="#0b7d63">📱 신청 방법</text>
+  <g font-size="16" fill="#5b6167">
+    <rect x="48" y="256" width="256" height="90" rx="12" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="176" y="290" text-anchor="middle" font-size="17" font-weight="800" fill="#12805c">위택스 / 이택스</text>
+    <text x="176" y="318" text-anchor="middle">전국 위택스(서울은 이택스)</text>
+
+    <rect x="322" y="256" width="256" height="90" rx="12" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="450" y="290" text-anchor="middle" font-size="17" font-weight="800" fill="#2563eb">앱 / ARS</text>
+    <text x="450" y="318" text-anchor="middle">스마트위택스 앱·전화</text>
+
+    <rect x="596" y="256" width="256" height="90" rx="12" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="724" y="290" text-anchor="middle" font-size="17" font-weight="800" fill="#c67c1e">주민센터 방문</text>
+    <text x="724" y="318" text-anchor="middle">관할 시·군·구청</text>
+  </g>
+</svg>

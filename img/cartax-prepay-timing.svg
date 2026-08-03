@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">🚗 자동차세 연납, 1월이 가장 유리</text>
+  <text x="50" y="90" font-size="17" font-weight="700" fill="#0b7d63">일찍 신청할수록 공제받는 기간이 길어 할인폭↑</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="140" width="188" height="200" rx="14" fill="#f2f9f5" stroke="#0b7d63" stroke-width="2"/>
+    <text x="142" y="180" text-anchor="middle" font-size="20" font-weight="800" fill="#12805c">1월 신청</text>
+    <text x="142" y="228" text-anchor="middle" font-size="40" font-weight="800" fill="#191c1f">5%</text>
+    <text x="142" y="266" text-anchor="middle" font-size="15" fill="#5b6167">1년치 공제</text>
+    <text x="142" y="292" text-anchor="middle" font-size="14" fill="#12805c" font-weight="700">가장 유리 ✔</text>
+  </g>
+  <g>
+    <rect x="252" y="160" width="188" height="180" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="346" y="200" text-anchor="middle" font-size="20" font-weight="800" fill="#2563eb">3월 신청</text>
+    <text x="346" y="252" text-anchor="middle" font-size="30" font-weight="800" fill="#191c1f">할인↓</text>
+    <text x="346" y="290" text-anchor="middle" font-size="14" fill="#8a9099">남은 기간분만 공제</text>
+  </g>
+  <g>
+    <rect x="456" y="180" width="188" height="160" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="550" y="220" text-anchor="middle" font-size="20" font-weight="800" fill="#2563eb">6월 신청</text>
+    <text x="550" y="270" text-anchor="middle" font-size="26" font-weight="800" fill="#191c1f">할인↓↓</text>
+  </g>
+  <g>
+    <rect x="660" y="200" width="188" height="140" rx="14" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="754" y="240" text-anchor="middle" font-size="20" font-weight="800" fill="#767b80">9월 신청</text>
+    <text x="754" y="288" text-anchor="middle" font-size="24" font-weight="800" fill="#191c1f">할인↓↓↓</text>
+  </g>
+
+  <text x="48" y="378" font-size="14" fill="#8a9099">※ 2026년 1월 신청 기준 공제율 5%(할인율 축소 논의 있음 — 신청 전 확인).</text>
+</svg>
