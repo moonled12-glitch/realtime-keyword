@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="418" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="32" font-weight="800" fill="#191c1f">📅 2027학년도 수능 주요 일정</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">시험일: 2026년 11월 19일(목)</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 타임라인 축 -->
+  <line x1="90" y1="270" x2="812" y2="270" stroke="#d7dde3" stroke-width="4"/>
+
+  <!-- 노드 1 -->
+  <circle cx="150" cy="270" r="12" fill="#0b7d63"/>
+  <text x="150" y="205" text-anchor="middle" font-size="17" font-weight="800" fill="#191c1f">9월 2일</text>
+  <text x="150" y="230" text-anchor="middle" font-size="15" fill="#5b6167">9월 모의평가</text>
+  <text x="150" y="318" text-anchor="middle" font-size="14" fill="#8a9099">최종 실력 점검</text>
+
+  <!-- 노드 2 -->
+  <circle cx="370" cy="270" r="12" fill="#2563eb"/>
+  <text x="370" y="205" text-anchor="middle" font-size="17" font-weight="800" fill="#191c1f">9월 중순</text>
+  <text x="370" y="230" text-anchor="middle" font-size="15" fill="#5b6167">수시 원서접수</text>
+  <text x="370" y="318" text-anchor="middle" font-size="14" fill="#8a9099">대학별 일정 확인</text>
+
+  <!-- 노드 3 (수능) -->
+  <circle cx="590" cy="270" r="16" fill="#c0392b"/>
+  <text x="590" y="200" text-anchor="middle" font-size="18" font-weight="800" fill="#c0392b">11월 19일(목)</text>
+  <text x="590" y="226" text-anchor="middle" font-size="16" font-weight="800" fill="#191c1f">대학수학능력시험</text>
+  <text x="590" y="320" text-anchor="middle" font-size="14" fill="#8a9099">D-DAY</text>
+
+  <!-- 노드 4 -->
+  <circle cx="800" cy="270" r="12" fill="#6b46c1"/>
+  <text x="800" y="205" text-anchor="middle" font-size="17" font-weight="800" fill="#191c1f">12월 11일</text>
+  <text x="800" y="230" text-anchor="middle" font-size="15" fill="#5b6167">성적 통지</text>
+  <text x="800" y="318" text-anchor="middle" font-size="14" fill="#8a9099">정시 지원 시작</text>
+
+  <text x="48" y="388" font-size="15" fill="#8a9099">※ 수시 원서접수 등 세부 일정은 대학별 모집요강 기준으로 확인하세요.</text>
+</svg>

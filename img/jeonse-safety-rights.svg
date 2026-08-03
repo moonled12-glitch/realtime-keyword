@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="518" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="32" font-weight="800" fill="#191c1f">💡 보증금 지키는 핵심 개념</text>
+  <line x1="48" y1="84" x2="852" y2="84" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 깡통전세 계산 박스 -->
+  <rect x="48" y="108" width="804" height="128" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+  <text x="72" y="146" font-size="20" font-weight="800" fill="#191c1f">⚠️ 깡통전세 자가진단</text>
+  <text x="72" y="182" font-size="19" font-weight="700" fill="#c0392b">( 선순위 채권 + 내 보증금 )  ÷  매매 시세  × 100</text>
+  <text x="72" y="214" font-size="17" fill="#5b6167">→ 이 값이 <tspan font-weight="800" fill="#12805c">70% 이하</tspan>면 비교적 안전, <tspan font-weight="800" fill="#c0392b">80~90% 이상</tspan>이면 위험 신호</text>
+
+  <!-- 대항력 -->
+  <rect x="48" y="260" width="390" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+  <text x="72" y="300" font-size="21" font-weight="800" fill="#12805c">🔑 대항력</text>
+  <text x="72" y="332" font-size="16" fill="#5b6167">전입신고 + 실제 거주(점유)로 발생</text>
+  <text x="72" y="360" font-size="16" fill="#5b6167">집주인이 바뀌어도 새 집주인에게</text>
+  <text x="72" y="384" font-size="16" fill="#5b6167">전세 계약 효력을 주장할 수 있음</text>
+
+  <!-- 우선변제권 -->
+  <rect x="462" y="260" width="390" height="150" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+  <text x="486" y="300" font-size="21" font-weight="800" fill="#2563eb">⚖️ 우선변제권</text>
+  <text x="486" y="332" font-size="16" fill="#5b6167">확정일자를 받으면 발생</text>
+  <text x="486" y="360" font-size="16" fill="#5b6167">집이 경매로 넘어가도 후순위</text>
+  <text x="486" y="384" font-size="16" fill="#5b6167">채권자보다 먼저 보증금 회수</text>
+
+  <text x="48" y="452" font-size="16" fill="#8a9099">✔ 전입신고·확정일자는 <tspan font-weight="800" fill="#191c1f">이사 당일</tspan>에 함께 처리하는 것이 가장 안전합니다.</text>
+
+  <rect x="0" y="500" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="490" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>

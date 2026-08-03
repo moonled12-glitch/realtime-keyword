@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="558" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="34" font-weight="800" fill="#191c1f">🛡️ 전세사기 안 당하는 5단계</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">계약 전 확인부터 이사 당일·계약 후까지</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <circle cx="76" cy="164" r="20" fill="#0b7d63"/><text x="76" y="171" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">1</text>
+    <text x="112" y="158" font-size="20" font-weight="800" fill="#191c1f">등기부등본(등기사항전부증명서) 확인</text>
+    <text x="112" y="186" font-size="16" fill="#5b6167">소유자 이름·근저당권·압류·가압류를 계약 직전과 잔금일에 다시 확인</text>
+  </g>
+  <g>
+    <circle cx="76" cy="240" r="20" fill="#0b7d63"/><text x="76" y="247" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">2</text>
+    <text x="112" y="234" font-size="20" font-weight="800" fill="#191c1f">깡통전세 여부 계산</text>
+    <text x="112" y="262" font-size="16" fill="#5b6167">선순위 채권 + 내 보증금이 매매 시세의 70% 이하인지 확인</text>
+  </g>
+  <g>
+    <circle cx="76" cy="316" r="20" fill="#0b7d63"/><text x="76" y="323" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">3</text>
+    <text x="112" y="310" font-size="20" font-weight="800" fill="#191c1f">집주인 세금 체납 확인</text>
+    <text x="112" y="338" font-size="16" fill="#5b6167">국세·지방세 완납증명서 요청(체납 세금은 내 보증금보다 먼저 변제됨)</text>
+  </g>
+  <g>
+    <circle cx="76" cy="392" r="20" fill="#0b7d63"/><text x="76" y="399" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">4</text>
+    <text x="112" y="386" font-size="20" font-weight="800" fill="#191c1f">이사 당일 전입신고 + 확정일자</text>
+    <text x="112" y="414" font-size="16" fill="#5b6167">대항력·우선변제권 확보 — 하루라도 미루면 순위가 밀릴 수 있음</text>
+  </g>
+  <g>
+    <circle cx="76" cy="468" r="20" fill="#0b7d63"/><text x="76" y="475" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">5</text>
+    <text x="112" y="462" font-size="20" font-weight="800" fill="#191c1f">전세보증금 반환보증 가입 (HUG 등)</text>
+    <text x="112" y="490" font-size="16" fill="#5b6167">집주인이 못 돌려줘도 보증기관이 대신 지급 — 마지막 안전장치</text>
+  </g>
+
+  <rect x="0" y="540" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="530" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>

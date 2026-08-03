@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="498" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="34" font-weight="800" fill="#191c1f">🎯 수능 100일, 무엇에 집중할까</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">새 개념보다 '아는 걸 실수 없이' 만드는 시기</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="138" width="390" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="180" font-size="21" font-weight="800" fill="#12805c">📖 국어·영어</text>
+    <text x="72" y="214" font-size="16" fill="#5b6167">매일 지문 감각 유지 · 오답 유형 정리</text>
+    <text x="72" y="242" font-size="16" fill="#5b6167">시간 배분 연습(실전 시험지 그대로)</text>
+    <text x="72" y="270" font-size="16" fill="#5b6167">영어는 어법·빈칸 취약 유형 집중</text>
+  </g>
+  <g>
+    <rect x="462" y="138" width="390" height="150" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="180" font-size="21" font-weight="800" fill="#2563eb">🔢 수학·탐구</text>
+    <text x="486" y="214" font-size="16" fill="#5b6167">틀린 문제 다시 풀기(개념 구멍 메우기)</text>
+    <text x="486" y="242" font-size="16" fill="#5b6167">킬러 대신 준킬러·3점 실수 줄이기</text>
+    <text x="486" y="270" font-size="16" fill="#5b6167">탐구는 개념+기출 반복이 가성비 최고</text>
+  </g>
+  <g>
+    <rect x="48" y="304" width="390" height="150" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="346" font-size="21" font-weight="800" fill="#c67c1e">⏰ 생활 리듬</text>
+    <text x="72" y="380" font-size="16" fill="#5b6167">기상·취침 시간 수능 시간표에 맞추기</text>
+    <text x="72" y="408" font-size="16" fill="#5b6167">오전에 국어·수학 머리 쓰는 연습</text>
+    <text x="72" y="436" font-size="16" fill="#5b6167">주 1회 실전 모의고사로 체력 훈련</text>
+  </g>
+  <g>
+    <rect x="462" y="304" width="390" height="150" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="486" y="346" font-size="21" font-weight="800" fill="#6b46c1">🧠 멘탈 관리</text>
+    <text x="486" y="380" font-size="16" fill="#5b6167">모의고사 점수에 일희일비하지 않기</text>
+    <text x="486" y="408" font-size="16" fill="#5b6167">할 일을 '하루 단위'로 쪼개 실행</text>
+    <text x="486" y="436" font-size="16" fill="#5b6167">충분한 수면 = 집중력·기억력 유지</text>
+  </g>
+
+  <rect x="0" y="480" width="900" height="20" fill="#0b7d63"/>
+  <text x="852" y="470" text-anchor="end" font-size="14" fill="#a0a5aa">자료 정리: 키워드픽 · keywordpick.co.kr</text>
+</svg>

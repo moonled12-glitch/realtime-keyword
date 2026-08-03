@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="438" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="32" font-weight="800" fill="#191c1f">🇰🇷 광복절, 태극기 다는 법</text>
+  <line x1="48" y1="84" x2="852" y2="84" stroke="#eef0f2" stroke-width="2"/>
+
+  <!-- 게양 시간 -->
+  <g>
+    <rect x="48" y="108" width="390" height="140" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="148" font-size="20" font-weight="800" fill="#12805c">⏰ 다는 시간</text>
+    <text x="72" y="182" font-size="16" fill="#5b6167">오전 7시 ~ 오후 6시가 원칙</text>
+    <text x="72" y="210" font-size="16" fill="#5b6167">(악천후 시에는 달지 않음)</text>
+    <text x="72" y="238" font-size="15" fill="#8a9099">비바람이 심하면 내렸다가 다시</text>
+  </g>
+  <!-- 다는 위치 -->
+  <g>
+    <rect x="462" y="108" width="390" height="140" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="148" font-size="20" font-weight="800" fill="#2563eb">📍 다는 위치</text>
+    <text x="486" y="182" font-size="16" fill="#5b6167">밖에서 볼 때 대문·베란다의</text>
+    <text x="486" y="210" font-size="16" fill="#5b6167">왼쪽에 다는 것이 원칙</text>
+    <text x="486" y="238" font-size="15" fill="#8a9099">아파트는 난간 중앙·왼쪽</text>
+  </g>
+
+  <!-- 경축일 vs 조의 -->
+  <g>
+    <rect x="48" y="268" width="804" height="128" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="306" font-size="20" font-weight="800" fill="#c67c1e">🎌 경축일 vs 조의를 표하는 날</text>
+    <text x="72" y="342" font-size="16" fill="#5b6167"><tspan font-weight="800" fill="#191c1f">광복절·삼일절·개천절·한글날(경축일)</tspan> → 깃봉과 깃면을 붙여서 게양</text>
+    <text x="72" y="372" font-size="16" fill="#5b6167"><tspan font-weight="800" fill="#191c1f">현충일·국장기간(조의)</tspan> → 깃면 세로 너비만큼 내려서 조기 게양</text>
+  </g>
+</svg>
