@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="438" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">➕ 여기에 더 붙는 지원금</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="390" height="140" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="72" y="142" font-size="20" font-weight="800" fill="#2563eb">♻️ 전환지원금</text>
+    <text x="72" y="178" font-size="16" fill="#5b6167">3년 이상 노후 휘발유·경유차를</text>
+    <text x="72" y="204" font-size="16" fill="#5b6167">폐차·매각 후 전기차 구매 시</text>
+    <text x="72" y="230" font-size="17" font-weight="800" fill="#191c1f">최대 +100만원</text>
+  </g>
+  <g>
+    <rect x="462" y="104" width="390" height="140" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="486" y="142" font-size="20" font-weight="800" fill="#6b46c1">👨‍👩‍👧‍👦 다자녀 가구</text>
+    <text x="486" y="178" font-size="16" fill="#5b6167">2자녀 +100만 · 3자녀 +200만</text>
+    <text x="486" y="204" font-size="16" fill="#5b6167">4자녀 이상 +300만원</text>
+    <text x="486" y="230" font-size="15" fill="#8a9099">자녀 수에 따라 차등 가산</text>
+  </g>
+  <g>
+    <rect x="48" y="258" width="390" height="140" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="296" font-size="20" font-weight="800" fill="#12805c">🌱 생애최초·청년 등</text>
+    <text x="72" y="332" font-size="16" fill="#5b6167">생애최초 구매·청년·차상위 등</text>
+    <text x="72" y="358" font-size="16" fill="#5b6167">국고보조금의 일정률 추가 가산</text>
+    <text x="72" y="384" font-size="15" fill="#8a9099">(연도·대상별 조건 확인)</text>
+  </g>
+  <g>
+    <rect x="462" y="258" width="390" height="140" rx="14" fill="#fff6ed" stroke="#f6a94c" stroke-width="2"/>
+    <text x="486" y="296" font-size="20" font-weight="800" fill="#c67c1e">🏙️ 지자체 보조금 합산</text>
+    <text x="486" y="332" font-size="16" fill="#5b6167">지역마다 금액 다름</text>
+    <text x="486" y="358" font-size="16" fill="#5b6167">국고 + 지자체 합치면</text>
+    <text x="486" y="384" font-size="17" font-weight="800" fill="#c0392b">최대 1,000만원 이상도</text>
+  </g>
+</svg>
