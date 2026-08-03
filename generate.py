@@ -50,6 +50,11 @@ SIGNAL_STATE = {"n": "new", "+": "up", "-": "down", "s": "same"}
 _env_ac = os.environ.get("ADSENSE_CLIENT", "").strip()
 ADSENSE_CLIENT = _env_ac if (_env_ac and _env_ac != "ca-pub-XXXXXXXXXXXXXXXX") else "ca-pub-5032586877771894"
 _ADS_ON = ADSENSE_CLIENT != "ca-pub-XXXXXXXXXXXXXXXX"
+# 광고 자리표시(회색 '광고' 박스) 노출 여부. 애드센스 승인 전에는 숨겨야 '광고용 사이트'로 오인되지 않음.
+# 승인 완료 후 워크플로 env 에 ADS_APPROVED=1 을 주면 다시 표시된다. (로더 스크립트는 심사용으로 항상 유지)
+_ADS_APPROVED = os.environ.get("ADS_APPROVED", "").strip().lower() in ("1", "true", "yes")
+_AD_TOP_BOX = '<div class="ad-top"><div>광고 · 728 × 90</div></div>' if _ADS_APPROVED else ''
+_AD_HERO = '<div class="hero-ad">광고 · 300 × 250</div>' if _ADS_APPROVED else ''
 ADSENSE_HEAD = (
     f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
     f'?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>' if _ADS_ON
@@ -390,7 +395,9 @@ def main():
               .replace("__AD_TOP__", ad_html("home-top"))
               .replace("__AD_BOTTOM__", ad_html("home-bottom"))
               .replace("__AD_LEFT__", rail_html("left"))
-              .replace("__AD_RIGHT__", rail_html("right")))
+              .replace("__AD_RIGHT__", rail_html("right"))
+              .replace("__AD_TOP_BOX__", _AD_TOP_BOX)
+              .replace("__AD_HERO__", _AD_HERO))
     open("index.html", "w", encoding="utf-8").write(out)
 
     # 블로그 사이드바(및 외부)에서 실시간으로 불러쓸 공유 데이터
