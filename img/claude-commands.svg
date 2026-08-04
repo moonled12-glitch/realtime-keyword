@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="438" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">⌨️ Claude Code 슬래시 명령어</text>
+  <text x="50" y="88" font-size="15" font-weight="700" fill="#0b7d63">개발자용 CLI — 입력창에 / 로 실행</text>
+  <line x1="48" y1="108" x2="852" y2="108" stroke="#eef0f2" stroke-width="2"/>
+
+  <g font-family="'D2Coding','Consolas',monospace">
+    <rect x="48" y="128" width="390" height="46" rx="8" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="66" y="157" font-size="17" font-weight="800" fill="#2563eb">/clear</text>
+    <text x="180" y="157" font-size="14" font-family="'Noto Sans KR',sans-serif" fill="#5b6167">대화 초기화(토큰 절약)</text>
+
+    <rect x="462" y="128" width="390" height="46" rx="8" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="480" y="157" font-size="17" font-weight="800" fill="#2563eb">/compact</text>
+    <text x="610" y="157" font-size="14" font-family="'Noto Sans KR',sans-serif" fill="#5b6167">대화 요약해 공간 확보</text>
+
+    <rect x="48" y="184" width="390" height="46" rx="8" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="66" y="213" font-size="17" font-weight="800" fill="#2563eb">/model</text>
+    <text x="180" y="213" font-size="14" font-family="'Noto Sans KR',sans-serif" fill="#5b6167">모델 전환(빠른↔고성능)</text>
+
+    <rect x="462" y="184" width="390" height="46" rx="8" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="480" y="213" font-size="17" font-weight="800" fill="#2563eb">/agents</text>
+    <text x="610" y="213" font-size="14" font-family="'Noto Sans KR',sans-serif" fill="#5b6167">서브에이전트 목록·실행</text>
+
+    <rect x="48" y="240" width="390" height="46" rx="8" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="66" y="269" font-size="17" font-weight="800" fill="#2563eb">/mcp</text>
+    <text x="180" y="269" font-size="14" font-family="'Noto Sans KR',sans-serif" fill="#5b6167">외부 도구(MCP) 연결·인증</text>
+
+    <rect x="462" y="240" width="390" height="46" rx="8" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="480" y="269" font-size="17" font-weight="800" fill="#2563eb">/help</text>
+    <text x="610" y="269" font-size="14" font-family="'Noto Sans KR',sans-serif" fill="#5b6167">명령어 도움말</text>
+  </g>
+
+  <rect x="48" y="304" width="804" height="96" rx="12" fill="#f2f9f5" stroke="#cdeede"/>
+  <text x="72" y="336" font-size="17" font-weight="800" fill="#12805c" font-family="'Noto Sans KR',sans-serif">🧩 기본 제공 '스킬' 명령</text>
+  <text x="72" y="368" font-size="15" fill="#5b6167" font-family="'Noto Sans KR',sans-serif">/code-review(코드 리뷰) · /debug(디버깅) · /simplify(단순화)</text>
+  <text x="72" y="392" font-size="15" fill="#5b6167" font-family="'Noto Sans KR',sans-serif">/batch(대량 일괄수정) · /loop(반복 자동화)  — 커스텀 스킬도 추가 가능</text>
+</svg>

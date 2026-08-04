@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SK하이닉스 나스닥 상장, 무엇이 달라지나 — ADR·AI 반도체·국내 증시 영향 정리</title>
-<meta name="description" content="SK하이닉스가 미국 나스닥에 ADR로 상장했습니다. ADR이 무엇인지, 왜 나스닥에 갔는지, AI 반도체·국내 증시에 어떤 의미인지 쉽게 정리했습니다.">
-<link rel="canonical" href="https://keywordpick.co.kr/blog/sk하이닉스-나스닥-상장-의미.html">
-<meta property="og:title" content="SK하이닉스 나스닥 상장, 무엇이 달라지나 — ADR·AI 반도체·국내 증시 영향 정리">
-<meta property="og:description" content="SK하이닉스가 미국 나스닥에 ADR로 상장했습니다. ADR이 무엇인지, 왜 나스닥에 갔는지, AI 반도체·국내 증시에 어떤 의미인지 쉽게 정리했습니다.">
+<title>클로드(Claude) 유용한 기능·명령어 총정리 (2026년 8월) — 일반 사용자부터 개발자까지</title>
+<meta name="description" content="2026년 8월 기준 클로드(Claude)를 200% 활용하는 핵심 기능(프로젝트·아티팩트·파일분석)과 유용한 프롬프트, 개발자용 Claude Code 슬래시 명령어(/clear·/model·/mcp 등)를 한 번에 정리했습니다.">
+<link rel="canonical" href="https://keywordpick.co.kr/blog/클로드-유용한-명령어-2026.html">
+<meta property="og:title" content="클로드(Claude) 유용한 기능·명령어 총정리 (2026년 8월) — 일반 사용자부터 개발자까지">
+<meta property="og:description" content="2026년 8월 기준 클로드(Claude)를 200% 활용하는 핵심 기능(프로젝트·아티팩트·파일분석)과 유용한 프롬프트, 개발자용 Claude Code 슬래시 명령어(/clear·/model·/mcp 등)를 한 번에 정리했습니다.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://keywordpick.co.kr/blog/sk하이닉스-나스닥-상장-의미.html">
+<meta property="og:url" content="https://keywordpick.co.kr/blog/클로드-유용한-명령어-2026.html">
 <meta property="og:image" content="https://keywordpick.co.kr/og.png?v=1">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -193,49 +193,131 @@ footer nav a:hover{color:var(--text);}
 <body>
 <div class="ad-top"><div>광고 · 728 × 90</div></div><header><div class="wrap"><a class="logo" href="/"><span class="mark">K</span><span class="name">키워드픽</span></a><nav class="main"><a href="/">실시간</a><a class="active" href="/blog/">블로그</a><a href="/about.html">소개</a><a href="/contact.html">문의</a></nav><button class="theme-btn" id="themeBtn" aria-label="다크/라이트 모드 전환">🌙</button></div></header>
 <main class="wrap layout"><div class="content-col"><article class="post">
-  <span class="cat-badge">경제</span>
-  <h1>SK하이닉스 나스닥 상장, 무엇이 달라지나 — ADR·AI 반도체·국내 증시 영향 정리</h1>
-  <div class="meta">2026-07-24 · SK하이닉스 나스닥 상장</div>
-  <div class="tags"><a href="/blog/">#SK하이닉스</a><a href="/blog/">#나스닥상장</a><a href="/blog/">#ADR</a><a href="/blog/">#AI반도체</a><a href="/blog/">#국내증시</a></div>
+  <span class="cat-badge">IT·과학</span>
+  <h1>클로드(Claude) 유용한 기능·명령어 총정리 (2026년 8월) — 일반 사용자부터 개발자까지</h1>
+  <div class="meta">2026-08-04 · 클로드 명령어</div>
+  <div class="tags"><a href="/blog/">#클로드</a><a href="/blog/">#Claude</a><a href="/blog/">#ClaudeCode</a><a href="/blog/">#슬래시명령어</a><a href="/blog/">#AI활용</a></div>
   <div class="ad">광고 · 반응형</div>
-  <div class="article-body"><p>SK하이닉스가 미국 나스닥 시장에 <strong>ADR(미국주식예탁증서)</strong> 형태로 상장하며 글로벌 자본시장 한복판에 들어섰습니다. 뉴욕 타임스스퀘어에 '웰컴 투 나스닥' 문구가 걸리는 등 화려하게 데뷔했는데요. 이번 상장이 정확히 무슨 의미인지, 투자자와 일반 소비자 입장에서 무엇이 달라지는지 쉽게 풀어봤습니다.</p>
-<h2>ADR이 뭐길래? — '직접 상장'과의 차이</h2>
-<p>먼저 헷갈리기 쉬운 개념부터 짚어야 합니다. 이번 SK하이닉스의 나스닥 등장은 국내 주식을 미국에서 직접 파는 '중복 상장'이 아니라 <strong>ADR</strong>을 통한 것입니다.</p>
-<ul>
-<li><strong>ADR(American Depositary Receipt)</strong>: 미국 예탁기관이 해외 기업의 원주(原株)를 보관하고, 이를 근거로 발행한 '예탁증서'를 미국 시장에서 거래하는 방식입니다.</li>
-<li>미국 투자자는 환전·해외 계좌 없이 <strong>달러로</strong> SK하이닉스에 투자할 수 있게 됩니다.</li>
-<li>기업 입장에선 한국 증시 상장을 유지하면서 <strong>글로벌 투자 접점</strong>을 넓히는 효과가 있습니다.</li>
-</ul>
-<p>즉 '한국 주식을 미국에 새로 판다'기보다, <strong>미국 투자자가 접근하기 쉬운 창구를 하나 더 열었다</strong>고 이해하면 됩니다.</p>
-<figure class="small"><img src="../img/brecht-corbeel-5tw2jfatonw-unsplash-mryit2gn.jpg" alt=""></figure>
+  <div class="article-body"><p>클로드(Claude)를 그냥 '질문하고 답 받는 챗봇'으로만 쓰면 절반만 쓰는 겁니다. 알아두면 시간을 크게 아끼는 <strong>기능·프롬프트·명령어</strong>가 많거든요. 2026년 8월 기준으로, 일반 사용자용부터 개발자용까지 유용한 것들을 정리했습니다.</p>
+<figure class="large"><img src="../img/claude-features.svg" alt="클로드 핵심 기능 4가지: 프로젝트(지침·자료 저장), 아티팩트(옆 창에서 편집), 파일·이미지 분석, 웹 검색·스킬"><figcaption>클로드 200% 쓰는 핵심 기능 (자료 정리: 키워드픽)</figcaption></figure>
 
-<div class="ad">광고 · 반응형</div><h2>왜 하필 지금, 왜 나스닥인가</h2>
-<p>핵심은 <strong>AI 반도체</strong>입니다. AI 서버에 필수인 고대역폭 메모리(HBM) 시장에서 SK하이닉스는 강력한 위치를 차지하고 있고, 이 수요의 최대 고객은 미국의 빅테크·AI 기업들입니다.</p>
-<p>나스닥은 애플·엔비디아·마이크로소프트 등 글로벌 기술주가 모인 시장입니다. 이곳에 이름을 올린다는 것은 단순한 자금 조달을 넘어,</p>
+<h2>1. 일반 사용자용 — 꼭 아는 핵심 기능</h2>
+<p>일반 웹/앱 클로드에서 '명령어'는 대부분 <strong>기능</strong>과 <strong>프롬프트(지시문)</strong> 형태입니다.</p>
 <ul>
-<li>글로벌 AI 파트너·투자자와의 <strong>접점 강화</strong></li>
-<li>글로벌 무대에서의 <strong>브랜드·신뢰도 제고</strong></li>
+<li><strong>프로젝트(Projects)</strong>: 자주 쓰는 지침·참고 자료를 저장해두면, 매번 설명하지 않아도 <strong>같은 맥락</strong>으로 대화할 수 있습니다. (예: "내 블로그 말투 규칙"을 저장)</li>
+<li><strong>아티팩트(Artifacts)</strong>: 문서·코드·웹페이지 같은 결과물을 대화창 <strong>옆 패널</strong>에서 바로 보고 수정합니다. <strong>2026년 6월부터는 고치고 싶은 부분만 하이라이트해 인라인 편집</strong>이 가능합니다.</li>
+<li><strong>파일·이미지 분석</strong>: PDF·엑셀·이미지를 올려 <strong>요약·표 추출·오류 찾기</strong>를 시킬 수 있습니다.</li>
+<li><strong>웹 검색·스킬</strong>: 최신 정보가 필요하면 웹 검색을, 반복 작업은 <strong>스킬(Skills)</strong>로 자동화할 수 있습니다.</li>
 </ul>
-<p>라는 상징적 의미가 큽니다. 'AI 반도체의 핵심 공급자'라는 정체성을 세계 시장에 각인시키는 행보인 셈입니다.</p>
-<h2>국내 증시와 투자자에게 주는 의미</h2>
-<p>이번 상장은 국내 증시 전반의 <strong>'AI 모멘텀'을 시험하는 계기</strong>로 평가됩니다. 국내 대표 반도체 기업이 해외 자본시장에서 어떤 평가를 받는지가, 앞으로 다른 국내 기업들의 해외 진출·자본 조달에도 참고 사례가 될 수 있기 때문입니다.</p>
-<p>다만 투자자라면 냉정하게 볼 부분도 있습니다.</p>
+<h2>2. 유용한 프롬프트 '명령' 모음</h2>
+<p>정해진 슬래시 명령이 아니어도, 아래처럼 요청하면 결과가 확 좋아집니다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>이렇게 말하면</th>
+<th>이런 효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>"표로 정리해줘"</strong></td>
+<td>복잡한 내용을 한눈에</td>
+</tr>
+<tr>
+<td><strong>"3줄로 요약해줘"</strong></td>
+<td>핵심만 빠르게</td>
+</tr>
+<tr>
+<td><strong>"초등학생도 이해하게 쉽게"</strong></td>
+<td>눈높이 설명</td>
+</tr>
+<tr>
+<td><strong>"단계별(1,2,3)로 알려줘"</strong></td>
+<td>따라 하기 쉬운 절차</td>
+</tr>
+<tr>
+<td><strong>"너는 ○○ 전문가야"</strong></td>
+<td>역할 부여로 답변 품질↑</td>
+</tr>
+<tr>
+<td><strong>"이어서 계속 써줘"</strong></td>
+<td>길이 제한 이어쓰기</td>
+</tr>
+<tr>
+<td><strong>"이 문서 내용만 근거로 답해"</strong></td>
+<td>지어내기(환각) 줄이기</td>
+</tr>
+<tr>
+<td><strong>"표/코드/이메일 형식으로 출력"</strong></td>
+<td>원하는 형식 지정</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p>팁: <strong>"먼저 계획을 세우고, 확인받은 뒤 진행해줘"</strong>라고 하면 엉뚱한 방향으로 길게 쓰는 걸 막을 수 있습니다.</p>
+</blockquote>
+<div class="ad">광고 · 반응형</div><h2>3. 개발자용 — Claude Code 슬래시 명령어</h2>
+<p>진짜 '명령어(슬래시 커맨드)'는 개발자용 <strong>Claude Code(터미널 도구)</strong>에 많습니다. 입력창에 <strong><code>/</code></strong>를 치면 실행됩니다.</p>
+<figure class="large"><img src="../img/claude-commands.svg" alt="Claude Code 슬래시 명령어: /clear, /compact, /model, /agents, /mcp, /help와 기본 스킬 /code-review, /debug, /simplify, /batch, /loop"><figcaption>Claude Code 슬래시 명령어 치트시트 (자료 정리: 키워드픽)</figcaption></figure>
+
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>명령어</th>
+<th>기능</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>/clear</strong></td>
+<td>대화 기록 초기화 — 토큰 절약에 가장 효과적</td>
+</tr>
+<tr>
+<td><strong>/compact</strong></td>
+<td>대화를 요약해 컨텍스트 공간 확보(맥락 유지)</td>
+</tr>
+<tr>
+<td><strong>/model</strong></td>
+<td>사용 모델 전환(빠른 모델 ↔ 고성능 모델)</td>
+</tr>
+<tr>
+<td><strong>/agents</strong></td>
+<td>서브에이전트 목록·실행(Explore·Plan 등)</td>
+</tr>
+<tr>
+<td><strong>/mcp</strong></td>
+<td>외부 도구(MCP 서버) 연결·인증 관리</td>
+</tr>
+<tr>
+<td><strong>/help</strong></td>
+<td>사용 가능한 명령어 도움말</td>
+</tr>
+</tbody>
+</table></div>
+<h3>기본 제공 '스킬' 명령</h3>
+<p>예전엔 커스텀 명령을 따로 만들었지만, 지금은 <strong>스킬(Skills)로 통합</strong>되어 아래가 기본 제공됩니다.</p>
 <ul>
-<li>ADR 상장 자체가 <strong>곧바로 실적이나 주가 상승을 보장하지는 않습니다.</strong></li>
-<li>반도체 경기, HBM 수요, 환율 등 <strong>외부 변수</strong>가 여전히 주가를 좌우합니다.</li>
-<li>단기 이벤트(상장 데뷔)와 장기 펀더멘털을 구분해서 봐야 합니다.</li>
+<li><strong>/code-review</strong>: 최근 바뀐 파일을 여러 에이전트가 병렬로 리뷰</li>
+<li><strong>/debug</strong>: 버그 원인 추적·수정</li>
+<li><strong>/simplify</strong>: 복잡한 코드를 단순화</li>
+<li><strong>/batch</strong>: 여러 파일에 같은 수정을 대량 적용</li>
+<li><strong>/loop</strong>: 반복 작업 자동화</li>
 </ul>
-<h2>정리</h2>
-<p>SK하이닉스의 나스닥 ADR 상장은 ① 미국 투자자의 접근성을 높이고 ② AI 반도체 대표기업이라는 위상을 세계에 알리는 전략적 행보입니다. 국내 증시에도 상징적 의미가 크지만, 실제 주가와 실적은 이후 반도체 시장 상황에 달려 있는 만큼 차분히 지켜볼 필요가 있습니다.</p>
+<p>직접 만든 명령은 <code>.claude/skills/</code>에 넣어 <strong>나만의 슬래시 명령</strong>으로 쓸 수 있고, MCP·플러그인을 연결하면 <code>/mcp__[서버]__[기능]</code> 형태의 명령이 추가됩니다.</p>
+<h2>4. 이렇게 조합하면 좋아요</h2>
+<ul>
+<li><strong>글쓰기·기획</strong>: 프로젝트에 말투·규칙 저장 → 아티팩트로 초안 만들고 인라인 편집</li>
+<li><strong>자료 정리</strong>: PDF·엑셀 업로드 → "표로 요약" → 아티팩트로 내보내기</li>
+<li><strong>개발</strong>: Claude Code에서 <code>/clear</code>로 시작 → 작업 → <code>/code-review</code>로 점검 → <code>/compact</code>로 이어가기</li>
+</ul>
+<h2>마무리</h2>
+<p>클로드를 잘 쓰는 핵심은 <strong>"기능을 알고, 원하는 형식을 분명히 요청하는 것"</strong>입니다. 일반 사용자는 <strong>프로젝트·아티팩트·파일 분석 + 좋은 프롬프트</strong>만 익혀도 충분하고, 개발자는 <strong>Claude Code 슬래시 명령어</strong>로 생산성을 크게 높일 수 있습니다. 오늘 소개한 것 중 두세 개만 습관으로 만들어보세요.</p>
 <hr />
-<p>이 글은 투자 권유가 아닙니다.</p>
-<h3>참고 자료</h3>
-<ul>
-<li>SK하이닉스 ADR 거래 시작 — 연합뉴스</li>
-<li>하이닉스 미국 오프닝 벨, 자본주의 심장부 데뷔 — 조선일보</li>
-<li>AI 모멘텀 시험대 오른 국내 증시 — 이코노미스트</li>
-</ul></div>
-  <div class="related"><h3 class="related-h">📎 함께 보면 좋은 글</h3><ul class="related-list"><li><a href="/blog/미국-2분기-gdp-성장률.html"><span class="rel-thumb"><img src="../img/us-gdp-q2.svg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">경제</span><span class="rel-t">미국 2분기 GDP 성장률 1.5% — 전망치 하회, 무슨 의미일까?</span></span></a></li><li><a href="/blog/삼성전자-2분기-실적-정리.html"><span class="rel-thumb"><img src="../img/samsung-q2-earnings.svg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">경제</span><span class="rel-t">삼성전자 2분기 실적 총정리 — 역대 최대 매출·반도체 호조·스마트폰 첫 적자</span></span></a></li><li><a href="/blog/머스크-테슬라-스페이스x-급락-합병설.html"><span class="rel-thumb"><img src="../img/spacex-uj3hvdfquji-unsplash-mryo73ih.jpg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">경제</span><span class="rel-t">머스크의 한 주 - 테슬라·스페이스X 동반 급락, 합병설, 스타십 13차 발사 정리</span></span></a></li><li><a href="/blog/클로드-유용한-명령어-2026.html"><span class="rel-thumb"><img src="../img/claude-features.svg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">IT·과학</span><span class="rel-t">클로드(Claude) 유용한 기능·명령어 총정리 (2026년 8월) — 일반 사용자부터 개발자까지</span></span></a></li></ul></div>
+<p><em>본 글은 2026년 8월 공개된 자료를 바탕으로 정리한 참고용 정보입니다. 클로드의 기능·명령어·모델 구성은 업데이트에 따라 바뀔 수 있으므로, 최신 사항은 Claude 공식 문서(docs.claude.com)를 확인하시기 바랍니다.</em></p>
+<p><strong>참고 자료</strong>
+- Claude 공식 문서(기능·슬래시 명령어)
+- Claude Code Docs(Skills·슬래시 명령어)</p></div>
+  <div class="related"><h3 class="related-h">📎 함께 보면 좋은 글</h3><ul class="related-list"><li><a href="/blog/ai-영화-2026-동향.html"><span class="rel-thumb"><img src="../img/aimovie-now.svg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">IT·과학</span><span class="rel-t">AI 영화, 어디까지 왔나 (2026) — 국내 첫 AI 장편·AI 배우 논란·기술과 쟁점</span></span></a></li><li><a href="/blog/chatgpt-이미지-생성-사용법.html"><span class="rel-thumb"><img src="../img/chatgpt-image-limits.svg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">IT·과학</span><span class="rel-t">ChatGPT 이미지 생성 사용법 — 무료 한도부터 잘 뽑는 프롬프트 팁까지</span></span></a></li><li><a href="/blog/notion-ai-사용법.html"><span class="rel-thumb"><img src="../img/notion-ai-features.svg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">IT·과학</span><span class="rel-t">Notion AI 사용법 — 메모·문서 앱에서 AI로 일 처리하기 (기능·요금 총정리)</span></span></a></li><li><a href="/blog/퍼플렉시티-사용법.html"><span class="rel-thumb"><img src="../img/perplexity-features.svg" alt="" loading="lazy"></span><span class="rel-body"><span class="rel-cat">IT·과학</span><span class="rel-t">퍼플렉시티(Perplexity) 사용법 — 출처까지 주는 AI 검색, 무료로 이렇게 쓴다</span></span></a></li></ul></div>
   <div class="ad">광고 · 반응형</div>
   <div class="post-note">본 포스팅은 공개된 뉴스와 자료를 바탕으로 편집·정리한 콘텐츠입니다.</div>
   <a class="backlink" href="/blog/">← 목록으로</a>
@@ -279,7 +361,7 @@ footer nav a:hover{color:var(--text);}
     });
   }).catch(function(){});
 })();
-</script><div class="side-card"><h3 class="side-h">📝 블로그 인기 글</h3><ul class="side-posts"><li><a href="/blog/클로드-유용한-명령어-2026.html"><span class="sp-thumb"><img src="../img/claude-features.svg" alt="" loading="lazy"></span><span class="sp-t">클로드(Claude) 유용한 기능·명령어 총정리 (2026년 8월) — 일반 사용자부터 개발자까지</span></a></li><li><a href="/blog/ai-영화-2026-동향.html"><span class="sp-thumb"><img src="../img/aimovie-now.svg" alt="" loading="lazy"></span><span class="sp-t">AI 영화, 어디까지 왔나 (2026) — 국내 첫 AI 장편·AI 배우 논란·기술과 쟁점</span></a></li><li><a href="/blog/개인파산-신청-2026.html"><span class="sp-thumb"><img src="../img/bankruptcy-vs.svg" alt="" loading="lazy"></span><span class="sp-t">개인파산 신청 총정리 (2026) — 자격·절차·비용·개인회생과의 차이</span></a></li><li><a href="/blog/서울-폭염중대경보-2026.html"><span class="sp-thumb"><img src="../img/heat-3levels.svg" alt="" loading="lazy"></span><span class="sp-t">서울 첫 &#x27;폭염중대경보&#x27; — 2026 폭염특보 3단계·기준·온열질환 대처법</span></a></li><li><a href="/blog/조지아-여행-체류-방법-2026.html"><span class="sp-thumb"><img src="../img/georgia-basics.svg" alt="" loading="lazy"></span><span class="sp-t">조지아 여행·장기체류 방법 (2026) — 무비자 1년·항공편·물가·한달살기</span></a></li><li><a href="/blog/면세점-쇼핑-팁-2026.html"><span class="sp-thumb"><img src="../img/dutyfree-limit.svg" alt="" loading="lazy"></span><span class="sp-t">면세점 쇼핑 팁 총정리 (2026) — 면세 한도·술담배 규정·자진신고 감면</span></a></li></ul></div></aside></main>
+</script><div class="side-card"><h3 class="side-h">📝 블로그 인기 글</h3><ul class="side-posts"><li><a href="/blog/ai-영화-2026-동향.html"><span class="sp-thumb"><img src="../img/aimovie-now.svg" alt="" loading="lazy"></span><span class="sp-t">AI 영화, 어디까지 왔나 (2026) — 국내 첫 AI 장편·AI 배우 논란·기술과 쟁점</span></a></li><li><a href="/blog/개인파산-신청-2026.html"><span class="sp-thumb"><img src="../img/bankruptcy-vs.svg" alt="" loading="lazy"></span><span class="sp-t">개인파산 신청 총정리 (2026) — 자격·절차·비용·개인회생과의 차이</span></a></li><li><a href="/blog/서울-폭염중대경보-2026.html"><span class="sp-thumb"><img src="../img/heat-3levels.svg" alt="" loading="lazy"></span><span class="sp-t">서울 첫 &#x27;폭염중대경보&#x27; — 2026 폭염특보 3단계·기준·온열질환 대처법</span></a></li><li><a href="/blog/조지아-여행-체류-방법-2026.html"><span class="sp-thumb"><img src="../img/georgia-basics.svg" alt="" loading="lazy"></span><span class="sp-t">조지아 여행·장기체류 방법 (2026) — 무비자 1년·항공편·물가·한달살기</span></a></li><li><a href="/blog/면세점-쇼핑-팁-2026.html"><span class="sp-thumb"><img src="../img/dutyfree-limit.svg" alt="" loading="lazy"></span><span class="sp-t">면세점 쇼핑 팁 총정리 (2026) — 면세 한도·술담배 규정·자진신고 감면</span></a></li><li><a href="/blog/환전-앱-카드-비교-2026.html"><span class="sp-thumb"><img src="../img/travelcard-common.svg" alt="" loading="lazy"></span><span class="sp-t">해외여행 환전 앱·카드 비교 (2026) — 트래블월렛·트래블로그·SOL트래블·토스</span></a></li></ul></div></aside></main>
 <footer><div class="wrap"><div class="foot-brand"><b>키워드픽</b><span>데이터 출처: 구글 트렌드 · signal.bz</span></div><nav><a href="/about.html">소개</a><a href="/blog/">블로그</a><a href="/contact.html">문의하기</a><a href="/privacy.html">개인정보처리방침</a></nav></div></footer>
 <script>(function(){var b=document.getElementById('themeBtn');if(!b)return;function cur(){return document.documentElement.getAttribute('data-theme')||'light';}function ap(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('theme',t);}catch(e){}b.textContent=(t==='dark')?'\u2600\ufe0f':'\ud83c\udf19';}b.textContent=(cur()==='dark')?'\u2600\ufe0f':'\ud83c\udf19';b.addEventListener('click',function(){ap(cur()==='dark'?'light':'dark');});})();</script>
 </body>

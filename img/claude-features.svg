@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="418" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">🤖 클로드 200% 쓰는 핵심 기능</text>
+  <text x="50" y="90" font-size="16" font-weight="700" fill="#0b7d63">일반 사용자도 바로 쓰는 4가지 (2026년 8월)</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="138" width="390" height="120" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="72" y="174" font-size="19" font-weight="800" fill="#2563eb">📁 프로젝트(Projects)</text>
+    <text x="72" y="206" font-size="15" fill="#5b6167">자주 쓰는 지침·자료를 저장해두고</text>
+    <text x="72" y="232" font-size="15" fill="#5b6167">같은 맥락으로 반복 작업</text>
+  </g>
+  <g>
+    <rect x="462" y="138" width="390" height="120" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="486" y="174" font-size="19" font-weight="800" fill="#12805c">🎨 아티팩트(Artifacts)</text>
+    <text x="486" y="206" font-size="15" fill="#5b6167">문서·코드·웹페이지를 옆 창에서</text>
+    <text x="486" y="232" font-size="15" fill="#5b6167">바로 보고 인라인 편집(2026.6~)</text>
+  </g>
+  <g>
+    <rect x="48" y="272" width="390" height="120" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="308" font-size="19" font-weight="800" fill="#c67c1e">📎 파일·이미지 분석</text>
+    <text x="72" y="340" font-size="15" fill="#5b6167">PDF·엑셀·이미지를 올려</text>
+    <text x="72" y="366" font-size="15" fill="#5b6167">요약·표 추출·분석 요청</text>
+  </g>
+  <g>
+    <rect x="462" y="272" width="390" height="120" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="486" y="308" font-size="19" font-weight="800" fill="#6b46c1">🌐 웹 검색 · 스킬</text>
+    <text x="486" y="340" font-size="15" fill="#5b6167">최신 정보 검색 + 반복 작업을</text>
+    <text x="486" y="366" font-size="15" fill="#5b6167">'스킬(Skills)'로 자동화</text>
+  </g>
+</svg>
