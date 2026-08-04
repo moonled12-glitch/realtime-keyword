@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">🏡 조지아 장기체류 &amp; 볼거리</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="390" height="130" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="140" font-size="19" font-weight="800" fill="#12805c">🏦 장기체류 준비</text>
+    <text x="72" y="172" font-size="15" fill="#5b6167">현지 은행 계좌·유심 개통 가능</text>
+    <text x="72" y="200" font-size="15" fill="#5b6167">아파트 월세 임대 · 의료 이용</text>
+  </g>
+  <g>
+    <rect x="462" y="104" width="390" height="130" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="140" font-size="19" font-weight="800" fill="#2563eb">💻 디지털 노마드</text>
+    <text x="486" y="172" font-size="15" fill="#5b6167">저렴한 물가 + 1년 체류로 인기</text>
+    <text x="486" y="200" font-size="15" fill="#5b6167">카페·코워킹 스페이스 활용</text>
+  </g>
+  <g>
+    <rect x="48" y="248" width="390" height="130" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="284" font-size="19" font-weight="800" fill="#c67c1e">🏙️ 트빌리시(수도)</text>
+    <text x="72" y="316" font-size="15" fill="#5b6167">구시가지·온천·와인 문화</text>
+    <text x="72" y="344" font-size="15" fill="#5b6167">여행·체류의 거점</text>
+  </g>
+  <g>
+    <rect x="462" y="248" width="390" height="130" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="486" y="284" font-size="19" font-weight="800" fill="#6b46c1">⛰️ 카즈베기</text>
+    <text x="486" y="316" font-size="15" fill="#5b6167">코카서스 설산·게르게티 교회</text>
+    <text x="486" y="344" font-size="15" fill="#5b6167">대자연 트레킹 명소</text>
+  </g>
+</svg>

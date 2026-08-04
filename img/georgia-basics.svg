@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">🇬🇪 조지아, 왜 뜨나</text>
+  <text x="50" y="90" font-size="17" font-weight="700" fill="#0b7d63">한국인 무비자 1년 · 저렴한 물가 · 한달살기 성지</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="140" width="256" height="200" rx="14" fill="#f2f9f5" stroke="#0b7d63" stroke-width="2"/>
+    <text x="176" y="184" text-anchor="middle" font-size="20" font-weight="800" fill="#12805c">무비자 체류</text>
+    <text x="176" y="234" text-anchor="middle" font-size="34" font-weight="800" fill="#191c1f">365일</text>
+    <text x="176" y="274" text-anchor="middle" font-size="15" fill="#5b6167">1년! 재입국 시</text>
+    <text x="176" y="298" text-anchor="middle" font-size="15" fill="#5b6167">새로 1년 시작</text>
+  </g>
+  <g>
+    <rect x="322" y="140" width="256" height="200" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="450" y="184" text-anchor="middle" font-size="20" font-weight="800" fill="#2563eb">항공편</text>
+    <text x="450" y="222" text-anchor="middle" font-size="16" fill="#5b6167">직항 없음</text>
+    <text x="450" y="252" text-anchor="middle" font-size="16" fill="#5b6167">이스탄불·중동 등</text>
+    <text x="450" y="278" text-anchor="middle" font-size="16" fill="#5b6167">1회 경유</text>
+    <text x="450" y="312" text-anchor="middle" font-size="14" fill="#8a9099">약 12~20시간</text>
+  </g>
+  <g>
+    <rect x="596" y="140" width="256" height="200" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="724" y="184" text-anchor="middle" font-size="20" font-weight="800" fill="#c67c1e">통화·물가</text>
+    <text x="724" y="222" text-anchor="middle" font-size="16" fill="#5b6167">라리(GEL) 사용</text>
+    <text x="724" y="252" text-anchor="middle" font-size="16" fill="#5b6167">유럽 대비 저렴한</text>
+    <text x="724" y="278" text-anchor="middle" font-size="16" fill="#5b6167">생활비</text>
+    <text x="724" y="312" text-anchor="middle" font-size="14" fill="#8a9099">장기 체류에 유리</text>
+  </g>
+</svg>

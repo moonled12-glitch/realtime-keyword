@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="358" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">💳 트래블카드 공통 혜택</text>
+  <text x="50" y="90" font-size="17" font-weight="700" fill="#0b7d63">공항 환전소보다 유리한 '여행 특화 카드'</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="140" width="256" height="170" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="176" y="196" text-anchor="middle" font-size="40">💰</text>
+    <text x="176" y="240" text-anchor="middle" font-size="18" font-weight="800" fill="#12805c">환전 수수료</text>
+    <text x="176" y="272" text-anchor="middle" font-size="20" font-weight="800" fill="#191c1f">주요 통화 무료</text>
+  </g>
+  <g>
+    <rect x="322" y="140" width="256" height="170" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="450" y="196" text-anchor="middle" font-size="40">🏧</text>
+    <text x="450" y="240" text-anchor="middle" font-size="18" font-weight="800" fill="#2563eb">해외 ATM 출금</text>
+    <text x="450" y="272" text-anchor="middle" font-size="20" font-weight="800" fill="#191c1f">수수료 면제</text>
+  </g>
+  <g>
+    <rect x="596" y="140" width="256" height="170" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="724" y="196" text-anchor="middle" font-size="40">🎫</text>
+    <text x="724" y="240" text-anchor="middle" font-size="18" font-weight="800" fill="#c67c1e">연회비</text>
+    <text x="724" y="272" text-anchor="middle" font-size="20" font-weight="800" fill="#191c1f">없음</text>
+  </g>
+  <text x="48" y="342" font-size="14" fill="#8a9099">※ 통화·조건별로 우대 범위가 다르니 발급 전 각 카드 안내를 확인하세요.</text>
+</svg>

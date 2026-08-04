@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">🌐 주요 eSIM 업체 특징</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="390" height="130" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="72" y="140" font-size="20" font-weight="800" fill="#2563eb">🌍 Airalo</text>
+    <text x="72" y="172" font-size="15" fill="#5b6167">200개국+ 지원, 종량제 요금 다양</text>
+    <text x="72" y="200" font-size="15" fill="#5b6167">여러 나라 여행에 무난</text>
+    <text x="72" y="224" font-size="14" fill="#8a9099">일부 요금 인상됨 — 가격 확인</text>
+  </g>
+  <g>
+    <rect x="462" y="104" width="390" height="130" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="486" y="140" font-size="20" font-weight="800" fill="#12805c">♾️ Holafly</text>
+    <text x="486" y="172" font-size="15" fill="#5b6167">무제한 데이터 요금제 특화</text>
+    <text x="486" y="200" font-size="15" fill="#5b6167">데이터 많이 쓰는 사람에게 유리</text>
+    <text x="486" y="224" font-size="14" fill="#8a9099">무제한이라 용량 걱정 적음</text>
+  </g>
+  <g>
+    <rect x="48" y="248" width="804" height="130" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="284" font-size="20" font-weight="800" fill="#c67c1e">🇰🇷 한국 업체 (말톡 · 로밍도깨비 · 여행유심 등)</text>
+    <text x="72" y="316" font-size="15" fill="#5b6167">· 카카오페이·네이버페이 등 국내 간편결제 가능</text>
+    <text x="72" y="344" font-size="15" fill="#5b6167">· 문제 생기면 카카오톡으로 한국어 상담 — 초보자·부모님께 추천</text>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">📱 eSIM이 뭐길래?</text>
+  <text x="50" y="90" font-size="17" font-weight="700" fill="#0b7d63">유심 교체 없이 QR로 개통하는 '디지털 유심'</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="140" width="256" height="200" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="176" y="180" text-anchor="middle" font-size="20" font-weight="800" fill="#12805c">eSIM</text>
+    <text x="176" y="218" text-anchor="middle" font-size="15" fill="#5b6167">QR 스캔으로 즉시 개통</text>
+    <text x="176" y="246" text-anchor="middle" font-size="15" fill="#5b6167">유심 뺄 필요 없음</text>
+    <text x="176" y="274" text-anchor="middle" font-size="15" fill="#5b6167">보통 가장 저렴</text>
+    <text x="176" y="308" text-anchor="middle" font-size="14" fill="#8a9099">지원 단말기만 가능</text>
+  </g>
+  <g>
+    <rect x="322" y="140" width="256" height="200" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="450" y="180" text-anchor="middle" font-size="20" font-weight="800" fill="#2563eb">로밍</text>
+    <text x="450" y="218" text-anchor="middle" font-size="15" fill="#5b6167">내 번호 그대로</text>
+    <text x="450" y="246" text-anchor="middle" font-size="15" fill="#5b6167">전화·문자 수신 OK</text>
+    <text x="450" y="274" text-anchor="middle" font-size="15" fill="#5b6167">가입 간편</text>
+    <text x="450" y="308" text-anchor="middle" font-size="14" fill="#8a9099">상대적으로 비쌀 수 있음</text>
+  </g>
+  <g>
+    <rect x="596" y="140" width="256" height="200" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="724" y="180" text-anchor="middle" font-size="20" font-weight="800" fill="#c67c1e">포켓와이파이</text>
+    <text x="724" y="218" text-anchor="middle" font-size="15" fill="#5b6167">여러 명·기기 공유</text>
+    <text x="724" y="246" text-anchor="middle" font-size="15" fill="#5b6167">단말기 대여</text>
+    <text x="724" y="274" text-anchor="middle" font-size="15" fill="#5b6167">일행 많을 때 유리</text>
+    <text x="724" y="308" text-anchor="middle" font-size="14" fill="#8a9099">충전·반납 번거로움</text>
+  </g>
+</svg>

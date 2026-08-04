@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">🧳 나라별 준비 포인트</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="804" height="80" rx="12" fill="#fdf1f0" stroke="#f6d5d0"/>
+    <text x="72" y="138" font-size="18" font-weight="800" fill="#c0392b">🇯🇵 일본</text>
+    <text x="150" y="138" font-size="15" fill="#5b6167">Visit Japan Web 사전 등록 · 교통패스(스이카/파스모) · 100V 전압</text>
+    <text x="150" y="164" font-size="15" fill="#5b6167">현금 쓰는 곳 여전히 많음 → 소액 엔화 준비</text>
+  </g>
+  <g>
+    <rect x="48" y="196" width="804" height="80" rx="12" fill="#f1f8f4" stroke="#cfe8db"/>
+    <text x="72" y="230" font-size="18" font-weight="800" fill="#12805c">🇻🇳 베트남</text>
+    <text x="150" y="230" font-size="15" fill="#5b6167">45일 초과 체류면 e-비자 · 여권 6개월↑ · 220V(한국 플러그 대체로 호환)</text>
+    <text x="150" y="256" font-size="15" fill="#5b6167">그랩(Grab) 앱 · 달러/동 환전 · 흥정 문화</text>
+  </g>
+  <g>
+    <rect x="48" y="288" width="804" height="80" rx="12" fill="#eef4fd" stroke="#d5e3f7"/>
+    <text x="72" y="322" font-size="18" font-weight="800" fill="#2563eb">🇪🇺 유럽</text>
+    <text x="150" y="322" font-size="15" fill="#5b6167">솅겐 90일 계산 · 소매치기 주의 · C/F형 플러그 · 유레일패스 검토</text>
+    <text x="150" y="348" font-size="15" fill="#5b6167">ETIAS 시행 시 사전 허가 필요 → 출발 전 확인</text>
+  </g>
+</svg>

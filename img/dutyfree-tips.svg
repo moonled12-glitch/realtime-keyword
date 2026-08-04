@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">💡 면세 쇼핑 &amp; 신고 꿀팁</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="390" height="130" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="140" font-size="19" font-weight="800" fill="#12805c">🖥️ 인터넷 면세점</text>
+    <text x="72" y="172" font-size="15" fill="#5b6167">출국 전 온라인 구매(적립·할인 많음)</text>
+    <text x="72" y="200" font-size="15" fill="#5b6167">공항 인도장에서 수령</text>
+  </g>
+  <g>
+    <rect x="462" y="104" width="390" height="130" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="140" font-size="19" font-weight="800" fill="#2563eb">🛬 입국장 면세점</text>
+    <text x="486" y="172" font-size="15" fill="#5b6167">돌아올 때 술·화장품 구매 가능</text>
+    <text x="486" y="200" font-size="15" fill="#5b6167">무겁게 들고 다닐 필요 없음</text>
+  </g>
+  <g>
+    <rect x="48" y="248" width="804" height="130" rx="14" fill="#fff6ed" stroke="#f6a94c" stroke-width="2"/>
+    <text x="72" y="284" font-size="19" font-weight="800" fill="#c67c1e">✅ 한도 초과 시 '자진신고'가 이득</text>
+    <text x="72" y="316" font-size="15" fill="#5b6167">· 자진신고 시 관세 <tspan font-weight="800" fill="#191c1f">30% 감면</tspan>(감면 한도 있음)</text>
+    <text x="72" y="344" font-size="15" fill="#5b6167">· 미신고 적발 시 <tspan font-weight="800" fill="#c0392b">가산세</tspan> — 숨기면 오히려 손해</text>
+    <text x="72" y="370" font-size="14" fill="#8a9099">입국 시 신고 물품 통로에서 신고</text>
+  </g>
+</svg>

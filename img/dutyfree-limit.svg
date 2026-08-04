@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">🛍️ 입국 면세 한도 (2026)</text>
+  <text x="50" y="90" font-size="16" font-weight="700" fill="#0b7d63">해외+국내 면세점 합산 기준 · 초과분은 세금</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="140" width="804" height="72" rx="14" fill="#f2f9f5" stroke="#0b7d63" stroke-width="2"/>
+    <text x="72" y="176" font-size="20" font-weight="800" fill="#12805c">기본 면세 한도</text>
+    <text x="828" y="184" text-anchor="end" font-size="26" font-weight="800" fill="#191c1f">미화 800달러</text>
+  </g>
+  <text x="48" y="248" font-size="17" font-weight="800" fill="#c67c1e">➕ 술·담배·향수는 별도 면세</text>
+  <g font-size="16">
+    <rect x="48" y="264" width="256" height="110" rx="12" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="176" y="298" text-anchor="middle" font-size="18" font-weight="800" fill="#c67c1e">🍷 술</text>
+    <text x="176" y="326" text-anchor="middle" fill="#5b6167">2병 · 2L 이하</text>
+    <text x="176" y="350" text-anchor="middle" fill="#5b6167">· 400달러 이하</text>
+
+    <rect x="322" y="264" width="256" height="110" rx="12" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="450" y="298" text-anchor="middle" font-size="18" font-weight="800" fill="#2563eb">🚬 담배</text>
+    <text x="450" y="332" text-anchor="middle" fill="#5b6167">200개비(1보루)</text>
+
+    <rect x="596" y="264" width="256" height="110" rx="12" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="724" y="298" text-anchor="middle" font-size="18" font-weight="800" fill="#6b46c1">💐 향수</text>
+    <text x="724" y="332" text-anchor="middle" fill="#5b6167">100mL</text>
+  </g>
+</svg>
