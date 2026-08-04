@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <rect x="1" y="1" width="898" height="70" rx="22" fill="#c0392b"/>
+  <rect x="1" y="40" width="898" height="31" fill="#c0392b"/>
+  <text x="40" y="48" font-size="28" font-weight="800" fill="#ffffff">🚨 고유가 피해지원금, 8월 31일 잔액 소멸</text>
+
+  <g>
+    <rect x="40" y="94" width="390" height="120" rx="14" fill="#fdecea" stroke="#f0a89e"/>
+    <text x="64" y="130" font-size="18" font-weight="800" fill="#c0392b">⏰ 사용 마감</text>
+    <text x="64" y="166" font-size="26" font-weight="800" fill="#191c1f">8/31(월) 24시</text>
+    <text x="64" y="196" font-size="14" fill="#5b6167">미사용 잔액 자동 소멸 · 환불 없음</text>
+  </g>
+  <g>
+    <rect x="454" y="94" width="406" height="120" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="478" y="130" font-size="18" font-weight="800" fill="#12805c">💳 대상·금액</text>
+    <text x="478" y="166" font-size="20" font-weight="800" fill="#191c1f">소득 하위 70% · 최대 60만원</text>
+    <text x="478" y="196" font-size="14" fill="#5b6167">이미 지급됨(신청 종료) — '사용'만 남음</text>
+  </g>
+
+  <text x="40" y="252" font-size="18" font-weight="800" fill="#0b7d63">🔎 잔액 확인 3가지</text>
+  <g font-size="14" fill="#5b6167">
+    <rect x="40" y="266" width="270" height="86" rx="12" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="60" y="298" font-size="15" font-weight="800" fill="#191c1f">카드로 받았다면</text>
+    <text x="60" y="326" font-size="13">카드사 앱·홈페이지</text>
+    <text x="60" y="344" font-size="13">'고유가 피해지원금' 메뉴</text>
+
+    <rect x="320" y="266" width="270" height="86" rx="12" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="340" y="298" font-size="15" font-weight="800" fill="#191c1f">비씨카드망 ARS</text>
+    <text x="340" y="326" font-size="13">1588-6374</text>
+    <text x="340" y="344" font-size="13">또는 1566-4800</text>
+
+    <rect x="600" y="266" width="260" height="86" rx="12" fill="#f7f9fb" stroke="#e5e8ea"/>
+    <text x="620" y="298" font-size="15" font-weight="800" fill="#191c1f">지역상품권이면</text>
+    <text x="620" y="326" font-size="13">지자체 지역화폐 앱</text>
+    <text x="620" y="344" font-size="13">잔액조회 메뉴</text>
+  </g>
+</svg>
