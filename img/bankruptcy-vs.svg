@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">⚖️ 개인파산 vs 개인회생</text>
+  <text x="50" y="90" font-size="17" font-weight="700" fill="#0b7d63">가장 큰 갈림길은 '갚을 소득이 있느냐'</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="140" width="390" height="210" rx="14" fill="#fdecea" stroke="#f0a89e"/>
+    <text x="72" y="180" font-size="22" font-weight="800" fill="#c0392b">개인파산</text>
+    <text x="72" y="216" font-size="16" fill="#5b6167">소득이 없거나 극히 적어</text>
+    <text x="72" y="242" font-size="16" fill="#5b6167">빚을 갚을 능력이 전혀 없음</text>
+    <text x="72" y="284" font-size="17" font-weight="700" fill="#191c1f">→ 재산 청산 + 면책</text>
+    <text x="72" y="312" font-size="15" fill="#8a9099">남은 빚의 변제책임 면제</text>
+  </g>
+  <g>
+    <rect x="462" y="140" width="390" height="210" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="486" y="180" font-size="22" font-weight="800" fill="#2563eb">개인회생</text>
+    <text x="486" y="216" font-size="16" fill="#5b6167">꾸준한 소득이 있어</text>
+    <text x="486" y="242" font-size="16" fill="#5b6167">일부를 갚을 수 있음</text>
+    <text x="486" y="284" font-size="17" font-weight="700" fill="#191c1f">→ 3~5년 변제 후 탕감</text>
+    <text x="486" y="312" font-size="15" fill="#8a9099">'재기 전제' 제도</text>
+  </g>
+</svg>

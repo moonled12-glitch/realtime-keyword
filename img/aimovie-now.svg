@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="418" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">🎬 AI 영화, 지금 어디까지 왔나</text>
+  <text x="50" y="90" font-size="16" font-weight="700" fill="#0b7d63">2025~2026 주요 흐름 (보도 기준)</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="138" width="390" height="120" rx="14" fill="#eef5ff" stroke="#d5e6fb"/>
+    <text x="72" y="174" font-size="19" font-weight="800" fill="#2563eb">🎥 국내 첫 AI 장편</text>
+    <text x="72" y="206" font-size="15" fill="#5b6167">영화 &lt;중간계&gt; 2025년 10월 개봉</text>
+    <text x="72" y="232" font-size="15" fill="#5b6167">국내 최초 AI 활용 장편으로 소개</text>
+  </g>
+  <g>
+    <rect x="462" y="138" width="390" height="120" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="486" y="174" font-size="19" font-weight="800" fill="#c67c1e">🧑‍🎤 AI 배우 논란</text>
+    <text x="486" y="206" font-size="15" fill="#5b6167">'틸리 노우드' 장편 주연 발탁</text>
+    <text x="486" y="232" font-size="15" fill="#5b6167">배우·업계 반발 — 논란 지속</text>
+  </g>
+  <g>
+    <rect x="48" y="272" width="390" height="120" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="308" font-size="19" font-weight="800" fill="#12805c">🇨🇳 AI 단막극 폭증</text>
+    <text x="72" y="340" font-size="15" fill="#5b6167">중국, 하루 수백 편 쏟아짐</text>
+    <text x="72" y="366" font-size="15" fill="#5b6167">유통작만 12만 편 이상(2월 기준)</text>
+  </g>
+  <g>
+    <rect x="462" y="272" width="390" height="120" rx="14" fill="#f7f5ff" stroke="#e6ddff"/>
+    <text x="486" y="308" font-size="19" font-weight="800" fill="#6b46c1">💸 소라 앱 종료</text>
+    <text x="486" y="340" font-size="15" fill="#5b6167">OpenAI, 2026년 3월 소라 앱 중단</text>
+    <text x="486" y="366" font-size="15" fill="#5b6167">저작권 소송·높은 운영비 부담</text>
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">🚑 온열질환 예방 &amp; 응급대처</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="390" height="150" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="72" y="142" font-size="19" font-weight="800" fill="#12805c">✅ 예방 수칙</text>
+    <text x="72" y="176" font-size="15" fill="#5b6167">· 물 자주 마시기(갈증 전에)</text>
+    <text x="72" y="204" font-size="15" fill="#5b6167">· 낮 12~17시 야외활동·작업 자제</text>
+    <text x="72" y="232" font-size="15" fill="#5b6167">· 헐렁한 옷·모자·그늘 활용</text>
+  </g>
+  <g>
+    <rect x="462" y="104" width="390" height="150" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="486" y="142" font-size="19" font-weight="800" fill="#c67c1e">⚠️ 위험 신호</text>
+    <text x="486" y="176" font-size="15" fill="#5b6167">· 어지럼·두통·메스꺼움</text>
+    <text x="486" y="204" font-size="15" fill="#5b6167">· 근육 경련, 땀이 안 남</text>
+    <text x="486" y="232" font-size="15" fill="#5b6167">· 의식 저하 → 열사병 응급</text>
+  </g>
+  <g>
+    <rect x="48" y="268" width="804" height="110" rx="14" fill="#fdecea" stroke="#f0a89e"/>
+    <text x="72" y="304" font-size="19" font-weight="800" fill="#c0392b">🆘 쓰러졌을 때</text>
+    <text x="72" y="336" font-size="15" fill="#5b6167">① 시원한 곳으로 이동 · 옷 느슨하게 ② 물·부채로 체온 낮추기</text>
+    <text x="72" y="362" font-size="15" fill="#5b6167">③ 의식 없으면 <tspan font-weight="800" fill="#c0392b">119</tspan> — 억지로 물 먹이지 말 것</text>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="32" font-weight="800" fill="#191c1f">🌡️ 2026 폭염특보 3단계</text>
+  <text x="50" y="90" font-size="17" font-weight="700" fill="#c0392b">올해부터 '중대경보' 신설 — 체감온도 기준</text>
+  <line x1="48" y1="112" x2="852" y2="112" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="140" width="256" height="200" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="176" y="182" text-anchor="middle" font-size="20" font-weight="800" fill="#c67c1e">폭염주의보</text>
+    <text x="176" y="234" text-anchor="middle" font-size="40" font-weight="800" fill="#191c1f">33℃↑</text>
+    <text x="176" y="272" text-anchor="middle" font-size="15" fill="#5b6167">체감온도 33도 이상</text>
+    <text x="176" y="296" text-anchor="middle" font-size="15" fill="#5b6167">2일 이상 예상</text>
+  </g>
+  <g>
+    <rect x="322" y="140" width="256" height="200" rx="14" fill="#fdecea" stroke="#f0a89e"/>
+    <text x="450" y="182" text-anchor="middle" font-size="20" font-weight="800" fill="#c0392b">폭염경보</text>
+    <text x="450" y="234" text-anchor="middle" font-size="40" font-weight="800" fill="#191c1f">35℃↑</text>
+    <text x="450" y="272" text-anchor="middle" font-size="15" fill="#5b6167">체감온도 35도 이상</text>
+    <text x="450" y="296" text-anchor="middle" font-size="15" fill="#5b6167">2일 이상 예상</text>
+  </g>
+  <g>
+    <rect x="596" y="140" width="256" height="200" rx="14" fill="#7a1f14" stroke="#5c150d"/>
+    <text x="724" y="182" text-anchor="middle" font-size="20" font-weight="800" fill="#ffd9d2">폭염중대경보</text>
+    <text x="724" y="234" text-anchor="middle" font-size="40" font-weight="800" fill="#ffffff">38℃↑</text>
+    <text x="724" y="272" text-anchor="middle" font-size="15" fill="#f3c9c2">체감 38도(또는 39도)</text>
+    <text x="724" y="296" text-anchor="middle" font-size="15" fill="#f3c9c2">하루만 예보돼도 발령</text>
+  </g>
+  <text x="48" y="378" font-size="14" fill="#8a9099">※ 중대경보 시 노인일자리 등 야외활동 전면 중단 — 체감 38도면 사망위험 약 1.16배.</text>
+</svg>

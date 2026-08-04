@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="398" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">📋 개인파산 절차 &amp; 비용</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <circle cx="72" cy="126" r="18" fill="#0b7d63"/><text x="72" y="133" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">1</text>
+    <text x="102" y="132" font-size="16" fill="#191c1f">서류 준비(채권자·재산·수입지출 목록, 등본 등)</text>
+  </g>
+  <g>
+    <circle cx="72" cy="172" r="18" fill="#0b7d63"/><text x="72" y="179" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">2</text>
+    <text x="102" y="178" font-size="16" fill="#191c1f">법원에 파산·면책 신청</text>
+  </g>
+  <g>
+    <circle cx="72" cy="218" r="18" fill="#0b7d63"/><text x="72" y="225" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">3</text>
+    <text x="102" y="224" font-size="16" fill="#191c1f">심문·파산선고(재산 있으면 환가·배당)</text>
+  </g>
+  <g>
+    <circle cx="72" cy="264" r="18" fill="#0b7d63"/><text x="72" y="271" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">4</text>
+    <text x="102" y="270" font-size="16" fill="#191c1f">면책 결정 → 남은 빚 변제책임 면제(새 출발)</text>
+  </g>
+
+  <line x1="48" y1="298" x2="852" y2="298" stroke="#eef0f2" stroke-width="2"/>
+  <g>
+    <rect x="48" y="314" width="390" height="70" rx="12" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="72" y="346" font-size="16" font-weight="800" fill="#c67c1e">💰 비용</text>
+    <text x="150" y="346" font-size="15" fill="#5b6167">인지대+송달료 약 5~10만원</text>
+    <text x="150" y="370" font-size="14" fill="#8a9099">변호사 의뢰 시 수임료 별도</text>
+  </g>
+  <g>
+    <rect x="462" y="314" width="390" height="70" rx="12" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="486" y="346" font-size="16" font-weight="800" fill="#12805c">🆓 무료 지원</text>
+    <text x="576" y="346" font-size="15" fill="#5b6167">대한법률구조공단 132</text>
+    <text x="576" y="370" font-size="14" fill="#8a9099">수급자·차상위·중위 125%↓</text>
+  </g>
+</svg>
