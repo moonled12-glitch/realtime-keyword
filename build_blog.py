@@ -647,11 +647,17 @@ def render_home_blog(posts):
     cards = ""
     for p in posts[:9]:
         raw = p.get("thumb") or ""
+        cat = esc(p.get("category") or "기타")
         # 홈은 루트에 있으므로 blog 기준 상대경로(../img/..)를 루트 기준(img/..)으로 변환
         th = raw if raw.startswith("http") else (raw[3:] if raw.startswith("../") else raw)
-        thumb = (f'<span class="hb-thumb"><img src="{esc(th)}" alt="" loading="lazy"></span>'
-                 if raw else '<span class="hb-thumb hb-noimg"></span>')
-        cat = esc(p.get("category") or "기타")
+        if raw:
+            thumb = f'<span class="hb-thumb"><img src="{esc(th)}" alt="" loading="lazy"></span>'
+        else:
+            # 이미지 없는 글: 빈 박스 대신 카테고리+키워드 텍스트 표지
+            kw = esc(p.get("keyword") or p.get("title") or "")
+            thumb = ('<span class="hb-thumb hb-noimg"><span class="hb-noimg-in">'
+                     f'<span class="hb-noimg-cat">{cat}</span>'
+                     f'<span class="hb-noimg-kw">{kw}</span></span></span>')
         cards += (f'<a class="hb-card" href="{PREFIX}/blog/{p["slug"]}.html">'
                   f'{thumb}<span class="hb-body">'
                   f'<span class="hb-cat">{cat}</span>'
@@ -674,7 +680,12 @@ def render_home_blog(posts):
         ".hb-card:hover{border-color:var(--accent);transform:translateY(-2px);}"
         ".hb-thumb{display:block;width:100%;aspect-ratio:16/9;background:var(--accent-soft);overflow:hidden;}"
         ".hb-thumb img{width:100%;height:100%;object-fit:cover;display:block;}"
-        ".hb-noimg{background:linear-gradient(135deg,var(--accent-soft),var(--surface));}"
+        ".hb-noimg{background:linear-gradient(135deg,var(--accent-soft),var(--surface));"
+        "display:flex;align-items:center;justify-content:center;padding:14px;text-align:center;}"
+        ".hb-noimg-in{display:flex;flex-direction:column;gap:8px;align-items:center;max-width:100%;}"
+        ".hb-noimg-cat{font-size:11px;font-weight:700;color:#fff;background:var(--accent);padding:2px 10px;border-radius:999px;}"
+        ".hb-noimg-kw{font-size:19px;font-weight:800;color:var(--accent);line-height:1.3;word-break:keep-all;"
+        "display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}"
         ".hb-body{display:flex;flex-direction:column;gap:6px;padding:13px 15px 15px;}"
         ".hb-cat{align-self:flex-start;font-size:11px;font-weight:700;color:var(--accent);"
         "background:var(--accent-soft);padding:2px 9px;border-radius:999px;}"
