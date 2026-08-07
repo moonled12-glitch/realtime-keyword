@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="438" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="32" font-weight="800" fill="#191c1f">📱 정부24로 끝내는 비대면 사실조사</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">스마트폰 앱으로 3분이면 완료 · 7/20 ~ 9/7</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <circle cx="80" cy="176" r="24" fill="#0b7d63"/><text x="80" y="185" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">1</text>
+    <text x="122" y="170" font-size="21" font-weight="800" fill="#191c1f">정부24 '앱' 실행</text>
+    <text x="122" y="200" font-size="16" fill="#5b6167">PC로는 불가 — 반드시 모바일 앱에서 로그인</text>
+  </g>
+  <g>
+    <circle cx="80" cy="256" r="24" fill="#0b7d63"/><text x="80" y="265" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">2</text>
+    <text x="122" y="250" font-size="21" font-weight="800" fill="#191c1f">주소지에서 위치(GPS) 인증</text>
+    <text x="122" y="280" font-size="16" fill="#5b6167">주민등록 주소지에서 접속 + 위치 권한 허용</text>
+  </g>
+  <g>
+    <circle cx="80" cy="336" r="24" fill="#0b7d63"/><text x="80" y="345" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">3</text>
+    <text x="122" y="330" font-size="21" font-weight="800" fill="#191c1f">세대 정보 확인 후 제출</text>
+    <text x="122" y="360" font-size="16" fill="#5b6167">등본 정보가 맞으면 '이상 없음'으로 응답·제출</text>
+  </g>
+
+  <rect x="48" y="392" width="804" height="34" rx="10" fill="#e6f4ef"/>
+  <text x="60" y="415" font-size="15" fill="#0b7d63">✔ 세대원 중 1명이 대표로 참여하면 온 가족 끝 — 방문조사 안 받아도 됩니다.</text>
+</svg>
