@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="58" font-size="30" font-weight="800" fill="#191c1f">📄 헷갈리는 3가지 서류 구분</text>
+  <line x1="48" y1="82" x2="852" y2="82" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <rect x="48" y="104" width="260" height="234" rx="14" fill="#eef5ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="178" y="142" text-anchor="middle" font-size="18" font-weight="800" fill="#2563eb">사업장 가입자명부</text>
+    <text x="178" y="180" text-anchor="middle" font-size="15" fill="#5b6167">회사 전체 직원의</text>
+    <text x="178" y="204" text-anchor="middle" font-size="15" fill="#5b6167">4대보험 가입 명단</text>
+    <text x="178" y="244" text-anchor="middle" font-size="14" fill="#8a9099">발급: 4insure.or.kr</text>
+    <text x="178" y="268" text-anchor="middle" font-size="14" fill="#8a9099">인증: 사업장 인증서</text>
+    <text x="178" y="308" text-anchor="middle" font-size="14" fill="#12805c" font-weight="700">입찰·바우처·관공서 제출</text>
+  </g>
+  <g>
+    <rect x="320" y="104" width="260" height="234" rx="14" fill="#f2f9f5" stroke="#cdeede"/>
+    <text x="450" y="142" text-anchor="middle" font-size="18" font-weight="800" fill="#12805c">개인 가입내역확인서</text>
+    <text x="450" y="180" text-anchor="middle" font-size="15" fill="#5b6167">내가 어느 회사에</text>
+    <text x="450" y="204" text-anchor="middle" font-size="15" fill="#5b6167">가입돼 있는지</text>
+    <text x="450" y="244" text-anchor="middle" font-size="14" fill="#8a9099">발급: 정부24·각 공단</text>
+    <text x="450" y="268" text-anchor="middle" font-size="14" fill="#8a9099">인증: 개인 인증서</text>
+    <text x="450" y="308" text-anchor="middle" font-size="14" fill="#12805c" font-weight="700">재직증명·대출·비자</text>
+  </g>
+  <g>
+    <rect x="592" y="104" width="260" height="234" rx="14" fill="#fff6ed" stroke="#f6dcc0"/>
+    <text x="722" y="142" text-anchor="middle" font-size="17" font-weight="800" fill="#c67c1e">사업장 가입내역확인서</text>
+    <text x="722" y="180" text-anchor="middle" font-size="15" fill="#5b6167">사업장의 4대보험</text>
+    <text x="722" y="204" text-anchor="middle" font-size="15" fill="#5b6167">가입 상태 확인</text>
+    <text x="722" y="244" text-anchor="middle" font-size="14" fill="#8a9099">발급: 4insure.or.kr</text>
+    <text x="722" y="268" text-anchor="middle" font-size="14" fill="#8a9099">인증: 사업장 인증서</text>
+    <text x="722" y="308" text-anchor="middle" font-size="14" fill="#12805c" font-weight="700">사업장 성립·상태 증빙</text>
+  </g>
+</svg>

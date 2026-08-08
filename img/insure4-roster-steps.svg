@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+  <rect x="1" y="1" width="898" height="468" rx="22" fill="#ffffff" stroke="#e5e8ea"/>
+  <text x="48" y="60" font-size="32" font-weight="800" fill="#191c1f">🧾 4대보험 가입자명부 발급 5단계</text>
+  <text x="50" y="92" font-size="18" font-weight="700" fill="#0b7d63">4대사회보험 정보연계센터(4insure.or.kr)에서</text>
+  <line x1="48" y1="114" x2="852" y2="114" stroke="#eef0f2" stroke-width="2"/>
+
+  <g>
+    <circle cx="78" cy="166" r="20" fill="#0b7d63"/><text x="78" y="173" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">1</text>
+    <text x="114" y="160" font-size="19" font-weight="800" fill="#191c1f">사업장 공동인증서로 로그인</text>
+    <text x="114" y="188" font-size="15" fill="#5b6167">개인 인증서 아님 — 사업장(사업자)용 공동인증서 필요</text>
+  </g>
+  <g>
+    <circle cx="78" cy="234" r="20" fill="#0b7d63"/><text x="78" y="241" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">2</text>
+    <text x="114" y="228" font-size="19" font-weight="800" fill="#191c1f">'증명서 발급' 메뉴 열기</text>
+    <text x="114" y="256" font-size="15" fill="#5b6167">증명서(가입내역확인_사업장, 전체가입자) 신청/발급</text>
+  </g>
+  <g>
+    <circle cx="78" cy="302" r="20" fill="#0b7d63"/><text x="78" y="309" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">3</text>
+    <text x="114" y="296" font-size="19" font-weight="800" fill="#191c1f">'사업장 가입자 명부' 선택 → 신청</text>
+    <text x="114" y="324" font-size="15" fill="#5b6167">전체 근로자가 한 번에 (일부만 선택 불가)</text>
+  </g>
+  <g>
+    <circle cx="78" cy="370" r="20" fill="#0b7d63"/><text x="78" y="377" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">4</text>
+    <text x="114" y="364" font-size="19" font-weight="800" fill="#191c1f">'출력가능'으로 바뀌면 출력</text>
+    <text x="114" y="392" font-size="15" fill="#5b6167">새로고침해 4대보험 모두 '출력가능' 확인 후 출력·저장</text>
+  </g>
+
+  <rect x="48" y="418" width="804" height="34" rx="10" fill="#e6f4ef"/>
+  <text x="60" y="441" font-size="15" fill="#0b7d63">✔ PDF로 저장하면 관공서·입찰·대출 제출용으로 그대로 사용 가능합니다.</text>
+</svg>
